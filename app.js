@@ -7,8 +7,8 @@ var bodyParser = require('body-parser')
 var routes = require('./routes/index')
 var app = express()
 
-var massive = require("massive");
-var connectionString = "postgres://localhost/video_store";
+var massive = require("massive")
+var connectionString = "postgres://localhost/video_store"
 
 // connect to Massive and get the db instance. You can safely use the
 // convenience sync method here because its on app load
@@ -16,7 +16,7 @@ var connectionString = "postgres://localhost/video_store";
 var massiveInstance = massive.connectSync({connectionString : connectionString})
 
 // Set a reference to the massive instance on Express' app:
-app.set('db', massiveInstance);
+app.set('db', massiveInstance)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
