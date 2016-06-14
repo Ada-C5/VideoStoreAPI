@@ -7,4 +7,6 @@ var Controller = require('../controllers/rentals')
 //   res.status(200).json({whatevs: 'whatevs!!!'})
 // });
 
+router.get('/rentals', Controller.getRentals)
+
 module.exports = router;
