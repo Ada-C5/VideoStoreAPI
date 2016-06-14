@@ -1,10 +1,19 @@
 var express = require('express');
 var router = express.Router();
+var Controllers = require('../controllers/video')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.status(200).json({whatevs: 'whatevs!!!'})
-});
+// router.get('/zomg', function(req, res, next) {
+//   res.status(200).json({zomg: 'it works!!!!'})
+// });
+
+
+/* GET home page. */
+// a callback
+router.get('/', Controllers.getIndex);
+
+// GET the chart page 
+router.get('/zomg', Controllers.getZomg); 
 
 // GET 
 
