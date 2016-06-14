@@ -29,8 +29,8 @@ GET movies/:title/history/sort/checkout-date
 rentals
 GET rentals/:title
 GET rentals/:title/customers
-POST rentals/:title/checkout
-POST rentals/:title/return
+POST rentals/:title/checkout #provide customerid and movie title
+POST rentals/:title/return #provide customerid and movie title
 GET rentals/overdue
 
 */
