@@ -38,3 +38,5 @@ CREATE TABLE rentals(
 );
 
 CREATE INDEX rentals ON rentals (customer_id);
+CREATE INDEX rentals_status ON rentals (status);
+
