@@ -5,9 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "clear; jasmine-node --verbose spec/",
-    "db:create": "createdb massive",
+    "db:create": "createdb customers; createdb movies; createdb rentals",
     "db:seed": "clear; node tasks/db_seed.js",
-    "db:drop": "dropdb massive",
+    "db:drop": "dropdb customers; dropdb movies; dropdb rentals",
     "db:reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed",
     "db:schema": "clear; node tasks/load_schema.js"
   },
