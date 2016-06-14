@@ -1,5 +1,5 @@
 var massive = require('massive')
-var connectionString = "postgres://localhost/scrabble_express"
+var connectionString = "postgres://localhost/cassettecollection"
 
 var db = massive.connectSync({connectionString : connectionString})
 
