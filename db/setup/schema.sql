@@ -8,6 +8,7 @@ CREATE TABLE movies(
 );
 
 CREATE INDEX movies_title ON movies (title);
+CREATE INDEX movies_date ON movies (release_date);
 
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers(
@@ -23,12 +24,17 @@ CREATE TABLE customers(
 );
 
 CREATE INDEX customers_name ON customers (name);
+CREATE INDEX customers_date ON customers (registered_at);
+CREATE INDEX customers_postal ON customers (postal_code);
 
 DROP TABLE IF EXISTS rentals;
 CREATE TABLE rentals(
   id integer PRIMARY KEY,
   movie_id integer REFERENCES movies (id),
-  customer_id integer REFERENCES customers (id)
+  customer_id integer REFERENCES customers (id),
+  status text,
+  checkout_date text,
+  return_date text
 );
 
 CREATE INDEX rentals ON rentals (customer_id);
