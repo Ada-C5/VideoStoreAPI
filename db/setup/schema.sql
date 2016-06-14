@@ -1,8 +1,10 @@
-DROP TABLE IF EXISTS words;
-CREATE TABLE words(
-  id serial PRIMARY KEY,
-  word text,
-  score integer
+DROP TABLE IF EXISTS movies;
+CREATE TABLE movies(
+  id PRIMARY KEY,
+  title text,
+  overview text,
+  release_date text,
+  inventory integer
 );
 
-CREATE INDEX words_word ON words (word);
+CREATE INDEX movies_title ON movies (title);
