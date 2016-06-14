@@ -25,8 +25,18 @@ var indexRoutes = require('./routes/index');
 // /zomg inside index route
 app.use('/', indexRoutes);
 // customers
+// GET
+// POST - check-in and check-out
+// needs id
+
 // rentals
+// GET
+// title
+// needs customer id, movie title
+
 // movies
+// GET
+// needs title
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
