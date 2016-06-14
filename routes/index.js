@@ -8,7 +8,6 @@ var Controller = require('../controllers/index')
 // });
 
 router.get('/', Controller.nothing)
-  
 
 router.get('/zomg', Controller.zomg)
 
