@@ -15,9 +15,8 @@ var connectionString = "postgres://localhost/video_store"
 var massiveInstance = massive.connectSync({connectionString : connectionString})
 
 // Set a reference to the massive instance on Express' app:
-app.set('db', massiveInstance)
+app.set('db', massiveInstance);
 
-var routes = require('./routes/index');
 
 
 // view engine setup
@@ -32,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/index');
 app.use('/', routes);
 
 // catch 404 and forward to error handler

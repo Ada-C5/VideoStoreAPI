@@ -29,5 +29,3 @@ CREATE TABLE customers(
   phone text,
   account_credit money
 );
-
--- CREATE INDEX words_word ON words (word);

@@ -8,7 +8,7 @@
     "db:drop": "dropdb scrabble_express",
     "db:create": "createdb scrabble_express",
     "db:schema": "node tasks/load_schema.js",
-    "db:seed": "seeddb scrabble_express"
+    "db:seed": "seeddb video_store"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -18,7 +18,6 @@
     "jade": "~1.11.0",
     "massive": "^2.3.0",
     "morgan": "~1.6.1",
-    "sequelize": "^3.23.3",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
