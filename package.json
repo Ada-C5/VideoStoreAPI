@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; jasmine-node --verbose spec/"
+    "test": "clear; jasmine-node --verbose spec/",
+    "db:drop": "dropdb scrabble_express",
+    "db:create": "createdb scrabble_express",
+    "db:schema": "node tasks/load_schema.js",
+    "db:seed": "seeddb scrabble_express"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
