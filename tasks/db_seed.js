@@ -5,7 +5,7 @@ var movieSeed = require('../db/seeds/movies')
 
 var db = massive.connectSync({connectionString: connectionString})
 
-db.seed.customers([customerSeed], function (err, res) {
+db.seed.customers(customerSeed, function (err, res) {
   if (err) {
     throw (new Error(err.message))
   }
@@ -14,7 +14,7 @@ db.seed.customers([customerSeed], function (err, res) {
   process.exit()
 })
 
-db.seed.movies([movieSeed], function (err, res) {
+db.seed.movies(movieSeed, function (err, res) {
   if (err) {
     throw (new Error(err.message))
   }
