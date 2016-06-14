@@ -6,6 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var app = express();
+
+// divide responsibilities. everything in "movies" will have /movies in its url.
+var movies = require('./routes/movies');
+app.use('/movies', movies)
+
+var customers = require('./routes/customers');
+app.use('/customers', customers)
 
 var app = express();
 
