@@ -21,7 +21,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+var indexRoutes = require('./routes/index');
+// /zomg inside index route
+app.use('/', indexRoutes);
+// customers
+// rentals
+// movies
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
