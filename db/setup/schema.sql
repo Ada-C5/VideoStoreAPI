@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS words;
+DROP TABLE IF EXISTS movies;
 CREATE TABLE movies(
   id serial PRIMARY KEY,
   title text,
