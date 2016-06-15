@@ -6,45 +6,52 @@ var movies_data = require("../db/seeds/movies")
 var customers_data = require("../db/seeds/customers")
 var rentals_data = require("../db/seeds/rentals")
 
+var moviesCount = 0
+var customersCount = 0
+var rentalsCount = 0
 
 function seed() {
-  var seeded_movies = 0
-  var seeded_customers = 0
-  var seeded_rentals = 0
-
+  // saveSync is not asynchronous, it's blocking, ok for stuff like this that is run every once in a while
   // while (seeded_customers !== customers_data.length && seeded_movies !== movies_data.length) {
     for (var movie of movies_data) {
-      db.movies.save({title: movie.title, overview: movie.overview, release_date: movie.release_date, inventory: movie.inventory}, function (err,res) {
+      db.movies.save(movie, function (err,res) {
         if (err) {
           throw new Error(err.message)
         }
-        seeded_movies++
+        moviesCount++
+        checkFinish()
       })
     }
 
     for (var customer of customers_data) {
-      db.customers.save({name: customer.name, registered_at: customer.registered_at, address: customer.address, city: customer.city, state: customer.state, postal_code: customer.postal_code, phone: customer.phone, account_credit: customer.account_credit}, function (err,res) {
+      db.customers.save(customer, function (err,res) {
         if (err) {
           throw new Error(err.message)
         }
-        seeded_customers++
-        // console.log(res)
+        customersCount++
+        checkFinish()
       })
     }
 
     for (var rental of rentals_data) {
-      db.rentals.save({movie_id: rental.movie_id, customer_id: rental.customer_id, status: rental.status, checkout_date: rental.checkout_date, due_date: rental.due_date }, function (err,res) {
+      db.rentals.save(rental, function (err,res) {
         if (err) {
           throw new Error(err.message)
         }
-        seeded_rentals++
-        // console.log(res)
+        rentalsCount++
+        checkFinish()
       })
     }
   // }
+}
 
-  // process.exit()
+function checkFinish() {
+  var totalCount = moviesCount + customersCount + rentalsCount
+  var totalLength = movies_data.length + customers_data.length + rentals_data.length
+
+  // console.log("total count", totalCount)
+  // console.log(totalCount >= totalLength)
+  if (totalCount >= totalLength) { process.exit() }
 }
 
 seed()
-// seed(null, process.exit())
