@@ -26,5 +26,17 @@
     "jasmine-node": "^1.14.5",
     "nodemon": "^1.9.2",
     "request": "^2.72.0"
-  }
+  },
+  "description": "The overall goal of this project is to create a system that a video store (remember those?) could use to track their inventory of rental videos and their collection of customers.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuzHarrison/VideoStoreAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SuzHarrison/VideoStoreAPI/issues"
+  },
+  "homepage": "https://github.com/SuzHarrison/VideoStoreAPI#readme"
 }
