@@ -26,5 +26,5 @@ CREATE TABLE rentals(
   customer_id int,
   check_in boolean,
   check_out boolean,
-  return_date datetime
+  return_date text
 );
