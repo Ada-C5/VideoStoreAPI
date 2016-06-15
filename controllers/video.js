@@ -1,14 +1,25 @@
 var VideoController = {
 
-  getIndex: function (req, res, next) {
-    res.render('index', {title: 'EXTREME VIDEO EXPRESS'})
+  getIndex: function (request, response, next) {
+    response.render('index', {title: 'EXTREME VIDEO EXPRESS'});
   },
 
   getZomg: function (request, response) {
     var locals = {}; 
-    var zomg = JSON.stringify('It Works!!!!!'); 
-    locals.zomg = zomg; 
+    locals.zomg = JSON.stringify('It Works!!!!!');  
     response.render('index', locals); 
+  },
+
+  getCustomer: function (request, response) {
+    response.render('customer'); 
+  },
+
+  getMovie: function (request, response) {
+    response.render('movie'); 
+  },
+
+  getRental: function (request, response) {
+    response.render('rental'); 
   }
 }
 

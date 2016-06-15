@@ -12,11 +12,13 @@ var Controllers = require('../controllers/video')
 // a callback
 router.get('/', Controllers.getIndex);
 
-// GET the chart page 
+// GET the zomg page 
 router.get('/zomg', Controllers.getZomg); 
 
 // GET 
 
+// GET the customer page 
+router.get('/customer', Controllers.getCustomer);
 // list of all of the customers
 // sort by  
   //name
@@ -28,6 +30,7 @@ router.get('/zomg', Controllers.getZomg);
 
 // GET 
 //movies
+router.get('/movie', Controllers.getMovie);
   //sort by same trash as before
   // title / release date 
   // given a movie title, shows a list of customers who have CURRENTLY checked it out
@@ -42,6 +45,7 @@ router.get('/zomg', Controllers.getZomg);
 // rental routes ~ rental/name (ie rental/Jaws)
 
 //GET 
+router.get('/rental', Controllers.getRental);
   // synopsis
   // release date 
   // available inventory (not checked out currently)
