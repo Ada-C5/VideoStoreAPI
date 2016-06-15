@@ -11,7 +11,8 @@ CREATE TABLE customers(
   registered_at date
 );
 
--- CREATE INDEX words_word ON words (word);  FIX THIS, I HAVE NO IDEA WHAT INDEX
+CREATE INDEX customers_name ON customers (name);
+ -- FIX THIS, I HAVE NO IDEA WHAT INDEX
 
 DROP TABLE IF EXISTS movies;
 CREATE TABLE movies(
@@ -23,7 +24,8 @@ CREATE TABLE movies(
   release_date date
 );
 
--- CREATE INDEX words_word ON words (word);  FIX THIS, I HAVE NO IDEA WHAT INDEX
+CREATE INDEX movies_title ON movies (title);
+-- FIX THIS, I HAVE NO IDEA WHAT INDEX
 
 DROP TABLE IF EXISTS rentals;
 CREATE TABLE rentals(
@@ -35,4 +37,5 @@ CREATE TABLE rentals(
   due_date date
 );
 
--- CREATE INDEX words_word ON words (word);  FIX THIS, I HAVE NO IDEA WHAT INDEX
+CREATE INDEX rentals_movie_id ON rentals (movie_id);
+-- FIX THIS, I HAVE NO IDEA WHAT INDEX
