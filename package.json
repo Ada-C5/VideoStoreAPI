@@ -4,21 +4,27 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
+    "test": "clear; jasmine-node --verbose spec/",
     "db:drop": "dropdb radio_star",
     "db:create": "createdb radio_star",
     "db:schema": "node tasks/load_schema.js",
-    "db:seed": "node db/seeds/movies.json; node db/seeds/customers.json",
-    "db:reset": "npm run db:drop; npm run db:create; npm run db:seed; npm run db:schema"
+    "db:seed": "node tasks/seed_data.js",
+    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
-    "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "jade": "~1.11.0",
     "massive": "^2.3.0",
     "morgan": "~1.6.1",
     "nodemon": "^1.9.2",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "nodemon": "^1.9.2",
+    "request": "^2.72.0"
+ }
 }
