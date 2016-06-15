@@ -5,10 +5,10 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "clear; jasmine-node --verbose spec/",
-    "db:drop": "dropdb cassetteconnection",
-    "db:create": "createdb cassetteconnection",
+    "db:drop": "dropdb cassettecollection",
+    "db:create": "createdb cassettecollection",
     "db:schema": "node tasks/load_schema.js",
-    "db:seed": "",
+    "db:seed": "node tasks/seed_data.js",
     "db:reset": "npm run db:drop; npm run db:create; npm run db:schema"
   },
   "dependencies": {
