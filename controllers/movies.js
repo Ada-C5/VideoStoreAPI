@@ -1,23 +1,56 @@
 var MovieController = {
-  // index: function (req, res, next) {
-  //   res.render('index', { title: 'Express' })
-  // },
+  sortTitle: function (req, res, next) {
+    res.send(
+      // CODE TO RETRIEVE movies, sorted by title
+    )}
+  }
 
-//   getParty: function (request, response) {
-//     var locals = {}
-//     locals.title = 'RANDOM PARTY GENERATOR'
-//     // pick rand number between 1-100
-//     locals.attendees = Math.floor(Math.random() * 100 + 1)
-//     // pick random day of week
-//     function sample (array) {
-//       return array[Math.floor(Math.random() * array.length)]
-//     }
-//
-//     locals.day = sample(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
-//     // pick a costume theme for your party
-//     locals.theme = sample(['Toga', 'Halloween', 'Black Light', 'Jungle', 'Neon'])
-//     response.render('party', locals)
-//   }
-// }
+  sortRelease: function (req, res, next) {
+    res.send(
+      // CODE TO RETRIEVE movies, sorted by release date
+    )}
+  }
+
+  current: function (req, res, next) {
+    res.send(
+      // CODE TO RETRIEVE rentals that are (currently checked out) by title
+    )}
+  }
+
+  history: function (req, res, next) {
+    res.send(
+      // CODE TO RETRIEVE rentals that were previously checked out by title
+    )}
+  }
+
+  rentalsTitle: function (req, res, next) {
+    res.send(
+      // HOW IS THIS DIFFERENT FROM CURRENT/HISTORY BY TITLE?
+    )}
+  }
+
+  rentalsCustomers: function (req, res, next) {
+    res.send(
+      //
+    )}
+  }
+
+  checkout: function (req, res, next) {
+    res.send(
+      //
+    )}
+  }
+
+  return: function (req, res, next) {
+    res.send(
+      //
+    )}
+  }
+
+  overdue: function (req, res, next) {
+    res.send(
+      // 
+    )}
+  }
 
 module.exports = MovieController
