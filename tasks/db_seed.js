@@ -4,35 +4,51 @@ var customerSeed = require('../db/seeds/customers')
 var movieSeed = require('../db/seeds/movies')
 
 var db = massive.connectSync({connectionString: connectionString})
+var movieRecords = movieSeed.length
+var customerRecords = movieSeed.length
 
 for (var record of movieSeed) {
-  console.log(record.title, record.release_date)
-  db.movies.saveSync(record)
+  db.movies.save(record, function (err, res) {
+    if (err) {
+      throw (new Error(err.message))
+    }
+    console.log('saved: ', JSON.stringify(res))
+    db.movies.count(function (err, res) {
+      if (err) {
+        throw (new Error(err.message))
+      }
+      console.log('records in db: ', res)
+      if (res >= movieRecords) { process.exit() }
+    })
+  })
 }
-
-process.exit()
 
 for (var record of customerSeed) {
-  console.log(record.name, record.address)
-  db.customers.saveSync(record)
+  db.customers.save(record, function (err, res) {
+    if (err) {
+      throw (new Error(err.message))
+    }
+    console.log('saved: ', JSON.stringify(res))
+    db.customers.count(function (err, res) {
+      if (err) {
+        throw (new Error(err.message))
+      }
+      console.log('records in db: ', res)
+      if (res >= customerRecords) { process.exit() }
+    })
+  })
 }
-
-process.exit()
+// =========================================================
+// for (var record of movieSeed) {
+//   console.log(record.title, record.release_date)
+//   db.movies.saveSync(record)
+// }
 //
-// db.seed.customers(customerSeed, function (err, res) {
-//   if (err) {
-//     throw (new Error(err.message))
-//   }
+// process.exit()
 //
-//   console.log('schema!')
-//   process.exit()
-// })
+// for (var record of customerSeed) {
+//   console.log(record.name, record.address)
+//   db.customers.saveSync(record)
+// }
 //
-// db.seed.movies(movieSeed, function (err, res) {
-//   if (err) {
-//     throw (new Error(err.message))
-//   }
-//
-//   console.log('schema!')
-//   process.exit()
-// })
+// process.exit()
