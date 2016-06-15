@@ -48,6 +48,8 @@ app.use('/customers', customerRoutes)
 
 // movies
 // GET
+var moviesRoutes = require('./routes/movies')
+app.use('/movies', moviesRoutes)
 // needs title
 
 // catch 404 and forward to error handler
