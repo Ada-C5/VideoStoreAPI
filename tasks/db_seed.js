@@ -1,5 +1,5 @@
 var massive = require('massive')
-var connectionString = 'postgres://localhost/massive'
+var connectionString = 'postgres://localhost/video_store'
 var customerSeed = require('../db/seeds/customers')
 var movieSeed = require('../db/seeds/movies')
 

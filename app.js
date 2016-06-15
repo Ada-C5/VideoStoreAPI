@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var app = express();
 
+var massive = require("massive")
+var connectionString = "postgres://localhost/video_store"
+
 // divide responsibilities. everything in "movies" will have /movies in its url.
 var movies = require('./routes/movies');
 app.use('/movies', movies)
