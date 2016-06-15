@@ -8,7 +8,8 @@
     "db:drop": "dropdb scrabble_express",
     "db:create": "createdb scrabble_express",
     "db:schema": "node tasks/load_schema.js",
-    "db:seed": "seeddb video_store"
+    "db:seed": "node tasks/seed.js",
+    "reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed;"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
