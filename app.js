@@ -36,6 +36,8 @@ app.use('/', indexRoutes)
 app.use('/zomg', indexRoutes)
 // customers
 // GET
+var customerRoutes = require('./routes/customers')
+app.use('/customers', customerRoutes)
 // POST - check-in and check-out
 // needs id
 
