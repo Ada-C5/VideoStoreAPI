@@ -43,6 +43,8 @@ app.use('/customers', customerRoutes)
 
 // rentals
 // GET
+var rentalsRoutes = require('./routes/rentals')
+app.use('/rentals', rentalsRoutes)
 // title
 // needs customer id, movie title
 
