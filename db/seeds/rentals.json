@@ -1,0 +1,23 @@
+[
+{
+"movie_id": 2,
+"customer_id": 4,
+"status": "checked_out",
+"checkout_date": "2016-06-14",
+"due_date": "2016-06-24"
+},
+{
+"movie_id": 33,
+"customer_id": 55,
+"status": "overdue",
+"checkout_date": "1960-06-03",
+"due_date": "1960-06-13"
+},
+{
+"movie_id": 1,
+"customer_id": 3,
+"status": "returned",
+"checkout_date": "2016-06-02",
+"due_date": "2016-06-12"
+}
+]
