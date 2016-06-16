@@ -8,6 +8,8 @@ var routes = require('./routes/index')
 var app = express()
 
 var massive = require("massive")
+
+var app = module.exports = express()
 var connectionString = "postgres://localhost/video_store"
 
 // connect to Massive and get the db instance. You can safely use the

@@ -8,7 +8,7 @@ CREATE TABLE customers(
   state text,
   postal_code text,
   phone text,
-  account_credit numeric
+  account_credit numeric(6, 2)
 );
 
 DROP TABLE IF EXISTS movies;

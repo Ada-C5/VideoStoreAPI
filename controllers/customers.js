@@ -1,4 +1,4 @@
-var Customers = require('../lib/customers')
+var Customer = require('../models/customer')
 
 CustomersController = {
   locals: {
@@ -6,17 +6,25 @@ CustomersController = {
   },
 
   getCustomers: function(req, res) {
+    Customer.all (function (error, customers) {
+      if (error) {
+        var err = new Error("Error retrieving customer list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customers)
+      }
+    })
     // var people = new Customers
-    var locals = CustomersController.locals
+    // var locals = CustomersController.locals
 
-    var db = req.app.get('db')
-    // locals.customers = db.customers.find(1)
+    // var db = req.app.get('db')
+    // // locals.customers = db.customers.find(1)
 
-    db.customers.find(function(err,results){
-      //user with ID 1
-      res.json(results);
-    });
-
+    // db.customers.find(function(err,results){
+    //   //user with ID 1
+    //   res.json(results);
+    // });
   }
 }
 
