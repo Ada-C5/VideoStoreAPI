@@ -26,7 +26,7 @@ router.post('/:title/check-out', function(req, res, next) {
 
 // POST rentals/:title/return
 // #provide customerid and movie title
-router.get('/:title/return', function(req, res, next) {
+router.post('/:title/return', function(req, res, next) {
   res.status(200).json({title: '"check in" one of a customers rentals:'})
 });
 
