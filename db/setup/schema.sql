@@ -8,7 +8,7 @@ CREATE TABLE customers(
   state text,
   postal_code text,
   phone text,
-  account_credit integer
+  account_credit decimal(9,2)
 );
 
 DROP TABLE IF EXISTS videos;
