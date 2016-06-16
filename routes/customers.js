@@ -3,8 +3,6 @@ var router = express.Router()
 
 var Controller = require('../controllers/customers')
 
-router.get('/', function(req, res) {
-  res.json({customers: ''})
-})
+router.get('/', Controller.getCustomers)
 
 module.exports = router
