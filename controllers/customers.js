@@ -11,7 +11,7 @@ var CustomersController = {
         res.json(customers);
       }
     });
-  }
+  },
   current: function(req, res, next) {
       Customer.find(req.params.id, function(error, customer) {
         if(error) {

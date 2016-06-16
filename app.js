@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var massive = require("massive")
 
+var app = module.exports = express();
+
 // database setup
 var connectionString = "postgres://localhost/videostore_api_" + app.get('env');
 var db = massive.connectSync({connectionString: connectionString});
@@ -31,11 +33,11 @@ app.use('/', indexRoutes);
 var customerRoutes = require('./routes/customers');
 app.use('/customers', customerRoutes);
 
-var movieRoutes = require('./routes/movies');
-app.use('/movies', movieRoutes);
-
-var rentalRoutes = require('./routes/rentals');
-app.use('/rentals', rentalRoutes);
+// var movieRoutes = require('./routes/movies');
+// app.use('/movies', movieRoutes);
+//
+// var rentalRoutes = require('./routes/rentals');
+// app.use('/rentals', rentalRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
