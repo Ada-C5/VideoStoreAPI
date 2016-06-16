@@ -28,21 +28,21 @@ var cust_records = cust_data.length
 var check1 = function checkVideo() {
   db.videos.count(function(err, res) {
   console.log("videos in db: ", res)
-  if (res >= video_records) {
-    console.log("Yay! I'm done with videos!")
-    return true;
-  }
-})
+    if (res >= video_records) {
+      console.log("Yay! I'm done with videos!")
+      return true;
+    }
+  })
 }
 
 var check2 = function checkCust() {
   db.customers.count(function(err, res) {
   console.log("customers in db: ", res)
-  if (res >= cust_records) {
-    console.log("Yay! I'm done with customers!")
-    return true;
-  }
-})
+    if (res >= cust_records) {
+      console.log("Yay! I'm done with customers!")
+      return true;
+    }
+  })
 }
 
 var make = function(){

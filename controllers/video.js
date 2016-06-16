@@ -1,7 +1,18 @@
 var VideoController = {
 
-  getIndex: function (request, response, next) {
-    response.render('index', {title: 'EXTREME VIDEO EXPRESS'});
+  getCustomers: function (request, response, next) {
+    Customers.all(function(error, customers) {
+      if(error) {
+        var err = new Error("Error retrieving customers list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        var locals = { customers: customers }
+        res.render("/customers", {
+          locals
+        });
+      }
+    });
   },
 
   getZomg: function (request, response) {

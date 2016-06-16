@@ -18,7 +18,7 @@ router.get('/zomg', Controllers.getZomg);
 // GET 
 
 // GET the customer page 
-router.get('/customer', Controllers.getCustomer);
+router.get('/customers', Controllers.getCustomers);
 // list of all of the customers
 // sort by  
   //name
