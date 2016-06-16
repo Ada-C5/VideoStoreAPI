@@ -3,8 +3,8 @@ var router = express.Router();
 var CustomersController = require('../controllers/customers')
 
 router.get('/', CustomersController.index) // nothing here, probably omit
-router.get('/customers/sort/:query', CustomersController.sortBy(parmas.req.query))
-router.get('/customers/:num/current', CustomersController.current)
-router.get('/customers/:num/history', CustomersController.history)
+router.get('/sort/:query', CustomersController.sortBy(parmas.req.query))
+router.get('/:id/current', CustomersController.current)
+router.get('/:id/history', CustomersController.history)
 
 module.exports = router;
