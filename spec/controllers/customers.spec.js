@@ -8,12 +8,31 @@ describe("CustomersController", function() {
     return baseUrl + "/customers" + endpoint
   }
 
-  describe("#getCustomers", function() {
+  describe("#getCustomers", function(done) {
     it("returns a Success response", function(done) {
       request.get(url("/"), function(error, response, body) {
         expect(response.statusCode).toBe(200)
         done()
       })
     })
+
+    it("returns JSON", function(done) {
+      request.get(url("/"), function(error, response, body) {
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+
+    it("should be an array of objects", function(done) {
+    request.get(url("/"), function(error, response, body) {
+      var data = JSON.parse(body)
+      expect(typeof data).toEqual('object')
+
+      for (var record of data) {
+        expect(Object.keys(record)).toEqual([ 'id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit' ])
+      }
+      done()
+    })
+  })
   })
 })
