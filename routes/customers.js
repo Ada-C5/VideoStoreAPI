@@ -27,7 +27,7 @@ router.get('/:id/current', function(req, res, next) {
 });
 
 // GET customers/:id/history
-router.get('/:id/current', function(req, res, next) {
+router.get('/:id/history', function(req, res, next) {
   res.status(200).json({title: 'List of Movies the Customer Has Checked-Out in the Past:'})
 });
 
