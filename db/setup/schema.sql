@@ -19,4 +19,15 @@ CREATE TABLE videos(
   release_date date,
   inventory integer,
   available_inventory integer
+);
+
+DROP TABLE IF EXISTS rentals;
+CREATE TABLE rentals(
+  id serial PRIMARY KEY,
+  customer_id integer,
+  video_id integer,
+  checkout_date date,
+  due_date date,
+  checkin_date date,
+  charge decimal(9,2)
 )
