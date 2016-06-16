@@ -14,8 +14,8 @@ var VideoController = {
     response.render('customer'); 
   },
 
-  getMovie: function (request, response) {
-    response.render('movie'); 
+  getVideo: function (request, response) {
+    response.render('video'); 
   },
 
   getRental: function (request, response) {

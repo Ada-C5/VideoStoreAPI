@@ -30,7 +30,7 @@ router.get('/customer', Controllers.getCustomer);
 
 // GET 
 //movies
-router.get('/movie', Controllers.getMovie);
+router.get('/video', Controllers.getVideo);
   //sort by same trash as before
   // title / release date 
   // given a movie title, shows a list of customers who have CURRENTLY checked it out
