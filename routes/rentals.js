@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var rentalsController = require('../controllers/rentals')
+var RentalsController = require('../controllers/rentals')
 
-router.get('/:movie', rentalsController.lookupMovie)
-router.get('/:movie/customers', rentalsController.sortBy) // do we need to pass stuff in?
-router.post('/:movie/check-out', rentalsController.checkOut) // requires json data customer_id and movie title
-router.post('/:movie/return', rentalsController.return) // requires json data customer_id and movie title
-router.get('/overdue', rentalsController.overdue)
-
+router.get('/:movie', RentalsController.lookupMovie)
+router.get('/:movie/customers', RentalsController.sortBy) // do we need to pass stuff in?
+router.post('/:movie/check-out', RentalsController.checkOut) // requires json data customer_id and movie title
+router.post('/:movie/return', RentalsController.return) // requires json data customer_id and movie title
+router.get('/overdue', RentalsController.overdue)
 
 module.exports = router;

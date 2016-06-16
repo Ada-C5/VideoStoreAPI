@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var moviesController = require('../controllers/movies')
+var MoviesController = require('../controllers/movies')
 
-router.get('/', moviesController.listMovies)
-router.get('/sort/:query', moviesController.sortBy)
-router.get('/:movie/current', moviesController.current)
-router.get('/:movie/history/sort/:by', moviesController.sortedHistory)
+router.get('/', MoviesController.listMovies)
+router.get('/sort/:query', MoviesController.sortBy)
+router.get('/:movie/current', MoviesController.current)
+router.get('/:movie/history/sort/:by', MoviesController.sortedHistory)
 
 
 module.exports = router;
