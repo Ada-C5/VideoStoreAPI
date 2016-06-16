@@ -2,10 +2,12 @@ var massive = require('massive')
 var connectionString = 'postgres://localhost/video_store'
 var customerSeed = require('../db/seeds/customers')
 var movieSeed = require('../db/seeds/movies')
+var rentalSeed = require('../db/seeds/rentals')
 
 var db = massive.connectSync({connectionString: connectionString})
 var movieRecords = movieSeed.length
 var customerRecords = movieSeed.length
+var rentalRecords = rentalSeed.length
 
 for (var record of movieSeed) {
   db.movies.save(record, function (err, res) {
@@ -35,6 +37,22 @@ for (var record of customerSeed) {
       }
       console.log('records in db: ', res)
       if (res >= customerRecords) { process.exit() }
+    })
+  })
+}
+
+for (var record of rentalSeed) {
+  db.rentals.save(record, function (err, res) {
+    if (err) {
+      throw (new Error(err.message))
+    }
+    console.log('saved: ', JSON.stringify(res))
+    db.rentals.count(function (err, res) {
+      if (err) {
+        throw (new Error(err.message))
+      }
+      console.log('records in db: ', res)
+      if (res >= rentalRecords) { process.exit() }
     })
   })
 }
