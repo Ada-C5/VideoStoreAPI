@@ -8,7 +8,7 @@ var Customer = function(id) {
 
 
 Customer.all = function(callback) {
-  db.customers.run(function(error, customers) {
+  db.run("SELECT * FROM customers;", function(error, customers) {
     if(error || !customers) {
       callback(error || new Error("Could not retrieve Customers"), undefined);
     } else {
