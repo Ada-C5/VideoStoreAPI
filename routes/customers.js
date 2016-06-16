@@ -4,9 +4,8 @@ var router = express.Router()
 var Controller = require('../controllers/customers')
 
 router.get('/', Controller.getCustomers)
-router.get('/:id', function(request, response) {
-  var id = request.params.id
-  Controller.getCustomersShow(request, response, id)
-})
+router.get('/:id', Controller.getCustomersShow)
+router.get('/sort/:field', Controller.getCustomersSort)
+
 
 module.exports = router

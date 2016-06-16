@@ -37,6 +37,19 @@ CustomersController = {
         // });
       }
     })
+  },
+
+  getCustomersSort: function(req, res) {
+    Customer.sort(req.params.field, req.query.n, req.query.p, function(error, customer) {
+      console.log(req.params);
+      if (error) {
+        var err = new Error("Error retrieving customer list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customer)
+      }
+    })
   }
 }
 
