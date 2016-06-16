@@ -3,7 +3,7 @@ var router = express.Router();
 var CustomersController = require('../controllers/customers')
 
 router.get('/', CustomersController.index) // nothing here, probably omit
-router.get('/sort/:query', CustomersController.sortBy(parmas.req.query))
+router.get('/sort/:query', CustomersController.sortBy(params.req.query))
 router.get('/:id/current', CustomersController.current)
 router.get('/:id/history', CustomersController.history)
 
