@@ -10,6 +10,7 @@ router.get('/zomg', function(req, res, next) {
   res.status(200).json({it_works: 'it works!!!'})
 });
 
+
 /*
 customers
 GET customers
@@ -38,6 +39,5 @@ POST rentals/:title/return #provide customerid and movie title
 GET rentals/overdue
 
 */
-
 
 module.exports = router;
