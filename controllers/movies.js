@@ -2,11 +2,13 @@ var MovieController = {
   sortTitle: function (req, res, next) {
     res.send(
       // CODE TO RETRIEVE movies, sorted by title
+      SELECT * FROM movies ORDER BY title;
     )}
   }
 
   sortRelease: function (req, res, next) {
     res.send(
+      SELECT * FROM movies ORDER BY release_date;
       // CODE TO RETRIEVE movies, sorted by release date
     )}
   }
@@ -49,7 +51,7 @@ var MovieController = {
 
   overdue: function (req, res, next) {
     res.send(
-      // 
+      //
     )}
   }
 
