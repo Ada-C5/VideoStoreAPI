@@ -40,9 +40,18 @@ var MovieController = {
   },
 
   history: function (req, res, next) {
-    res.send(
-      // CODE TO RETRIEVE rentals that were previously checked out by title
-    )},
+    var movie_id = req.params.id
+    console.log(movie_id)
+    console.log(req.params)
+    db.query("select * from rentals where checked_out = false and movie_id=$1 order by due_date asc", [movie_id], function(err, movieRecords){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movieRecords)
+      }
+    });
+  },
 
   rentalsTitle: function (req, res, next) {
     res.send(
