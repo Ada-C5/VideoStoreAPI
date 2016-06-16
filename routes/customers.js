@@ -1,36 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-// GET customers
-router.get('/', function(req, res, next) {
-  res.status(200).json({title: 'List of Customers:'})
-});
+var Controller = require('../controllers/customers_controller')
+
+// GET customers //
+router.get('/', Controller.getCustomers)
 
 // GET customers/sort/name?n=10&p=2
-router.get('/sort/', function(req, res, next) {
-  res.status(200).json({title: 'Sorted List of Customers:'})
-});
+router.get('/sort/name', Controller.sortName)
 
 // GET customers/sort/registered_at
-router.get('/sort/registered-at', function(req, res, next) {
-  res.status(200).json({title: 'List of Customers Sorted by Register Date:'})
-});
+router.get('/sort/registered-at', Controller.sortRegistered)
 
 // GET customers/sort/postal_code
-router.get('/sort/postal-code', function(req, res, next) {
-  res.status(200).json({title: 'List of Customers Sorted by Postal Code:'})
-});
+router.get('/sort/postal-code', Controller.sortPostal)
 
 // GET customers/:id/current
-router.get('/:id/current', function(req, res, next) {
-  res.status(200).json({title: 'List of Movies the Customer Currently Has Checked-Out:'})
-});
+router.get('/:id/current', Controller.customerCurrent)
 
 // GET customers/:id/history
-router.get('/:id/history', function(req, res, next) {
-  res.status(200).json({title: 'List of Movies the Customer Has Checked-Out in the Past:'})
-});
-
+router.get('/:id/history', Controller.customerHistory)
 
 
 module.exports = router
