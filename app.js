@@ -26,6 +26,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// database setup
+var connectionString = "postgres://localhost/extreme_video_express" + app.get('env');
+var db = massive.connectSync({connectionString: connectionString});
+app.set('db', db);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
