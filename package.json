@@ -5,8 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "clear; jasmine-node --verbose spec/",
-    "db:drop": "dropdb scrabble_express",
-    "db:create": "createdb scrabble_express",
+    "db:drop": "dropdb video_store",
+    "db:create": "createdb video_store",
     "db:schema": "node tasks/load_schema.js",
     "db:seed": "node tasks/seed.js",
     "reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed;"
