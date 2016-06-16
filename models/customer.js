@@ -5,6 +5,8 @@ var db = app.get("db");
 var Customer = function(customer) {
   this.id = customer.id;
   this.name = customer.name;
+  this.registered_at = customer.registered_at;
+  this.postal_code = customer.postal_code
 };
 
 
@@ -20,8 +22,9 @@ Customer.all = function(callback) {
   });
 };
 
-Customer.sortByName = function(input, callback){
-  db.run("Select * From (Select Row_Number() Over (Order By name) As RowNum, *From customers) customers Where RowNum BETWEEN $1 AND $2;",input, function(error, customers) {
+Customer.sortBy = function(input, callback){
+  var order = input.shift()
+  db.run("Select * From (Select Row_Number() Over (Order By " + order + ") As RowNum, *From customers) customers Where RowNum BETWEEN $1 AND $2;",input, function(error, customers) {
     if(error || !customers) {
       callback(error || new Error("Could not retrieve Customers"), undefined);
     } else {

@@ -14,12 +14,13 @@ var CustomersController = {
   },
 
   sortBy: function(req, res, next) {
-    console.log("bla",req.params.query, req.query.n, req.query.p)
+    var type = req.params.query
     var n = req.query.n
     var p = req.query.p
     var firstrow = n*(p-1)+1
     var lastrow = n*p
-    Customer.sortByName([firstrow,lastrow],function(error, customers) {
+    console.log("bla",type,firstrow,lastrow)
+    Customer.sortBy([type,firstrow,lastrow],function(error, customers) {
       if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
         err.status = 500;
