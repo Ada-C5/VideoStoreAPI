@@ -18,6 +18,9 @@ app.use('/movies', movies)
 var customers = require('./routes/customers');
 app.use('/customers', customers)
 
+var rentals = require('./routes/rentals');
+app.use('/rentals', rentals)
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
