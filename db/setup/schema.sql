@@ -32,12 +32,10 @@ CREATE TABLE rentals(
   id serial PRIMARY KEY,
   movie_id integer REFERENCES movies (id),
   customer_id integer REFERENCES customers (id),
-  checked boolean,
+  checked text,
   rental_date text,
-  due_date text,
+  due_date text
 );
 
 CREATE INDEX rentals_customers ON rentals (customer_id);
-CREATE INDEX rentals_states ON rentals (status);
-
--- CREATE INDEX words_word ON words (word);
+CREATE INDEX rentals_states ON rentals (checked);
