@@ -1,4 +1,4 @@
--var app = require("../app");
+var app = require("../app");
 var db = app.get("db");
 
 // Constructor function
