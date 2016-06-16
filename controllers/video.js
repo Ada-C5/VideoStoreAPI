@@ -1,3 +1,5 @@
+var Customers = require("../models/customers");
+
 var VideoController = {
 
   getCustomers: function (request, response, next) {
