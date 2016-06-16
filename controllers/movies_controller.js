@@ -1,4 +1,4 @@
-var Movie = require("../models/movie");
+var Movie = require("../models/movie.js");
 
 var MoviesController = {
   listMovies: function(req, res, next) {
@@ -16,15 +16,15 @@ var MoviesController = {
     });
   },
 
-  sortBy: function() {
+  sortBy: function(req, res, next)  {
 
   },
 
-  current: function() {
+  current: function(req, res, next)  {
 
   },
 
-  sortedHistory: function() {
+  sortedHistory: function(req, res, next)  {
 
   }
 }
