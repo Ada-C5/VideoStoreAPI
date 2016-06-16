@@ -19,7 +19,7 @@ Customer.all = function (callback) {
       callback(error || new Error("Could not retrieve customers"), undefined);
     } else {
       callback(null, customers.map (function (customer) {
-        return new Customer(customer);
+        return new Customer(customer)
       }))
     }
   })
