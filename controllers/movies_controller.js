@@ -24,7 +24,7 @@ var MoviesController = {
 
   },
 
-  sortedHistory: function(req, res, next)  {
+  sortByHistory: function(req, res, next)  {
 
   }
 }
