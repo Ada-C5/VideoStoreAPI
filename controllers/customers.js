@@ -15,26 +15,29 @@ CustomersController = {
         res.json(customers)
       }
     })
-    // var people = new Customers
-    // var locals = CustomersController.locals
+  },
 
-    // var db = req.app.get('db')
-    // // locals.customers = db.customers.find(1)
+  getCustomersShow: function(req, res) {
+    Customer.find(req.params.id, function(error, customer) {
 
-    // db.customers.find(function(err,results){
-    //   //user with ID 1
-    //   res.json(results);
-    // });
+      if(error) {
+        var err = new Error("No such customer");
+        err.status = 404;
+        next(err);
+      } else {
+        res.json(customer)
+
+        // customer.getBalance(function(error, balance) {
+        //   res.render("customers/show", {
+        //     customer: {
+        //       id: customer.id,
+        //       balance: balance
+        //     }
+        //   });
+        // });
+      }
+    })
   }
 }
 
 module.exports = CustomersController
-
-
-// chart: function(req, res) {
-//   var chart = new Scorer().scoreChart()
-//   var locals = ScrabbleController.locals
-//
-//   locals.chart = chart
-//   res.render('chart', locals)
-// },

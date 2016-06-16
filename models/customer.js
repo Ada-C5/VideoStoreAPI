@@ -25,8 +25,15 @@ Customer.all = function (callback) {
   })
 }
 
-// Customer.prototype.sortBy = function (name, registered_at, postal_code) {
+Customer.find = function(id, callback) {
+  db.customers.findOne({id: id}, function(error, customer) {
+    if(error || !customer) {
+      callback(error || new Error("Customer not found"), undefined);
+    } else {
+      callback(null, new Customer(customer));
+    }
+  });
+};
 
-// }
 
 module.exports = Customer
