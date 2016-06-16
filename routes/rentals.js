@@ -7,11 +7,11 @@ var Controller = require('../controllers/rentals')
 //   res.status(200).json({whatevs: 'whatevs!!!'})
 // });
 
-router.get('/rentals/:title', Controller.getRentals)
-router.get('/rentals/:title/customers', Controller.getRentalsCustomers)
-router.get('/rentals/:title/check-out', Controller.getRentalsCheckOut)
-router.get('/rentals/:title/return', Controller.getRentalsReturn)
-router.get('/rentals/overdue', Controller.getRentalsOverdue)
+router.get('/:title', Controller.getRentals)
+router.get('/:title/customers', Controller.getRentalsCustomers)
+router.get('/:title/check-out', Controller.getRentalsCheckOut)
+router.get('/:title/return', Controller.getRentalsReturn)
+router.get('/overdue', Controller.getRentalsOverdue)
 
 
 

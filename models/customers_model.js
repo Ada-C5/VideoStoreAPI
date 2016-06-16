@@ -6,7 +6,7 @@ var Customer = function(id) {
 }
 
 Customer.all = function(callback) {
-  db.customers.find(function(error, accounts) {
+  db.customers.find(function(error, customers) {
     if (error|| !customers) {
       callback(error || new Error("Could not retrieve customers"), undefined);
     } else {
@@ -16,3 +16,5 @@ Customer.all = function(callback) {
     };
   })
 };
+
+module.exports = Customer;
