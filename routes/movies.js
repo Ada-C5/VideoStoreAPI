@@ -6,12 +6,12 @@ var Controller = require('../controllers/movies')
 router.get('/sort/title', Controller.sortTitle)
 router.get('/sort/release', Controller.sortRelease)
 
-router.get('/:title/current', Controller.current)
-router.get('/:title/history', Controller.history)
+router.get('/:id/current', Controller.current)
+router.get('/:id/history', Controller.history)
 
-router.get('/rentals/:title', Controller.rentalsTitle)
-router.get('/rentals/:title/customers', Controller.rentalsCustomers)
-router.post('/rentals/:title/checkout', Controller.checkout)
-router.patch('/rentals/:title/return', Controller.return)
+router.get('/rentals/:id', Controller.rentalsTitle)
+router.get('/rentals/:id/customers', Controller.rentalsCustomers)
+router.post('/rentals/:id/checkout', Controller.checkout)
+router.patch('/rentals/:id/return', Controller.return)
 router.get('/rentals/overdue', Controller.overdue)
 module.exports = router;
