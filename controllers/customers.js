@@ -12,7 +12,7 @@ CustomersController = {
     var db = req.app.get('db')
     // locals.customers = db.customers.find(1)
 
-    db.customers.find(1, function(err,results){
+    db.customers.find(function(err,results){
       //user with ID 1
       res.json(results);
     });
