@@ -1,7 +1,7 @@
 var Movie = require("../models/movie");
 
 var MoviesController = {
-  index: function(req, res, next) {
+  listMovies: function(req, res, next) {
     // giving a callback function to handle error or render view
     Movie.all(function(error, movies) {
       if(error) {
@@ -14,7 +14,18 @@ var MoviesController = {
         // res.render("movies/index", locals);
       }
     });
+  },
+
+  sortBy: function() {
+
+  },
+
+  current: function() {
+
+  },
+
+  sortedHistory: function() {
+
   }
 }
-
-  module.exports = MoviesController;
+module.exports = MoviesController;
