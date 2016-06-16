@@ -1,58 +1,63 @@
+var Massive = require("massive");
+var db = Massive.connectSync({db : "video_store"});
+
 var MovieController = {
   sortTitle: function (req, res, next) {
-    res.send(
-      // CODE TO RETRIEVE movies, sorted by title
-      SELECT * FROM movies ORDER BY title;
-    )}
-  }
+
+    db.query("select * from movies order by title", function(err, movies){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movies)
+      }
+    });
+  },
 
   sortRelease: function (req, res, next) {
-    res.send(
-      SELECT * FROM movies ORDER BY release_date;
-      // CODE TO RETRIEVE movies, sorted by release date
-    )}
-  }
+    db.query("select * from movies order by release_date", function(err, movies){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movies)
+      }
+    });
+  },
 
   current: function (req, res, next) {
     res.send(
       // CODE TO RETRIEVE rentals that are (currently checked out) by title
-    )}
-  }
+    )},
 
   history: function (req, res, next) {
     res.send(
       // CODE TO RETRIEVE rentals that were previously checked out by title
-    )}
-  }
+    )},
 
   rentalsTitle: function (req, res, next) {
     res.send(
       // HOW IS THIS DIFFERENT FROM CURRENT/HISTORY BY TITLE?
-    )}
-  }
+    )},
 
   rentalsCustomers: function (req, res, next) {
     res.send(
       //
-    )}
-  }
+    )},
 
   checkout: function (req, res, next) {
     res.send(
       //
-    )}
-  }
+    )},
 
   return: function (req, res, next) {
     res.send(
       //
-    )}
-  }
+    )},
 
   overdue: function (req, res, next) {
     res.send(
       //
     )}
-  }
-
+}
 module.exports = MovieController
