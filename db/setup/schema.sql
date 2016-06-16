@@ -1,13 +1,3 @@
-DROP TABLE IF EXISTS videos;
-CREATE TABLE videos(
-  id serial PRIMARY KEY,
-  title text,
-  overview text,
-  release_date date,
-  inventory integer,
-  available_inventory integer
-)
-
 DROP TABLE IF EXISTS customers;
 CREATE TABLE customers(
   id serial PRIMARY KEY,
@@ -16,7 +6,17 @@ CREATE TABLE customers(
   address text,
   city text,
   state text,
-  postal_code integer,
-  phone integer,
+  postal_code text,
+  phone text,
   account_credit integer
+);
+
+DROP TABLE IF EXISTS videos;
+CREATE TABLE videos(
+  id serial PRIMARY KEY,
+  title text,
+  overview text,
+  release_date date,
+  inventory integer,
+  available_inventory integer
 )
