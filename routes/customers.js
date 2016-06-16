@@ -5,4 +5,6 @@ var CustomerController = require('../controllers/customers');
 /* GET home page. */
 router.get('/', CustomerController.index);
 
+router.get('/:customer_id/current', CustomerController.current);
+
 module.exports = router;
