@@ -15,10 +15,15 @@ var MovieController = {
   },
 
   sortRelease: function (req, res, next) {
-    res.send(
-      // SELECT * FROM movies ORDER BY release_date;
-      // CODE TO RETRIEVE movies, sorted by release date
-    )},
+    db.query("select * from movies order by release_date", function(err, movies){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movies)
+      }
+    });
+  },
 
   current: function (req, res, next) {
     res.send(
