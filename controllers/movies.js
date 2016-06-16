@@ -27,8 +27,6 @@ var MovieController = {
 
   current: function (req, res, next) {
     var movie_id = req.params.id
-    console.log(movie_id)
-    console.log(req.params)
     db.query("select * from rentals where checked_out = true and movie_id=$1 order by due_date asc", [movie_id], function(err, movieRecords){
       if(err) {
         var err = new Error("It's an error")
@@ -41,8 +39,6 @@ var MovieController = {
 
   history: function (req, res, next) {
     var movie_id = req.params.id
-    console.log(movie_id)
-    console.log(req.params)
     db.query("select * from rentals where checked_out = false and movie_id=$1 order by due_date asc", [movie_id], function(err, movieRecords){
       if(err) {
         var err = new Error("It's an error")
@@ -54,9 +50,24 @@ var MovieController = {
   },
 
   rentalsTitle: function (req, res, next) {
-    res.send(
-      // HOW IS THIS DIFFERENT FROM CURRENT/HISTORY BY TITLE?
-    )},
+    var movie_id = req.params.id
+    db.query("select * from rentals where movie_id = $1 and checked_out = true"), [movie_id], function(err, rentalRecords) {
+      if(err) {
+        throw (new Error(err.message))
+      } else {
+        db.query("select * from movies where movie_id=$1 asc", [movie_id], function(err, movieRecords){
+          if(err) {
+            var err = new Error("It's an error")
+            next(err)
+          } else {
+            var available = movieRecords.inventory - rentalRecords.length
+            res.json({movieRecords: movieRecords, available: available})
+          }
+        });
+      }
+      }
+},
+// NOT YET COMPLETE/FUNCTIONAL 
 
   rentalsCustomers: function (req, res, next) {
     res.send(
