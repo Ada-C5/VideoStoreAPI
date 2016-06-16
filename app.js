@@ -6,20 +6,21 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var massive = require("massive")
-var connectionString = "postgres://localhost/radio_star"
+var connectionString = "postgres://localhost/radio_star";
+// + app.get('env');
 
 
 // connect to Massive and get the db instance. You can safely use the
 // convenience sync method here because its on app load
 // you can also use loadSync - it's an alias
-var massiveInstance = massive.connectSync({connectionString : connectionString})
+var db = massive.connectSync({connectionString : connectionString});
+// console.log(db)
+// var db = massive.connectSync({db : "radio_star"})
 
 // Set a reference to the massive instance on Express' app:
-app.set('db', massiveInstance)
+app.set("db", db);
 
 
 
@@ -27,6 +28,10 @@ app.set('db', massiveInstance)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+module.exports = app;
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -68,6 +73,3 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-module.exports = app;
