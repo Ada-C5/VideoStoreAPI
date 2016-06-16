@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 
 var massive = require("massive")
 
-
-var app = module.exports = express();
-
 // database setup
 var connectionString = "postgres://localhost/videostore_api_" + app.get('env');
 var db = massive.connectSync({connectionString: connectionString});
