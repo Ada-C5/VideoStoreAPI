@@ -14,6 +14,7 @@ var MoviesController = {
         // res.render("movies/index", locals);
       }
     });
-  };
+  }
+}
 
   module.exports = MoviesController;
