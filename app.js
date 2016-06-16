@@ -4,9 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var massive = require("massive");
 var app = module.exports = express();
 //
-var massive = require("massive")
 var connectionString = "postgres://localhost/video_store"
 
 // connect to Massive and get the db instance. You can safely use the

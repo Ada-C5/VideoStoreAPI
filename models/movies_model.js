@@ -1,8 +1,8 @@
 var app = require("../app");
 var db = app.get("db");
 
-var Movie = function(id) {
-  this.id = id;
+var Movie = function(title) {
+  this.title = title;
 }
 
 Movie.all = function(callback) {
@@ -11,9 +11,21 @@ Movie.all = function(callback) {
       callback(error || new Error("Could not retrieve movies"), undefined);
     } else {
       callback(null, movies.map(function(movie) {
-        return new Movie(movie.id);
+        return new Movie(movie.title);
       }))
     };
+  })
+};
+
+Movie.findMovie = function(title, callback) {
+  db.movies.findOne({title: title}, function(error, movie) {
+
+    if (error || !movie) {
+
+      callback(error || new Error("Movie not found"), undefined);
+    } else {
+      callback(null, new Movie(movie.title));
+    }
   })
 };
 
