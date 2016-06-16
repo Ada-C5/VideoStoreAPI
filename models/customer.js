@@ -49,16 +49,6 @@ Customer.sort = function(field, n, p, callback){
       }))
     }
   })
-
-  // db.sort_customers([field, n, p], function(error, customers) {
-  //   if (error || !customers) {
-  //     callback(error || new Error("Could not retrieve customers"), undefined);
-  //   } else {
-  //     callback(null, customers.map (function (customer) {
-  //       return new Customer(customer)
-  //     }))
-  //   }
-  // })
 }
 
 

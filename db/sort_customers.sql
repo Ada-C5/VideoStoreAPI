@@ -1,1 +1,0 @@
-SELECT * FROM customers ORDER BY $1 LIMIT $2 OFFSET $3;
