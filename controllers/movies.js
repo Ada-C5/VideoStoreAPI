@@ -67,7 +67,7 @@ var MovieController = {
       }
       }
 },
-// NOT YET COMPLETE/FUNCTIONAL 
+// NOT YET COMPLETE/FUNCTIONAL
 
   rentalsCustomers: function (req, res, next) {
     res.send(
@@ -79,10 +79,22 @@ var MovieController = {
       //
     )},
 
-  return: function (req, res, next) {
-    res.send(
-      //
-    )},
+    return: function (req, res, next) {
+      var movie_id = req.params.id
+      var customer_id = req.params.customer
+
+      // find rental id# that matches movie_id and customer_id
+      // update that instance to checked_out false
+
+        db.rentals.update({id: ID_NUM, checked_out: false}, function(err, rental){
+          if(err) {
+            var err = new Error("It's an error")
+            next(err)
+          } else {
+            res.json(rental)
+          }
+        });
+      )},
 
   overdue: function (req, res, next) {
     res.send(
