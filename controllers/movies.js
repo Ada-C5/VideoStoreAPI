@@ -41,11 +41,22 @@ var MoviesController = {
       } else {
         res.json(movies)
       }
+    })},
+
+  sortedHistory: function (req, res, next) {
+    var title = req.params.movie
+    var sort = req.params.by
+    Customer.rentedThisMovie([title, sort], function(error, movies) {
+      if(error) {
+        var err = new Error("Error retrieving customer list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(movies)
+      }
     })}
 
-  // function sortedHistory () {
 
-  // }
 }
 
 module.exports = MoviesController

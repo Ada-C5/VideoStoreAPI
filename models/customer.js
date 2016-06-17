@@ -7,8 +7,11 @@ var Customer = function(customer) {
   this.name = customer.name;
   this.registered_at = customer.registered_at;
   this.postal_code = customer.postal_code;
-  this.phone = customer.postal_code;
-  this.account_credit = customer.postal_code;
+  this.phone = customer.phone;
+  this.account_credit = customer.account_credit;
+  if (customer.checkout_date) {
+    this.checkout_date = customer.checkout_date
+  }
 };
 
 
@@ -38,7 +41,21 @@ Customer.sortBy = function(input, callback){
 };
 
 Customer.customersWithMovie = function(input, callback){
-  db.run("SELECT * FROM (SELECT customer_id FROM rentals WHERE (SELECT id FROM movies WHERE movies.title = $1 and status='checked_out') = movie_id) as new_ids INNER JOIN customers ON (new_ids.customer_id = customers.id);;",input, function(error, customers) {
+  db.run("SELECT * FROM (SELECT customer_id FROM rentals WHERE (SELECT id FROM movies WHERE movies.title = $1 and status='checked_out') = movie_id) as new_ids INNER JOIN customers ON (new_ids.customer_id = customers.id);",input, function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve Customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customer(customer);
+      }));
+    }
+  });
+};
+
+Customer.rentedThisMovie = function(input, callback) {
+  var order = input.pop()
+
+  db.run("SELECT * FROM (SELECT customer_id, checkout_date FROM rentals WHERE (SELECT id FROM movies WHERE movies.title = $1) = movie_id) as new_ids JOIN customers ON (new_ids.customer_id = customers.id) ORDER BY " + order + ";",input, function(error, customers) {
     if(error || !customers) {
       callback(error || new Error("Could not retrieve Customers"), undefined);
     } else {

@@ -33,5 +33,12 @@
 "status": "returned",
 "checkout_date": "2016-06-02",
 "due_date": "2016-06-12"
+},
+{
+"movie_id": 1,
+"customer_id": 4,
+"status": "returned",
+"checkout_date": "1960-06-03",
+"due_date": "1960-06-13"
 }
 ]
