@@ -19,13 +19,13 @@ var CustomersController = {
     var n = req.query.n;
     var p = req.query.p;
 
-    Customer.all(function(error, customers) {
+    Customer.sortByName([n, p], function(error, customers) {
       if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
-        res.json(n)
+        res.json(customers)
       }
     });
 
