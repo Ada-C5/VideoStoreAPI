@@ -7,9 +7,10 @@ var Rental = function(rental) {
   this.id = rental.id;
   this.checkout_date = rental.checkout_date;
   this.due_date = rental.due_date;
+  this.status = rental.status
 };
 
-Rental.rentals = function(input,callback){
+Rental.currentCheckedOut = function(input,callback){
   // var order = input.shift()
   db.run("select * from (select * from rentals,movies where rentals.movie_id=movies.id) as joined where customer_id=$1 and status=$2;",input, function(error, rentals) {
     if(error || !rentals) {
@@ -22,5 +23,17 @@ Rental.rentals = function(input,callback){
   });
 }
 
-module.exports = Rental
+Rental.all = function (input,callback) {
+  // var order = input.shift()
+  db.run("select * from (select * from rentals,movies where rentals.movie_id=movies.id) as joined where customer_id=$1 order by due_date;", input, function (error, rentals) {
+    if(error || !rentals) {
+      callback(error || new Error("Could not retrieve rentals"), undefined);
+    } else {
+      callback(null, rentals.map(function (rental) {
+        return new Rental(rental);
+      }));
+    }
+  });
+}
 
+module.exports = Rental
