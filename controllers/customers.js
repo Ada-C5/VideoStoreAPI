@@ -5,7 +5,7 @@ var CustomerController = {
   allCustomers: function (req, res, next) {
     db.query("select * from customers", function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
@@ -20,7 +20,7 @@ var CustomerController = {
     if ( p === undefined) { p = 1 }
     db.query("select * from customers order by name asc limit $1 offset $2", [n, p], function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
@@ -33,9 +33,9 @@ var CustomerController = {
     var p = req.query.p
     if ( n === undefined) { n = 10 }
     if ( p === undefined) { p = 1 }
-    db.query("select * from customers order by registered_at asc limit $1 offset $2", [n], function(err, customerRecords){
+    db.query("select * from customers order by registered_at asc limit $1 offset $2", [n, p], function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
@@ -45,12 +45,12 @@ var CustomerController = {
 
   sortPostalCode: function (req, res, next) {
     var n = req.query.n
-    var p = req.params.p
+    var p = req.query.p
     if ( n === undefined) { n = 10 }
     if ( p === undefined) { p = 1 }
-    db.query("select * from customers order by postal_code asc limit $1", [n, p], function(err, customerRecords){
+    db.query("select * from customers order by postal_code asc limit $1 offset $2", [n, p], function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
