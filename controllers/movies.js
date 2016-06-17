@@ -1,4 +1,5 @@
 var Movie = require("../models/movie")
+var Customer = require("../models/customer")
 
 var MoviesController = {
   index: function(req, res, next) {
@@ -28,11 +29,19 @@ var MoviesController = {
     } else {
       res.json(movies)
     }
-  })}
+  })},
 
-  // function current () {
-
-  // },
+  current: function (req, res, next) {
+    var title = req.params.movie
+    Customer.customersWithMovie([title], function(error, movies) {
+      if(error) {
+        var err = new Error("Error retrieving customer list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(movies)
+      }
+    })}
 
   // function sortedHistory () {
 
