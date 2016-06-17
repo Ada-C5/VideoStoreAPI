@@ -16,7 +16,8 @@ var MoviesController = {
   },
 
   sort: function(req, res, next) {
-    Movie.sort(req.params.sort_param, function (error, result) {
+    console.log(req.query);
+    Movie.sort(req.params.sort_param, req.query.n, req.query.p, function (error, result) {
       if (error) {
         var err = new Error("Error retrieving movies:\n" + error.message);
         err.status = 500;

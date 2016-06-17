@@ -37,8 +37,13 @@ Movie.all = function (callback) {
   // but make it into a hash so we can use it to initialize
 // })
 
-Movie.sort = function (field, callback) {
-  db.movies.find({}, {order: field}, function(error, movies) {
+Movie.sort = function (field, n, p, callback) {
+  var sort_options = {
+    order: field,
+    limit: n,
+    offset: p
+  };
+  db.movies.find({}, sort_options, function(error, movies) {
     if(error || !movies) {
       //in this case error is always true because we're inside the if-statement for error being truthy. so we're passing "true" to the callback.
       callback(error, undefined);
