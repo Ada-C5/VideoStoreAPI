@@ -2,6 +2,20 @@ var Massive = require("massive");
 var db = Massive.connectSync({db : "video_store"});
 
 var MovieController = {
+
+  allMovies: function (req, res, next) {
+
+    db.query("select * from movies", function(err, movieRecords){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movieRecords)
+      }
+    });
+  },
+
+
   sortTitle: function (req, res, next) {
 
     db.query("select * from movies order by title", function(err, movieRecords){
