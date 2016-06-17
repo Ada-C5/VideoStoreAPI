@@ -37,8 +37,17 @@ Movie.all = function (callback) {
   // but make it into a hash so we can use it to initialize
 // })
 
-Movie.sort = function (callback) {
-  
+Movie.sort = function (field, callback) {
+  db.movies.find({}, {order: field}, function(error, movies) {
+    if(error || !movies) {
+      //in this case error is always true because we're inside the if-statement for error being truthy. so we're passing "true" to the callback.
+      callback(error, undefined);
+    } else {
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie);
+      }));
+    }
+  });
 }
 
 module.exports = Movie;
