@@ -25,7 +25,6 @@ CREATE TABLE rentals(
   id serial PRIMARY KEY,
   customer_id int,
   movie_id int,
-  check_in boolean,
-  check_out boolean,
+  status boolean,
   return_date text
 );
