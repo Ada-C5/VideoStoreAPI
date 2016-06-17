@@ -7,7 +7,7 @@ var MovieController = {
 
     db.query("select * from movies", function(err, movieRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(movieRecords)
@@ -16,10 +16,13 @@ var MovieController = {
   },
 
   sortTitle: function (req, res, next) {
-
-    db.query("select * from movies order by title", function(err, movieRecords){
+    var n = req.query.n
+    var p = req.query.p
+    if ( n === undefined) { n = 10 }
+    if ( p === undefined) { p = 1 }
+    db.query("select * from movies order by title limit $1 offset $2", [n, p], function(err, movieRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(movieRecords)
@@ -28,9 +31,13 @@ var MovieController = {
   },
 
   sortRelease: function (req, res, next) {
-    db.query("select * from movies order by release_date", function(err, movieRecords){
+    var n = req.query.n
+    var p = req.query.p
+    if ( n === undefined) { n = 10 }
+    if ( p === undefined) { p = 1 }
+    db.query("select * from movies order by release_date limit $1 offset $2", [n, p], function(err, movieRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(movieRecords)
@@ -41,15 +48,19 @@ var MovieController = {
   current: function (req, res, next) {
     var movie_id = req.params.id
     db.query("select * from rentals where checked_out = true and movie_id=$1 order by due_date asc", [movie_id], function(err, movieRecords){
+      console.log(movieRecords)
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
-      } else {
+      } else if (movieRecords.length < 1) {
+        res.json("This movie has not been checked out yet")
+      }
+      else {
         var customers = []
         for (var movie of movieRecords) {
         db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
           if(err) {
-            var err = new Error("It's an error")
+            var err = new Error(err.message)
             next(err)
           } else {
             customers.push(customerRecords)
@@ -67,14 +78,17 @@ var MovieController = {
     var movie_id = req.params.id
     db.query("select * from rentals where checked_out = false and movie_id=$1 order by due_date asc", [movie_id], function(err, movieRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
+      } else if (movieRecords.length < 1) {
+        res.json("This movie has not been checked out yet")
       } else {
         var customers = []
         for (var movie of movieRecords) {
-        db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
+        db.query("select * from customers where id=$1 order by name", [movie.customer_id], function(err, customerRecords){
+          console.log("HERE")
           if(err) {
-            var err = new Error("It's an error")
+            var err = new Error(err.message)
             next(err)
           } else {
             customers.push(customerRecords)
@@ -92,14 +106,16 @@ var MovieController = {
     var movie_id = req.params.id
     db.query("select * from rentals where checked_out = false and movie_id=$1 order by checked_out asc", [movie_id], function(err, movieRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
+      } else if (movieRecords.length < 1) {
+        res.json("This movie has not been checked out yet")
       } else {
         var customers = []
         for (var movie of movieRecords) {
         db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
           if(err) {
-            var err = new Error("It's an error")
+            var err = new Error(err.message)
             next(err)
           } else {
             customers.push(customerRecords)
@@ -166,7 +182,7 @@ var MovieController = {
 
     db.query("insert into rentals (customer_id,movie_id,check_out_date,checked_out,due_date) values ($1,$2,$3,$4,$5)", [customer_id,movie_id,check_out_date,true,due_date], function(err, createRental){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(200)
@@ -181,7 +197,7 @@ var MovieController = {
 
     db.query("update rentals set checked_out = false where movie_id=$1 AND customer_id=$2", [movie_id,customer_id], function(err, updateRental){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(200)
@@ -192,7 +208,7 @@ var MovieController = {
   overdue: function (req, res, next) {
     db.query("SELECT customer_id, movie_id, check_out_date, due_date FROM rentals WHERE checked_out=true AND due_date < now()", function(err, movieRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(movieRecords)
