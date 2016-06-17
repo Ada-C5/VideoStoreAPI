@@ -32,7 +32,7 @@ Customer.all = function(callback) {
 };
 
 Customer.sortByName = function(input, callback) {
-  db.run ("SELECT * FROM customers ORDER BY name;", function(error, customers) {
+  db.run ("SELECT * FROM customers ORDER BY name LIMIT $1 OFFSET $2;", input, function(error, customers) {
     if(error || !customers) {
       callback(error || new Error("Could not retrieve customers"), undefined);
     } else {
