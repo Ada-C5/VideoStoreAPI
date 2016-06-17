@@ -1,4 +1,4 @@
-var Rentals = require("../models/customers");
+var Rentals = require("../models/rentals");
 
 var RentalsController = {
 
@@ -12,8 +12,8 @@ var RentalsController = {
         response.json(rentals)
       }
     });
-  },
-
+  }
+}
 //   // customer id, sort column, offset (p and n)
 //   getCustomersSorted: function(request, response) {
 //     Customers.sort(request.params.column, request.query.p, request.query.n, function(error, customers) {
@@ -40,4 +40,4 @@ var RentalsController = {
 //   }
 // }
 
-module.exports = CustomersController;
+module.exports = RentalsController;

@@ -29,17 +29,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //
-// routes 
+// routes
 //
 
 var routes    = require('./routes/index');
 var customers = require('./routes/customers');
 var videos    = require('./routes/videos');
-// var rentals   = require('./routes/rentals');
+var rentals   = require('./routes/rentals');
 app.use('/', routes);
 app.use('/customers', customers);
 app.use('/videos', videos);
-// app.use('/rentals', rentals);
+app.use('/rentals', rentals);
 
 //
 // error handlers
