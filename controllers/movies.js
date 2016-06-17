@@ -51,28 +51,38 @@ var MovieController = {
 
   rentalsTitle: function (req, res, next) {
     var movie_id = req.params.id
-    db.query("select * from rentals where movie_id = $1 and checked_out = true"), [movie_id], function(err, rentalRecords) {
+    db.query("select * from rentals where movie_id = $1 and checked_out = true", [movie_id], function(err, rentalRecords) {
       if(err) {
         throw (new Error(err.message))
       } else {
-        db.query("select * from movies where movie_id=$1 asc", [movie_id], function(err, movieRecords){
+        db.query("select * from movies where id=$1", [movie_id], function(err, movieRecords){
           if(err) {
-            var err = new Error("It's an error")
+            var err = new Error(err.message)
             next(err)
           } else {
-            var available = movieRecords.inventory - rentalRecords.length
+            var available = movieRecords[0].inventory - rentalRecords.length
             res.json({movieRecords: movieRecords, available: available})
           }
         });
       }
-      }
+    })
 },
-// NOT YET COMPLETE/FUNCTIONAL
+// refactor with join if
 
   rentalsCustomers: function (req, res, next) {
-    res.send(
-      //
-    )},
+    var movie_id = req.params.id
+    db.query("select * from rentals where movie_id = $1 and checked_out = true", [movie_id], function(err, rentalRecords) {
+      if(err) {
+        throw (new Error(err.message))
+      } else {
+        var customerNumbers = []
+        for (var record of rentalRecords) {
+          customerNumbers.push(record.customer_id)
+        }
+        res.json({customerIdNumbers: customerNumbers})
+    }}
+  )
+},
 
   checkout: function (req, res, next) {
     res.send(
@@ -94,7 +104,7 @@ var MovieController = {
             res.json(rental)
           }
         });
-      )},
+      },
 
   overdue: function (req, res, next) {
     res.send(
