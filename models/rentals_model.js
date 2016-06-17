@@ -27,6 +27,15 @@ Rental.getCurrentRentals = function(customer_id, callback) {
   })
 }
 
+Rental.getPastRentals = function(customer_id, callback) {
+  db.rentals.where("customer_id=$1 AND returned=$2", [customer_id, true], function(error, checked_out) {
+    if(error) {
+      callback(error, undefined);
+    } else {
+      callback(null, checked_out);
+    }
+  })
+}
 
 
 

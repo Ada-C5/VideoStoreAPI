@@ -23,7 +23,6 @@ var CustomersController = {
 			} else {
 					res.json(data)
 			}
-
 		})
 	},
 
@@ -36,13 +35,18 @@ var CustomersController = {
 			} else {
 					res.json(data)
 			}
-
 		})
 	},
 
 	getCustomersHistory: function(req, res) {
-
+		Rental.getPastRentals(req.params.customer_id, function(error, data) {
+			if(error) {
+				var err = new Error("No such data");
+				err.status = 404;
+			} else {
+					res.json(data)
+			}
+		})
 	}
 }
-
 module.exports = CustomersController
