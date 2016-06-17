@@ -25,15 +25,6 @@ CustomersController = {
         next(err);
       } else {
         res.json(customer)
-
-        // customer.getBalance(function(error, balance) {
-        //   res.render("customers/show", {
-        //     customer: {
-        //       id: customer.id,
-        //       balance: balance
-        //     }
-        //   });
-        // });
       }
     })
   },
