@@ -1,10 +1,17 @@
 var app = require("../app")
 var db = app.get("db")
 
+var Movie = function(id) {
+  this.id = id,
+  this.title = title,
+  this.release_date =  release_date,
+  this.inventory = inventory
+}
+
 // takes on parameter(callback)-then run db.accounts.find
 Movie.all = function(callback) {
   // then run db.accounts.find(no specific id or column - just another callback)
-  db.movies.find('*', function(error, movies) {
+  db.movies.find(function(error, movies) {
     if(error || !movies) {
       // handling any error
       callback(error || new Error("Could not retrieve movies"), undefined);
@@ -29,11 +36,11 @@ Movie.all = function(callback) {
 // }
 
 // only attach this function if we're in test mode.
-if (app.get('env') === 'test') {
-  Movie.close_connection = function() {
-    console.log("closing connection")
-    db.end()
-  }
-}
+// if (app.get('env') === 'test') {
+//   Movie.close_connection = function() {
+//     console.log("closing connection")
+//     db.end()
+//   }
+// }
 
 module.exports = Movie;

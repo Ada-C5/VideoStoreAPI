@@ -16,15 +16,15 @@ var MoviesController = {
     });
   },
 
-  sortBy: function() {
+  sortBy: function(req, res, next)  {
 
   },
 
-  current: function() {
+  current: function(req, res, next)  {
 
   },
 
-  sortedHistory: function() {
+  sortByHistory: function(req, res, next)  {
 
   }
 }

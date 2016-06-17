@@ -32,7 +32,7 @@ var CustomersController = {
   },
 
   customerHistory: function(req, res, next) {
-    
-  }
 
+  }
+}
 module.exports = CustomersController
