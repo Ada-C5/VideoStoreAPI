@@ -5,6 +5,7 @@ var db = massive.connectSync({connectionString : connectionString})
 
 var movies_data = require("../db/seeds/movies.json")
 var customer_data = require("../db/seeds/customers.json")
+var rental_data = require("../db/seeds/rentals.json")
 // var movies_array = JSON.parse(movies_data)
 // console.log(movies_data)
 
@@ -14,6 +15,10 @@ for(var movie of movies_data){
 
 for(var customer of customer_data){
   db.customers.saveSync(customer);
+  }
+
+for(var rental of rental_data){
+  db.rentals.saveSync(rental);
   }
 
 console.log("seeding done")
