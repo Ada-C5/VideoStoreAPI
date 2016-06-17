@@ -1,0 +1,15 @@
+extends layout
+
+
+
+block content
+  h1 Customer Details
+  table
+    thead
+      tr
+        th Customer ID
+        th Name
+    tbody
+      ul
+      each val in locals
+        li= val

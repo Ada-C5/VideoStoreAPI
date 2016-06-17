@@ -15,30 +15,29 @@ var VideoController = {
         next(err);
       } else {
         var locals = { customers: customers }
-        res.render("/customers", {
-          locals
-        });
+        // locals = JSON.stringify(locals.customers)
+        response.json("customers", locals);
       }
     });
   },
 
   getZomg: function (request, response) {
-    var locals = {}; 
-    locals.zomg = JSON.stringify('It Works!!!!!');  
-    response.render('index', locals); 
+    var locals = {};
+    locals.zomg = JSON.stringify('It Works!!!!!');
+    response.render('index', locals);
   },
 
   getCustomer: function (request, response) {
-    response.render('customer'); 
+    response.render('customer');
   },
 
   getVideo: function (request, response) {
-    response.render('video'); 
+    response.render('video');
   },
 
   getRental: function (request, response) {
-    response.render('rental'); 
+    response.render('rental');
   }
 }
 
-module.exports = VideoController; 
+module.exports = VideoController;
