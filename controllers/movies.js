@@ -2,6 +2,19 @@ var Massive = require("massive");
 var db = Massive.connectSync({db : "video_store"});
 
 var MovieController = {
+
+  allMovies: function (req, res, next) {
+
+    db.query("select * from movies", function(err, movieRecords){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movieRecords)
+      }
+    });
+  },
+
   sortTitle: function (req, res, next) {
 
     db.query("select * from movies order by title", function(err, movieRecords){
@@ -177,8 +190,15 @@ var MovieController = {
   },
 
   overdue: function (req, res, next) {
-    res.send(
-      //
-    )}
+    db.query("SELECT customer_id, movie_id, check_out_date, due_date FROM rentals WHERE checked_out=true AND due_date < now()", function(err, movieRecords){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(movieRecords)
+      }
+    });
+  }
+
 }
 module.exports = MovieController
