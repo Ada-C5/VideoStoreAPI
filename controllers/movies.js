@@ -88,7 +88,7 @@ var MovieController = {
         var err = new Error("It's an error")
         next(err)
       } else {
-        res.json("Success - movie returned")
+        res.json(200)
       }
     });
   },
