@@ -10,9 +10,9 @@ router.get('/sort/release', Controller.sortRelease)
 router.get('/:id/current', Controller.current)
 router.get('/:id/history', Controller.history)
 
+router.get('/rentals/overdue', Controller.overdue)
 router.get('/rentals/:id', Controller.rentalsTitle)
 router.get('/rentals/:id/customers', Controller.rentalsCustomers)
 router.get('/rentals/:id/checkout/:customer', Controller.checkout)
 router.get('/rentals/:id/return/:customer', Controller.return)
-router.get('/rentals/overdue', Controller.overdue)
 module.exports = router;
