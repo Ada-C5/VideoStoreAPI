@@ -1,5 +1,9 @@
-// var express = require('express');
-// var router = express.Router();
-// var Controllers = require('../controllers/rentals')
+var express = require('express');
+var router = express.Router();
+var Controllers = require('../controllers/rentals')
 
-// model.exports = router; 
+// router.get('/', Controllers.getIndex);
+router.get('/customers/:customer_id/current', Controllers.getCustomerRentals);
+
+module.exports = router;
+model.exports = router;
