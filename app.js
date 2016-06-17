@@ -8,6 +8,7 @@ var massive = require('massive');
 
 var routes = require('./routes/index');
 var app = express();
+module.exports = app;
 
 // database setup
 var connectionString = "postgres://localhost/bank-accounts_" + app.get('env');
@@ -30,6 +31,7 @@ app.use('/', routes);
 
 var customersRoutes = require('./routes/customers');
 app.use('/customers', customersRoutes);
+
 
 var moviesRoutes = require('./routes/movies');
 app.use('/movies', moviesRoutes);
@@ -66,6 +68,3 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-module.exports = app;

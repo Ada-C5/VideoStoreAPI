@@ -1,4 +1,4 @@
-var Movie = require("../models/movie.js");
+var Movie = require("../models/movie");
 
 var MoviesController = {
   listMovies: function(req, res, next) {
