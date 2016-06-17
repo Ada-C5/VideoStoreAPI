@@ -1,11 +1,12 @@
 var app = require("../app");
 var db = app.get("db");
 
-var Movie = function(id) {
-  this.id = id;
-  this.title = title;
-  this.release_date =  release_date;
-  this.inventory = inventory;
+var Movie = function(movie) {
+  this.id = movie.id;
+  this.title = movie.title;
+  this.overview = movie.overview;
+  this.release_date =  movie.release_date;
+  this.inventory = movie.inventory;
 }
 
 // takes on parameter(callback)-then run db.accounts.find
@@ -19,7 +20,7 @@ Movie.all = function(callback) {
       // saying there was no error, accounts is an array and we map it
       callback(null, movies.map(function(movie) {
         // and return to a new instance of the account with id
-        return new Movie(movie.id);
+        return new Movie(movie);
       }));
     };
   });
