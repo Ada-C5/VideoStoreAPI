@@ -21,8 +21,8 @@ Movie.all = function (callback) {
   })
 }
 
-Movie.find = function(id, callback) {
-  db.movies.findOne({id: id}, function(error, movie) {
+Movie.find = function(title, callback) {
+  db.movies.findOne({title: title}, function(error, movie) {
     if(error || !movie) {
       callback(error || new Error("movie not found"), undefined)
     } else {

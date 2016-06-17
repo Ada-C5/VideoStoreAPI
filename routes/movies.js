@@ -4,7 +4,7 @@ var Controller = require('../controllers/movies')
 
 /* GET home page. */
 router.get('/', Controller.getMovies)
-router.get('/:id', Controller.getMoviesShow)
+router.get('/:title', Controller.getMoviesShow)
 router.get('/sort/:field', Controller.getMoviesSort)
 
 module.exports = router

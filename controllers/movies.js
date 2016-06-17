@@ -17,8 +17,8 @@ MoviesController = {
     })
   },
 
-  getMoviesShow: function(req, res) {
-    Movie.find(req.params.id, function(error, movie) {
+  getMoviesShow: function(req, res, next) {
+    Movie.find(req.params.title, function(error, movie) {
       if(error) {
         var err = new Error("No such movies");
         err.status = 404;

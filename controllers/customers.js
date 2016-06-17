@@ -17,8 +17,8 @@ CustomersController = {
     })
   },
 
-  getCustomersShow: function(req, res) {
-    Customer.find(req.params.id, function(error, customer) {
+  getCustomersShow: function(req, res, next) {
+    Customer.find(req.params.name, function(error, customer) {
       if(error) {
         var err = new Error("No such customer");
         err.status = 404;
