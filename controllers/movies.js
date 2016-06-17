@@ -75,9 +75,31 @@ var MovieController = {
     )},
 
   checkout: function (req, res, next) {
-    res.send(
-      //
-    )},
+    var movie_id = req.params.id
+    var customer_id = req.params.customer
+
+    var current_date = new Date()
+    var current_day = current_date.getDate()
+    var current_month = current_date.getMonth() + 1
+    var current_year = current_date.getFullYear()
+    var check_out_date = current_year + "-" + current_month + "-" + current_day
+
+    var future_date = new Date(current_date.getTime()+(14*24*60*60*1000));
+    var future_day = future_date.getDate()
+    var future_month = future_date.getMonth() + 1
+    var future_year = future_date.getFullYear()
+    var due_date = future_year + "-" + future_month + "-" + future_day
+
+    db.query("insert into rentals (customer_id,movie_id,check_out_date,checked_out,due_date) values ($1,$2,$3,$4,$5)", [customer_id,movie_id,check_out_date,true,due_date], function(err, createRental){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json(200)
+      }
+    });
+    
+    },
 
   return: function (req, res, next) {
     var movie_id = req.params.id
