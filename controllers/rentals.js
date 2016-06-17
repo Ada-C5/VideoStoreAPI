@@ -2,8 +2,20 @@ var Rentals = require("../models/rentals");
 
 var RentalsController = {
 
-  getCustomerRentals: function (request, response, next) {
-    Rentals.find(request.params.customer_id, function(error, rentals) {
+  getCurrentRentals: function (request, response, next) {
+    Rentals.find_current(request.params.customer_id, function(error, rentals) {
+      if(error) {
+        var err = new Error("Error retrieving customer's rental list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        response.json(rentals)
+      }
+    });
+  },
+
+  getRentalHistory: function (request, response, next) {
+    Rentals.find_history(request.params.customer_id, function(error, rentals) {
       if(error) {
         var err = new Error("Error retrieving customer's rental list:\n" + error.message);
         err.status = 500;
