@@ -15,23 +15,24 @@ var MoviesController = {
       }
     });
   },
+sortBy: function(req, res, next) {
+  var options = {
+    order: req.params.field,
+    limit: req.query.n,
+    offset: req.query.p
+  }
 
-  sortByRelease: function(req, res, next)  {
-    //  var type = req.params.query;
-     var n = req.query.n;
-     var p = req.query.p;
-
-    Movie.sortByRelease([n, p], function(error, movies) {
-      if(error) {
-        var err = new Error("Error retrieving sorted movie list:\n" + error.message);
-        err.status = 500;
-        next(err);
-      } else {
-        res.json(movies)
-        // var locals = { movies: movies }
-        // res.render("movies/index", locals);
-      }
-   });
+  Movie.sortBy(options, function(error, movies) {
+    if(error) {
+      var err = new Error("Error retrieving sorted movie list:\n" + error.message);
+      err.status = 500;
+      next(err);
+    } else {
+      res.json(movies)
+      // var locals = { movies: movies }
+      // res.render("movies/index", locals);
+    }
+  });
  },
 
   // current: function(req, res, next)  {
