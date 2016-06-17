@@ -19,12 +19,25 @@ var CustomersController = {
           err.status = 404;
           next(err);
         } else {
-          customer.getCurrent(function(error, balance) {
-            res.render(customer);
+          customer.getCurrent(function(error, current) {
+            res.render(current);
           });
         }
       });
-    }
+    },
+  sort: function(req, res, next) {
+    var options = {order: req.params.search, limit: req.query.n, offset: req.query.p}
+    Customer.sort(options, function(error, customers) {
+      if(error) {
+        var err = new Error("Error retrieving customer list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customers);
+      }
+    });
+  },
+
 };
 
 
