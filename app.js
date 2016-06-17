@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes 
 //
 
-
 var routes    = require('./routes/index');
 var customers = require('./routes/customers');
 var videos    = require('./routes/videos');
@@ -41,7 +40,6 @@ app.use('/', routes);
 app.use('/customers', customers);
 app.use('/videos', videos);
 // app.use('/rentals', rentals);
-
 
 //
 // error handlers
