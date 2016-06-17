@@ -1,9 +1,10 @@
 var express = require('express')
 var router = express.Router()
+var Controller = require('../controllers/movies')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.status(200).json({movies: 'movies!!!'})
-})
+router.get('/', Controller.getMovies)
+router.get('/:id', Controller.getMoviesShow)
+router.get('/sort/:field', Controller.getMoviesSort)
 
 module.exports = router

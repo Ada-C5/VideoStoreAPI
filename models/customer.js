@@ -51,25 +51,4 @@ Customer.sort = function(field, n, p, callback){
   })
 }
 
-
 module.exports = Customer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
