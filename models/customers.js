@@ -28,8 +28,8 @@ Customers.sort = function(column, p, n, callback) {
     if (error || !customers) {
       callback(error || new Error("Could not retrieve customers"), undefined)
     } else {
-      callback(null, customers.map (function (customer) {
-        return Cutomers(customer)
+      callback(null, customers.map(function(customer) {
+        return customer
       })); 
     }
   }); 
