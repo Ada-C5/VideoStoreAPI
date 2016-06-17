@@ -24,15 +24,43 @@ describe("CustomersController", function() {
     })
 
     it("should be an array of objects", function(done) {
-    request.get(url("/"), function(error, response, body) {
-      var data = JSON.parse(body)
-      expect(typeof data).toEqual('object')
+      request.get(url("/"), function(error, response, body) {
+        var data = JSON.parse(body)
+        expect(typeof data).toEqual('object')
 
-      for (var record of data) {
-        expect(Object.keys(record)).toEqual([ 'id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit' ])
-      }
-      done()
+        for (var record of data) {
+          expect(Object.keys(record)).toEqual([ 'id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit' ])
+        }
+        done()
+      })
     })
   })
+
+  describe('#getCustomersShow', function(done) {
+    it('returns a success response', function(done) {
+      request.get(url("/Curran Stout"), function(error, response, body) {
+        expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns JSON", function(done) {
+      request.get(url("/Curran Stout"), function(error, response, body) {
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+
+    it("should be an array of objects", function(done) {
+      request.get(url("/Curran Stout"), function(error, response, body) {
+        var data = JSON.parse(body)
+        expect(typeof data).toEqual('object')
+
+        // for (var record of data) {
+          expect(Object.keys(data)).toEqual([ 'id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit' ])
+        // }
+        done()
+      })
+    })
   })
 })
