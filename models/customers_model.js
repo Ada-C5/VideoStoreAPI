@@ -17,4 +17,21 @@ Customer.all = function(callback) {
   })
 };
 
+Customer.sort = function(column, p, n, callback) {
+  // sort by column, for n number of records starting at p
+ db.customers.find({}, {
+    order: column,
+    limit: n,
+    offset: p
+  }, function(error, customers) {
+    if (error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined)
+    } else {
+      callback(null, customers.map (function (customer) {
+        return customer
+      }))
+    }
+  })
+}
+
 module.exports = Customer;

@@ -16,7 +16,15 @@ var CustomersController = {
 	},
 	// customer id, sort column, offest ?????
 	subsetCustomers: function(req, res) {
+		Customer.sort(req.params.column, req.query.p, req.query.n, function(error, data) {
+			if(error) {
+				var err = new Error("No such data");
+				err.status = 404;
+			} else {
+					res.json(data)
+			}
 
+		})
 	},
 
 	// customer id, all rentals attached to customer id within data params
