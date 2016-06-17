@@ -8,22 +8,4 @@ describe("Endpoint at /", function () {
       done()
     })
   })
-
-  describe("the returned json data", function() {
-    it('has the right keys', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(Object.keys(data)).toEqual(['whatevs'])
-        done()
-      })
-    })
-
-    it('has the right values for the keys', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(data.whatevs).toEqual('whatevs!!!')
-        done()
-      })
-    })
-  })
-})
+});
