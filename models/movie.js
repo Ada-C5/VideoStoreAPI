@@ -1,11 +1,11 @@
-var app = require("../app")
-var db = app.get("db")
+var app = require("../app");
+var db = app.get("db");
 
 var Movie = function(id) {
-  this.id = id,
-  this.title = title,
-  this.release_date =  release_date,
-  this.inventory = inventory
+  this.id = id;
+  this.title = title;
+  this.release_date =  release_date;
+  this.inventory = inventory;
 }
 
 // takes on parameter(callback)-then run db.accounts.find
