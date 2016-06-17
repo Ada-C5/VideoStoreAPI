@@ -27,9 +27,6 @@ var CustomersController = {
         next(err);
       } else {
         res.json(customers)
-        // res.render("accounts/index", {
-        //   accounts: accounts
-        // });
       }
     });
   }
