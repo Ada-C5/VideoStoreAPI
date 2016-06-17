@@ -2,10 +2,16 @@ var Customers = require("../models/customers");
 
 var VideoController = {
 
+// Baseline project requirement, left for completion purposes:
+  // getZomg: function (request, response) {
+  //   var locals = {};
+  //   locals.zomg = JSON.stringify('It Works!!!!!');
+  //   response.render('index', locals);
+  // },
+
   getIndex: function (request, response, next) {
     response.render('index');
   },
-
 
   getCustomers: function (request, response, next) {
     Customers.all(function(error, customers) {
@@ -19,12 +25,6 @@ var VideoController = {
         response.json("customers", locals);
       }
     });
-  },
-
-  getZomg: function (request, response) {
-    var locals = {};
-    locals.zomg = JSON.stringify('It Works!!!!!');
-    response.render('index', locals);
   },
 
   getCustomer: function (request, response) {
