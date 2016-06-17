@@ -28,7 +28,7 @@ Customer.all = function (callback) {
 Customer.find = function(name, callback) {
   db.customers.findOne({name: name}, function(error, customer) {
     if(error || !customer) {
-      callback(error || new Error("Customer not found"), undefined)
+      callback(new Error("Customer not found"), undefined)
     } else {
       callback(null, new Customer(customer))
     }

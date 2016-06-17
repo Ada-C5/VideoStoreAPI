@@ -33,6 +33,13 @@ describe('Movie', function () {
         done()
       })
     })
+
+    it('should throw an error if the movie DNE', function (done) {
+      Movie.find("bad title", function(error, customer) {
+        expect(error.message).toEqual("movie not found")
+      })
+    done()
+    })
   })
 
   describe('#sort', function () {
@@ -45,6 +52,13 @@ describe('Movie', function () {
         expect(movie_array[0].inventory).toEqual(inventory1)
       })
       done()
+    })
+
+    it('should throw an error if the customer DNE', function (done) {
+      Movie.sort("bad title", 1, 3, function(error, movie) {
+        expect(error.message).toEqual("Customer not retrieve movies")
+      })
+    done()
     })
   })
 })

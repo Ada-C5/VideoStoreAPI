@@ -41,6 +41,13 @@ describe('Customer', function () {
         done()
       })
     })
+
+    it('should throw an error if the customer DNE', function (done) {
+      Customer.find("person", function(error, customer) {
+        expect(error.message).toEqual("Customer not found")
+      })
+    done()
+    })
   })
 
   describe('#sort', function () {
