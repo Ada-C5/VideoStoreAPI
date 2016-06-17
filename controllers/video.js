@@ -2,6 +2,11 @@ var Customers = require("../models/customers");
 
 var VideoController = {
 
+  getIndex: function (request, response, next) {
+    response.render('index');
+  },
+
+
   getCustomers: function (request, response, next) {
     Customers.all(function(error, customers) {
       if(error) {
