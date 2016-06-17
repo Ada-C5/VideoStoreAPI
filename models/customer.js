@@ -16,7 +16,7 @@ var Customer = function (customer) {
 Customer.all = function (callback) {
   db.customers.find (function (error, customers) {
     if (error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined);
+      callback(error || new Error("Could not retrieve customers"), undefined)
     } else {
       callback(null, customers.map (function (customer) {
         return new Customer(customer)
@@ -28,12 +28,12 @@ Customer.all = function (callback) {
 Customer.find = function(id, callback) {
   db.customers.findOne({id: id}, function(error, customer) {
     if(error || !customer) {
-      callback(error || new Error("Customer not found"), undefined);
+      callback(error || new Error("Customer not found"), undefined)
     } else {
-      callback(null, new Customer(customer));
+      callback(null, new Customer(customer))
     }
-  });
-};
+  })
+}
 
 Customer.sort = function(field, n, p, callback){
   db.customers.find({}, {
@@ -42,7 +42,7 @@ Customer.sort = function(field, n, p, callback){
     offset: p
   }, function(error, customers) {
     if (error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined);
+      callback(error || new Error("Could not retrieve customers"), undefined)
     } else {
       callback(null, customers.map (function (customer) {
         return new Customer(customer)
