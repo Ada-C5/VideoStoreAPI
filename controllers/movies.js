@@ -19,7 +19,7 @@ MoviesController = {
 				var err = new Error("No such data");
 				err.status = 404;
 			} else {
-					res.json(data)
+				res.json(data)
 			}
 
 		})

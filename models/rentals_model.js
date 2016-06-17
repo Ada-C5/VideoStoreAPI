@@ -5,13 +5,12 @@ var Rental = function(id) {
   this.id = id
 };
 
-Rental.getCheckedOut = function(movie_id, callback) {
+Rental.getCheckedOut = function(title, callback) {
   // Not sure if this would return in an array or if we'd have to convert it to an array
-  var array = db.rentals.where("movie_id=$1 AND returned=$2", [movie_id, false], function(error, rental) {
+  db.rentals.where("title=$1 AND returned=$2", [title, false], function(error, checked_out) {
     if(error) {
       callback(error, undefined);
     } else {
-      var checked_out = array.length;
       callback(null, checked_out);
     }
   })
@@ -33,6 +32,17 @@ Rental.getPastRentals = function(customer_id, callback) {
       callback(error, undefined);
     } else {
       callback(null, checked_out);
+    }
+  })
+}
+
+Rental.getOverdue = function(callback) {
+  var now = new Date().toISOString().split('T')[0];
+  db.rentals.where("returned=$1 AND due_date<$2", [false, now], function(error, overdue) {
+    if(error) {
+      callback(error, undefined);
+    } else {
+      callback(null, overdue);
     }
   })
 }

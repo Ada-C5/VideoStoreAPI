@@ -1,8 +1,9 @@
 var app = require("../app");
 var db = app.get("db");
 
-var Movie = function(title) {
+var Movie = function(title, inventory) {
   this.title = title;
+  this.inventory = inventory;
 }
 
 Movie.all = function(callback) {
@@ -24,7 +25,7 @@ Movie.findMovie = function(title, callback) {
 
       callback(error || new Error("Movie not found"), undefined);
     } else {
-      callback(null, new Movie(movie.title));
+      callback(null, new Movie(movie.title, movie.inventory));
     }
   })
 };

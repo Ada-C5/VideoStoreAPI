@@ -3,12 +3,16 @@ var Movie = require("../models/movies_model");
 
 RentalsController = {
 	getRentals: function(req, res) {
+
+
 		Movie.findMovie(req.params.title, function(error, movie) {
 			if(error) {
 				var err = new Error("No such movie");
 				err.status = 404;
 			} else {
 				Rental.getCheckedOut(movie.id, function(error, checked_out) {
+					// get checkout int and minus from inventory (from movie instance)
+					console.log(checked_out)
 					res.json(checked_out)
 				})
 			}
@@ -29,7 +33,16 @@ RentalsController = {
 	},
 
 	getRentalsOverdue: function(req, res) {
+		console.log("AAAALLLOOO????")
+		Rental.getOverdue(function(error, over_due) {
+			if(error) {
+				var err = new Error("Ooops");
+				err.status = 404;
+			} else {
+				res.json(over_due)
+			}
 
+		})
 	}
 }
 
