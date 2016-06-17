@@ -4,7 +4,7 @@ var Controller = require('../controllers/movies')
 
 
 router.get('/', Controller.getMovies)
-router.get('/sort/release-date?n=10&p=2', Controller.subsetMovies)
+router.get('/sort/:column', Controller.subsetMovies)
 router.get('/:title/current', Controller.getMoviesCurrent)
 router.get('/:title/history', Controller.getMoviesHistory)
 

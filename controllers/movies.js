@@ -14,7 +14,15 @@ MoviesController = {
 	},
 
 	subsetMovies: function(req, res) {
+		Movie.sort(req.params.column, req.query.p, req.query.n, function(error, data) {
+			if(error) {
+				var err = new Error("No such data");
+				err.status = 404;
+			} else {
+					res.json(data)
+			}
 
+		})
 	},
 
 	getMoviesCurrent: function(req, res) {

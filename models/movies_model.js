@@ -29,6 +29,23 @@ Movie.findMovie = function(title, callback) {
   })
 };
 
+Movie.sort = function(column, p, n, callback) {
+  // sort by column, for n number of records starting at p
+ db.movies.find({}, {
+    order: column,
+    limit: n,
+    offset: p
+  }, function(error, movies) {
+    if (error || !movies) {
+      callback(error || new Error("Could not retrieve movies"), undefined)
+    } else {
+      callback(null, movies.map (function (movie) {
+        return movie
+      }))
+    }
+  })
+}
+
 
 
 
