@@ -1,4 +1,4 @@
-ar app = require("../app");
+var app = require("../app");
 var db = app.get("db");
 
 // takes on parameter(callback)-then run db.accounts.find
