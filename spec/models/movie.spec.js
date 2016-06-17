@@ -5,7 +5,7 @@ var Movie = require('../../models/movie')
 
 describe('Movie', function () {
 //   // var movie1 = new Movie
-//   var title1 = "Jaws"
+  var title1 = "Alien"
 //   var title2 = "Alien"
 
   afterEach(function () {
@@ -14,8 +14,8 @@ describe('Movie', function () {
 
   describe('#find', function () {
     it('should return correct movie', function (done) {
-       Movie.find("Jaws", function (error, movie1) {
-        expect(movie1.title).toEqual("Jaws")
+       Movie.find(title1, function (error, movie1) {
+        expect(movie1.title).toEqual(title1)
         expect(error).toBeNull
         done()
       })
