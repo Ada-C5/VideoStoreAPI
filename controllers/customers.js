@@ -34,7 +34,7 @@ var CustomersController = {
 
   current: function(req, res, next) {
     var id = req.params.id
-    Rental.rentals(["checked_out", id], function(error, customers) {
+    Rental.rentals([id,'checked_out'], function(error, customers) {
       if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
         err.status = 500;
@@ -45,18 +45,18 @@ var CustomersController = {
     });
   }
 
-  history: function(req, res, next) {
-    var id = req.params.id
-    Rental.rentals(["returned", id], function(error, customers) {
-      if(error) {
-        var err = new Error("Error retrieving customer list:\n" + error.message);
-        err.status = 500;
-        next(err);
-      } else {
-        res.json(customers)
-      }
-    });
-  }
+  // history: function(req, res, next) {
+  //   var id = req.params.id
+  //   Rental.rentals(['returned', id], function(error, customers) {
+  //     if(error) {
+  //       var err = new Error("Error retrieving customer list:\n" + error.message);
+  //       err.status = 500;
+  //       next(err);
+  //     } else {
+  //       res.json(customers)
+  //     }
+  //   });
+  // }
 }
 
 module.exports = CustomersController
