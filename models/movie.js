@@ -26,9 +26,22 @@ Movie.all = function(callback) {
   });
 };
 
-Movie.sortByRelease = function(input, callback) {
-  // first parameter is the
-  db.run("SELECT * FROM movies ORDER BY release_date LIMIT $1 OFFSET $2;", input, function(error, movies) {
+// Movie.sortByRelease = function(input, callback) {
+//   // first parameter is the
+//   db.run("SELECT * FROM movies ORDER BY release_date LIMIT $1 OFFSET $2;", input, function(error, movies) {
+//     if(error || !movies) {
+//       callback(error || new Error("Movies not found"), undefined);
+//     } else {
+//       callback(null, movies.map(function(movie) {
+//         return new Movie(movie)
+//       }));
+//     };
+//   });
+// };
+
+Movie.sortBy = function(options, callback) {
+  // first parameter is the info from movie controller which was [type, n, p]
+  db.movies.find({}, options, function(error, movies) {
     if(error || !movies) {
       callback(error || new Error("Movies not found"), undefined);
     } else {
@@ -38,6 +51,7 @@ Movie.sortByRelease = function(input, callback) {
     };
   });
 };
+
 
 // only attach this function if we're in test mode.
 // if (app.get('env') === 'test') {
