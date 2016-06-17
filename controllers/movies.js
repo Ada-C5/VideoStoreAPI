@@ -79,22 +79,19 @@ var MovieController = {
       //
     )},
 
-    return: function (req, res, next) {
-      var movie_id = req.params.id
-      var customer_id = req.params.customer
+  return: function (req, res, next) {
+    var movie_id = req.params.id
+    var customer_id = req.params.customer
 
-      // find rental id# that matches movie_id and customer_id
-      // update that instance to checked_out false
-
-        db.rentals.update({id: ID_NUM, checked_out: false}, function(err, rental){
-          if(err) {
-            var err = new Error("It's an error")
-            next(err)
-          } else {
-            res.json(rental)
-          }
-        });
-      )},
+    db.query("update rentals set checked_out = false where movie_id=$1 AND customer_id=$2", [movie_id,customer_id], function(err, updateRental){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        res.json("Success - movie returned")
+      }
+    });
+  },
 
   overdue: function (req, res, next) {
     res.send(
