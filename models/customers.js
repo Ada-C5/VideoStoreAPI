@@ -18,4 +18,22 @@ Customers.all = function(callback) {
   });
 };
 
+
+Customers.sort = function(column, p, n, callback) {
+ db.customers.find({}, {
+    order: column,
+    limit: n,
+    offset: p
+  }, function(error, customers) {
+    if (error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined)
+    } else {
+      callback(null, customers.map (function (customer) {
+        return Cutomers(customer)
+      })); 
+    }
+  }); 
+}
+
+
 module.exports = Customers;

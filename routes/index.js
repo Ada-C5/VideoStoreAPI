@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Controllers = require('../controllers/video')
+var Controllers = require('../controllers/customers')
 
 /* GET home page. */
 // router.get('/zomg', function(req, res, next) {
@@ -13,12 +13,13 @@ var Controllers = require('../controllers/video')
 router.get('/', Controllers.getIndex);
 
 // GET the zomg page 
-router.get('/zomg', Controllers.getZomg); 
+// router.get('/zomg', Controllers.getZomg); 
 
 // GET 
 
 // GET the customer page 
 router.get('/customers', Controllers.getCustomers);
+router.get('/customers/sort/:column', Controllers.getCustomersSorted); 
 // list of all of the customers
 // sort by  
   //name
