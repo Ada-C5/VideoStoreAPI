@@ -17,3 +17,6 @@ Customer.all = function(callback) {
     };
   });
 };
+
+
+module.exports = Customer;
