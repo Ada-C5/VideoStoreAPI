@@ -42,7 +42,7 @@ Customer.sort = function(field, n, p, callback){
     offset: p
   }, function(error, customers) {
     if (error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined)
+      callback(new Error("Could not retrieve customers"), undefined)
     } else {
       callback(null, customers.map (function (customer) {
         return new Customer(customer)
