@@ -26,17 +26,18 @@ Movie.all = function(callback) {
   });
 };
 
-Movie.sortBy = function(field, callback) {
+Movie.sortByRelease = function(input, callback) {
   // first parameter is the
-  db.movies.run("SELECT * ???????????????????????", function(error, movies) {
-    // ("Select * From (Select Row_Number() Over (Order By " + order + ") As RowNum, *From movies) movies Where RowNum BETWEEN $1 AND $2;",input, function(error, movies)
-    if(error || !movie) {
-      callback(error || new Error("Movie not found"), undefined);
+  db.run("SELECT * FROM movies ORDER BY release_date LIMIT $1 OFFSET $2;", input, function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Movies not found"), undefined);
     } else {
-      callback(null, new Movie(movie.id));
-    }
-  })
-}
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie)
+      }));
+    };
+  });
+};
 
 // only attach this function if we're in test mode.
 // if (app.get('env') === 'test') {
