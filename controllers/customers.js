@@ -1,5 +1,5 @@
 var Customer = require("../models/customers_model");
-
+var Rental = require("../models/rentals_model");
 
 
 var CustomersController = {
@@ -29,7 +29,15 @@ var CustomersController = {
 
 	// customer id, all rentals attached to customer id within data params
 	getCustomersCurrent: function(req, res) {
+		Rental.getCurrentRentals(req.params.customer_id, function(error, data) {
+			if(error) {
+				var err = new Error("No such data");
+				err.status = 404;
+			} else {
+					res.json(data)
+			}
 
+		})
 	},
 
 	getCustomersHistory: function(req, res) {
