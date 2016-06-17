@@ -7,11 +7,11 @@ var Rentals = function(customer_id) {
 };
 
 Rentals.find = function(customer_id, callback) {
-  db.rentals.where("customer_id=$1", [customer_id], function(error, checked_out) {
-    if(error || !rental) {
+  db.rentals.where("customer_id=$1", [customer_id], function(error, rentals) {
+    if(error || !rentals) {
       callback(error || new Error("Rentals not found"), undefined);
     } else {
-      callback(null, checked_out);
+      callback(null, rentals);
     }
   }
 )}
