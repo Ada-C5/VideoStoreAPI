@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var massive = require('massive');
 
 
-// var videoRoutes = require('./routes/index');
-// app.use('/video', videoRoutes);
-
 var app = module.exports = express();
 
 // database setup
@@ -21,17 +18,34 @@ app.set('db', db);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-var routes = require('./routes/index');
-app.use('/', routes);
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//
+// routes 
+//
 
+
+var routes    = require('./routes/index');
+var customers = require('./routes/customers');
+var videos    = require('./routes/videos');
+// var rentals   = require('./routes/rentals');
+app.use('/', routes);
+app.use('/customers', customers);
+app.use('/videos', videos);
+// app.use('/rentals', rentals);
+
+
+//
+// error handlers
+//
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,18 +53,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-//
-// routes 
-//
-
-// var indexRoutes = require('./routes/index');
-// app.use('/', indexRoutes);
-
-// var videoRoutes = require('./routes/video');
-// app.use('/video', videoRoutes);
-
-
-// error handlers
 
 // development error handler
 // will print stacktrace
