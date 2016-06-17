@@ -1,6 +1,6 @@
 var Customers = require("../models/customers");
 
-var VideoController = {
+var CustomersController = {
 
   getIndex: function (request, response, next) {
     response.render('index');
@@ -38,4 +38,4 @@ var VideoController = {
   }
 }
 
-module.exports = VideoController;
+module.exports = CustomersController;
