@@ -1,27 +1,10 @@
-// Retrieve a list of all movies (/movies)
-
-// Retrieve a subset of movies (/movies/sort/release-date?n=5&p=1)
-// Given a sort column, return n movie records, offset by p records (this will be used to create "pages" of movies)
-// Sort columns are
-// title
-// release_date
-// Given a movie's title...
-// Get a list of customers that have currently checked out a copy of the film (/movies/Jaws/current)
-// include each customer's name, phone number, and account credit
-// Get a list of customers that have checked out a copy in the past (/movies/Jaws/history/sort/name)
-// include each customer's name, phone number, and account credit
-// ordered by customer name or
-// ordered by check out date
-
-
 var app = require("../app");
-// var massive = require("massive");
-// var db = massive.connectSync({db: "radio_star"});
 var db = app.get("db");
-// console.log(app);
-// Constructor function
-var Movie = function(id) {
-  this.id = id;
+var Movie = function(movie) {
+  this.id = movie.id;
+  this.title = movie.title;
+  this.release_date = movie.release_date;
+  this.synopsis = movie.overview;
 };
 
 // Instance functions
@@ -36,7 +19,77 @@ Movie.all = function(callback) {
       var allMovies = movies.map(function(movie) {
         return new Movie(movie);
       });
+      // console.log(allMovies)
+      callback(null, allMovies)
+    };
+  });
+};
+
+Movie.subset = function(callback) {
+  db.query("select * from movies", function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve movies"), undefined);
+    } else {
+      var allMovies = movies.map(function(movie) {
+        return new Movie(movie);
+      });
       console.log(allMovies)
+      callback(null, allMovies)
+    };
+  });
+};
+
+
+Movie.sort = function(query, n, p, callback) {
+  db.movies.find({}, {
+    order: query,
+    limit: n,
+    offset: p
+  }, function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve movies"), undefined);
+
+    // } else if ((query != "name") && (query != "registered_at") && (query != "postal_code")) {
+    //   callback(error || new Error("Undefined sort term"), undefined);
+    } else {
+      var allMovies = movies.map(function(movie) {
+        return new Movie(movie);
+      });
+      callback(null, allMovies)
+    };
+  });
+};
+
+
+Movie.find = function(ids, callback) {
+    db.rentals.find({movie_id: ids, checked: "true"}, function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve movies"), undefined);
+    } else {
+      var allMovies = movies.map(function(rental) {
+        // var x = new Movie(movie);
+        return rental.due_date;
+      });
+      // console.log(allMovies)
+      callback(null, allMovies)
+    };
+  });
+};
+
+
+Movie.history = function(ids, callback) {
+  // console.log(n)
+  db.rentals.find({
+    id: ids, checked: "false"},
+    // order: rental_date,
+
+  function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve movies"), undefined);
+    } else {
+      var allMovies = movies.map(function(movie) {
+        return new Movie(movie);
+      });
       callback(null, allMovies)
     };
   });
