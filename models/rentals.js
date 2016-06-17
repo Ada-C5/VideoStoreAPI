@@ -2,19 +2,19 @@ var app = require("../app");
 var db = app.get("db");
 
 // Constructor function
-var Rentals = function(id) {
-  this.id = id;
+var Rentals = function(customer_id) {
+  this.customer_id = customer_id;
 };
 
 Rentals.find = function(customer_id, callback) {
-  db.rentals.find({customer_id: customer_id}, function(error, rental) {
+  db.rentals.where("customer_id=$1", [customer_id], function(error, checked_out) {
     if(error || !rental) {
       callback(error || new Error("Rentals not found"), undefined);
     } else {
-      callback(null, new Rental(rental.customer_id));
+      callback(null, checked_out);
     }
-  });
-};
+  }
+)}
 
 // Rentals.all = function(callback) {
 //   db.rentals.find(function(error, rentals) {
