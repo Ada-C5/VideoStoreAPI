@@ -11,7 +11,7 @@ var Rental = function(rental) {
 
 Rental.rentals = function(input,callback){
   // var order = input.shift()
-  db.run("SELECT * FROM rentals INNER JOIN movies ON rentals.movie_id=movies.id;", function(error, rentals) {
+  db.run("select * from (select * from rentals,movies where rentals.movie_id=movies.id) as joined where customer_id=$1 and status=$2;",input, function(error, rentals) {
     if(error || !rentals) {
       callback(error || new Error("Could not retrieve rentals"), undefined);
     } else {
