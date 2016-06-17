@@ -7,7 +7,7 @@ var moviesParsedJSON = require('../db/seeds/movies.json');
 // var movieLength = moviesParsedJSON.length
 var customersParsedJSON = require('../db/seeds/customers.json');
 // var customerLength = customersParsedJSON.length
-
+var rentalsParsedJSON = require('../db/seeds/rentals.json');
 
 
 // ***********synchronous method
@@ -16,14 +16,20 @@ for (var movie of moviesParsedJSON) {
 	// pass save
 	// db.video_store.saveSync({movie: movie.title.....})
 	db.movies.saveSync(movie);
-}
+};
 
 
 for (var customer of customersParsedJSON) {
 	// console.log(customer.name, customer.registered_at,  )
 	// db.video_store.saveSync({name: customer.name, customer.registered_at, })
 	db.customers.saveSync(customer);
-}
+};
+
+for (var rental of rentalsParsedJSON) {
+	// console.log(customer.name, customer.registered_at,  )
+	// db.video_store.saveSync({name: customer.name, customer.registered_at, })
+	db.rentals.saveSync(rental);
+};
 
 console.log("seeding done!")
 process.exit()
