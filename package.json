@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
+    "start-test": "NODE_ENV=test ./node_modules/.bin/nodemon ./bin/www",
     "test": "clear; jasmine-node --verbose spec/",
     "db:create": "createdb video_store",
     "db:seed": "clear; node tasks/db_seed.js",
