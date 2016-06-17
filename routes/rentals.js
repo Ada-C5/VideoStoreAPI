@@ -6,4 +6,3 @@ var Controllers = require('../controllers/rentals')
 router.get('/customers/:customer_id/current', Controllers.getCustomerRentals);
 
 module.exports = router;
-model.exports = router;
