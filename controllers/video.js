@@ -1,6 +1,6 @@
 var Customers = require("../models/customers");
 
-var VideoController = {
+var CustomersController = {
 
 // Baseline project requirement, left for completion purposes:
   // getZomg: function (request, response) {
@@ -20,9 +20,7 @@ var VideoController = {
         err.status = 500;
         next(err);
       } else {
-        var locals = { customers: customers }
-        // locals = JSON.stringify(locals.customers)
-        response.json("customers", locals);
+        response.json(customers)
       }
     });
   },
@@ -40,4 +38,4 @@ var VideoController = {
   }
 }
 
-module.exports = VideoController;
+module.exports = CustomersController;
