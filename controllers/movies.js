@@ -32,19 +32,70 @@ var MovieController = {
         var err = new Error("It's an error")
         next(err)
       } else {
-        res.json(movieRecords)
-      }
-    });
-  },
+        var customers = []
+        for (var movie of movieRecords) {
+        db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
+          if(err) {
+            var err = new Error("It's an error")
+            next(err)
+          } else {
+            customers.push(customerRecords)
+            // console.log(customers)
+          }
+          res.json(customers)
 
-  history: function (req, res, next) {
+        }
+      )}
+    }
+      }
+    )},
+
+  historyName: function (req, res, next) {
     var movie_id = req.params.id
     db.query("select * from rentals where checked_out = false and movie_id=$1 order by due_date asc", [movie_id], function(err, movieRecords){
       if(err) {
         var err = new Error("It's an error")
         next(err)
       } else {
-        res.json(movieRecords)
+        var customers = []
+        for (var movie of movieRecords) {
+        db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
+          if(err) {
+            var err = new Error("It's an error")
+            next(err)
+          } else {
+            customers.push(customerRecords)
+            // console.log(customers)
+          }
+          res.json(customers)
+
+        }
+      )}
+      }
+    });
+  },
+
+  historyDate: function (req, res, next) {
+    var movie_id = req.params.id
+    db.query("select * from rentals where checked_out = false and movie_id=$1 order by checked_out asc", [movie_id], function(err, movieRecords){
+      if(err) {
+        var err = new Error("It's an error")
+        next(err)
+      } else {
+        var customers = []
+        for (var movie of movieRecords) {
+        db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
+          if(err) {
+            var err = new Error("It's an error")
+            next(err)
+          } else {
+            customers.push(customerRecords)
+            // console.log(customers)
+          }
+          res.json(customers)
+
+        }
+      )}
       }
     });
   },
