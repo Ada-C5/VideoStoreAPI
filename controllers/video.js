@@ -14,9 +14,7 @@ var VideoController = {
         err.status = 500;
         next(err);
       } else {
-        var locals = { customers: customers }
-        // locals = JSON.stringify(locals.customers)
-        response.json("customers", locals);
+        response.json(customers)
       }
     });
   },
