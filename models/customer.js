@@ -1,0 +1,19 @@
+ar app = require("../app");
+var db = app.get("db");
+
+// takes on parameter(callback)-then run db.accounts.find
+Customer.all = function(callback) {
+  // then run db.accounts.find(no specific id or column - just another callback)
+  db.customers.find('*', function(error, customers) {
+    if(error || !customers) {
+      // handling any error
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      // saying there was no error, accounts is an array and we map it
+      callback(null, customers.map(function(customer) {
+        // and return to a new instance of the account with id
+        return new Customer(customer.id);
+      }));
+    };
+  });
+};
