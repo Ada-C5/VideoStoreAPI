@@ -6,7 +6,7 @@ var Customer = function(customer) {
   this.id = customer.id;
   this.name = customer.name;
   this.registered_at = customer.registered_at;
-  this.postal_code = customer.postal_code
+  this.postal_code = customer.postal_code;
 };
 
 
@@ -34,4 +34,7 @@ Customer.sortBy = function(input, callback){
     }
   });
 };
+
+
+
 module.exports = Customer
