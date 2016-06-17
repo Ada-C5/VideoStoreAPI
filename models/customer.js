@@ -1,6 +1,19 @@
 var app = require("../app");
 var db = app.get("db");
 
+
+var Customer = function(id) {
+  this.id = id
+  this.name = name
+  this.registered_at = registered_at
+  this.address = address
+  this.city = city
+  this.state = state
+  this.postal_code = postal_code
+  this.phone = phone
+  this.account_credit = account_credit
+}
+
 // takes on parameter(callback)-then run db.accounts.find
 Customer.all = function(callback) {
   // then run db.accounts.find(no specific id or column - just another callback)
