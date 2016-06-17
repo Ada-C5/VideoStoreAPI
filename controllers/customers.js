@@ -27,12 +27,12 @@ var CustomersController = {
 
   // customer id, sort column, offset (p and n)
   getCustomersSorted: function(request, response) {
-    Customers.sort(request.params.column, request.query.p, request.query.n, function(error, data) {
+    Customers.sort(request.params.column, request.query.p, request.query.n, function(error, customers) {
       if(error) {
-        var err = new Error("Not Found :(");
-        err.status = 404;
+          var err = new Error("Not Found :(");
+          err.status = 404;
       } else {
-          response.json(data)
+          response.json(customers)
       }
 
     })
