@@ -17,8 +17,21 @@ var MoviesController = {
   },
 
   sortBy: function(req, res, next)  {
-
-  },
+     var n = req.query.n;
+     var p = req.query.p;
+    // giving a callback function to handle error or render view
+    Movie.all(field, function(error, movies) {
+      if(error) {
+        var err = new Error("Error retrieving sorted movie list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(n)
+        // var locals = { movies: movies }
+        // res.render("movies/index", locals);
+      }
+   })
+ }, 
 
   current: function(req, res, next)  {
 
