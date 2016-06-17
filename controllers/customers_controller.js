@@ -15,11 +15,12 @@ var CustomersController = {
     });
   },
 
-  sortName: function(req, res, next) {
+  sortBy: function(req, res, next) {
     var n = req.query.n;
     var p = req.query.p;
+    var field = String(req.params.field)
 
-    Customer.sortByName([n, p], function(error, customers) {
+    Customer.sortBy(field, n, p, function(error, customers) {
       if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
         err.status = 500;
@@ -28,14 +29,6 @@ var CustomersController = {
         res.json(customers)
       }
     });
-
-  },
-
-  sortRegistered: function(req, res, next) {
-
-  },
-
-  sortPostal: function(req, res, next) {
 
   },
 

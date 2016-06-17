@@ -7,13 +7,7 @@ var Controller = require('../controllers/customers_controller')
 router.get('/', Controller.getCustomers)
 
 // GET customers/sort/name?n=10&p=2
-router.get('/sort/name*', Controller.sortName)
-
-// GET customers/sort/registered_at
-router.get('/sort/registered-at', Controller.sortRegistered)
-
-// GET customers/sort/postal_code
-router.get('/sort/postal-code', Controller.sortPostal)
+router.get('/sort/:field', Controller.sortBy)
 
 // GET customers/:id/current
 router.get('/:id/current', Controller.customerCurrent)

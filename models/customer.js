@@ -31,8 +31,12 @@ Customer.all = function(callback) {
   });
 };
 
-Customer.sortByName = function(input, callback) {
-  db.run ("SELECT * FROM customers ORDER BY name LIMIT $1 OFFSET $2;", input, function(error, customers) {
+Customer.sortBy = function(field, n, p, callback) {
+  db.customers.find({}, {
+    order: field,
+    limit: n,
+    offset: p
+  }, function(error, customers) {
     if(error || !customers) {
       callback(error || new Error("Could not retrieve customers"), undefined);
     } else {
