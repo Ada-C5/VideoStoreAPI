@@ -1,0 +1,26 @@
+[
+{
+"customer_id": "1",
+"video_id": "1",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": "Fri, 1 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "2",
+"video_id": "2",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": "Fri, 1 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "3",
+"video_id": "3",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": "Fri, 1 May 2015 07:54:14 -0700",
+"charge": 1.50
+}
+]
