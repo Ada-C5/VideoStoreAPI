@@ -31,5 +31,17 @@ Customer.all = function(callback) {
   });
 };
 
+Customer.sortByName = function(input, callback) {
+  db.run ("SELECT * FROM customers ORDER BY name;", function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customer(customer);
+      }));
+    };
+  });
+}
+
 
 module.exports = Customer;
