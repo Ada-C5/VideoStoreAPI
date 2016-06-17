@@ -12,7 +12,7 @@ var Movie = function (movie) {
 Movie.all = function (callback) {
   db.movies.find (function (error, movies) {
     if (error || !movies) {
-      callback(error || new Error("Could not retrieve movies"), undefined)
+      callback(new Error("Could not retrieve movies"), undefined)
     } else {
       callback(null, movies.map (function (movie) {
         return new Movie(movie)
@@ -24,7 +24,7 @@ Movie.all = function (callback) {
 Movie.find = function(title, callback) {
   db.movies.findOne({title: title}, function(error, movie) {
     if(error || !movie) {
-      callback(error || new Error("movie not found"), undefined)
+      callback(new Error("movie not found"), undefined)
     } else {
       callback(null, new Movie(movie))
     }
