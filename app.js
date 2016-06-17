@@ -11,7 +11,7 @@ var app = express();
 module.exports = app;
 
 // database setup
-var connectionString = "postgres://localhost/bank-accounts_" + app.get('env');
+var connectionString = "postgres://localhost/video_store_api_" + app.get('env');
 var db = massive.connectSync({connectionString: connectionString});
 app.set('db', db);
 
