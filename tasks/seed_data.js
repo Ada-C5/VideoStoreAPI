@@ -10,6 +10,7 @@ var db = massive.connectSync({connectionString : connectionString})
  var fs = require("fs")
  console.log("\n *STARTING* \n")
 // Get content from file
+var seedRentals = "rentals.json"
 var seedMovies = "movies.json"
 var seedCustomers = "customers.json"
 
@@ -39,15 +40,23 @@ var seedData = function(filename, table, callback) {
 }
 var movies_done = false
 var customers_done = false
+var rentals_done = false
+
 seedData(seedMovies, db.movies, function(){
   movies_done = true
-  if (customers_done === true) {
+  if (customers_done && rentals_done === true) {
     process.exit()
   }
 })
 seedData(seedCustomers, db.customers, function() {
   customers_done = true
-  if (movies_done === true) {
+  if (movies_done && rentals_done === true) {
+    process.exit()
+  }
+})
+seedData(seedRentals, db.rentals, function(){
+  rentals_done = true
+  if (customers_done && movies_done === true) {
     process.exit()
   }
 })
