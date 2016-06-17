@@ -2,6 +2,13 @@ var Customers = require("../models/customers");
 
 var CustomersController = {
 
+// Baseline project requirement, left for completion purposes:
+  // getZomg: function (request, response) {
+  //   var locals = {};
+  //   locals.zomg = JSON.stringify('It Works!!!!!');
+  //   response.render('index', locals);
+  // },
+
   getIndex: function (request, response, next) {
     response.render('index');
   },
@@ -31,12 +38,6 @@ var CustomersController = {
     })
   },
   
-  getZomg: function (request, response) {
-    var locals = {};
-    locals.zomg = JSON.stringify('It Works!!!!!');
-    response.render('index', locals);
-  },
-
   getCustomer: function (request, response) {
     response.render('customer/:id');
   },
