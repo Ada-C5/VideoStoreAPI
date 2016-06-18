@@ -25,15 +25,69 @@ describe("MoviesController", function() {
     })
 
     it("should be an array of objects", function(done) {
-    request.get(url("/"), function(error, response, body) {
-      var data = JSON.parse(body)
-      expect(typeof data).toEqual('object')
+      request.get(url("/"), function(error, response, body) {
+        var data = JSON.parse(body)
+        expect(typeof data).toEqual('object')
 
-      for (var record of data) {
-        expect(Object.keys(record)).toEqual([ 'id', 'title', 'overview', 'release_date', 'inventory'])
-      }
-      done()
+        for (var record of data) {
+          expect(Object.keys(record)).toEqual([ 'id', 'title', 'overview', 'release_date', 'inventory'])
+        }
+        done()
+      })
     })
   })
+
+  describe('#getMoviesShow', function(done) {
+    it('returns a success response', function(done) {
+      request.get(url("/Jaws"), function(error, response, body) {
+        expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns JSON", function(done) {
+      request.get(url("/Jaws"), function(error, response, body) {
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+
+    it("should be an array of objects", function(done) {
+      request.get(url("/Jaws"), function(error, response, body) {
+        var data = JSON.parse(body)
+        expect(typeof data).toEqual('object')
+
+          expect(Object.keys(data)).toEqual([ 'id', 'title', 'overview', 'release_date', 'inventory'])
+        done()
+      })
+    })
+  })
+
+  describe('#getMoviesSort', function(done) {
+    it('returns a success response', function(done) {
+      request.get(url("/sort/title?n=1&p=2"), function(error, response, body) {
+        expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns JSON", function(done) {
+      request.get(url("/sort/title?n=1&p=2"), function(error, response, body) {
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+
+    it("should be an array of objects", function(done) {
+      request.get(url("/sort/title?n=1&p=2"), function(error, response, body) {
+        var data = JSON.parse(body)
+        expect(typeof data).toEqual('object')
+
+        for (var record of data) {
+          expect(Object.keys(record)).toEqual([ 'id', 'title', 'overview', 'release_date', 'inventory'])
+        }
+        done()
+      })
+    })
   })
 })

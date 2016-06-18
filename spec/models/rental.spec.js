@@ -13,7 +13,7 @@ describe('Rental', function () {
     db.end()
   })
 
-  describe('#getRentals', function () {
+  describe('#all', function () {
     it('should return all movies', function (done) {
       Rental.all(function (error, movies) {
         expect(movies.length).toEqual(100)
@@ -22,7 +22,7 @@ describe('Rental', function () {
     })
   })
 
-  describe('#getRentalsShow', function () {
+  describe('#find', function () {
     it('should return correct movie', function (done) {
        Rental.find(title1, function (error, movie) {
         expect(movie[0].title).toEqual(title1)
