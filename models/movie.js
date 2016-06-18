@@ -38,7 +38,7 @@ Movie.sort = function(field, n, p, callback){
     offset: p
   }, function(error, movies) {
     if (error || !movies) {
-      callback(error || new Error("Could not retrieve movies"), undefined)
+      callback(new Error("Could not retrieve movies"), undefined)
     } else {
       callback(null, movies.map (function (movie) {
         return new Movie(movie)

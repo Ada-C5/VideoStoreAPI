@@ -56,7 +56,7 @@ describe('Movie', function () {
 
     it('should throw an error if the customer DNE', function (done) {
       Movie.sort("bad title", 1, 3, function(error, movie) {
-        expect(error.message).toEqual("Customer not retrieve movies")
+        expect(error.message).toEqual("Could not retrieve movies")
       })
     done()
     })
