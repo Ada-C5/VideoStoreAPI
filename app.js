@@ -39,7 +39,7 @@ var rentals   = require('./routes/rentals');
 // app.use('/', routes);
 app.use('/customers', customers);
 app.use('/videos', videos);
-app.use('/', rentals);
+app.use('/rentals', rentals);
 
 //
 // error handlers

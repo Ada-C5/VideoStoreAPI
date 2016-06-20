@@ -28,15 +28,26 @@ var VideosController = {
   },
 
   getVideo: function (request, response) {
-    response.render('video/:id');
+    Videos.find(request.params.title, function(error, video) {
+      if(error) {
+        var err = new Error("Not Found :(");
+        err.status = 404;
+      } else {
+        response.json(video)
+      }
+    })
   },
 
-  getVideo: function (request, response) {
-    response.render('video');
-  },
-
-  getRental: function (request, response) {
-    response.render('rental');
+  getVideosByCustomer: function (request, response) {
+    Videos.customer_current(request.params.title, function(error, customers) {
+      if(error) {
+        var err = new Error("Error retrieving video's rental list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        response.json(customers)
+      }
+    });
   }
 }
 
