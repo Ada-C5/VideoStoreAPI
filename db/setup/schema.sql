@@ -14,7 +14,8 @@ CREATE TABLE rentals(
   customer_id int,
   created_date date,
   due_date date,
-  returned boolean
+  returned boolean,
+  returned_date date
 );
 
 DROP TABLE IF EXISTS customers;
