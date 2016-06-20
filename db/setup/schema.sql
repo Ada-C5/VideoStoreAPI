@@ -26,5 +26,6 @@ CREATE TABLE rentals(
   customer_id int,
   movie_id int,
   status boolean,
+  checkout_date text,
   return_date text
 );
