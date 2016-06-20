@@ -4,6 +4,8 @@ var Customer = require("./customer.js");
 var db = app.get("db");
 
 var rental_days = 5; // due date is in 5 days
+var rentalFee = 2
+
 
 
 // Constructor function
@@ -33,8 +35,8 @@ Rental.createCheckOut = function(customer_id, title, callback) {
       callback(error || new Error("Availability issue: All movies of this title are currently checked out"), undefined)
     } else {
       Customer.find(customer_id, function(error, customer) {
-        if (error || !customer) {
-          callback(error);
+        if (error || !customer || customer.account_credit < 2) {
+          callback(error || new Error("Insufficient Funds: Account Credit balance is less than $2.00"));
         } else {
           var rentalInfo = {
             movie_id: movie.id,
@@ -44,9 +46,10 @@ Rental.createCheckOut = function(customer_id, title, callback) {
             status: "checked-out",
             return_date: new Date(new Date().getTime()+(5*24*60*60*1000))
           };
-
+          var new_balance = customer.account_credit - rentalFee
+          db.customers.save{id: customer.id, account_credit: new_balance}
           db.rentals.save(rentalInfo);
-          callback(null, new Rental(rentalInfo)); // creating instance of Rental through the constructor so that we can do instance-like things to the rental
+          callback(null, [{rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)}]); // creating instance of Rental through the constructor so that we can do instance-like things to the rental
         }
       })
 
