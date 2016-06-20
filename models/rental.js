@@ -8,6 +8,7 @@ var Rental = function(rental) {
   this.checkout_date = rental.checkout_date;
   this.due_date = rental.due_date;
   this.status = rental.status
+  this.name = rental.name
 };
 
 Rental.currentCheckedOut = function(input,callback){
@@ -23,7 +24,7 @@ Rental.currentCheckedOut = function(input,callback){
   });
 }
 
-Rental.all = function (input,callback) {
+Rental.all = function (input, callback) {
   // var order = input.shift()
   db.run("SELECT * FROM (SELECT customer_id, checkout_date FROM rentals WHERE (SELECT id FROM movies WHERE movies.title = $1) = movie_id) as new_ids JOIN customers ON (new_ids.customer_id = customers.id) ORDER BY " + order + ";", input, function (error, rentals) {
     if(error || !rentals) {
@@ -36,5 +37,18 @@ Rental.all = function (input,callback) {
   });
 }
 
+Rental.overdueList = function (callback) {
+  // var order = input.shift()
+  db.run("SELECT customers.name, movies.title, checkout_date, due_date FROM (SELECT customer_id, movie_id, due_date, checkout_date FROM rentals WHERE status='overdue') as overdues INNER JOIN customers ON (overdues.customer_id = customers.id) INNER JOIN movies ON (overdues.movie_id = movies.id);", function (error, rentals) {
+    console.log("halp")
+    if(error || !rentals) {
+      callback(error || new Error("Could not retrieve rentals"), undefined);
+    } else {
+      callback(null, rentals.map(function (rental) {
+        return new Rental(rental);
+      }));
+    }
+  });
+}
 
 module.exports = Rental
