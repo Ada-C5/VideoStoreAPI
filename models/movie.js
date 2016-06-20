@@ -6,7 +6,7 @@ var Movie = function(movieInfo) {
   this.id = movieInfo.id;
   this.title = movieInfo.title;
   this.available_inventory = movieInfo.available_inventory;
-  this.total_inventory = movieInfo.total_inventory;
+  this.inventory = movieInfo.inventory;
   this.overview = movieInfo.overview;
   this.release_date = movieInfo.release_date;
 };

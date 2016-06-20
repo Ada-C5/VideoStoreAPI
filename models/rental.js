@@ -1,6 +1,10 @@
 var app = require("../app");
 var Movie = require("./movie.js");
+var Customer = require("./customer.js");
 var db = app.get("db");
+
+var rental_days = 5; // due date is in 5 days
+
 
 // Constructor function
 var Rental = function(rentalInfo) {
@@ -19,6 +23,36 @@ Rental.findTitle = function(movie_title, callback) {
       callback(null, new Movie(movie));
     }
   });
+};
+
+Rental.createCheckOut = function(customer_id, title, callback) {
+  Rental.findTitle(title, function(error, movie) {
+    if(error || !movie) {
+      callback(error);
+    } else if (error || movie.available_inventory < 1) {
+      callback(error || new Error("Availability issue: All movies of this title are currently checked out"), undefined)
+    } else {
+      Customer.find(customer_id, function(error, customer) {
+        if (error || !customer) {
+          callback(error);
+        } else {
+          var rentalInfo = {
+            movie_id: movie.id,
+            customer_id: customer_id,
+            created_at: Date(),
+            updated_at: Date(),
+            status: "checked-out",
+            return_date: new Date(new Date().getTime()+(5*24*60*60*1000))
+          };
+
+          db.rentals.save(rentalInfo);
+          callback(null, new Rental(rentalInfo)); // creating instance of Rental through the constructor so that we can do instance-like things to the rental
+        }
+      })
+
+    }
+  })
+
 };
 
 module.exports = Rental;
