@@ -1,5 +1,6 @@
 var app = require("../app");
 var db = app.get("db");
+
 var Cust = function(cust) {
   this.id = cust;
   // this.id = cust.id;
@@ -101,8 +102,8 @@ Cust.find = function(input, callback) {
 // };
 
 
-Cust.history = function(input, callback) {
-  db.run("SELECT * FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id WHERE rentals.customer_id=$1 and rentals.checked=$2 ORDER BY rentals.rental_date;", input, function(error, rentals) {
+Cust.history = function(input, query, callback) {
+  db.run("SELECT * FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id WHERE rentals.customer_id=$1 and rentals.checked=$2 ORDER BY " + query + ";" , input, function(error, rentals) {
       console.log(rentals)
    if(error || !rentals) {
       callback(error || new Error("Could not retrieve customers rentals"), undefined);
@@ -113,85 +114,12 @@ Cust.history = function(input, callback) {
     }
   });
 }
-//
-//   return this;
-// };
-//
-// var balanceResultCallback = function(account, callback) {
-//   return function(error, result) {
-//     if(error) {
-//       callback(error, undefined);
-//     } else {
-//       account.getBalance(function(error, balance) {
-//         callback(error, balance);
-//       });
-//     }
-//   };
-// };
-//
-// Custs.prototype.deposit = function(amount, callback) {
-//   db.custs_deposit(this.id, amount, balanceResultCallback(this, callback));
-//   return this;
-// };
-//
-// Custs.prototype.withdraw = function(amount, callback) {
-//   db.custs_withdraw(this.id, amount, balanceResultCallback(this, callback));
-//   return this;
-// };
-//
-// Custs.prototype.transfer = function(to, amount, callback) {
-//   db.custs_transfer(this.id, to.id, amount, balanceResultCallback(this, callback));
-//   return this;
-// };
-//
-// // Class Functions
-// Custs.create = function(initialBalance, callback) {
-//   db.custs.save({
-//     balance: initialBalance
-//   }, function(error, account) {
-//     if(error || !account) {
-//       callback(error || new Error("Could not create account"), undefined);
-//     } else {
-//       callback(null, new Custs(account.id));
-//     }
-//   });
-// };
-//
-// Custs.createSync = function(initialBalance) {
-//   var account = db.custs.saveSync({
-//     balance: initialBalance
-//   });
-//
-//   return new Custs(account.id);
-// };
-//
-// Custs.all = function(callback) {
-//   db.custs.find(function(error, custs) {
-//     if(error || !custs) {
-//       callback(error || new Error("Could not retrieve custs"), undefined);
-//     } else {
-//       callback(null, custs.map(function(account) {
-//         return new Custs(account.id);
-//       }));
-//     }
-//   });
-// };
-//
-// Custs.find = function(id, callback) {
-//   db.custs.findOne({id: id}, function(error, account) {
-//     if(error || !account) {
-//       callback(error || new Error("Custs not found"), undefined);
-//     } else {
-//       callback(null, new Custs(account.id));
-//     }
-//   });
-// };
-//
-// // only attach this function if we're in test mode
-// if (app.get('env') === 'test') {
-//   Custs.close_connection = function() {
-//     console.log("closing connection")
-//     db.end()
-//   }
-// }
+
+// only attach this function if we're in test mode
+if (app.get('env') === 'test') {
+  Cust.close_connection = function() {
+    console.log("closing connection")
+    db.end()
+  }
+}
 module.exports = Cust;

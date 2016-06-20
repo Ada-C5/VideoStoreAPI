@@ -1,5 +1,7 @@
 var app = require("../app");
 var db = app.get("db");
+
+console.log(db)
 var Movie = function(movie) {
   this.id = movie.id;
   this.title = movie.title;
@@ -148,4 +150,12 @@ Movie.history = function(input, query, callback) {
 //     db.end()
 //   }
 // }
+
+// only attach this function if we're in test mode
+if (app.get('env') === 'test') {
+  Movie.close_connection = function() {
+    console.log("closing connection")
+    db.end()
+  }
+}
 module.exports = Movie;
