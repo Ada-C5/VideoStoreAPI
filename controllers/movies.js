@@ -118,7 +118,14 @@ var MovieController = {
         var err = new Error("It's an error")
         next(err)
       } else {
-        res.json(200)
+        db.query("update customers set account_credit = account_credit - 1 where id = $1", [customer_id], function(err, customerRecord){
+          if(err) {
+            var err = new Error(err.message)
+            next(err)
+          } else {
+            res.json(200)
+          }
+        });
       }
     });
 
