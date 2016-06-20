@@ -7,6 +7,7 @@ router.get('/', Controller.getCustomers)
 router.get('/:name', Controller.getCustomersShow)
 router.get('/sort/:field', Controller.getCustomersSort)
 router.get('/:id/current', Controller.getRentalsCurrent)
+router.get('/:id/history', Controller.getRentalsHistory)
 
 
 

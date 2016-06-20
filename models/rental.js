@@ -34,13 +34,24 @@ Rental.find = function (title, callback) {
   })
 }
 
-Rental.findRentals = function (id, callback) {
+Rental.findCurrent = function (id, callback) {
   db.rentals.find({customer_id: id, status: true}, function (error, rentals) {
     if (error || !rentals) {
       callback(new Error("Could not retrieve rentals"), undefined)
     } else {
       callback(null, rentals.map (function (rental) {
-        // console.log(rental)
+        return new Rental(rental)
+      }))
+    }
+  })
+}
+
+Rental.findHistory = function (id, callback) {
+  db.rentals.find({customer_id: id}, function (error, rentals) {
+    if (error || !rentals) {
+      callback(new Error("Could not retrieve rentals"), undefined)
+    } else {
+      callback(null, rentals.map (function (rental) {
         return new Rental(rental)
       }))
     }

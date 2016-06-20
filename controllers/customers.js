@@ -43,13 +43,24 @@ CustomersController = {
   },
 
   getRentalsCurrent: function (req, res, next) {
-    Rental.findRentals(req.params.id, function (error, rental) {
+    Rental.findCurrent(req.params.id, function (error, rental) {
       if (error) {
-        var err = new Error("Error retrieving rental list:\n" + error.message);
+        var err = new Error("Error retrieving current rentals:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
-        console.log(rental)
+        res.json(rental)
+      }
+    })
+  },
+
+  getRentalsHistory: function (req, res, next) {
+    Rental.findHistory(req.params.id, function (error, rental) {
+      if (error) {
+        var err = new Error("Error retrieving rental history:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
         res.json(rental)
       }
     })
