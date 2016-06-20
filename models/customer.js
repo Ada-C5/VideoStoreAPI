@@ -12,6 +12,9 @@ var Customer = function(customer) {
   if (customer.checkout_date) {
     this.checkout_date = customer.checkout_date
   }
+  if (customer.due_date) {
+    this.due_date = customer.due_date
+  }
 };
 
 
@@ -66,6 +69,19 @@ Customer.rentedThisMovie = function(input, callback) {
   });
 };
 
+Customer.currentlyCheckedOut = function (input,callback) {
+  // var order = input.shift()
+  db.run("SELECT customers.name, checkout_date, due_date, movies.title FROM (SELECT customer_id, due_date, checkout_date, movie_id FROM rentals WHERE status='checked_out' OR status='overdue') as checkout INNER JOIN customers ON (checkout.customer_id = customers.id) INNER JOIN movies ON (checkout.movie_id = movies.id) WHERE movies.title=$1;",input, function (error, customers) {
+    console.log("halp")
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve rentals"), undefined);
+    } else {
+      callback(null, customers.map(function (customer) {
+        return new Customer(customer);
+      }));
+    }
+  });
+}
 
 
 module.exports = Customer
