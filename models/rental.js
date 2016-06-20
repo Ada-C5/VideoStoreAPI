@@ -51,14 +51,14 @@ Rental.overdueList = function (callback) {
 }
 
 Rental.checkOut = function (input, callback) {
-    db.run("SELECT id FROM movies WHERE title=$1;", input, function (error, found_id) {
-      console.log("id? ",found_id)
-      db.rentals.save({customer_id: input[1], movie_id: found_id, due_date: due(), checkout_date: today(), status: "checked_out"}, function (error, rentals) {
+    db.movies.findOne({title: input[0]}, function (error, found_id) {
+      console.log(found_id.id)
+      db.run("UPDATE movies SET inventory=inventory-1 WHERE title=$1;", [found_id.title], function (error, meh) {})
+      db.rentals.save({customer_id: input[1], movie_id: found_id.id, due_date: due(), checkout_date: today(), status: "checked_out"}, function (error, rentals) {
         rentals = [rentals]
         if(error || !rentals) {
           callback(error || new Error("Could not retrieve rentals"), undefined);
         } else {
-          db.run("UPDATE movies SET inventory=inventory-1 WHERE title=$1;", input, function (error, meh) {})
           callback(null, rentals.map(function (rental) {
             return new Rental(rental);
           }))
@@ -76,7 +76,6 @@ due = function () {
   da = date.getDate().toString()
   da = da[1] ? da : "0" + da[0]
   fdate = yr + "-" + mo + "-" + da
-  console.log(fdate)
   return fdate
 
 }
@@ -90,7 +89,6 @@ today = function () {
   da = date.getDate().toString()
   da = da[1] ? da : "0" + da[0]
   fdate = yr + "-" + mo + "-" + da
-  console.log(fdate)
   return fdate
 }
 
