@@ -51,6 +51,7 @@ Rental.findCurrent = function (id, callback) {
 
 Rental.findHistory = function (id, callback) {
   db.rentals.find({customer_id: id}, function (error, rentals) {
+    console.log(rentals);
     if (error || !rentals) {
       callback(new Error("Could not retrieve rentals"), undefined)
     } else {
@@ -62,27 +63,17 @@ Rental.findHistory = function (id, callback) {
 }
 
 Rental.findCurrentMovies = function (title, callback) {
-  db.rental_movie_history([title], function (error, movies) {
-    console.log(movies);
-    db.customers.find({id: movies[0].customer_id}, function (error, custy) {
-    // Customer.find_by_id(customers[0].customer_id, function (error, custy) {
-      // console.log(custy);
+  db.rental_movie_history([title], function (error, customers) {
+    db.customers.find({id: customers.customer_id}, function (error, custy) {
+      console.log(customers);
       if (error || !custy) {
         callback(new Error("Could not retrieve rentals"), undefined)
       } else {
         callback(null, custy.map (function (cust) {
-          return new Customer(cust)
+          return new Rental(cust)
         }))
       }
     })
-    // console.log(customers[0].customer_id)
-    // if (error || !customers) {
-    //   callback(new Error("Could not retrieve rentals"), undefined)
-    // } else {
-    //   callback(null, customers.map (function (customer) {
-    //     return new Customer(customer)
-    //   }))
-    // }
   })
 }
 
