@@ -40,8 +40,7 @@ var seedDb = function(type){
 
   for(movie of movies){
     movie.created_at = movie.updated_at = date
-    movie.total_inventory = movie.available_inventory = movie.inventory
-    delete movie.inventory 
+    movie.available_inventory = movie.inventory
     db.movies.save(movie, function(err, result){
       if(err) {
         console.log("Unable to save movie " + movie.title + ": " + err.message)

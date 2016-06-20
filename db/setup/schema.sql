@@ -5,7 +5,7 @@ CREATE TABLE movies(
   title text,
   overview text,
   release_date text,
-  total_inventory integer,
+  inventory integer,
   available_inventory integer,
   created_at timestamp,
   updated_at timestamp
