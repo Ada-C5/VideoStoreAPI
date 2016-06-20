@@ -18,8 +18,8 @@ var Customer = function(customerInfo) {
 
 // Instance functions
 
-Customer.prototype.getCurrent = function(callback) {
-  db.customers.findOne(this.id, function(error, result) {
+Customer.prototype.getCurrent = function(user_id, callback) {
+  db.customers.find({id: user_id}, {}, function(error, customers) {
     if(error) {
       callback(error, undefined);
     } else {
@@ -30,19 +30,6 @@ Customer.prototype.getCurrent = function(callback) {
 
   return this;
 };
-
-// Customer.prototype.getCurrent = function(callback) {
-//   db.customers.findOne(this.id, function(error, result) {
-//     if(error) {
-//       callback(error, undefined);
-//     } else {
-//       callback(null, result.balance);
-//     }
-//   });
-//
-//   return this;
-// };
-
 
 Customer.all = function(callback) {
   db.customers.find(function(error, customers) {

@@ -3,6 +3,6 @@ var router = express.Router();
 var RentalsController = require('../controllers/rentals');
 
 /* GET home page. */
-router.get('/', RentalsController.index);
+router.get('/:title', RentalsController.show);
 
 module.exports = router;

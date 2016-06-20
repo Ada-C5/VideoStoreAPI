@@ -5,7 +5,8 @@ CREATE TABLE movies(
   title text,
   overview text,
   release_date text,
-  inventory integer,
+  total_inventory integer,
+  available_inventory integer,
   created_at timestamp,
   updated_at timestamp
 );
@@ -38,7 +39,6 @@ CREATE TABLE rentals(
   movie_id integer,
   customer_id integer,
   status text,
-  overview text,
   return_date timestamp,
   created_at timestamp,
   updated_at timestamp

@@ -11,6 +11,7 @@ var app = module.exports = express();
 
 // database setup
 var connectionString = "postgres://localhost/videostore_api_" + app.get('env');
+
 var db = massive.connectSync({connectionString: connectionString});
 app.set('db', db);
 
