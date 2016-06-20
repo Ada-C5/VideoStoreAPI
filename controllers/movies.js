@@ -1,4 +1,5 @@
 var Movie = require('../models/movie')
+var Rental = require('../models/rental')
 
 MoviesController = {
   locals: {
@@ -25,15 +26,6 @@ MoviesController = {
         next(err);
       } else {
         res.json(movie)
-
-        // movie.getBalance(function(error, balance) {
-        //   res.render("movies/show", {
-        //     movie: {
-        //       id: movie.id,
-        //       balance: balance
-        //     }
-        //   });
-        // });
       }
     })
   },
@@ -42,6 +34,18 @@ MoviesController = {
     Movie.sort(req.params.field, req.query.n, req.query.p, function(error, movie) {
       if (error) {
         var err = new Error("Error retrieving movie list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(movie)
+      }
+    })
+  },
+
+  getMoviesCurrent: function (req, res, next) {
+    Rental.findCurrentMovies(req.params.title, function (error, movie) {
+      if (error) {
+        var err = new Error("Error retrieving current movies:\n" + error.message);
         err.status = 500;
         next(err);
       } else {

@@ -1,6 +1,9 @@
 var app = require('../app')
 var db = app.get('db')
 var Movie = require('./movie')
+var Customer = require('./customer')
+
+// var movieHistory = require('../db/rental_movie_history')
 
 var Rental = function (rental) {
   this.id = rental.id
@@ -53,6 +56,19 @@ Rental.findHistory = function (id, callback) {
     } else {
       callback(null, rentals.map (function (rental) {
         return new Rental(rental)
+      }))
+    }
+  })
+}
+
+Rental.findCurrentMovies = function (title, callback) {
+  db.rental_movie_history([title], function (error, customers) {
+    console.log(customers)
+    if (error || !customers) {
+      callback(new Error("Could not retrieve rentals"), undefined)
+    } else {
+      callback(null, customers.map (function (customer) {
+        return new Customer(customer)
       }))
     }
   })
