@@ -134,7 +134,9 @@ var MovieController = {
     db.query("select * from rentals where movie_id = $1 and checked_out = true", [movie_id], function(err, rentalRecords) {
       if(err) {
         throw (new Error(err.message))
-      } else {
+      } else if (movieRecords.length < 1) {
+        res.json("This movie has not been checked out yet")
+      }else {
         db.query("select * from movies where id=$1", [movie_id], function(err, movieRecords){
           if(err) {
             var err = new Error(err.message)
@@ -154,7 +156,9 @@ var MovieController = {
     db.query("select * from rentals where movie_id = $1 and checked_out = true", [movie_id], function(err, rentalRecords) {
       if(err) {
         throw (new Error(err.message))
-      } else {
+      } else if (movieRecords.length < 1) {
+        res.json("This movie has not been checked out yet")
+      }else {
         var customerNumbers = []
         for (var record of rentalRecords) {
           customerNumbers.push(record.customer_id)

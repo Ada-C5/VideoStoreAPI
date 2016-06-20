@@ -64,6 +64,8 @@ var CustomerController = {
       if(err) {
         var err = new Error(err.message)
         next(err)
+      } else if (movieRecords.length < 1) {
+        res.json("This customer has not yet checked out any movies")
       } else {
         res.json(movieRecords)
       }
@@ -76,6 +78,8 @@ var CustomerController = {
       if(err) {
         var err = new Error(err.mesage)
         next(err)
+      } else if (movieRecords.length < 1) {
+        res.json("This customer has not yet checked out any movies")
       } else {
         res.json(movieRecords)
       }
