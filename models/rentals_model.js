@@ -1,8 +1,14 @@
 var app = require("../app");
 var db = app.get("db");
 
-var Rental = function(id) {
-  this.id = id
+var Rental = function(movie_id, customer_id, created_date, due_date, returned = false, returned_date = null) {
+  this.movie_id = movie_id;
+  this.customer_id = customer_id;
+  this.created_date = created_date;
+  this.due_date = due_date;
+  this.returned = returned;
+  this.returned_date = returned_date;
+
 };
 
 Rental.getCheckedOut = function(title, callback) {
@@ -57,6 +63,14 @@ Rental.getOverdue = function(callback) {
   })
 }
 
+Rental.prototype.getCheckout = function(movie_title, customer_id, callback) {
+  var movie_id = db.run("SELECT id FROM movies WHERE title = movie_title")
+  var created_date = new Date().toISOString().split('T')[0];
+  var due_date = created_date.setDate(created_date.getDate()+7);
+
+  var rental = Rental.new(movie_id, customer_id, created_date, due_date)
+
+}
 
 
 module.exports = Rental;
