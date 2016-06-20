@@ -27,11 +27,11 @@ Rental.getCurrentRentals = function(customer_id, callback) {
 }
 
 Rental.getPastRentals = function(customer_id, callback) {
-  db.rentals.where("customer_id=$1 AND returned=$2", [customer_id, true], function(error, checked_out) {
+  db.run("SELECT customer_id, created_date, movie_id, returned_date FROM rentals WHERE customer_id=$1 AND returned=$2 ORDER BY returned_date ASC", [customer_id, true], function(error, past_rentals) {
     if(error) {
       callback(error, undefined);
     } else {
-      callback(null, checked_out);
+      callback(null, past_rentals);
     }
   })
 }

@@ -2,10 +2,10 @@
 {
 "movie_id": 40,
 "customer_id": 5,
-"created_date": "1960-06-16",
-"due_date": "1960-06-18",
+"created_date": "1980-06-16",
+"due_date": "1980-06-18",
 "returned": true,
-"returned_date": "1960-06-18"
+"returned_date": "1980-06-18"
 },
 {
 "movie_id": 40,
@@ -17,9 +17,19 @@
 {
 "movie_id": 40,
 "customer_id": 5,
-"created_date": "1965-06-16",
+"created_date": "1960-06-16",
 "due_date": "1960-06-18",
 "returned": true,
 "returned_date": "1960-06-18"
+},
+{
+"movie_id": 40,
+"customer_id": 5,
+"created_date": "1970-06-16",
+"due_date": "1970-06-18",
+"returned": true,
+"returned_date": "1967-06-18"
 }
+
+
 ]
