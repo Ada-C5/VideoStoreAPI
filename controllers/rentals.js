@@ -1,5 +1,6 @@
 var Rental = require("../models/rental")
 var Movie = require("../models/movie")
+var Customer = require("../models/customer")
 
 var RentalsController = {
 
@@ -16,9 +17,19 @@ var RentalsController = {
       }
     })},
 
-  // function sortBy () {
+  currentlyCheckedOut: function (req, res, next) {
+    var title = req.params.movie
 
-  // },
+    Customer.currentlyCheckedOut([title],function (error, customers) {
+      if(error) {
+        var err = new Error("Error retrieving overdue list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customers)
+      }
+    });
+  },
 
   // function checkOut () {
 
