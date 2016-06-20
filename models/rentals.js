@@ -26,5 +26,16 @@ Rentals.find_history = function(customer_id, callback) {
   }
 )}
 
+Rentals.video_current = function(title, callback) {
+  var video = db.videos.findOne(title)
+  console.log(video)
+  db.rentals.where(video.id, function(error, rentals) {
+    if(error || !rentals) {
+      callback(error || new Error("Rentals not found"), undefined);
+    } else {
+      callback(null, rentals);
+    }
+  }
+)}
 
 module.exports = Rentals;
