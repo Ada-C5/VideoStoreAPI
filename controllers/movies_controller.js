@@ -1,5 +1,5 @@
 var Movie = require("../models/movie");
-// var Customer = require("../models/customer");
+var Customer = require("../models/customer");
 // var Rental = require("../models/rental");
 
 var MoviesController = {
@@ -36,30 +36,25 @@ var MoviesController = {
     });
  },
 
-  // current: function(req, res, next)  {
-  //   var movie = req.params.title;
-  //
-  //   Movie.find(movie, function(error, search_movie)
-  //     if(error) {
-  //         var err = new Error("No such movie");
-  //         err.status = 404;
-  //         next(err);
-  //       } else {
-  //         Rentals.find(function(error, movie) {
-  //           res.render("rentals/show", {
-  //             movie: {
-  //               id: movie.id,
-  //             }
-  //           });
-  //         });
-  //       }
-  //     });
-  // )
+ current: function(req, res, next) {
+   var movie = req.params.title;
 
-  // },
-  //
-  // sortByHistory: function(req, res, next)  {
-  //
-  // }
+   Movie.find_customers_by_movie_title(movie, function(error, customers) {
+     if(error) {
+       var err = new Error("No such movie");
+       err.status = 404;
+       next(err);
+     } else {
+       var obj = {};
+       if (customers.length === 0) {
+         obj["status"] = 204;
+       } else {
+         obj["status"] = 200;
+       }
+       obj["customers"] = customers;
+       res.json(obj);
+     }
+   })
+  }
 }
 module.exports = MoviesController;
