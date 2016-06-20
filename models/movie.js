@@ -64,6 +64,18 @@ Movie.find_customers_by_movie_title = function(title, callback) {
  });
 }
 
+Movie.find_customers_by_movie_title_history = function([field], callback) {
+  db.run("SELECT customers.name, customers.phone, customers.account_credit FROM customers INNER JOIN rentals ON customers.id = rentals.customer_id INNER JOIN movies ON rentals.movie_id = movies.id WHERE movies.title ILIKE 'Jaws' ORDER BY $1;", [field], function(error, customers) {
+   if(error || !customers) {
+     callback(error || new Error("Could not find customers"), undefined);
+   } else {
+     callback(null, customers.map(function(customer) {
+       return new Customers(customer);
+     }));
+   }
+ });
+}
+
 // Get a list of customers that have checked out a copy in the past (/movies/Jaws/history/sort/name)
 // include each customer's name, phone number, and account credit
 // ordered by customer name or

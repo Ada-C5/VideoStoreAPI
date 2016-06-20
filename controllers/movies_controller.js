@@ -55,6 +55,28 @@ var MoviesController = {
        res.json(obj);
      }
    })
-  }
+ },
+
+  history: function(req, res, next) {
+    var movie = req.params.title;
+    var field = req.params.field;
+
+    Movie.find_customers_by_movie_title_history([field], function(error, customers) {
+      if(error) {
+        var err = new Error("No such movie");
+        err.status = 404;
+        next(err);
+      } else {
+        var obj = {};
+        if (customers.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["customers"] = customers;
+        res.json(obj);
+      }
+    })
+   }
 }
 module.exports = MoviesController;
