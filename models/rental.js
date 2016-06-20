@@ -12,13 +12,11 @@ var Rental = function(rentalInfo) {
 
 // show title --> from movies --> overview, release_date, available inventory
 Rental.findTitle = function(movie_title, callback) {
-  db.movies.find({title: movie_title}, function(error, movies) {
-    if(error || !movies) {
+  db.movies.findOne({title: movie_title}, function(error, movie) {
+    if(error || !movie) {
       callback(error || new Error("Movie with this title not found"), undefined);
     } else {
-      callback(null, movies.map(function(movie) {
-        return new Movie(movie)
-      }))
+      callback(null, new Movie(movie));
     }
   });
 };
