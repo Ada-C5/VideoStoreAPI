@@ -63,12 +63,22 @@ Rental.getOverdue = function(callback) {
   })
 }
 
-Rental.prototype.getCheckout = function(movie_title, customer_id, callback) {
-  var movie_id = db.run("SELECT id FROM movies WHERE title = movie_title")
-  var created_date = new Date().toISOString().split('T')[0];
+Rental.getCheckout = function(movie_title, customer_id, callback) {
+  var moobie_id = db.run("SELECT id FROM movies WHERE title = $1", [movie_title])
+  var created_date = new Date()
+  // answer = new Date(due_date).toUTCString()    converts milli's to datetime
   var due_date = created_date.setDate(created_date.getDate()+7);
 
-  var rental = Rental.new(movie_id, customer_id, created_date, due_date)
+  var rented_copies = db.run("SELECT COUNT(*) FROM rentals WHERE movie_id = $1 AND returned=false", [moobie_id])
+  var inventory = db.run("SELECT inventory FROM movies WHERE title = $1", [movie_title])
+
+  if (inventory - rented_copies > 0) {
+    var rental = Rental.new(moobie_id, customer_id, created_date, due_date);
+    db.rentals.save(rental);
+    callback(null, due_date);
+  } else {
+    callback(null, undefined);
+  }
 
 }
 

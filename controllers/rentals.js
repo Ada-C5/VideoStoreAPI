@@ -30,13 +30,13 @@ RentalsController = {
 	},
 
 	getRentalsCheckOut: function(req, res) {
-		Rental.getCheckout(req.params.title, req.params.customer_id, function(error, checked_out) {
+		console.log("BEBEBELKRSEELSKERSEJRLSER:))")
+		Rental.getCheckout(req.params.title, req.params.customerid, function(error, checked_out) {
 		if(error) {
 			var err = new Error("No one has that movie checked out");
-			console.log("hi")
 			err.status = 404;
 		} else {
-				res.json(req.params.customer_id)
+				res.json(checked_out)
 			}
 		})
 	},
