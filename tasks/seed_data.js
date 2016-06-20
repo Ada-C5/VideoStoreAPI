@@ -27,8 +27,11 @@ var rental_data = require("../db/seeds/rentals.json")
       dbs.rentals.saveSync(rental);
       }
 
+
     console.log("seeding done");
     process.exit();
   };
+
+
 
 seed_pls();

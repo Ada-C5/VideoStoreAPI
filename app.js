@@ -23,8 +23,6 @@ var db = massive.connectSync({connectionString : connectionString});
 // Set a reference to the massive instance on Express' app:
 app.set("db", db);
 
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -33,6 +31,8 @@ module.exports = app;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var rentals = require('./routes/rentals');
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -41,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/rentals', rentals)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
