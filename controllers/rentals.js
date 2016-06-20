@@ -31,9 +31,20 @@ var RentalsController = {
     });
   },
 
-  // function checkOut () {
-
-  // },
+  checkOut: function (req, res, next) {
+    var title = req.params.movie
+    var id = 55
+    console.log("HALP")
+    Rental.checkOut([title, id],function (error, rental) {
+      if(error) {
+        var err = new Error("Error checking out rental:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json([{"sample": "BLAH"}])
+      }
+    });
+  },
 
   // function return () {
 

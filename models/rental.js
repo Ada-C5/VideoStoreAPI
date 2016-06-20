@@ -38,7 +38,6 @@ Rental.all = function (input,callback) {
 }
 
 Rental.overdueList = function (callback) {
-  // var order = input.shift()
   db.run("SELECT customers.name, movies.title, checkout_date, due_date FROM (SELECT customer_id, movie_id, due_date, checkout_date FROM rentals WHERE status='overdue') as overdues INNER JOIN customers ON (overdues.customer_id = customers.id) INNER JOIN movies ON (overdues.movie_id = movies.id);", function (error, rentals) {
     console.log("halp")
     if(error || !rentals) {
@@ -50,6 +49,66 @@ Rental.overdueList = function (callback) {
     }
   });
 }
+
+Rental.checkOut = function (input, callback) {
+    db.run("SELECT id FROM movies WHERE title=$1;", input, function (error, found_id) {
+      console.log("id? ",found_id)
+      db.rentals.save({customer_id: input[1], movie_id: found_id, due_date: due(), checkout_date: today(), status: "checked_out"}, function (error, rentals) {
+        rentals = [rentals]
+        if(error || !rentals) {
+          callback(error || new Error("Could not retrieve rentals"), undefined);
+        } else {
+          db.run("UPDATE movies SET inventory=inventory-1 WHERE title=$1;", input, function (error, meh) {})
+          callback(null, rentals.map(function (rental) {
+            return new Rental(rental);
+          }))
+        }
+      })
+    })
+}
+
+due = function () {
+  date = new Date(Date.now() + 1000000000) // uhh magic number.. adds 12 days
+
+  yr = date.getFullYear().toString()
+  mo = (date.getMonth()+1).toString()
+  mo = mo[1] ? mo : "0" + mo[0]
+  da = date.getDate().toString()
+  da = da[1] ? da : "0" + da[0]
+  fdate = yr + "-" + mo + "-" + da
+  console.log(fdate)
+  return fdate
+
+}
+
+today = function () {
+  date = new Date(Date.now())
+
+  yr = date.getFullYear().toString()
+  mo = (date.getMonth()+1).toString()
+  mo = mo[1] ? mo : "0" + mo[0]
+  da = date.getDate().toString()
+  da = da[1] ? da : "0" + da[0]
+  fdate = yr + "-" + mo + "-" + da
+  console.log(fdate)
+  return fdate
+}
+
+// Rental.overdueList = function (input, callback) {
+//   db.run("SELECT id FROM movies WHERE title=$1;", input, db.rentals.save(error , function (error, rentals) {
+//     console.log("halp")
+//     if(error || !rentals) {
+//       callback(error || new Error("Could not retrieve rentals"), undefined);
+//     } else {
+//       callback(null, rentals.map(function (rental) {
+//         return new Rental(rental);
+//       }));
+//     }
+//   }))
+// }
+
+
+
 
 
 // Rental.all = function (input, callback) {
