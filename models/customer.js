@@ -61,7 +61,7 @@ Customer.current = function([id], callback) {
 }
 
 Customer.history = function([id], callback) {
-  db.run ("SELECT rentals.customer_id, rentals.movie_id, movies.title FROM rentals INNER JOIN movies ON rentals.movie_id = movies.id WHERE customer_id = $1;", [id], function(error, movies) {
+  db.run ("SELECT rentals.customer_id, rentals.movie_id, movies.title, rentals.checkout_date, rentals.return_date FROM rentals INNER JOIN movies ON rentals.movie_id = movies.id WHERE customer_id = $1 ORDER BY rentals.checkout_date;", [id], function(error, movies) {
     if(error || !movies) {
       callback(error || new Error("Could not retrieve customer movies"), undefined);
     } else {

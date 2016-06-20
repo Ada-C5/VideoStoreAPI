@@ -7,6 +7,8 @@ var Movie = function(movie) {
   this.overview = movie.overview;
   this.release_date =  movie.release_date;
   this.inventory = movie.inventory;
+  this.checkout_date = movie.checkout_date;
+  this.return_date = movie.return_date;
 }
 
 // takes on parameter(callback)-then run db.accounts.find
