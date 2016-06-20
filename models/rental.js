@@ -2,7 +2,13 @@ var app = require('../app')
 var db = app.get('db')
 var Movie = require('./movie')
 
-var Rental = function () {}
+var Rental = function (rental) {
+  this.id = rental.id
+  this.customer_id = rental.customer_id
+  this.movie_id = rental.movie_id
+  this.status = rental.status
+  this.return_date = rental.return_date
+}
 
 Rental.all = function (callback) {
   db.movies.find (function (error, movies) {
@@ -23,6 +29,19 @@ Rental.find = function (title, callback) {
     } else {
       callback(null, movies.map (function (movie) {
         return new Movie(movie)
+      }))
+    }
+  })
+}
+
+Rental.findRentals = function (id, callback) {
+  db.rentals.find({customer_id: id, status: true}, function (error, rentals) {
+    if (error || !rentals) {
+      callback(new Error("Could not retrieve rentals"), undefined)
+    } else {
+      callback(null, rentals.map (function (rental) {
+        // console.log(rental)
+        return new Rental(rental)
       }))
     }
   })

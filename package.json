@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; ./node_modules/.bin/istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",    "db:drop": "dropdb video_store",
+    "test": "clear; ./node_modules/.bin/istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
+    "db:drop": "dropdb video_store",
     "db:create": "createdb video_store",
     "db:schema": "node tasks/load_schema",
     "db:seed": "node tasks/seed.js",
@@ -22,6 +23,7 @@
     "massive": "^2.3.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.4",
     "jasmine-node": "^1.14.5",
     "nodemon": "^1.9.2",
     "request": "^2.72.0"
