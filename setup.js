@@ -14,14 +14,4 @@ var Massive = require('massive');
     console.log("Successfully created database " + dbName + ".");
   }
 
-  // Setup the DB schema
-  // var db = Massive.connectSync({ db: dbName });
-  // db.create_schema(function(error, result) {
-  //   if(error) {
-  //     console.log("Error creating DB schema for " + dbName + ":");
-  //     console.log(error);
-  //   } else {
-  //     console.log("Successfully created DB schema for " + dbName + ".");
-  //   }
-  // });
 });
