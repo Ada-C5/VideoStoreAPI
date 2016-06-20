@@ -36,6 +36,18 @@ var RentalsController = {
         response.json(rentals)
       }
     });
+  }, 
+
+  getVideoHistory: function(request, response, next) {
+    Rentals.find_video_history(request.params.title, request.params.ordered_by, function(error, rentals) {
+      if(error) {
+        var err = new Error("Error retrieving video's rental list:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        response.json(rentals)
+      }
+    })
   }
 }
 //   // customer id, sort column, offset (p and n)

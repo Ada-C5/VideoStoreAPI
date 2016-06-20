@@ -32,7 +32,6 @@ Rentals.video_current = function(title, callback) {
     if (error || !videos) {
       callback(error || new Error("Rentals not found"), undefined);
     } else {
-
       var video_id = videos.id
       var cust = []
       db.rentals.find({video_id: video_id, checkin_date: null}, function(error, rentals) {
@@ -54,27 +53,31 @@ Rentals.video_current = function(title, callback) {
   })
 }
 
+Rentals.find_video_history = function(title, ordered_by, callback) {
+  db.videos.findOne({title: title}, function(error, videos) {
 
-          // for (var rental of rentals) {
-          //   var customer_id = rental.customer_id
-          //   db.customers.find({id: customer_id}, function(error, customer) {
-          //     if(error || !customer) {
-          //       callback(error || new Error("Customer not found"), undefined);
-          //     } else {
-          //       // console.log(customer)
-          //       cust.push(customer[0])
-          //       // console.log(cust)
-          //       return cust
-          //     }
-          //   })
-          //   console.log(cust)
+    if (error || !videos) {
+      callback(error || new Error("Rentals not found"), undefined);
+    } else {
+      var video_id = videos.id
+      var cust = []
+      db.rentals.where("video_id=$1 AND checkin_date IS NOT NULL ORDER BY $2", [video_id, ordered_by], function(error, rentals) {
+        if(error || !rentals) {
+        callback(error || new Error("Rentals not found"), undefined);
+        } else {
 
-//           }
-//         })
-//       }
-//     }
-//   })
-// }
-
+          for (var rental of rentals) {
+            db.customers.findOne({id: rental.customer_id}, function(error, customer) {
+              cust.push(customer)
+              if (cust.length === rentals.length) {
+                callback(null, cust);
+              }
+            })
+          }
+        }
+      })
+    }
+  })
+}
 
 module.exports = Rentals;
