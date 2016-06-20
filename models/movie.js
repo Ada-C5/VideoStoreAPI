@@ -1,6 +1,6 @@
 var app = require("../app");
 var db = app.get("db");
-var Customers = require("../models/customer");
+
 
 var Movie = function(movie) {
   this.id = movie.id;
@@ -11,6 +11,8 @@ var Movie = function(movie) {
   this.checkout_date = movie.checkout_date;
   this.return_date = movie.return_date;
 }
+module.exports = Movie;
+var Customer = require("../models/customer");
 
 // takes on parameter(callback)-then run db.accounts.find
 Movie.all = function(callback) {
@@ -58,19 +60,31 @@ Movie.find_customers_by_movie_title = function(title, callback) {
      callback(error || new Error("Could not find customers"), undefined);
    } else {
      callback(null, customers.map(function(customer) {
-       return new Customers(customer);
+       return new Customer(customer);
      }));
    }
  });
-}
+};
 
-Movie.find_customers_by_movie_title_history = function([field], callback) {
-  db.run("SELECT customers.name, customers.phone, customers.account_credit FROM customers INNER JOIN rentals ON customers.id = rentals.customer_id INNER JOIN movies ON rentals.movie_id = movies.id WHERE movies.title ILIKE 'Jaws' ORDER BY $1;", [field], function(error, customers) {
+Movie.find_customers_by_movie_title_history = function(fields, callback) {
+  console.log("CUSTOMERS:", Customer)
+  db.run("SELECT customers.name, customers.phone, customers.account_credit FROM customers INNER JOIN rentals ON customers.id = rentals.customer_id INNER JOIN movies ON rentals.movie_id = movies.id WHERE movies.title ILIKE $1 ORDER BY $2;", fields, function(error, customers) {
    if(error || !customers) {
      callback(error || new Error("Could not find customers"), undefined);
    } else {
+      var my_customers = customers.map(function(customer) {
+        
+        var my_customer = new Customer(customer)
+        return my_customer
+        //  console.log(my_customer)
+      })
+
+     console.log("after the map!")
+     console.log(my_customers)
+    //  callback(null, my_customers)
+
      callback(null, customers.map(function(customer) {
-       return new Customers(customer);
+       return new Customer(customer);
      }));
    }
  });
@@ -89,5 +103,3 @@ Movie.find_customers_by_movie_title_history = function([field], callback) {
 //     db.end()
 //   }
 // }
-
-module.exports = Movie;

@@ -1,5 +1,5 @@
 var Movie = require("../models/movie");
-var Customer = require("../models/customer");
+// var Customer = require("../models/customer");
 // var Rental = require("../models/rental");
 
 var MoviesController = {
@@ -61,7 +61,7 @@ var MoviesController = {
     var movie = req.params.title;
     var field = req.params.field;
 
-    Movie.find_customers_by_movie_title_history([field], function(error, customers) {
+    Movie.find_customers_by_movie_title_history([movie, field], function(error, customers) {
       if(error) {
         var err = new Error("No such movie");
         err.status = 404;

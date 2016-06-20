@@ -1,9 +1,8 @@
 var app = require("../app");
 var db = app.get("db");
-var Movie = require("../models/movie");
-
 
 var Customer = function(customer) {
+  console.log(customer)
   this.id = customer.id
   this.name = customer.name
   this.registered_at = customer.registered_at
@@ -14,6 +13,9 @@ var Customer = function(customer) {
   this.phone = customer.phone
   this.account_credit = customer.account_credit
 }
+module.exports = Customer;
+
+var Movie = require("../models/movie");
 
 // takes on parameter(callback)-then run db.accounts.find
 Customer.all = function(callback) {
