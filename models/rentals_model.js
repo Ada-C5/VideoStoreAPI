@@ -63,23 +63,23 @@ Rental.getOverdue = function(callback) {
   })
 }
 
-Rental.getCheckout = function(movie_title, customer_id, callback) {
-  var moobie_id = db.run("SELECT id FROM movies WHERE title = $1", [movie_title])
-  var created_date = new Date()
-  // answer = new Date(due_date).toUTCString()    converts milli's to datetime
-  var due_date = created_date.setDate(created_date.getDate()+7);
-
-  var rented_copies = db.run("SELECT COUNT(*) FROM rentals WHERE movie_id = $1 AND returned=false", [moobie_id])
-  var inventory = db.run("SELECT inventory FROM movies WHERE title = $1", [movie_title])
-
-  if (inventory - rented_copies > 0) {
-    var rental = Rental.new(moobie_id, customer_id, created_date, due_date);
-    db.rentals.save(rental);
-    callback(null, due_date);
-  } else {
-    callback(null, undefined);
-  }
-
+Rental.getCheckout = function(movie_title, id, callback) {
+  // var moobie_id = db.run("SELECT id FROM movies WHERE title = $1", [movie_title])
+  // var created_date = new Date()
+  // // answer = new Date(due_date).toUTCString()    converts milli's to datetime
+  // var due_date = created_date.setDate(created_date.getDate()+7);
+  // movie_id, customer_id, created_date, due_date
+    // db.run("SELECT id FROM movies WHERE title = $1", [movie_title])
+    console.log(movie_title)
+  db.rentals.save({movie_id: (db.run("SELECT id FROM movies WHERE title = $1", [movie_title])), customer_id: id, created_date: (new Date().toISOString().split('T')[0]), due_date: (new Date().setDate(new Date().getDate()+7).toISOString().split('T')[0])}), function(error, data) {
+    if(error) {
+      callback(error, undefined);
+    } else {
+      // var rental = Rental.new(moobie_id, customer_id, new Date(), new Date().setDate(created_date.getDate()+7), due_date);
+      // db.rentals.save(rental);
+      callback(null, data);
+    }
+  } 
 }
 
 
