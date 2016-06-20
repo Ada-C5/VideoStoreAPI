@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; jasmine-node --verbose spec/",
+    "test": "clear; istanbul cover --include-all-sources jasmine-node --verbose spec/",
     "db:drop": "dropdb video_store",
     "db:create": "createdb video_store",
     "db:schema": "node tasks/load_schema.js",
@@ -22,6 +22,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.4",
     "jasmine-node": "^1.14.5",
     "nodemon": "^1.9.2",
     "request": "^2.72.0"
