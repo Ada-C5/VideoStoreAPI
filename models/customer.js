@@ -35,6 +35,16 @@ Customer.find = function(name, callback) {
   })
 }
 
+Customer.find_by_id = function(id, callback) {
+  db.customers.find({id: id}, function(error, customer) {
+    if(error || !customer) {
+      callback(new Error("Customer not found"), undefined)
+    } else {
+      callback(null, new Customer(customer))
+    }
+  })
+}
+
 Customer.sort = function(field, n, p, callback){
   db.customers.find({}, {
     order: field,

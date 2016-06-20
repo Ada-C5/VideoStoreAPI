@@ -56,4 +56,3 @@ MoviesController = {
 }
 
 module.exports = MoviesController
-
