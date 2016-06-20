@@ -1,5 +1,6 @@
 var app = require("../app");
 var db = app.get("db");
+var Movie = require("../models/movie");
 
 
 var Customer = function(customer) {
@@ -43,7 +44,31 @@ Customer.sortBy = function(field, n, p, callback) {
       callback(null, customers.map(function(customer) {
         return new Customer(customer);
       }));
-    };
+    }
+  });
+}
+
+Customer.current = function([id], callback) {
+  db.run ("SELECT rentals.customer_id, rentals.movie_id, movies.title FROM rentals INNER JOIN movies ON rentals.movie_id = movies.id WHERE customer_id = $1 AND return_date IS NULL;", [id], function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve customer movies"), undefined);
+    } else {
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie);
+      }));
+    }
+  });
+}
+
+Customer.history = function([id], callback) {
+  db.run ("SELECT rentals.customer_id, rentals.movie_id, movies.title, rentals.checkout_date, rentals.return_date FROM rentals INNER JOIN movies ON rentals.movie_id = movies.id WHERE customer_id = $1 ORDER BY rentals.checkout_date;", [id], function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve customer movies"), undefined);
+    } else {
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie);
+      }));
+    }
   });
 }
 
