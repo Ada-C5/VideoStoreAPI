@@ -1,0 +1,38 @@
+[
+{
+"customer_id": 1,
+"movie_id": 29,
+"status": true,
+"return_date": "Sun Jun 19 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 19,
+"movie_id": 69,
+"status": true,
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 39,
+"status": true,
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 19,
+"status": true,
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 99,
+"status": true,
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 89,
+"status": false,
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+}
+]
