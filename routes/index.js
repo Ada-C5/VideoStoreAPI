@@ -42,7 +42,7 @@ router.get('/movies', MovieController.index);
 // Retrieve a subset of movie
 // Given a sort column, return n movie records, offset by p records (this will be used to create "pages" of movies)
 // Sort columns are: title, release_date
- router.get('/movies/sort/:query', MovieController.subset)
+ router.get('/movies/sort/:query', MovieController.find)
  // router.get('/movies/sort/:query?n=1&p=5', MovieController.subset)
  // query of title or release_date
 
@@ -50,14 +50,14 @@ router.get('/movies', MovieController.index);
  // Given a movie's title...
  // Get a list of customers that have currently checked out a copy of the film
  // include each customer's name, phone number, and account credit
- router.get('/movies/:movie_title/current', MovieController.current)
+ router.get('/movies/:movie/current', MovieController.current)
 
 //
 // Given a movie's title...
 // Get a list of customers that have checked out a copy in the past
 // include each customer's name, phone number, and account credit
 // ordered by customer name or ordered by check out date
-// router.get('/movies/:movie_title/history/sort/:name')
+router.get('/movies/:movie/history/sort/:query', MovieController.history)
 
 //
 //

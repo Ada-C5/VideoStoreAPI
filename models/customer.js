@@ -7,6 +7,13 @@ var Cust = function(cust) {
   // this.address = cust.address;
 };
 
+var Movie = function(movie) {
+  this.title = movie.title;
+  // this.id = cust.id;
+  // this.name = cust.name;
+  // this.address = cust.address;
+};
+
 // Instance functions
 
 
@@ -45,38 +52,67 @@ Cust.sort = function(query, n, p, callback) {
   });
 };
 
-
-Cust.find = function(ids, callback) {
-    db.rentals.find({customer_id: ids, checked: "true"}, function(error, custs) {
-    if(error || !custs) {
-      callback(error || new Error("Could not retrieve custs"), undefined);
+Cust.find = function(input, callback) {
+  // find all rentals that this customer has checked out
+  // console/.log(input)
+  db.run("SELECT * FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id WHERE rentals.customer_id=$1 and rentals.checked=$2;", input, function(error, rentals) {
+      console.log(rentals)
+   if(error || !rentals) {
+      callback(error || new Error("Could not retrieve customers rentals"), undefined);
     } else {
-      var allCusts = custs.map(function(rental) {
-        // var x = new Cust(cust);
-        return rental.due_date;
-      });
-      callback(null, allCusts)
+      callback(null, rentals.map(function(rental) {
+        return rental;
+      }));
     };
   });
 };
+// Cust.find = function(ids, callback) {
+//   // find all rentals that this customer has checked out
+//     db.rentals.find({customer_id: ids, checked: "true"}, function(error, rentals) {
+//       // console.log(rentals)
+//     if(error || !rentals) {
+//       callback(error || new Error("Could not retrieve rentals"), undefined);
+//     } else {
+//         // callback(null, rentals.map(function(rental) {
+//         var arrayOfMovies = [];
+//
+//         var allMovies = rentals.map(function(rental) {
+//           console.log(rental)
+//           db.query("select * from movies where id=$1", [rental.movie_id], function(error, movie) {
+//           // console.log(rental.movie_id)
+//             // new Movie(rental);
+//             return arrayOfMovies.push(new Movie(movie[0]))
+//             console.log(arrayOfMovies)
+//             // console.log(movie[0].title)
+//             // return arrayOfMovies;
+//           });
+//             // console.log(arrayOfMovies)
+//
+//           // return new Movie(movie[0]);
+//         });
+//         console.log(allMovies)
+//         console.log(arrayOfMovies)
+//         // return arrayOfMovies;
+//         callback(null, arrayOfMovies)
+//       // console.log(arrayOfMovies)
+//       // callback(null, movie)
+//     };
+//   });
+// };
 
 
-Cust.history = function(ids, callback) {
-  db.rentals.find({
-    id: ids, checked: "false"},
-    // order: rental_date,
-
-  function(error, custs) {
-    if(error || !custs) {
-      callback(error || new Error("Could not retrieve custs"), undefined);
+Cust.history = function(input, callback) {
+  db.run("SELECT * FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id WHERE rentals.customer_id=$1 and rentals.checked=$2 ORDER BY rentals.rental_date;", input, function(error, rentals) {
+      console.log(rentals)
+   if(error || !rentals) {
+      callback(error || new Error("Could not retrieve customers rentals"), undefined);
     } else {
-      var allCusts = custs.map(function(cust) {
-        return new Cust(cust);
-      });
-      callback(null, allCusts)
-    };
+      callback(null, rentals.map(function(rental) {
+        return (rental);
+      }));
+    }
   });
-};
+}
 //
 //   return this;
 // };

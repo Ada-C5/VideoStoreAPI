@@ -13,7 +13,7 @@ var MovieController = {
     });
   },
 
-  subset: function(req, res, next) {
+  find: function(req, res, next) {
     Movie.sort(req.params.query, req.query.n , req.query.p, function(error, movies) {
         if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
@@ -25,8 +25,11 @@ var MovieController = {
     });
   },
 
+// /movies/:movie/current
   current: function(req, res, next) {
-    Movie.find(req.params.id, function(error, movies) {
+    var movie = req.params.movie
+    var movie = movie.toLowerCase().replace(/^./, movie[0].toUpperCase());
+    Movie.find(['true', movie], function(error, movies) {
         if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
         err.status = 500;
@@ -38,7 +41,11 @@ var MovieController = {
   },
 
   history: function(req, res, next) {
-    Movie.history(req.params.id, function(error, movies) {
+    var movie = req.params.movie
+    var movie = movie.toLowerCase().replace(/^./, movie[0].toUpperCase());
+
+    console.log(req.params.query)
+    Movie.history(['false', movie], req.params.query, function(error, movies) {
         if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
         err.status = 500;

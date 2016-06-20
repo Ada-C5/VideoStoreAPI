@@ -19,7 +19,9 @@ for(var customer of customer_data){
 
 for(var rental of rental_data){
   db.rentals.saveSync(rental);
-}
+  }
+
+
 
 console.log("seeding done")
 process.exit()
