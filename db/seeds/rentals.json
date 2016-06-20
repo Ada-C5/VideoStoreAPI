@@ -1,0 +1,23 @@
+[
+{
+"customer_id": 1,
+"movie_id": 2,
+"rental_date": "2016-06-14",
+"checked": true,
+"due_date": "2016-06-24"
+},
+{
+"customer_id": 2,
+"movie_id": 4,
+"rental_date": "2015-02-14",
+"checked": true,
+"due_date": "2015-02-24"
+},
+{
+"customer_id": 2,
+"movie_id": 7,
+"rental_date": "2013-06-15",
+"checked": false,
+"due_date": "2013-06-30"
+}
+]
