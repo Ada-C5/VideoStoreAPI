@@ -14,6 +14,6 @@ router.get('/:id/history/sort/name', Controller.historyName)
 router.get('/rentals/overdue', Controller.overdue)
 router.get('/rentals/:id', Controller.rentalsTitle)
 router.get('/rentals/:id/customers', Controller.rentalsCustomers)
-router.get('/rentals/:id/checkout/:customer', Controller.checkout)
-router.get('/rentals/:id/return/:customer', Controller.return)
+router.post('/rentals/:id/checkout/:customer', Controller.checkout)
+router.post('/rentals/:id/return/:customer', Controller.return)
 module.exports = router;
