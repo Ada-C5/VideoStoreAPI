@@ -33,7 +33,17 @@ var CustomersController = {
   },
 
   customerCurrent: function(req, res, next) {
+    var id = req.params.id
 
+    Customer.current([id], function(error, movies) {
+      if(error) {
+        var err = new Error("Error retrieving current movies for this customer:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(movies)
+      }
+    })
   },
 
   customerHistory: function(req, res, next) {
