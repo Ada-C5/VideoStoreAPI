@@ -5,10 +5,11 @@ var Controller = require('../controllers/movies')
 /* GET home page. */
 router.get('/', Controller.allMovies)
 router.get('/sort/title', Controller.sortTitle)
-router.get('/sort/release', Controller.sortRelease)
+router.get('/sort/release-date', Controller.sortRelease)
 
 router.get('/:id/current', Controller.current)
-router.get('/:id/history', Controller.history)
+router.get('/:id/history/sort/date', Controller.historyDate)
+router.get('/:id/history/sort/name', Controller.historyName)
 
 router.get('/rentals/overdue', Controller.overdue)
 router.get('/rentals/:id', Controller.rentalsTitle)

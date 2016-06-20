@@ -5,7 +5,7 @@ var CustomerController = {
   allCustomers: function (req, res, next) {
     db.query("select * from customers", function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
@@ -15,13 +15,12 @@ var CustomerController = {
 
   sortName: function (req, res, next) {
     var n = req.query.n
-    var p = req.params.p
-    var limit = Number(p) * 10 //assumes 10 customer records per "page", unused
-    if (n === undefined) {
-    n = 10} // IMPERFECT - REVISIT AT REFACTOR
-    db.query("select * from customers order by name asc limit $1", [n], function(err, customerRecords){
+    var p = req.query.p
+    if (n === undefined) { n = 10 }
+    if ( p === undefined) { p = 1 }
+    db.query("select * from customers order by name asc limit $1 offset $2", [n, p], function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
@@ -31,13 +30,12 @@ var CustomerController = {
 
   sortDate: function (req, res, next) {
     var n = req.query.n
-    var p = req.params.p
-    var limit = Number(p) * 10 //assumes 10 customer records per "page", unused
-    if (n === undefined) {
-    n = 10} // IMPERFECT - REVISIT AT REFACTOR
-    db.query("select * from customers order by registered_at asc limit $1", [n], function(err, customerRecords){
+    var p = req.query.p
+    if ( n === undefined) { n = 10 }
+    if ( p === undefined) { p = 1 }
+    db.query("select * from customers order by registered_at asc limit $1 offset $2", [n, p], function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
@@ -47,13 +45,12 @@ var CustomerController = {
 
   sortPostalCode: function (req, res, next) {
     var n = req.query.n
-    var p = req.params.p
-    var limit = Number(p) * 10 //assumes 10 customer records per "page", unused
-    if (n === undefined) {
-    n = 10} // IMPERFECT - REVISIT AT REFACTOR
-    db.query("select * from customers order by postal_code asc limit $1", [n], function(err, customerRecords){
+    var p = req.query.p
+    if ( n === undefined) { n = 10 }
+    if ( p === undefined) { p = 1 }
+    db.query("select * from customers order by postal_code asc limit $1 offset $2", [n, p], function(err, customerRecords){
       if(err) {
-        var err = new Error("It's an error")
+        var err = new Error(err.message)
         next(err)
       } else {
         res.json(customerRecords)
