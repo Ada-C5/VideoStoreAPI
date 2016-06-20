@@ -1,4 +1,5 @@
 var app = require("../app");
+var Movie = require("./movie.js");
 var db = app.get("db");
 
 // Constructor function
@@ -10,12 +11,16 @@ var Rental = function(rentalInfo) {
 };
 
 // show title --> from movies --> overview, release_date, available inventory
-Rental.find = function(movie_id, callback) {
-  db.movies.find({id: movie_id}, function(error, customer) {
-    if(error || !customer) {
-      callback(error || new Error("Account not found"), undefined);
+Rental.findTitle = function(movie_title, callback) {
+  db.movies.find({title: movie_title}, function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Movie with this title not found"), undefined);
     } else {
-      callback(null, new Customer(customer));
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie)
+      }))
     }
   });
 };
+
+module.exports = Rental;
