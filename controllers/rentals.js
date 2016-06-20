@@ -9,6 +9,7 @@ var RentalsController = {
         err.status = 404;
         next(err);
       } else {
+          delete movie.id;
           res.json(movie);
         };
     });
