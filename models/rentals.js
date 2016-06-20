@@ -7,7 +7,7 @@ var Rentals = function(customer_id) {
 };
 
 Rentals.find_current = function(customer_id, callback) {
-  db.rentals.where("customer_id=$1 AND checkin_date=null", [customer_id], function(error, rentals) {
+  db.rentals.where("customer_id=$1 AND checkin_date is null", [customer_id], function(error, rentals) {
     if(error || !rentals) {
       callback(error || new Error("Rentals not found"), undefined);
     } else {
