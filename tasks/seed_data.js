@@ -12,10 +12,44 @@ var rental_data = require("../db/seeds/rentals.json")
     var dbNames = `radio_star_development`;
     var db = Massive.connectSync({ db: dbName });
     var dbs = Massive.connectSync({ db: dbNames });
+
     for(var movie of movies_data){
-      db.movies.saveSync(movie);
-      dbs.movies.saveSync(movie);
-      }
+      db.movies.save(
+        {title: movie.title,
+        search_title: movie.title.toLowerCase().replace(/ /g, "").replace(/\./g, ""),
+        overview: movie.overview,
+        release_date: movie.release_date,
+        inventory: movie.inventory,
+        inventory_total: movie.inventory}, function(err,res){
+        if(err) {
+          throw new Error(err.message)
+        }
+      })
+    }
+
+    for(var movie of movies_data){
+      dbs.movies.save(
+        {title: movie.title,
+        search_title: movie.title.toLowerCase().replace(/ /g, "").replace(/\./g, ""),
+        overview: movie.overview,
+        release_date: movie.release_date,
+        inventory: movie.inventory,
+        inventory_total: movie.inventory}, function(err,res){
+        if(err) {
+          throw new Error(err.message)
+        }
+      })
+    }
+
+    // for(var movie of movies_data){
+    //   db.movies.saveSync(title: ,
+    //   search_title text,
+    //   overview text,
+    //   release_date text,
+    //   inventory integer,
+    //   inventory_total integer);
+    //   dbs.movies.saveSync(movie);
+    //   }
 
     for(var customer of customer_data){
       db.customers.saveSync(customer);

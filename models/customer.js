@@ -57,7 +57,7 @@ Cust.find = function(input, callback) {
   // find all rentals that this customer has checked out
   // console/.log(input)
   db.run("SELECT * FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id WHERE rentals.customer_id=$1 and rentals.checked=$2;", input, function(error, rentals) {
-      console.log(rentals)
+      // console.log(rentals)
    if(error || !rentals) {
       callback(error || new Error("Could not retrieve customers rentals"), undefined);
     } else {
@@ -104,7 +104,7 @@ Cust.find = function(input, callback) {
 
 Cust.history = function(input, query, callback) {
   db.run("SELECT * FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id WHERE rentals.customer_id=$1 and rentals.checked=$2 ORDER BY " + query + ";" , input, function(error, rentals) {
-      console.log(rentals)
+      // console.log(rentals)
    if(error || !rentals) {
       callback(error || new Error("Could not retrieve customers rentals"), undefined);
     } else {

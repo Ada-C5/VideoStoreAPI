@@ -1,7 +1,7 @@
 var app = require("../app");
 var db = app.get("db");
 
-console.log(db)
+// console.log(db)
 var Movie = function(movie) {
   this.id = movie.id;
   this.title = movie.title;
@@ -10,7 +10,6 @@ var Movie = function(movie) {
 };
 
 // Instance functions
-
 
 // class
 Movie.all = function(callback) {
@@ -58,7 +57,7 @@ Movie.find = function(input, callback) {
 };
 
 Movie.history = function(input, query, callback) {
-  console.log(input)
+  // console.log(input)
   db.run("SELECT customers.* FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id INNER JOIN customers ON customers.id=rentals.customer_id WHERE rentals.checked = $1 AND movies.title=$2 ORDER BY " + query + ";", input, function(error,customers) {
    if(error || !customers) {
       callback(error || new Error("Could not retrieve customers customers"), undefined);

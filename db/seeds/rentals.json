@@ -20,7 +20,8 @@
 "rental_date": "2013-06-15",
 "checked": false,
 "due_date": "2013-06-30"
-
+},
+{
 "movie_id": "1",
 "customer_id": "1",
 "checked": "false",

@@ -2,9 +2,11 @@ DROP TABLE IF EXISTS movies;
 CREATE TABLE movies(
   id serial PRIMARY KEY,
   title text,
+  search_title text,
   overview text,
   release_date text,
-  inventory integer
+  inventory integer,
+  inventory_total integer
 );
 
 CREATE INDEX movies_title ON movies (title);
