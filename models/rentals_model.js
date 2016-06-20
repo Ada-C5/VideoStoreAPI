@@ -37,7 +37,7 @@ Rental.getPastRentals = function(customer_id, callback) {
 }
 
 Rental.getCustomers = function(movie_title, callback) {
-  db.run("SELECT customer_id FROM rentals WHERE movie_id=(SELECT id FROM movies WHERE title=$1) AND returned=false", [movie_title], function(error, customers) {
+  db.run("SELECT * FROM customers WHERE id=(SELECT customer_id FROM rentals WHERE movie_id=(SELECT id FROM movies WHERE title=$1) AND returned=false)", [movie_title], function(error, customers) {
     if(error) {
       callback(error, undefined);
     } else {

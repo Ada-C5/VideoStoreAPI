@@ -1,4 +1,5 @@
 var Movie = require("../models/movies_model");
+var Rental = require("../models/rentals_model");
 
 
 MoviesController = {
@@ -25,8 +26,15 @@ MoviesController = {
 		})
 	},
 
-	getMoviesCurrent: function(req, res) {
-
+	getRentalsCustomers: function(req, res) {
+			Rental.getCustomers(req.params.title, function(error, checked_out) {
+			if(error) {
+				var err = new Error("No one has that movie checked out");
+				err.status = 404;
+			} else {
+					res.json(checked_out)
+			}
+		})
 	},
 
 	getMoviesHistory: function(req, res) {
