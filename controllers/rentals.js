@@ -3,8 +3,6 @@ var Movie = require("../models/movies_model");
 
 RentalsController = {
 	getRentals: function(req, res) {
-
-
 		Movie.findMovie(req.params.title, function(error, movie) {
 			if(error) {
 				var err = new Error("No such movie");
@@ -21,7 +19,14 @@ RentalsController = {
 	},
 
 	getRentalsCustomers: function(req, res) {
-
+			Rental.getCustomers(req.params.title, function(error, checked_out) {
+			if(error) {
+				var err = new Error("No one has that movie checked out");
+				err.status = 404;
+			} else {
+					res.json(checked_out)
+			}
+		})
 	},
 
 	getRentalsCheckOut: function(req, res) {
@@ -41,7 +46,6 @@ RentalsController = {
 			} else {
 				res.json(over_due)
 			}
-
 		})
 	}
 }

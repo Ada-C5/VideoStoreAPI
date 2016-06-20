@@ -36,6 +36,16 @@ Rental.getPastRentals = function(customer_id, callback) {
   })
 }
 
+Rental.getCustomers = function(movie_title, callback) {
+  db.run("SELECT customer_id FROM rentals WHERE movie_id=(SELECT id FROM movies WHERE title=$1) AND returned=false", [movie_title], function(error, customers) {
+    if(error) {
+      callback(error, undefined);
+    } else {
+      callback(null, customers);
+    }
+  })
+}
+
 Rental.getOverdue = function(callback) {
   var now = new Date().toISOString().split('T')[0];
   db.rentals.where("returned=$1 AND due_date<$2", [false, now], function(error, overdue) {
