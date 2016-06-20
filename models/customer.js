@@ -49,6 +49,18 @@ Customer.sortBy = function(field, n, p, callback) {
 }
 
 Customer.current = function([id], callback) {
+  db.run ("SELECT rentals.customer_id, rentals.movie_id, movies.title FROM rentals INNER JOIN movies ON rentals.movie_id = movies.id WHERE customer_id = $1 AND return_date IS NULL;", [id], function(error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve customer movies"), undefined);
+    } else {
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie);
+      }));
+    }
+  });
+}
+
+Customer.history = function([id], callback) {
   db.run ("SELECT rentals.customer_id, rentals.movie_id, movies.title FROM rentals INNER JOIN movies ON rentals.movie_id = movies.id WHERE customer_id = $1;", [id], function(error, movies) {
     if(error || !movies) {
       callback(error || new Error("Could not retrieve customer movies"), undefined);

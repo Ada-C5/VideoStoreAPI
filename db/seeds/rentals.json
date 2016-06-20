@@ -34,17 +34,15 @@
 {
 "movie_id": 5,
 "customer_id": 1,
-"checkout_date": "2015-02-10",
-"due_date": "2015-02-20",
-"return_date": "2015-02-27"
+"checkout_date": "2016-02-10",
+"due_date": "2016-02-20"
 },
 
 {
 "movie_id": 6,
 "customer_id": 6,
-"checkout_date": "2015-10-10",
-"due_date": "2015-10-20",
-"return_date": "2015-10-20"
+"checkout_date": "2016-06-16",
+"due_date": "2016-06-26"
 },
 
 {
