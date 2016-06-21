@@ -1,7 +1,6 @@
 var request = require("request")
-
+var app = require("../../app.js")
 var baseUrl = "http://localhost:3000"
-
 
 describe("CustomersController", function() {
   var url = function(endpoint) {
@@ -12,6 +11,13 @@ describe("CustomersController", function() {
     it("returns a Success response", function(done) {
       request.get(url("/"), function(error, response, body) {
         expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns the body data", function(done) {
+      request.get(url("/Shelley Rocha"), function(error, response, body) {
+        expect(response.body).toBe('{"id":1,"name":"Shelley Rocha","registered_at":"Wed, 29 Apr 2015 07:54:14 -0700","address":"Ap #292-5216 Ipsum Rd.","city":"Hillsboro","state":"OR","postal_code":"24309","phone":"(322) 510-8695","account_credit":"13.15"}')
         done()
       })
     })
