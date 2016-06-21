@@ -14,9 +14,8 @@ var CustController = {
   },
 
   subset: function(req, res, next) {
-    console.log(req.query)
-    console.log("req params query: ", req.params.query)
-
+    // console.log(req.query)
+    // console.log("req params query: ", req.params.query)
     Cust.sort(req.params.query, req.query.n , req.query.p, function(error, custs) {
         // var n = req.params.n
         // var p = req.params.p

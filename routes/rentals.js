@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-
-var RentalController = require('../controllers/rentals');
-
-router.get('/', RentalController.getRentals);
+// var express = require('express');
+// var router = express.Router();
+//
+// var RentalController = require('../controllers/rentals');
+//
+// router.get('/', RentalController.getRentals);
 
 
 // Look a movie up by title to see: it's synopsis, release date, available inventory (not currently checked-out to a customer), and inventory total
@@ -34,4 +34,4 @@ router.get('/', RentalController.getRentals);
 
 
 
-module.exports = router;
+// module.exports = router;

@@ -1,35 +1,70 @@
 var Rental = require('../models/rental');
 
 var RentalsController = {
-  locals: {
-    title: 'Rentals'
-  // }
 
-  },
-
-  getRentals: function(req, res) {
-    Rental.all (function (error, movies) {
-      if (error) {
-        var err = new Error( "Sorry, We're having problems retrieving rental list:\n" + error.message);
-        err.status = 500
+//   /rentals/:movie
+//  returns overview, release_date available inventory and total inventory
+  find: function(req, res, next) {
+    Rental.search([req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, movie) {
+        if(error) {
+        var err = new Error("Error retrieving movie:\n" + error.message);
+        err.status = 500;
         next(err);
       } else {
-        res.json(movies)
+        res.json(movie)
       }
-    })
+    });
   },
 
-  getRentalsShow: function(req, res, next) {
-    Rental.find (req.params.title, function(error, rental) {
-      if (error) {
-        var err = new Error("No rentals found");
-        err.status = 404;
+  findCustomers: function(req, res, next) {
+    Rental.searchCust(['true', req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+        if(error) {
+        var err = new Error("Error retrieving customers:\n" + error.message);
+        err.status = 500;
         next(err);
       } else {
-        res.json(rental)
+        res.json(customers)
       }
-    })
+    });
+  },
+
+  checkOut: function(req, res, next) {
+    // Rental.checkout([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+    Rental.checkout([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+        if(error) {
+        var err = new Error("Error retrieving customers:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customers)
+      }
+    });
+  },
+
+  return: function(req, res, next) {
+    // Rental.return([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+    Rental.return([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+        if(error) {
+        var err = new Error("Error retrieving customers:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customers)
+      }
+    });
   }
-}
 
-module.exports = RentalsController
+  // getRentalsShow: function(req, res, next) {
+  //   Rental.find (req.params.title, function(error, rental) {
+  //     if (error) {
+  //       var err = new Error("No rentals found");
+  //       err.status = 404;
+  //       next(err);
+  //     } else {
+  //       res.json(rental)l
+  //     }
+  //   });
+  // }
+};
+
+module.exports = RentalsController;

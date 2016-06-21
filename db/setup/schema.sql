@@ -36,7 +36,8 @@ CREATE TABLE rentals(
   customer_id integer REFERENCES customers (id),
   checked text,
   rental_date text,
-  due_date text
+  due_date text,
+  return_date text
 );
 
 CREATE INDEX rentals_customers ON rentals (customer_id);

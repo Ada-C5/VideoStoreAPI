@@ -8,12 +8,12 @@ var Cust = function(cust) {
   // this.address = cust.address;
 };
 
-var Movie = function(movie) {
-  this.title = movie.title;
-  // this.id = cust.id;
-  // this.name = cust.name;
-  // this.address = cust.address;
-};
+// var Movie = function(movie) {
+//   this.title = movie.title;
+//   // this.id = cust.id;
+//   // this.name = cust.name;
+//   // this.address = cust.address;
+// };
 
 // Instance functions
 

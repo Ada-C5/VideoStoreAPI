@@ -4,7 +4,7 @@ var Controller = require('../controllers/index')
 
 var MovieController = require('../controllers/movies');
 var CustController = require('../controllers/customers');
-
+var RentalController = require('../controllers/rentals');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -59,8 +59,26 @@ router.get('/movies', MovieController.index);
 // ordered by customer name or ordered by check out date
 router.get('/movies/:movie/history/sort/:query', MovieController.history)
 
-//
-//
-//
-//
+// Look a movie up by title to see (/rentals/Jaws)
+// it's synopsis
+// release date
+// available inventory (not currently checked-out to a customer)
+// and inventory total
+router.get('/rentals/:movie', RentalController.find);
+
+// See a list of customers that have currently checked out any of the movie's inventory (/rentals/Jaws/customers)
+router.get('/rentals/:movie/customers', RentalController.findCustomers);
+
+// Given a customer's id and a movie's title ...
+// "check out" one of the movie's inventory to the customer (/rentals/Jaws/check-out)
+// Establish a return date
+// Charge the customer's account (cost up to you)
+router.get('/rentals/:movie/check-out', RentalController.checkOut);
+
+
+// "check in" one of customer's rentals (/rentals/Jaws/return)
+// return the movie to its inventory
+router.get('/rentals/:movie/return', RentalController.return);
+
+
 module.exports = router;
