@@ -27,7 +27,7 @@ Rental.find = function (title, callback) {
       callback(new Error("Could not retrieve movies"), undefined)
     } else {
       callback(null, movies.map (function (movie) {
-        return new Movie(movie)
+      return new Movie(movie)
       }))
     }
   })
@@ -51,13 +51,9 @@ Rental.findHistory = function (id, callback) {
 
 Rental.findCurrentMovies = function (title, callback) {
   db.rental_movie_history([title], function (error, customers) {
-    if (error || !customers) {
-      callback(new Error("Could not retrieve rentals"), undefined)
-    } else {
-      callback(null, customers.map(function (customer) {
-        return new Customer(customer)
-      }))
-    }
+    callback(null, customers.map(function (customer) {
+      return new Customer(customer)
+    }))
   })
 }
 
