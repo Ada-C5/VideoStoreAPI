@@ -15,13 +15,9 @@ var Customer = function (customer) {
 
 Customer.all = function (callback) {
   db.customers.find (function (error, customers) {
-    if (error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined)
-    } else {
-      callback(null, customers.map (function (customer) {
-        return new Customer(customer)
-      }))
-    }
+    callback(null, customers.map (function (customer) {
+      return new Customer(customer)
+    }))
   })
 }
 
@@ -37,11 +33,7 @@ Customer.find = function(name, callback) {
 
 Customer.find_by_id = function(id, callback) {
   db.customers.find({id: id}, function(error, customer) {
-    if(error || !customer) {
-      callback(new Error("Customer not found"), undefined)
-    } else {
-      callback(null, new Customer(customer))
-    }
+    callback(null, new Customer(customer))
   })
 }
 
