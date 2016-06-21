@@ -74,6 +74,18 @@ var RentalsController = {
         response.json(rentals)
       }
     })
+  },
+
+  getOverdue: function(request, response, next) {
+    Rentals.overdue(function(error, overdue_videos) {
+      if(error) {
+        var err = new Error("Overdue rentals not found:\n" + error.message);
+        err.status = 304;
+        next(err);
+      } else {
+        response.json(overdue_videos)
+      }
+    })
   }
 }
 

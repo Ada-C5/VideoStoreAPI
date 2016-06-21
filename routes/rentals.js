@@ -8,6 +8,8 @@ router.get('/customer/:customer_id/history', Controllers.getRentalHistory)
 router.get('/:title/current', Controllers.getVideoCurrent)
 router.get('/:title/history/sort/:ordered_by', Controllers.getVideoHistory)
 
+router.get('/overdue', Controllers.getOverdue)
+
 router.get('/video/:title/checkout/:customer_id', Controllers.postCheckout)
 router.post('/video/:title/checkout/:customer_id', Controllers.postCheckout)
 

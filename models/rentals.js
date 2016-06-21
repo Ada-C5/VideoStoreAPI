@@ -26,6 +26,40 @@ Rentals.find_history = function(customer_id, callback) {
   }
 )}
 
+Rentals.overdue = function(callback) {
+  var ultimate_return = []
+  db.run("select * from rentals where due_date<now() AND checkin_date IS NULL", function(error, overdue_videos) {
+    if(error || !overdue_videos) {
+      callback(error || new Error("Overdue videos not found"), undefined);
+    } else {
+      for (var rental of overdue_videos) {
+        db.videos.findOne({id: rental.video_id}, function(error, found_video) {
+          if(error || !found_video) {
+            callback(error || new Error("Could not find video"), undefined);
+          } else {
+            db.customers.findOne({id: rental.customer_id}, function(error, found_customer) {
+              if(error || !found_customer) {
+                callback(error || new Error("Could not find customer"), undefined);
+              } else {
+                var compiled = {
+                  customer: found_customer.name,
+                  video: found_video.title,
+                  checkout_date: rental.checkout_date,
+                  due_date: rental.due_date
+                }
+                ultimate_return.push(compiled)
+                if (overdue_videos.length === ultimate_return.length) {
+                  callback(null, ultimate_return);
+                }
+              }
+            })
+          }
+        })
+      }
+    }
+  })
+}
+
 Rentals.video_current = function(title, callback) {
   db.videos.findOne({title: title}, function(error, videos) {
 

@@ -24,7 +24,7 @@
 "charge": 1.50
 },
 {
-"customer_id": "1",
+"customer_id": "4",
 "video_id": "1",
 "checkout_date": "Sat, 2 May 2015 07:54:14 -0700",
 "due_date": "Sun, 3 May 2015 07:54:14 -0700",
@@ -32,7 +32,7 @@
 "charge": 1.50
 },
 {
-"customer_id": "2",
+"customer_id": "5",
 "video_id": "2",
 "checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
 "due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
@@ -40,7 +40,7 @@
 "charge": 1.50
 },
 {
-"customer_id": "3",
+"customer_id": "6",
 "video_id": "3",
 "checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
 "due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
@@ -48,7 +48,7 @@
 "charge": 1.50
 },
 {
-"customer_id": "3",
+"customer_id": "7",
 "video_id": "6",
 "checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
 "due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
@@ -56,7 +56,7 @@
 "charge": 1.50
 },
 {
-"customer_id": "3",
+"customer_id": "8",
 "video_id": "1",
 "checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
 "due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
