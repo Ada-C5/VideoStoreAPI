@@ -9,7 +9,7 @@ var massive = require('massive')
 
 var app = express();
 module.exports = app;
-var connectionString = "postgres://localhost/cassettecollection"
+var connectionString = "postgres://localhost/cassettecollection_" + app.get('env')
 var db = massive.connectSync({connectionString : connectionString})
 app.set("db", db)
 // view engine setup
@@ -67,6 +67,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

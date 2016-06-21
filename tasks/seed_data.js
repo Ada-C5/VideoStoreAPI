@@ -1,7 +1,10 @@
 var massive = require('massive')
-var connectionString = "postgres://localhost/cassettecollection"
+var connectionString = "postgres://localhost/cassettecollection_development"
+var connectionString_test = "postgres://localhost/cassettecollection_test"
 
 var db = massive.connectSync({connectionString : connectionString})
+var db_test = massive.connectSync({connectionString : connectionString_test})
+
 var movies_data = require("../db/seeds/movies")
 var customers_data = require("../db/seeds/customers")
 var rentals_data = require("../db/seeds/rentals")
@@ -17,6 +20,12 @@ function seed() {
       if (err) {
         throw new Error(err.message)
       }
+    })
+
+    db_test.movies.save(movie, function (err,res) {
+      if (err) {
+        throw new Error(err.message)
+      }
       moviesCount++
       checkFinish()
     })
@@ -27,6 +36,12 @@ function seed() {
       if (err) {
         throw new Error(err.message)
       }
+    })
+
+    db_test.customers.save(customer, function (err,res) {
+      if (err) {
+        throw new Error(err.message)
+      }
       customersCount++
       checkFinish()
     })
@@ -34,6 +49,12 @@ function seed() {
 
   for (var rental of rentals_data) {
     db.rentals.save(rental, function (err,res) {
+      if (err) {
+        throw new Error(err.message)
+      }
+    })
+
+    db_test.rentals.save(rental, function (err,res) {
       if (err) {
         throw new Error(err.message)
       }
