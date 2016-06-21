@@ -16,11 +16,23 @@ describe("Endpoint at /customers", function () {
       })
     })
 
-    it('has the right values', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(data['0'].city).toEqual('Harrisburg')
-        done()
-      })
+  it("should be an array of objects", function(done) {
+    request.get(base_url, function(error, response, body) {
+      var data = JSON.parse(body)
+      expect(typeof data).toEqual('object')
+
+      for (var record of data) {
+        expect(Object.keys(record)).toEqual([ 'id', 'name', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit', 'registered_at'])
+      }
+      done()
     })
+  })
+
+  it('has the right values', function(done) {
+    request.get(base_url, function(error, response, body) {
+      var data = JSON.parse(body)
+      expect(data['0'].city).toEqual('Hillsboro')
+      done()
+    })
+  })
 })
