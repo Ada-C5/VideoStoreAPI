@@ -64,23 +64,38 @@ Rental.getOverdue = function(callback) {
 }
 
 Rental.getCheckout = function(movie_title, id, callback) {
-  // var moobie_id = db.run("SELECT id FROM movies WHERE title = $1", [movie_title])
-  // var created_date = new Date()
-  // // answer = new Date(due_date).toUTCString()    converts milli's to datetime
-  // var due_date = created_date.setDate(created_date.getDate()+7);
-  // movie_id, customer_id, created_date, due_date
-    // db.run("SELECT id FROM movies WHERE title = $1", [movie_title])
-    console.log(movie_title)
-  db.rentals.save({movie_id: (db.run("SELECT id FROM movies WHERE title = $1", [movie_title])), customer_id: id, created_date: (new Date().toISOString().split('T')[0]), due_date: (new Date().setDate(new Date().getDate()+7).toISOString().split('T')[0])}), function(error, data) {
-    if(error) {
-      callback(error, undefined);
-    } else {
-      // var rental = Rental.new(moobie_id, customer_id, new Date(), new Date().setDate(created_date.getDate()+7), due_date);
-      // db.rentals.save(rental);
-      callback(null, data);
+    // get movie id from movie table by title
+  db.movies.findOne({
+    title: movie_title
+    // call back with movie id
+  }, function (error, movie) {
+    if (error) {
+      return callback(error);
+    } else if (!movie) {
+      return callback(new Error("Movie not found"));
     }
-  } 
-}
 
+    // set date vars
+    var now = new Date();
+    var due = new Date(now);
+    due.setDate(due.getDate() + 7);
+
+    // save new rental (nested inside find)
+    db.rentals.save({
+      movie_id: movie.id,
+      customer_id: id,
+      created_date: now,
+      due_date: due,
+      returned: false
+      // callback with rental info
+    }, function (error, rental) {
+      if (error) {
+        return callback(error);
+      }
+      // pass rental back to controller
+      return callback(null, rental);
+    });
+  });
+}
 
 module.exports = Rental;

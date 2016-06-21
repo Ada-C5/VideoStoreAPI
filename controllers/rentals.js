@@ -29,16 +29,16 @@ RentalsController = {
 		})
 	},
 
-	getRentalsCheckOut: function(req, res) {
+	getRentalsCheckOut: function(req, res, next) {
 		console.log("BEBEBELKRSEELSKERSEJRLSER:))")
 		Rental.getCheckout(req.params.title, req.params.customerid, function(error, checked_out) {
-		if(error) {
-			var err = new Error("No one has that movie checked out");
-			err.status = 404;
-		} else {
+			if(error) {
+				var err = new Error("No one has that movie checked out");
+				err.status = 404;
+			} else {
 				res.json(checked_out)
 			}
-		})
+		});
 	},
 
 	getRentalsReturn: function(req, res) {
