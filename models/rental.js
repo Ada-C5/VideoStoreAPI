@@ -47,11 +47,6 @@ Rental.createCheckOut = function(customer_id, title, callback) {
             return_date: new Date(new Date().getTime()+(5*24*60*60*1000))
           };
 
-          console.log(rentalInfo.created_at)
-          console.log(rentalInfo.return_date)
-
-
-
           db.rentals.save(rentalInfo, function(error, rental) {
             if (error) {
               callback(error || new Error("Rental was not saved to database"))
@@ -59,9 +54,16 @@ Rental.createCheckOut = function(customer_id, title, callback) {
               var new_balance = customer.account_credit - rentalFee
               db.customers.save({id: customer.id, account_credit: new_balance}, function(error,updated){
                 if (error){
-                  callback(error || new Error("Update Not Succesfull: Unable to update customer account credit"))
+                  callback(error || new Error("Update Not Successful: Unable to update customer account credit"))
                 } else {
-                  callback(null, {rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)});
+                  var new_inventory = movie.available_inventory - 1;
+                  db.movies.save({id: movie.id, available_inventory: new_inventory}, function(error, movie) {
+                    if (error) {
+                      callback(error || new Error("Unable to reduce inventory count"));
+                    } else {
+                      callback(null, {rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)});
+                    }
+                  })
                 }
               })
 
