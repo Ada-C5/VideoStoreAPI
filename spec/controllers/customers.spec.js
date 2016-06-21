@@ -61,8 +61,7 @@ describe("CustomersController", function() {
       request.get(url("/Curran Stout"), function(error, response, body) {
         var data = JSON.parse(body)
         expect(typeof data).toEqual('object')
-
-          expect(Object.keys(data)).toEqual([ 'id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit' ])
+        expect(Object.keys(data)).toEqual([ 'id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit' ])
         done()
       })
     })

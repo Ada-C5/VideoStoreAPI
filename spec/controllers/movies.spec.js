@@ -56,8 +56,7 @@ describe("MoviesController", function() {
       request.get(url("/Jaws"), function(error, response, body) {
         var data = JSON.parse(body)
         expect(typeof data).toEqual('object')
-
-          expect(Object.keys(data)).toEqual([ 'id', 'title', 'overview', 'release_date', 'inventory'])
+        expect(Object.keys(data)).toEqual([ 'id', 'title', 'overview', 'release_date', 'inventory'])
         done()
       })
     })

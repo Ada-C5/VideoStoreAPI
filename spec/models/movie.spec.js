@@ -17,8 +17,8 @@ describe('Movie', function () {
     it('should return all movies', function (done) {
       Movie.all(function (error, movies) {
         expect(movies.length).toEqual(100)
+        done()
       })
-      done()
     })
   })
 
@@ -37,8 +37,8 @@ describe('Movie', function () {
     it('should throw an error if the movie DNE', function (done) {
       Movie.find("bad title", function(error, customer) {
         expect(error.message).toEqual("movie not found")
+        done()
       })
-    done()
     })
   })
 
@@ -50,15 +50,15 @@ describe('Movie', function () {
         expect(movie_array[0].overview).toEqual(overview1)
         expect(movie_array[0].release_date).toEqual(release_date1)
         expect(movie_array[0].inventory).toEqual(inventory1)
+        done()
       })
-      done()
     })
 
     it('should throw an error if the customer DNE', function (done) {
       Movie.sort("bad title", 1, 3, function(error, movie) {
         expect(error.message).toEqual("Could not retrieve movies")
+        done()
       })
-    done()
     })
   })
 })
