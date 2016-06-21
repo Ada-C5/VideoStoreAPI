@@ -34,12 +34,12 @@ describe('Rental', function () {
       })
     })
 
-    // it('should throw an error if the movie DNE', function (done) {
-    //   Rental.find("bad title", function(error, movie) {
-    //     expect(error.message).toEqual("Could not retrieve movies")
-    //     done()
-    //   })
-    // })
+    it('should throw an error if the movie DNE', function (done) {
+      Rental.find("bad title", function(error, movie) {
+        expect(error.message).toEqual("Could not retrieve movies")
+        done()
+      })
+    })
   })
 
   describe("#findHistory", function () {
@@ -53,17 +53,16 @@ describe('Rental', function () {
       })
     })
 
-    // it('should throw an error if no rentals found', function (done) {
-    //   Rental.findHistory(300, function(error, movie) {
-    //     console.log(movie)
-    //     expect(error.message).toEqual("Could not retrieve rentals")
-    //     done()
-    //   })
-    // })
+    it('should throw an error if no rentals found', function (done) {
+      Rental.findHistory(300, function(error, movie) {
+        expect(error).toEqual(null)
+        done()
+      })
+    })
 
     it('if customer has no rentals', function (done) {
       Rental.findHistory(200, function(error, movie) {
-        expect(error.message).toEqual([])
+        expect(error).toEqual(null)
         done()
       })
     })
@@ -78,12 +77,12 @@ describe('Rental', function () {
       })
     })
 
-    // it('should throw an error if no rentals found', function (done) {
-    //   Rental.findCurrent(300, function(error, movie) {
-    //     expect(error.message).toEqual("Could not retrieve rentals")
-    //     done()
-    //   })
-    // })
+    it('should throw an error if no rentals found', function (done) {
+      Rental.findCurrent(300, function(error, movie) {
+        expect(error).toEqual(null)
+        done()
+      })
+    })
 
     it('if customer has no rentals', function (done) {
       Rental.findCurrent(200, function(error, movie) {
