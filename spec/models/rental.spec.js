@@ -42,28 +42,53 @@ describe('Rental', function () {
     })
   })
 
-  // describe('#sort', function () {
-  //   it('should sort customer by name', function(done) {
-  //     Rental.sort("name", 1, 3, function(error, customer_array) {
-  //       expect(customer_array.length).toEqual(1)
-  //       expect(customer_array[0].name).toEqual(customer1)
-  //       expect(customer_array[0].registered_at).toEqual(registered_at1)
-  //       expect(customer_array[0].address).toEqual(address1)
-  //       expect(customer_array[0].city).toEqual(city1)
-  //       expect(customer_array[0].state).toEqual(state1)
-  //       expect(customer_array[0].postal_code).toEqual(postal_code1)
-  //       expect(customer_array[0].phone).toEqual(phone1)
-  //       expect(customer_array[0].account_credit).toEqual(account_credit1)
-  //       expect(error).toBeNull
-  //     })
-  //     done()
-  //   })
-  //
-  //   it('should throw an error if the customer DNE', function (done) {
-  //     Rental.sort("abcd", 1, 3, function(error, customer_array2) {
-  //       expect(error.message).toEqual("Could not retrieve customers")
-  //     })
-  //   done()
-  //   })
-  // })
+  describe("#findHistory", function () {
+    it("should return history rentals for a customer", function (done) {
+      Rental.findHistory(1, function (error, customer) {
+        expect(customer[0].customer_id).toEqual(1)
+        expect(customer[0].movie_id).toEqual(29)
+        expect(customer[0].status).toEqual(true)
+        expect(customer[0].return_date).toEqual('Sun Jun 19 2016 22:19:53 GMT-0700 (PDT)')
+        done()
+      })
+    })
+
+    it('should throw an error if no rentals found', function (done) {
+      Rental.findHistory(300, function(error, movie) {
+        expect(error.message).toEqual("Could not retrieve rentals")
+      })
+    done()
+    })
+
+    it('if customer has no rentals', function (done) {
+      Rental.findHistory(200, function(error, movie) {
+        expect(error.message).toEqual([])
+      })
+    done()
+    })
+  })
+
+  describe("#findCurrent", function () {
+    it("should return current rentals for a customer", function (done) {
+      Rental.findCurrent(29, function (error, customer) {
+        expect(customer.length).toEqual(3)
+        expect(customer[0].customer_id).toEqual(29)
+        done()
+      })
+    })
+
+    it('should throw an error if no rentals found', function (done) {
+      Rental.findCurrent(300, function(error, movie) {
+        expect(error.message).toEqual("Could not retrieve rentals")
+      })
+    done()
+    })
+
+    it('if customer has no rentals', function (done) {
+      Rental.findCurrent(200, function(error, movie) {
+        expect(error.message).toEqual([])
+      })
+    done()
+    })
+  })
 })
