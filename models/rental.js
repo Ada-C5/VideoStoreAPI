@@ -56,32 +56,39 @@ Rental.checkout = function (customer_id, movie, callback) {
         callback(new Error("Could not retrieve customer from database. Customer id should be sent in JSON body."), undefined)
       } else {
 
-        // update RENTALSSSS. this should always work, thanks to the movie and customer checks above.
-        var insertArray = [];
-        // duedate is 7 days after Date.now
-        var duedate = (new Date(Date.now(new Date())+604800000)).toString();
-        insertArray.push(movieid[0]["id"], customer_id[0], 'true', (new Date()).toString(), duedate)
-        db.run("INSERT INTO rentals (movie_id, customer_id, checked, rental_date, due_date) VALUES ($1, $2, $3, $4, $5);", insertArray, function (error, rentals) {
-          if (error || !rentals) {
-            callback(new Error("Could not update rental info"), undefined)
-          } else {
+        // check to see if customer got $$$$$
+        db.run("SELECT * from customers WHERE id=$1 AND account_credit > 1.49", customer_id, function (error, cust) {
+        if (error || !cust || cust.length===0) {
+          callback(new Error("Customer does not have enough money for a rental."), undefined)
+        } else {
 
-            // update customer credit -1.50 AFTER making the rental
-            db.run("UPDATE customers SET account_credit=account_credit-1.5 WHERE id=$1 AND account_credit > 1.45;", customer_id, function (error, updates) {
-            if (error || !updates) {
-              callback(new Error("Could not update customer credit, might not have enough money"), undefined)
+          // update RENTALSSSS. this should always work, thanks to the movie and customer checks above.
+          var insertArray = [];
+          // duedate is 7 days after Date.now
+          var duedate = (new Date(Date.now(new Date())+604800000)).toString();
+          insertArray.push(movieid[0]["id"], customer_id[0], 'true', (new Date()).toString(), duedate)
+          db.run("INSERT INTO rentals (movie_id, customer_id, checked, rental_date, due_date) VALUES ($1, $2, $3, $4, $5);", insertArray, function (error, rentals) {
+            if (error || !rentals) {
+              callback(new Error("Could not update rental info"), undefined)
             } else {
 
-              // update movie inventory
-              db.run("UPDATE movies SET inventory=inventory-1 WHERE search_title=$1;", movie, function (error, updatesmovie) {
-              if (error || !updatesmovie) {
-                callback(new Error("Could not update movie inventory"), undefined)
+              // update customer credit -1.50 AFTER making the rental
+              db.run("UPDATE customers SET account_credit=account_credit-1.5 WHERE id=$1;", customer_id, function (error, updates) {
+              if (error || !updates) {
+                callback(new Error("Could not update customer credit, might not have enough money"), undefined)
               } else {
 
-                // NO ERRORSSSSS! return the due date for the rental
-                callback(null, {return_date: duedate});
-              }
-            })
+                // update movie inventory
+                db.run("UPDATE movies SET inventory=inventory-1 WHERE search_title=$1;", movie, function (error, updatesmovie) {
+                if (error || !updatesmovie) {
+                  callback(new Error("Could not update movie inventory"), undefined)
+                } else {
+
+                  // NO ERRORSSSSS! return the due date for the rental
+                  callback(null, {return_date: duedate});
+                }
+              })
+            }});
           }});
         }});
       }});
@@ -96,43 +103,50 @@ Rental.return = function (customer_id, movie_title, callback) {
   if (error || !movie) {
     callback(new Error("Could not retrieve movie based on given movie title"), undefined)
   } else {
-    // if no errors, check to see if customer exists
+
+    // check to see if customer exists
     db.customers.where("id=$1", customer_id, function (error, customer) {
       if (error || !customer) {
         callback(new Error("Could not retrieve customer from database"), undefined)
       } else {
+
         // does this person even have a rental??
+        // if multiple rentals.. assume customer wants to return one with closest due date -> LIMIT 1 will limit to the first found id.
+        // UPDATE rentals SET checked='false', return_date='Tue Jun 21 2016 11:24:33 GMT-0700 (PDT)' FROM rentals WHERE customer_id=2 AND movie_id=2 AND checked='true' ORDER BY id LIMIT 1;
+
+
         var arrCheck = []
         arrCheck.push(customer_id[0], movie[0].id, 'true')
-        console.log(arrCheck)
-        db.run("SELECT * FROM rentals WHERE customer_id=$1 AND movie_id=$2 AND checked=$3", arrCheck, function (error, rental) {
-          console.log(rental)
+        db.run("SELECT * FROM rentals WHERE customer_id=$1 AND movie_id=$2 AND checked=$3 LIMIT 1", arrCheck, function (error, rental) {
           if (error || !rental || rental.length===0) {
-            callback(new Error("This customer does not have this movie checked out"), undefined)
+            callback(new Error("This customer currently does not have this movie checked out"), undefined)
           } else {
 
-            // if no errors, customer, movie and rentals exist.
-            //  update rentals back to checked in
+            // Update rentals checked in and return date
+            // This should always work, thanks to the movie, customer and rental checks above.
             var insertArray = [];
             var returndate = (new Date()).toString();
-            insertArray.push('false', returndate, customer_id[0], movie[0].id)
-            console.log(insertArray)
-            db.run("UPDATE rentals SET checked=$1, return_date=$2 WHERE customer_id=$3 AND movie_id=$4;", insertArray, function (error, rentalupdate) {
+            insertArray.push('false', returndate, rental[0]["id"])
+            // insertArray.push('false', returndate, customer_id[0], movie[0].id)
+            db.run("UPDATE rentals SET checked=$1, return_date=$2 WHERE id=$3;", insertArray, function (error, rentalupdate) {
               if (error || !rentalupdate) {
                 callback(new Error("Could not update rental info"), undefined)
               } else {
+
                 // update movie inventory
+                console.log(movie_title)
                   db.run("UPDATE movies SET inventory=inventory+1 WHERE search_title=$1;", movie_title, function (error, updatesmovie) {
                   if (error || !updatesmovie) {
                     callback(new Error("Could not update movie inventory"), undefined)
                   } else {
-                    callback(undefined, rentalupdate)
+                    callback(undefined, {return: "Movie has been successfully returned"})
               }})
             }})
           }})
         }})
       }})
     }
+
   //   })
   //   }})
   // }
