@@ -41,6 +41,14 @@ RentalsController = {
 	},
 
 	getRentalsReturn: function(req, res) {
+		Rental.getReturn(req.params.id, function(error, returned) {
+			if(error) {
+				var err = new Error("No one has that movie checked out");
+				err.status = 404;
+			} else {
+				res.json(returned)
+			}
+		});		
 
 	},
 

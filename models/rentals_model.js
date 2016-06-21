@@ -63,6 +63,20 @@ Rental.getOverdue = function(callback) {
   })
 }
 
+Rental.getReturn = function(rental_id, callback) {
+  db.rentals.update({
+    id: rental_id,
+    returned: true,
+    returned_date: new Date()
+    }, function(error, checked_out) {
+    if(error) {
+      callback(error, undefined);
+    } else {
+      callback(null, checked_out);
+    }
+  })
+}
+
 Rental.getCheckout = function(movie_title, id, callback) {
     // get movie id from movie table by title
   db.movies.findOne({
@@ -80,22 +94,6 @@ Rental.getCheckout = function(movie_title, id, callback) {
         if (error) {
           return callback(error);
         }
-
-      //         db.customers.update(
-      //   {id: id,
-      //   account_credit: 2.0
-      // }, function (error, movie_id = movie, account_balance_update) {
-      //   if (error) {
-      //     return callback(error);
-      //   }
-
-
-    //     } else if (!account_balance_update) {
-    // console.log("aaaaalllooooo")
-    //       // return callback(new Error("Money not able to be removed from account"));
-    //       callback
-    //     }
-
 
       // set date vars
       var now = new Date();
