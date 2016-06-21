@@ -89,17 +89,21 @@ Rentals.checkout = function(title, customer_id, callback) {
       callback(error || new Error("Video not available"), undefined);
     } else {
 
+// available inventory is -1 (working)
+// money is being subtracted from customer (working)
+// rentals is not creating
+
       var updated_inventory = (video.available_inventory - 1)
-      db.videos.update({id: video_id, available_inventory: updated_inventory}, function(error, updated_video){
+      db.videos.update({id: video.id, available_inventory: updated_inventory}, function(error, updated_video){
         if (error || !updated_video) {
           callback(error || new Error("Video not updated"), undefined);
         } else { 
-           db.customers.findOne({id: id}, function(error, customer) {
+           db.customers.findOne({id: customer_id}, function(error, customer) {
             if (error || !customer) {
               callback(error || new Error("Customer not found"), undefined);
             } else {
               var updated_credit = customer.account_credit - 1
-              db.customer.update({id: customer_id, account_credit: updated_credit}, function(error, updated_customer) {
+              db.customers.update({id: customer_id, account_credit: updated_credit}, function(error, updated_customer) {
                 if (error || !updated_customer) {
                   callback(error || new Error("Customer credit not updated"), undefined);
                 } else { 
