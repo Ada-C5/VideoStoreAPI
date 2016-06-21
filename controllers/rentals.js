@@ -1,6 +1,10 @@
 var Rental = require('../models/rental');
 
 var RentalsController = {
+  locals: {
+    title: 'Rentals'
+  }
+
 
 
   index: function(req, res) {

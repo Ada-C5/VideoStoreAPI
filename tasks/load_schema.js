@@ -2,7 +2,7 @@ var spawn = require('child_process').spawnSync;
 var Massive = require('massive');
 
 ['development', 'test'].forEach(function(env) {
-  console.log(env)
+  // console.log(env)
   // var env = 'development'
   var dbName = `radio_star_${env}`;
   var db = Massive.connectSync({ db: dbName });
