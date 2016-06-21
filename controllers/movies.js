@@ -52,6 +52,18 @@ MoviesController = {
         res.json(customer)
       }
     })
+  },
+
+  getMoviesHistory: function (req, res, next) {
+    Rental.findHistoryMovies(req.params.title, function (error, customers) {
+      if (error) {
+        var err = new Error("Error retrieving rental history:\n" + error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        res.json(customers)
+      }
+    })
   }
 }
 

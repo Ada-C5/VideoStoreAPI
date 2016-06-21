@@ -57,5 +57,13 @@ Rental.findCurrentMovies = function (title, callback) {
   })
 }
 
+Rental.findHistoryMovies = function (title, callback) {
+  db.customer_rental_history([title], function (error, customers) {
+    callback(null, customers.map(function (customer) {
+      return new Customer(customer)
+    }))
+  })
+}
+
 
 module.exports = Rental
