@@ -6,6 +6,6 @@ router.get('/', Controller.getMovies)
 router.get('/:title', Controller.getMoviesShow)
 router.get('/sort/:field', Controller.getMoviesSort)
 router.get('/:title/current', Controller.getMoviesCurrent)
-
+router.get('/:title/history/sort/:field', Controller.getMoviesCurrent)
 
 module.exports = router
