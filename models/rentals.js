@@ -85,7 +85,7 @@ Rentals.checkout = function(title, customer_id, callback) {
     if (error || !video) {
       callback(error || new Error("Video not found"), undefined);
     } else {
-      if (video.available_inventory < 1) {
+      if (video.available_inventory <= 0) {
         callback(error || new Error("Video not available"), undefined);
       } else {
         var updated_inventory = (video.available_inventory - 1)
@@ -106,8 +106,8 @@ Rentals.checkout = function(title, customer_id, callback) {
                     db.rentals.insert({
                       customer_id: updated_customer.id,
                       video_id: updated_video.id,
-                      checkout_date: new Date(new Date().getTime()+(60*60*1000)),
-                      due_date: new Date(new Date().getTime()+(1*24*60*60*1000)),
+                      checkout_date: new Date(),
+                      due_date: new Date(),
                       checkin_date:null,
                       charge:1.00
                     }, function(error, rental_complete) {
@@ -141,15 +141,18 @@ Rentals.checkout = function(title, customer_id, callback) {
             if (error || !updated_video) {
               callback(error || new Error("Video not updated"), undefined);
             } else {
-              db.rentals.update({customer_id: customer_id, video_id: updated_video.id, checkin_date: new Date(new Date().getTime()+(60*60*1000))}, function(error, updated_rental) {
-                if (error || !updated_rental) {
-                  callback(error || new Error("Rental not updated"), undefined);
-                } else {
-                  callback(null, updated_rental)
-                }
+              db.rentals.where("customer_id=$1 AND video_id=$2 AND checkin_date IS NULL", [customer_id, updated_video.id], function(error, found_rental) {
+                db.rentals.update({id: found_rental[0].id, checkin_date: new Date()}, function(error, updated_rental) {
+                  if (error || !updated_rental) {
+                    callback(error || new Error("Rental not updated"), undefined);
+                  } else {
+                    callback(null, updated_rental)
+                  }
+                })
               })
+              }
             }
-          })
+          )
         }
       }
     })
