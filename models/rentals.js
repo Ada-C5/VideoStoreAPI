@@ -6,6 +6,13 @@ var Rentals = function(customer_id) {
   this.customer_id = customer_id;
 };
 
+var Rental = function(new_rental) {
+ this.id = new_rental.id;
+ this.video_id = new_rental.video_id;
+ this.customer_id = new_rental.customer_id;
+ // this.status = new_rental.status; //"returned" and "checkedOut"
+};
+
 Rentals.find_current = function(customer_id, callback) {
   db.rentals.where("customer_id=$1 AND checkin_date=null", [customer_id], function(error, rentals) {
     if(error || !rentals) {
@@ -108,17 +115,16 @@ Rentals.checkout = function(title, customer_id, callback) {
                   callback(error || new Error("Customer credit not updated"), undefined);
                 } else { 
                 //update successful, create rental 
-                    db.rentals.insert({
+                    var new_rental = {
                       customer_id: updated_customer.id,
                       video_id: updated_video.id,
                       checkout_date: Date.now(),
                       due_date: new Date(new Date().getTime()+(1*24*60*60*1000)),
                       checkin_date:null,
                       charge:1.00
-                    }, 
-                    function(error, new_rental) {
-                      callback(null, new_rental)
-                    })
+                    }; 
+                    db.rentals.save(new_rental);
+                    callback(null, {new_rental: new Rental(new_rental)})
                   }
                 })
               }
