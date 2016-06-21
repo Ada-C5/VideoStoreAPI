@@ -19,8 +19,7 @@
 "movie_id": 3,
 "customer_id": 9,
 "checkout_date": "2015-08-11",
-"due_date": "2015-08-21",
-"return_date": "2015-08-28"
+"due_date": "2015-08-21"
 },
 
 {

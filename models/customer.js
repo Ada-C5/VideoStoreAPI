@@ -2,7 +2,6 @@ var app = require("../app");
 var db = app.get("db");
 
 var Customer = function(customer) {
-  console.log(customer)
   this.id = customer.id
   this.name = customer.name
   this.registered_at = customer.registered_at

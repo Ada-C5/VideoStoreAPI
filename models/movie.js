@@ -55,7 +55,7 @@ Movie.sortBy = function(options, callback) {
 // };
 
 Movie.find_customers_by_movie_title = function(title, callback) {
-  db.run("SELECT customers.name, customers.phone, customers.account_credit FROM customers INNER JOIN rentals ON customers.id = rentals.customer_id INNER JOIN movies ON rentals.movie_id = movies.id WHERE movies.title ILIKE $1 AND rentals.return_date IS NULL;", [title], function(error, customers) {
+  db.movie.customers_by_movie_title([title], function(error, customers) {
    if(error || !customers) {
      callback(error || new Error("Could not find customers"), undefined);
    } else {
@@ -67,22 +67,10 @@ Movie.find_customers_by_movie_title = function(title, callback) {
 };
 
 Movie.find_customers_by_movie_title_history = function(fields, callback) {
-  console.log("CUSTOMERS:", Customer)
   db.run("SELECT customers.name, customers.phone, customers.account_credit FROM customers INNER JOIN rentals ON customers.id = rentals.customer_id INNER JOIN movies ON rentals.movie_id = movies.id WHERE movies.title ILIKE $1 ORDER BY $2;", fields, function(error, customers) {
    if(error || !customers) {
      callback(error || new Error("Could not find customers"), undefined);
    } else {
-      var my_customers = customers.map(function(customer) {
-        
-        var my_customer = new Customer(customer)
-        return my_customer
-        //  console.log(my_customer)
-      })
-
-     console.log("after the map!")
-     console.log(my_customers)
-    //  callback(null, my_customers)
-
      callback(null, customers.map(function(customer) {
        return new Customer(customer);
      }));
@@ -90,10 +78,6 @@ Movie.find_customers_by_movie_title_history = function(fields, callback) {
  });
 }
 
-// Get a list of customers that have checked out a copy in the past (/movies/Jaws/history/sort/name)
-// include each customer's name, phone number, and account credit
-// ordered by customer name or
-// ordered by check out date
 
 
 // only attach this function if we're in test mode.
