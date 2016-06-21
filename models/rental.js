@@ -31,7 +31,7 @@ Rental.find = function (title, callback) {
       callback(new Error("Could not retrieve movies"), undefined)
     } else {
       callback(null, movies.map (function (movie) {
-        return new Movie(movie)
+      return new Movie(movie)
       }))
     }
   })
@@ -43,7 +43,7 @@ Rental.findCurrent = function (id, callback) {
       callback(new Error("Could not retrieve rentals"), undefined)
     } else {
       callback(null, rentals.map (function (rental) {
-        return new Rental(rental)
+      return new Rental(rental)
       }))
     }
   })

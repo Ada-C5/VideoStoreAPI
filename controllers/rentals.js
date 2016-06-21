@@ -5,7 +5,7 @@ RentalsController = {
     title: 'RENTALS RENTALS RENTALS'
   },
 
- getRentals: function(req, res) {
+ getRentals: function(req, res, next) {
     Rental.all (function (error, movies) {
       if (error) {
         var err = new Error("Error retrieving rental list:\n" + error.message);
@@ -27,7 +27,19 @@ RentalsController = {
         res.json(rental)
       }
     })
-  }
+  },
+
+  // getRentalsCustomers:function(req, res, next) {
+  //   Rental.find (req.params.title, function(error, rental) {
+  //     if (error) {
+  //       var err = new Error("No such rentals");
+  //       err.status = 404;
+  //       next(err);
+  //     } else {
+  //       res.json(rental)
+  //     }
+  //   })
+  // }
 }
 
 module.exports = RentalsController
