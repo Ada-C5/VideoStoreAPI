@@ -86,9 +86,36 @@ describe('Rental', function () {
 
     it('if customer has no rentals', function (done) {
       Rental.findCurrent(200, function(error, movie) {
-        expect(error.message).toEqual([])
+        expect(error).toEqual(null)
         done()
       })
     })
   })
+
+  describe("#findCurrentMovies", function () {
+    it("should return current customers currently renting a movie", function (done) {
+      Rental.findCurrentMovies('Die Hard', function (error, customers) {
+        expect(customers.length).toEqual(2)
+        expect(customers[0].id).toEqual(19)
+        done()
+      })
+    })
+
+    it('should throw an error if no rentals found', function (done) {
+      Rental.findCurrentMovies("bad title", function(error, movie) {
+        console.log(error)
+        expect(error).toEqual(null)
+        done()
+      })
+    })
+
+    // it('if customer has no rentals', function (done) {
+    //   Rental.findCurrent(200, function(error, movie) {
+    //     expect(error.message).toEqual([])
+    //     done()
+    //   })
+    // })
+  })
+
+
 })
