@@ -34,6 +34,9 @@ var MoviesController = {
         err.status = 500;
         next(err);
       } else {
+        // if (result.length === 0) {
+        //   res.status(204); //not working for some reason, fix later
+        // }
         res.json(result);
       }
     });

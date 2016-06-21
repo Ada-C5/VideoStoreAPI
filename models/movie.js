@@ -61,37 +61,40 @@ Movie.sort = function (field, n, p, callback) {
 
 Movie.current = function (title, callback) {
 
-  // db.
-
   db.movies.findOne({title: title}, function(error, movie) {
     if (error || !movie ) {
       callback(error || new Error("No movie with that title"), undefined);
     } else {
-
+      // console.log(movie)
       db.rentals.find({ movie_id: movie.id }, function(error, rentals) {
         if (error || !rentals) {
+          // console.log(error.message)
           callback(error || new Error("Movie not currently being rented"), undefined);
         } else {
-
+          console.log(rentals);
           // for each rental, map an array of customer ids
-          var ids_of_customers_renting_movie = [];
-          for (var rental of rentals) {
-            ids_of_customers_renting_movie = rentals.map(function (rental) {return rental.customer_id;})
+          var ids_of_customers_renting_movie = rentals.map(function (rental) { return rental.customer_id;})
+
+          // handles situations when no rentals exist
+          if (ids_of_customers_renting_movie.length === 0) {
+            callback(null, []);
           }
 
           // find the customers that have those ids
-          for (var id of ids_of_customers_renting_movie) {
-            db.customers.find({ id: id }, function(error, customers) {
-              if ( error || !customers ) {
-                callback(error || new Error("No customer matching id"), undefined);
-              } else {
-                callback(null, customers);
-              }
-            });
-          }
+          // for (var id of ids_of_customers_renting_movie) {
+          db.customers.find({ id: ids_of_customers_renting_movie }, function(error, customers) {
+            if ( error || !customers ) {
+              // console.log(ids_of_customers_renting_movie)
+              // console.log(error.message)
+              callback(error || new Error("No customer matching id"), undefined);
+            } else {
+              callback(null, customers);
+            }
+          });
+          // }
 
         }
-      };
+      });
     }
   });
 
