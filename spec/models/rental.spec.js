@@ -103,18 +103,10 @@ describe('Rental', function () {
 
     it('should throw an error if no rentals found', function (done) {
       Rental.findCurrentMovies("bad title", function(error, movie) {
-        console.log(error)
         expect(error).toEqual(null)
         done()
       })
     })
-
-    // it('if customer has no rentals', function (done) {
-    //   Rental.findCurrent(200, function(error, movie) {
-    //     expect(error.message).toEqual([])
-    //     done()
-    //   })
-    // })
   })
 
 
