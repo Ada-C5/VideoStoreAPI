@@ -1,4 +1,7 @@
+DROP TABLE IF EXISTS rentals;
 DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS customers;
+
 CREATE TABLE movies(
   id serial PRIMARY KEY,
   title text,
@@ -10,7 +13,6 @@ CREATE TABLE movies(
 CREATE INDEX movies_title ON movies (title);
 CREATE INDEX movies_date ON movies (release_date);
 
-DROP TABLE IF EXISTS customers;
 CREATE TABLE customers(
   id serial PRIMARY KEY,
   name text,
@@ -27,7 +29,6 @@ CREATE INDEX customers_name ON customers (name);
 CREATE INDEX customers_date ON customers (registered_at);
 CREATE INDEX customers_postal ON customers (postal_code);
 
-DROP TABLE IF EXISTS rentals;
 CREATE TABLE rentals(
   id serial PRIMARY KEY,
   movie_id integer REFERENCES movies (id),

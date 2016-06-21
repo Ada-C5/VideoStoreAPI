@@ -1,7 +1,7 @@
 var app = require("../app");
 var db = app.get("db");
 
-console.log(db)
+// console.log(db)
 var Movie = function(movie) {
   this.id = movie.id;
   this.title = movie.title;
