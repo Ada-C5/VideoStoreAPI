@@ -28,3 +28,28 @@ Rental.all = function (title, callback) {
     }
   });
 };
+
+Rental.sortBy = function(options, callback) {
+  // first parameter is the info from movie controller which was [type, n, p]
+  db.rentals.find({}, options, function(error, rentals) {
+    if(error || !rentals) {
+      callback(error || new Error("Rentals not found"), undefined);
+    } else {
+      callback(null, rentals.map(function(rental) {
+        return new Rental(rental)
+      }));
+    };
+  });
+};
+
+Rental.customers_current_rentals = function(title, callback) {
+  db.rental.customers_current_rentals([title], function(error, customers) {
+   if(error || !customers) {
+     callback(error || new Error("Could not find customers"), undefined);
+   } else {
+     callback(null, customers.map(function(customer) {
+       return new Customer(customer);
+     }));
+   }
+ });
+};

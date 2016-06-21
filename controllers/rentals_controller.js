@@ -16,7 +16,28 @@ var RentalsController = {
         res.json(rentals)
       }
     })
-  }
+  },
+
+  sortBy: function(req, res, next) {
+    var movie = req.params.title;
+
+    Rental.customers_current_rentals(movie, function(error, customers) {
+      if(error) {
+        var err = new Error("No such customer");
+        err.status = 404;
+        next(err);
+      } else {
+        var obj = {};
+        if (customers.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["customers"] = customers;
+        res.json(obj);
+      }
+    })
+  },
 
 
 }

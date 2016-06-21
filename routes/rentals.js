@@ -8,7 +8,7 @@ router.get('/:title', RentalsController.findMovie)
 //
 // // GET rentals/:title/customers
 // // list of customers that have currently checked out any of the movie's inventory
-// router.get('/:title/customers', RentalsController.sortBy)
+router.get('/:title/customers', RentalsController.sortBy)
 //
 // // POST rentals/:title/check-out
 // // #provide customerid and movie title
