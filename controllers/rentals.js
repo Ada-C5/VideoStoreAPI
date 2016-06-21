@@ -35,6 +35,8 @@ var RentalsController = {
     var title = req.params.movie
     var id = 55
     console.log(req.body.customer_id) // need to test to see if customer's id comes in body
+    // if we don't want to have them passed in the body we can alter the url to take a
+    // second parameter ->/rentals/:movie/check-out/:cust_id
 
     Rental.checkOut([title, id],function (error, rental) {
       if(error) {
