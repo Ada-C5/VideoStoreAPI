@@ -55,7 +55,6 @@ Rental.createCheckOut = function(customer_id, title, callback) {
               callback(null, {rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)});
             }
           })
-        // creating instance of Rental through the constructor so that we can do instance-like things to the rental
         }
       })
 

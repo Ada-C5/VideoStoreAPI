@@ -7,6 +7,6 @@ router.get('/', MoviesController.index);
 
 router.get('/sort/:sort_param', MoviesController.sort);
 
-// router.get('/:title/current', MoviesController.current);
+router.get('/:title/current', MoviesController.current);
 
 module.exports = router;

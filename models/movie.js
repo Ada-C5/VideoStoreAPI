@@ -48,7 +48,7 @@ Movie.sort = function (field, n, p, callback) {
     offset: p
   };
   db.movies.find({}, sort_options, function(error, movies) {
-    if(error || !movies) {
+    if (error || !movies) {
       //in this case error is always true because we're inside the if-statement for error being truthy. so we're passing "true" to the callback.
       callback(error, undefined);
     } else {
@@ -57,7 +57,46 @@ Movie.sort = function (field, n, p, callback) {
       }));
     }
   });
-}
+};
+
+Movie.current = function (title, callback) {
+
+  // db.
+
+  db.movies.findOne({title: title}, function(error, movie) {
+    if (error || !movie ) {
+      callback(error || new Error("No movie with that title"), undefined);
+    } else {
+
+      db.rentals.find({ movie_id: movie.id }, function(error, rentals) {
+        if (error || !rentals) {
+          callback(error || new Error("Movie not currently being rented"), undefined);
+        } else {
+
+          // for each rental, map an array of customer ids
+          var ids_of_customers_renting_movie = [];
+          for (var rental of rentals) {
+            ids_of_customers_renting_movie = rentals.map(function (rental) {return rental.customer_id;})
+          }
+
+          // find the customers that have those ids
+          for (var id of ids_of_customers_renting_movie) {
+            db.customers.find({ id: id }, function(error, customers) {
+              if ( error || !customers ) {
+                callback(error || new Error("No customer matching id"), undefined);
+              } else {
+                callback(null, customers);
+              }
+            });
+          }
+
+        }
+      };
+    }
+  });
+
+
+};
 
 
 
