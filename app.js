@@ -52,12 +52,13 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json('error', {
       message: err.message,
       error: err
     });
