@@ -126,6 +126,7 @@ Rentals.checkout = function(title, customer_id, callback) {
       }
     }
   })
+}
 
   Rentals.checkin = function(title, customer_id, callback) {
     db.videos.findOne({title: title}, function(error, video) {
@@ -153,6 +154,5 @@ Rentals.checkout = function(title, customer_id, callback) {
       }
     })
   }
-}
 
 module.exports = Rentals;
