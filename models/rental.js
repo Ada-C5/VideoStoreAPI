@@ -52,7 +52,6 @@ Rental.overdueList = function (callback) {
 
 Rental.checkOut = function (input, callback) {
     db.movies.findOne({title: input[0]}, function (error, found_id) {
-      console.log(found_id.id)
       db.run("UPDATE movies SET inventory=inventory-1 WHERE title=$1;", [found_id.title], function (error, meh) {})
       db.rentals.save({customer_id: input[1], movie_id: found_id.id, due_date: due(), checkout_date: today(), status: "checked_out"}, function (error, rentals) {
         rentals = [rentals]
@@ -63,6 +62,25 @@ Rental.checkOut = function (input, callback) {
             return new Rental(rental);
           }))
         }
+      })
+    })
+}
+
+Rental.return = function (input, callback) {
+    db.movies.findOne({title: input[0]}, function (error, found_id) {
+      db.run("UPDATE movies SET inventory=inventory+1 WHERE title=$1;", [found_id.title], function (error, meh) {})
+
+      db.rentals.findOne({movie_id: found_id.id, customer_id: input[1], status: "checked_out"}, function (error, rental) {
+        db.rentals.update({id: rental.id, status: "returned"}, function (error, rentals) {
+          rentals = [rentals]
+          if(error || !rentals) {
+            callback(error || new Error("Could not retrieve rentals"), undefined);
+          } else {
+            callback(null, rentals.map(function (rental) {
+              return new Rental(rental);
+            }))
+          }
+        })
       })
     })
 }
