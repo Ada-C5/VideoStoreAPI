@@ -36,7 +36,7 @@ var RentalsController = {
         response.json(rentals)
       }
     });
-  }, 
+  },
 
   getVideoHistory: function(request, response, next) {
     Rentals.find_video_history(request.params.title, request.params.ordered_by, function(error, rentals) {
@@ -59,9 +59,22 @@ var RentalsController = {
       next(err);
     } else {
       response.json(rentals)
-   }
-  })
- }
+    }
+   })
+  },
+
+  postCheckin: function(request, response, next) {
+    Rentals.checkin(request.params.title, request.params.customer_id, function(error, rentals) {
+
+      if(error) {
+        var err = new Error("That video is not available for return:\n" + error.message);
+        err.status = 304;
+        next(err);
+      } else {
+        response.json(rentals)
+      }
+    })
+  }
 }
 
 module.exports = RentalsController;
