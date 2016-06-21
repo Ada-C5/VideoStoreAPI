@@ -1,5 +1,5 @@
 
-SELECT movies.id, rentals.movie_id, rentals.customer_id, customers.id as customer_id, customers.*
+SELECT movies.id, rentals.movie_id, rentals.customer_id, customers.*
 FROM rentals
 INNER JOIN movies
 ON movies.id=rentals.movie_id

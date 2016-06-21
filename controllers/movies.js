@@ -44,7 +44,6 @@ MoviesController = {
 
   getMoviesCurrent: function (req, res, next) {
     Rental.findCurrentMovies(req.params.title, function (error, customer) {
-      console.log(customer)
       if (error) {
         var err = new Error("Error retrieving current customers:\n" + error.message);
         err.status = 500;
