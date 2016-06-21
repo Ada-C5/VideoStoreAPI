@@ -52,12 +52,21 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// catch 304 and forward to the error handler
+// express deprecated res.json(status, obj): Use res.status(status).json(obj) instead app.js:58:9
+//not complete yet, working on understandin next   
+  // app.use(function(err, req, res, next) {
+  //   res.status(err.status || 304);
+  //   res.json(res.status).json('error', { message: err.message, error: err.status});
+  // });
+
+
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json('error', {
       message: err.message,
       error: err
     });
