@@ -53,14 +53,44 @@ Rental.getCustomers = function(movie_title, callback) {
 }
 
 Rental.getOverdue = function(callback) {
-  var now = new Date().toISOString().split('T')[0];
-  db.rentals.where("returned=$1 AND due_date<$2", [false, now], function(error, overdue) {
-    if(error) {
+  var now = new Date();
+  console.log(now)
+  db.run("SELECT * FROM rentals WHERE returned=false AND due_date<?", function (error, overdues) {
+    if (error) {
       callback(error, undefined);
-    } else {
-      callback(null, overdue);
     }
-  })
+    console.log(overdues);  
+    callback(null, overdues);
+    
+
+        // remove money from account
+    //   db.run("UPDATE customers SET account_credit=account_credit-2.0 WHERE id=$1;", [id], function (error, movie_id = movie, account_balance_update) {
+    //     if (error) {
+    //       return callback(error);
+    //     }
+
+    //   // set date vars
+    //   var now = new Date();
+    //   var due = new Date(now);
+    //   due.setDate(due.getDate() + 7);
+
+    //   // save new rental (nested inside find)
+    //   db.rentals.save({
+    //     movie_id: movie_id.id,
+    //     customer_id: id,
+    //     created_date: now,
+    //     due_date: due,
+    //     returned: false
+    //     // callback with rental info
+    //   }, function (error, rental) {
+    //     if (error) {
+    //       return callback(error);
+    //     }
+    //     // pass rental back to controller
+    //     return callback(null, rental);
+    //   });
+    // });
+  });
 }
 
 Rental.getReturn = function(rental_id, callback) {

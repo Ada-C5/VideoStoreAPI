@@ -53,7 +53,6 @@ RentalsController = {
 	},
 
 	getRentalsOverdue: function(req, res) {
-		console.log("AAAALLLOOO????")
 		Rental.getOverdue(function(error, over_due) {
 			if(error) {
 				var err = new Error("Ooops");
@@ -61,7 +60,7 @@ RentalsController = {
 			} else {
 				res.json(over_due)
 			}
-		})
+		});
 	}
 }
 
