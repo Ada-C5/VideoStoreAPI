@@ -48,7 +48,7 @@ RentalsController = {
 			} else {
 				res.json(returned)
 			}
-		});		
+		});
 
 	},
 
