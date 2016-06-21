@@ -75,25 +75,48 @@ Rental.getCheckout = function(movie_title, id, callback) {
       return callback(new Error("Movie not found"));
     }
 
-    // set date vars
-    var now = new Date();
-    var due = new Date(now);
-    due.setDate(due.getDate() + 7);
+        // remove money from account
+      db.run("UPDATE customers SET account_credit=account_credit-2.0 WHERE id=$1;", [id], function (error, movie_id = movie, account_balance_update) {
+        if (error) {
+          return callback(error);
+        }
 
-    // save new rental (nested inside find)
-    db.rentals.save({
-      movie_id: movie.id,
-      customer_id: id,
-      created_date: now,
-      due_date: due,
-      returned: false
-      // callback with rental info
-    }, function (error, rental) {
-      if (error) {
-        return callback(error);
-      }
-      // pass rental back to controller
-      return callback(null, rental);
+      //         db.customers.update(
+      //   {id: id,
+      //   account_credit: 2.0
+      // }, function (error, movie_id = movie, account_balance_update) {
+      //   if (error) {
+      //     return callback(error);
+      //   }
+
+
+    //     } else if (!account_balance_update) {
+    // console.log("aaaaalllooooo")
+    //       // return callback(new Error("Money not able to be removed from account"));
+    //       callback
+    //     }
+
+
+      // set date vars
+      var now = new Date();
+      var due = new Date(now);
+      due.setDate(due.getDate() + 7);
+
+      // save new rental (nested inside find)
+      db.rentals.save({
+        movie_id: movie_id.id,
+        customer_id: id,
+        created_date: now,
+        due_date: due,
+        returned: false
+        // callback with rental info
+      }, function (error, rental) {
+        if (error) {
+          return callback(error);
+        }
+        // pass rental back to controller
+        return callback(null, rental);
+      });
     });
   });
 }

@@ -28,5 +28,5 @@ CREATE TABLE customers(
   state text,
   postal_code text,
   phone text,
-  account_credit money
+  account_credit decimal 
 );
