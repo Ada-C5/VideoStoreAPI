@@ -54,25 +54,25 @@ Rental.getCustomers = function(movie_title, callback) {
 
 Rental.getOverdue = function(callback) {
   var now = new Date()
-  db.run("SELECT movie_id, customer_id, created_date, due_date FROM rentals WHERE returned=false AND due_date< $1", [now], function (error, overdues) {
+  db.run("SELECT customers.name, movies.title, rentals.created_date, rentals.due_date FROM rentals INNER JOIN movies ON movies.id=rentals.movie_id INNER JOIN customers ON customers.id=rentals.customer_id WHERE rentals.returned=false AND rentals.due_date<$1", [now], function (error, overdues) {
     if (error) {
       callback(error, undefined);
     }
     callback(null, overdues);
 
 
-    for (var rental in overdues) {
-      db.run("SELECT name FROM customers WHERE id=$1;", [rental.customer_id], function (error, customer_name, overdues) {
-        if (error) {
-          return callback(error);
-        } else {
-          rental["name"] = customer_name;
-          console.log(rental)
-          console.log(overdues)
-        }
+    // for (var rental in overdues) {
+    //   db.run("SELECT name FROM customers WHERE id=$1;", [rental.customer_id], function (error, customer_name, overdues) {
+    //     if (error) {
+    //       return callback(error);
+    //     } else {
+    //       rental["name"] = customer_name;
+    //       console.log(rental)
+    //       console.log(overdues)
+    //     }
 
-      })
-    }
+    //   })
+    // }
     // )}
     //   // set date vars
     //   var now = new Date();
