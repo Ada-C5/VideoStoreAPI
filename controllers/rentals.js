@@ -1,13 +1,13 @@
 var Rental = require('../models/rental');
 
-var RentalsController = {
-  locals: {
-    title: 'Rentals'
-  }
+var RentalController = {
+  // locals: {
+  //   title: 'Rentals'
+  // },
 
 
 
-  index: function(req, res) {
+  getRentals: function(req, res) {
     Rental.all (function (error, movies) {
       if (error) {
         var err = new Error( "Sorry, We're having problems retrieving rental list:\n" + error.message);
@@ -32,16 +32,16 @@ var RentalsController = {
   },
 
   customersNames: function(req, res, next) {
-    Rental.customers (req.params.movie_title, function(error,customerIds) {
+    Rental.customers (req.params.movie_title, function(error, customerNames) {
       if (error) {
         var err = new Error("No customers found");
         err.status = 404;
         next(err);
       } else {
-      res.json(customerIds)
+      res.json(customerNames)
       }
     })
   }
 }
 
-module.exports = RentalsController
+module.exports = RentalController

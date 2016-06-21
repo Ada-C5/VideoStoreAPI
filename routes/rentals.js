@@ -14,14 +14,7 @@ router.get('/', RentalController.getRentals);
 // // See a list of customers that have currently checked out any of the movie's inventory
  router.get('/:movie_title/customers', RentalController.customersNames)
 
- // router.get('/:movie_title', RentalController.find_title)
-//
-//
-// // See a list of customers that have currently checked out any of the movie's inventory
- // router.get(':movie_title/customers')
 
-//
-//
 //
 // // Given a customer's id and a movie's title ...
 // // "check out" one of the movie's inventory to the customer

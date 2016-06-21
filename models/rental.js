@@ -2,6 +2,7 @@ var app = require('../app')
 var db = app.get("db")
 var Movie = require('./movie')
 
+
 var Rental = function(id) {
   this.id = id;
 }
@@ -52,11 +53,26 @@ Rental.customers = function (title, callback) {
         if(error || !rentalRecords) {
           callback(new Error("Could not retrieve movies"), undefined)
         } else {
-          var customerIds = []
-          for (var record of rentalRecords) {
-            customerIds.push(record.customer_id)
+          console.log(rentalRecords)
+          //loop for each of the customer_ids then pass that whole array into the db call
+          var custIds = []
+          for (var cust of rentalRecords) {
+            custIds.push(cust.customer_id)
           }
-          callback(null, customerIds)
+          console.log(custIds)
+          db.customers.find({id: custIds}, function (error, customersNames) {
+            console.log(customersNames)
+            if(error || !customersNames) {
+              callback(new Error("Could not retrieve customers"), undefined)
+            } else {
+              var customerNames = []
+              for (var record of customersNames) {
+                console.log(record.name)
+                customerNames.push(record.name)
+              }
+              callback(null, customerNames)
+            }
+          })
         }
       })
     }
