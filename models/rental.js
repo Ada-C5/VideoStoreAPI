@@ -47,9 +47,15 @@ Rental.createCheckOut = function(customer_id, title, callback) {
             return_date: new Date(new Date().getTime()+(5*24*60*60*1000))
           };
           var new_balance = customer.account_credit - rentalFee
-          db.customers.save{id: customer.id, account_credit: new_balance}
-          db.rentals.save(rentalInfo);
-          callback(null, [{rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)}]); // creating instance of Rental through the constructor so that we can do instance-like things to the rental
+          db.customers.save({id: customer.id, account_credit: new_balance}, function(error,updated){
+            if (error){
+              callback(error || new Error("Update Not Succesfull: Unable to update customer account credit"))
+            } else{
+              db.rentals.save(rentalInfo);
+              callback(null, {rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)});
+            }
+          })
+        // creating instance of Rental through the constructor so that we can do instance-like things to the rental
         }
       })
 
