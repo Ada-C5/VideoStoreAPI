@@ -4,7 +4,7 @@ var RentalsController = require('../controllers/rentals_controller.js');
 //
 // // GET rentals/:title
 // // Look a rental up by title
-// router.get('/:title', RentalsController.findMovie)
+router.get('/:title', RentalsController.findMovie)
 //
 // // GET rentals/:title/customers
 // // list of customers that have currently checked out any of the movie's inventory

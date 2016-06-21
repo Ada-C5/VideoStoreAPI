@@ -1,6 +1,6 @@
 var Movie = require("../models/movie");
-// var Customer = require("../models/customer");
-// var Rental = require("../models/rental");
+var Customer = require("../models/customer");
+var Rental = require("../models/rental");
 
 var MoviesController = {
   listMovies: function(req, res, next) {
