@@ -1,7 +1,8 @@
 var massive = require('massive')
-var connectionString = "postgres://localhost/video_store"
 
-var db = massive.connectSync({connectionString : connectionString})
+var databaseName = process.argv[2];
+var connectionString = "postgres://localhost/" + databaseName;
+var db = massive.connectSync({connectionString : connectionString});
 
 db.setup.schema([], function(err, res) {
   if (err) {

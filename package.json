@@ -4,13 +4,18 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "start-test": "NODE_ENV=test ./node_modules/.bin/nodemon ./bin/www",
-    "test": "clear; ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
     "db:drop": "dropdb video_store",
     "db:create": "createdb video_store",
-    "db:schema": "node tasks/load_schema.js",
-    "db:seed": "node tasks/seed.js",
-    "reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed;"
+    "db:schema": "node tasks/load_schema.js video_store",
+    "db:seed": "node tasks/seed.js video_store",
+    "reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed;",
+    "start-test": "NODE_ENV=test ./node_modules/.bin/nodemon ./bin/www",
+    "db:drop-test": "dropdb video_storetest",
+    "db:create-test": "createdb video_storetest",
+    "db:schema-test": "node tasks/load_schema.js video_storetest",
+    "db:seed-test": "node tasks/seed.js video_storetest",
+    "reset-test": "npm run db:drop-test; npm run db:create-test; npm run db:schema-test; npm run db:seed-test;",
+    "test": "clear; ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
