@@ -1,8 +1,7 @@
 var express = require('express')
 var router = express.Router()
+var Controller = require('../controllers/index')
 
-router.get('/', function(req, res, next) {
-  res.status(200).json({whatevs: 'whatevs!!!'})
-})
+router.get('/', Controller.getIndex)
 
 module.exports = router
