@@ -33,7 +33,7 @@ Rentals.overdue = function(callback) {
       callback(error || new Error("Overdue videos not found"), undefined);
     } else {
       for (var rental of overdue_videos) {
-        db.videos.findOne({id: rental.video_id}, function(error, found_video) {
+        db.videos.findOne({id: rental.video_id}, function(rental, error, found_video) {
           if(error || !found_video) {
             callback(error || new Error("Could not find video"), undefined);
           } else {
@@ -54,7 +54,7 @@ Rentals.overdue = function(callback) {
               }
             })
           }
-        })
+        }.bind(db.videos, rental)) // Kari is great! Thank you Kari! <3 <3 <3 <3 <3 <3 <3!!!
       }
     }
   })

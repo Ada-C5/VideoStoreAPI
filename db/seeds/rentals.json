@@ -9,7 +9,7 @@
 },
 {
 "customer_id": "2",
-"video_id": "1",
+"video_id": "3",
 "checkout_date": "Fri, 8 May 2015 07:54:14 -0700",
 "due_date": "Wed, 9 May 2015 07:54:14 -0700",
 "checkin_date": null,
@@ -50,8 +50,8 @@
 {
 "customer_id": "7",
 "video_id": "6",
-"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
-"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkout_date": "Wed, 22 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 23 Apr 2015 07:54:14 -0700",
 "checkin_date": null,
 "charge": 1.50
 },
