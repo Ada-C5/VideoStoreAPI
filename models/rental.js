@@ -19,7 +19,6 @@ Rental.search = function (input, callback) {
     }
   });
 }
-// fsdoiahfisohfios
 
 //  /rentals/:movie/customers
 //  returns list of customers (assume its full info)
@@ -35,65 +34,6 @@ Rental.searchCust = function (input, callback) {
     }
   })
 }
-
-// Rental.find = function (title, callback) {
-//   db.movies.find({title: title}, function (error, movies) {
-//     if (error || !movies) {
-//       callback(new Error("Could not retrieve movies"), undefined)
-//     } else {
-//       //look up all rentals for that movie
-//       db.rentals.find({movie_id: movies[0].id}, function (error, rentals) {
-//         if (error || !rentals) {
-//           callback(new Error("Could not retrieve rentals"), undefined)
-//         } else {
-//           var out = 0
-//
-//           for (movie of rentals) {
-//             if (movie.checked === "true") {
-//               out += 1
-//             }
-//           }
-//           movies[0]["available_inventory"] = (movies[0].inventory - out)
-//
-//           callback(null, movies[0])
-//         }
-//       })
-
-// Rental.customers = function (title, callback) {
-//   db.movies.findOne({title: title}, function (error, movies) {
-//     if (error || !movies) {
-//       callback(new Error("Could not retrieve movies"), undefined)
-//     } else {
-//       db.rentals.find({movie_id: movies.id}, function (error, rentalRecords) {
-//         if(error || !rentalRecords) {
-//           callback(new Error("Could not retrieve movies"), undefined)
-//         } else {
-//           console.log(rentalRecords)
-//           //loop for each of the customer_ids then pass that whole array into the db call
-//           var custIds = []
-//           for (var cust of rentalRecords) {
-//             custIds.push(cust.customer_id)
-//           }
-//           console.log(custIds)
-//           db.customers.find({id: custIds}, function (error, customersNames) {
-//             console.log(customersNames)
-//             if(error || !customersNames) {
-//               callback(new Error("Could not retrieve customers"), undefined)
-//             } else {
-//               var customerNames = []
-//               for (var record of customersNames) {
-//                 console.log(record.name)
-//                 customerNames.push(record.name)
-//               }
-//               callback(null, customerNames)
-//             }
-//           })
-//         }
-//       })
-//     }
-//   });
-// }
-
 
 
 Rental.checkout = function (customer_id, movie, callback) {
@@ -200,7 +140,27 @@ Rental.return = function (customer_id, movie_title, callback) {
       }})
     }})
   }})
-}
+};
+
+Rental.overdue = function (input, callback) {
+  db.run("SELECT * FROM rentals WHERE checked=$1 AND due_date < $2", input, function (error, overdue) {
+    console.log(input)
+    if (error || !overdue || overdue.length ===0) {
+      callback(new Error("Could not overdue rentals"), undefined)
+    }else {
+      // db.run("UPDATE movies SET inventory=inventory+1 WHERE search_title=$1;", movie_title, function (error, updatesmovie) {
+      //   if (error || !updatesmovie) {
+      //     callback(new Error("Could not update movie inventory"), undefined)
+      //   } else {
+          callback(undefined, overdue.map(function(info) {
+            return info;
+            console.log(info);
+          }));)
+
+    }
+  })
+};
+
 
 
 module.exports = Rental;

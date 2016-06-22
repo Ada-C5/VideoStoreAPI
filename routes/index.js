@@ -59,6 +59,10 @@ router.get('/movies', MovieController.index);
 // ordered by customer name or ordered by check out date
 router.get('/movies/:movie/history/sort/:query', MovieController.history)
 
+// See a list of customers with overdue movies (/rentals/overdue)
+// include customer name, movie title, check-out date, and return date
+router.get('/rentals/overdue', RentalController.overdue);
+
 // Look a movie up by title to see (/rentals/Jaws)
 // it's synopsis
 // release date
@@ -80,9 +84,7 @@ router.get('/rentals/:movie/check-out', RentalController.checkOut);
 // return the movie to its inventory
 router.get('/rentals/:movie/return', RentalController.return);
 
-// See a list of customers with overdue movies (/rentals/overdue)
-// include customer name, movie title, check-out date, and return date
-// router.get('/rentals/overdue', RentalController.overdue);
+
 
 
 module.exports = router;
