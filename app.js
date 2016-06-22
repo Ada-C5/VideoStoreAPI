@@ -8,7 +8,7 @@ var massive = require("massive");
 var app = module.exports = express();
 //
 // var connectionString = "postgres://localhost/video_store"
-var connectionString = "postgres://localhost/video_store" + app.get('env');
+var connectionString = "postgres://localhost/video_store_" + app.get('env');
 
 // connect to Massive and get the db instance. You can safely use the
 // convenience sync method here because its on app load
