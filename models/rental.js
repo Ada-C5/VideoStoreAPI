@@ -19,7 +19,7 @@ Rental.search = function (input, callback) {
     }
   });
 }
-
+// fsdoiahfisohfios
 
 //  /rentals/:movie/customers
 //  returns list of customers (assume its full info)
