@@ -5,6 +5,10 @@ IndexController = {
 
   getIndex: function(req, res) {
     res.status(200).json({whatevs: 'whatevs!!!'})
+  },
+
+  getZomg: function(req, res) {
+    res.status(200).json({it_works: 'Yeah MF!!!'})
   }
 }
 

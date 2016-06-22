@@ -2,6 +2,7 @@ var app = require('../app')
 var db = app.get('db')
 var Movie = require('./movie')
 var Customer = require('./customer')
+var Rental = require('./rental')
 
 // var movieHistory = require('../db/rental_movie_history')
 
@@ -61,6 +62,22 @@ Rental.findHistoryMovies = function (title, callback) {
   db.customer_rental_history([title], function (error, customers) {
     callback(null, customers.map(function (customer) {
       return new Customer(customer)
+    }))
+  })
+}
+
+Rental.find_customers = function (title, callback) {
+  db.find_current_rentals([title], function (error, customers) {
+    callback(null, customers.map(function (customer) {
+      return new Customer(customer)
+    }))
+  })
+}
+
+Rental.newRental = function (title, callback) {
+  db.save({}, function (error, rentals) {
+    callback(null, rentals.map(function (rental) {
+      return new Rental(rental)
     }))
   })
 }

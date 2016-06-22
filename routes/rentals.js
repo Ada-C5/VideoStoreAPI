@@ -4,6 +4,8 @@ var Controller = require('../controllers/rentals')
 
 router.get('/', Controller.getRentals)
 router.get('/:title', Controller.getRentalsShow)
-// router.get('/:title/customers', Controller.getRentalsCustomers)
+router.get('/:title/customers', Controller.getRentalsCustomers)
+
+router.post('/:title/checkout', Controller.postCheckout)
 
 module.exports = router
