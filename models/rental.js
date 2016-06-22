@@ -75,14 +75,14 @@ Rental.find_customers = function (title, callback) {
 }
 
 Rental.newRental = function (title, cust_id, callback) {
-
   db.movies.search({columns:["title"], term: title}, function (error, movies) {
     db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString()})
+    var movieInventory = movies[0].inventory - 1
+    db.movies.updateSync({id: movies[0].id, inventory: movieInventory})
     if (error || !movies) {
       callback(new Error("Could not retrieve movie"), undefined)
     } else {
       callback(null, movies.map (function (movie) {
-        console.log(movie)
         return new Movie(movie)
       }))
     }

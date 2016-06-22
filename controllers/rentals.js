@@ -42,7 +42,6 @@ RentalsController = {
   },
 
   postCheckout:function(req, res, next) {
-    console.log(req.body)
     Rental.newRental (req.params.title, req.body.customer_id, function(error, movie) {
       if (error) {
         var err = new Error("Can't rent out");
