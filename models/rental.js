@@ -28,7 +28,7 @@ Rental.find = function (title, callback) {
       callback(new Error("Could not retrieve movies"), undefined)
     } else {
       callback(null, movies.map (function (movie) {
-      return new Movie(movie)
+        return new Movie(movie)
       }))
     }
   })
@@ -75,8 +75,17 @@ Rental.find_customers = function (title, callback) {
 }
 
 Rental.newRental = function (title, cust_id, callback) {
-  Rental.find(title, function(error, movie) {
-    db.rentals.saveSync({customer_id: cust_id, movie_id: movie.id, status: true, checkout_date: (new Date()).toString()})
+
+  db.movies.search({columns:["title"], term: title}, function (error, movies) {
+    db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString()})
+    if (error || !movies) {
+      callback(new Error("Could not retrieve movie"), undefined)
+    } else {
+      callback(null, movies.map (function (movie) {
+        console.log(movie)
+        return new Movie(movie)
+      }))
+    }
   })
 }
 
