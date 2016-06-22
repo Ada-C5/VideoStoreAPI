@@ -80,5 +80,9 @@ router.get('/rentals/:movie/check-out', RentalController.checkOut);
 // return the movie to its inventory
 router.get('/rentals/:movie/return', RentalController.return);
 
+// See a list of customers with overdue movies (/rentals/overdue)
+// include customer name, movie title, check-out date, and return date
+// router.get('/rentals/overdue', RentalController.overdue);
+
 
 module.exports = router;

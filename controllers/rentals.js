@@ -32,7 +32,7 @@ var RentalsController = {
     // Rental.checkout([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
     Rental.checkout([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
         if(error) {
-        var err = new Error("Error retrieving customers:\n" + error.message);
+        var err = new Error("Error:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
@@ -45,7 +45,7 @@ var RentalsController = {
     // Rental.return([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
     Rental.return([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
         if(error) {
-        var err = new Error("Error retrieving customers:\n" + error.message);
+        var err = new Error("Error:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
@@ -53,18 +53,21 @@ var RentalsController = {
       }
     });
   }
+  // See a list of customers with overdue movies (/rentals/overdue)
+  // include customer name, movie title, check-out date, and return date
 
-  // getRentalsShow: function(req, res, next) {
-  //   Rental.find (req.params.title, function(error, rental) {
-  //     if (error) {
-  //       var err = new Error("No rentals found");
-  //       err.status = 404;
-  //       next(err);
-  //     } else {
-  //       res.json(rental)l
-  //     }
-  //   });
-  // }
+//   return: function(req, res, next) {
+//     // Rental.return([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+//     Rental.return([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
+//         if(error) {
+//         var err = new Error("Error:\n" + error.message);
+//         err.status = 500;
+//         next(err);
+//       } else {
+//         res.json(customers)
+//       }
+//     });
+//   }
 };
 
 module.exports = RentalsController;
