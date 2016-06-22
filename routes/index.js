@@ -4,15 +4,15 @@ var Controllers = require('../controllers/customers')
 
 /* GET home page. */
 
-router.get('/', Controllers.getIndex);
-// router.get('/', function(req, res, next) {
-//   res.status(200).json({index: 'index'})
-// });
+// router.get('/', Controllers.getIndex);
+router.get('/', function(req, res, next) {
+  res.status(200).json({index: 'index'})
+});
 
-//part of baseline project
-// router.get('/zomg', function(req, res, next) {
-//   res.status(200).json({whatevs: 'it works!!!!'})
-// });
+part of baseline project
+router.get('/zomg', function(req, res, next) {
+  res.status(200).json({whatevs: 'it works!!!!'})
+});
 
 module.exports = router;
 
