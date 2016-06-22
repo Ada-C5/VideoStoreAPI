@@ -119,33 +119,34 @@ describe("RentalsController", function() {
       })
     })
   })
-})
+
+
+  describe("#postCheckout", function(done) {
+    it("returns a Success checkout response", function(done) {
+      request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
+        expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns JSON", function(done) {
+      request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+
 // this junk does not work yet 
+    xit("should be an array of objects", function(done) {
+      request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
+        var data = JSON.parse(body)
+        expect(typeof data).toEqual('object')
 
-  // describe("#postCheckout", function(done) {
-  //   it("returns a Success checkout response", function(done) {
-  //     request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
-  //       expect(response.statusCode).toBe(200)
-  //       done()
-  //     })
-  //   })
-
-  //   it("returns JSON", function(done) {
-  //     request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
-  //       expect(response.headers['content-type']).toContain('application/json')
-  //       done()
-  //     })
-  //   })
-
-  //   it("should be an array of objects", function(done) {
-  //     request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
-  //       var data = JSON.parse(body)
-  //       expect(typeof data).toEqual('object')
-
-  //       for (var record of data) {
-  //         expect(Object.keys(record)).toEqual([ 'id', 'customer_id', 'video_id', 'checkout_date', 'due_date', 'checkin_date', 'charge'])
-  //       }
-  //       done()
-  //     })
-  //   })
-  // })
+        for (var record of data) {
+          expect(Object.keys(record)).toEqual([ 'id', 'customer_id', 'video_id', 'checkout_date', 'due_date', 'checkin_date', 'charge'])
+        }
+        done()
+      })
+    })
+  })
+})
