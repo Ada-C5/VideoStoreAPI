@@ -42,13 +42,13 @@ RentalsController = {
   },
 
   postCheckout:function(req, res, next) {
-    Rental.newRental (req.params.title, function(error, rental) {
+    Rental.newRental (req.params.title, req.params.customer_id, function(error) {
       if (error) {
         var err = new Error("Can't rent out");
         err.status = 404;
         next(err);
       } else {
-        res.json(rental)
+        res.status(200)
       }
     })
   }
