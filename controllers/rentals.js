@@ -8,10 +8,18 @@ RentalsController = {
 				var err = new Error("No such movie");
 				err.status = 404;
 			} else {
-				Rental.getCheckedOut(movie.id, function(error, checked_out) {
+				// console.log(movie.id)
+				Rental.getCurrentlyCheckedOut(movie, function(error, checked_out) {
 					// get checkout int and minus from inventory (from movie instance)
-					console.log(checked_out)
-					res.json(checked_out)
+					// console.log((parseInt(movie.inventory))-(parseInt(checked_out)))
+					var return_data = {
+						title:movie.title,
+						overview:movie.overview,
+						release_date:movie.release_date,
+						total_inventory:movie.inventory,
+						available_copies:(parseInt(movie.inventory))-(parseInt(checked_out))
+					} 
+					res.json(return_data)
 				})
 			}
 

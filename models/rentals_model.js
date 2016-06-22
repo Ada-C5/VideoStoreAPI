@@ -32,6 +32,22 @@ Rental.getCurrentRentals = function(customer_id, callback) {
   })
 }
 
+Rental.getCurrentlyCheckedOut = function(movie, callback) {
+  // db.run("SELECT COUNT(*) FROM rentals WHERE returned=false AND movie_id=$1", [movie.id], function(error, checked_out) {
+  db.rentals.count({movie_id: movie.id, returned: false}, function (error, count) {
+    if(error) {
+      callback(error);
+    } else {
+      // console.log(movie)
+      // console.log(count);
+      // var available_copies = movie.inventory - checked_out
+      // console.log("poooooo")
+      // console.log(movie.inventory)
+      callback(null, count);
+    }
+  })
+}
+
 Rental.getPastRentals = function(customer_id, callback) {
   db.run("SELECT customer_id, created_date, movie_id, returned_date FROM rentals WHERE customer_id=$1 AND returned=$2 ORDER BY returned_date ASC", [customer_id, true], function(error, past_rentals) {
     if(error) {
