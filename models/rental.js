@@ -76,9 +76,7 @@ Rental.find_customers = function (title, callback) {
 
 Rental.newRental = function (title, cust_id, callback) {
   Rental.find(title, function(error, movie) {
-    db.rentals.save({customer_id: cust_id, movie_id: movie.id, status: true, checkout_date: (new Date()).toString()}, function (err, response) {
-      callback(err)
-    })
+    db.rentals.saveSync({customer_id: cust_id, movie_id: movie.id, status: true, checkout_date: (new Date()).toString()})
   })
 }
 

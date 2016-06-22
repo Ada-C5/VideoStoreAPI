@@ -48,7 +48,7 @@ RentalsController = {
         err.status = 404;
         next(err);
       } else {
-        res.status(200)
+        res.json({checkout: "Success, you checked out, you fancy."})
       }
     })
   }
