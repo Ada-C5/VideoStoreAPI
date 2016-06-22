@@ -12,7 +12,7 @@ router.get('/:title/customers', RentalsController.sortBy)
 //
 // // POST rentals/:title/check-out
 // // #provide customerid and movie title
-// router.post('/:title/check-out', RentalsController.checkout)
+router.post('/:title/check-out', RentalsController.checkout)
 //
 // // POST rentals/:title/return
 // // #provide customerid and movie title

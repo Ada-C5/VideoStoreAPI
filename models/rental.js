@@ -28,6 +28,17 @@ Rental.all = function (title, callback) {
     }
   });
 };
+Rental.find = function (title, callback) {
+  db.movies.search({columns:["title"], term: title}, function (error, movies) {
+    if(error || !movies) {
+      callback(error || new Error("Movies not found"), undefined);
+    } else {
+      callback(null, movies.map(function(movie) {
+        return new Movie(movie)
+      }));
+    };
+  });
+};
 
 Rental.sortBy = function(options, callback) {
   // first parameter is the info from movie controller which was [type, n, p]
@@ -52,4 +63,10 @@ Rental.customers_current_rentals = function(title, callback) {
      }));
    }
  });
+};
+
+Rental.createCheckOut = function(title, customer_id, callback) {
+  Rental.find(title, function(error, movie) {
+    db.rentals.saveSync({customer_id: customer_id, movie_id: movie.id, checkout_date: (new Date())})
+  });
 };

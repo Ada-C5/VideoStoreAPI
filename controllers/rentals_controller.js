@@ -39,6 +39,19 @@ var RentalsController = {
     })
   },
 
+  checkout: function(req, res, next) {
+    var movie = req.params.title;
+    var customer_id = req.body.customer_id;
 
+    Rental.createCheckOut(movie, customer_id, function(error) {
+      if(error) {
+        var err = new Error("Rental checkout failed");
+        err.status = 404;
+        next(err);
+      } else {
+        res.json(rental);
+      }
+    })
+  }
 }
 module.exports = RentalsController;
