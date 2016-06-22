@@ -1,7 +1,7 @@
+// still needs error testing for JSON responses
+
 var request = require("request")
-
 var baseUrl = "http://localhost:3000"
-
 
 describe("VideosController", function() {
   var url = function(endpoint) {
@@ -15,7 +15,6 @@ describe("VideosController", function() {
         done()
       })
     })
-
 
     it("returns JSON", function(done) {
       request.get(url("/"), function(error, response, body) {
