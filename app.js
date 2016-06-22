@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var massive = require('massive');
 
-
 var app = module.exports = express();
 
 // database setup

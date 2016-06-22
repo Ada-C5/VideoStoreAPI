@@ -1,15 +1,15 @@
 var Customers = require("../models/customers");
 
 var CustomersController = {
-
-  getIndex: function (request, response, next) {
-    response.render('index');
-  },
+  // move this to an index controller for baseline req
+  // getIndex: function (request, response, next) {
+  //   response.render('index');
+  // },
 
   getCustomers: function (request, response, next) {
     Customers.all(function(error, customers) {
       if(error) {
-        var err = new Error("Error retrieving customer list." + error.message);
+        var err = new Error
         err.status = 500;
         err.error = "Error retrieving customer list."
         response.json(err)
@@ -23,7 +23,7 @@ var CustomersController = {
   getCustomersSorted: function(request, response) {
     Customers.sort(request.params.column, request.query.p, request.query.n, function(error, customers) {
       if(error) {
-        var err = new Error("Not found :(" + error.message);
+        var err = new Error
         err.status = 404;
         err.error = "Not found :("
         response.json(err)
