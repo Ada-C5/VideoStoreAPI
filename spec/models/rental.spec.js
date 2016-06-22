@@ -14,4 +14,4 @@ describe('Rental', function () {
 
   })
 
-}
+})

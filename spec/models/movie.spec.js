@@ -14,8 +14,19 @@ describe('Movie', function () {
   })
 
   describe('all', function () {
-    
+    it('should return an array',function(done){
+      Movie.all(function(error,movies){
+        expect(movies).toEqual(jasmine.any(Array))
+      done()
+      })
+    })
 
+    it('should contain movie objects',function(done){
+      Movie.all(function(error,movies){
+        expect(movies[0]).toContain("soemhting")
+      done()
+      })
+    })
   })
 
-}
+})

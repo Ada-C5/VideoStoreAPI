@@ -5,7 +5,7 @@
   "scripts": {
     "start": "./node_modules/.bin/nodemon ./bin/www",
     "start-test": "NODE_ENV=test ./node_modules/.bin/nodemon ./bin/www",
-    "test": "clear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --verbose spec/",
+    "test": "clear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
     "db:drop": "dropdb cassettecollection_development && dropdb cassettecollection_test",
     "db:create": "createdb cassettecollection_development; createdb cassettecollection_test",
     "db:schema": "node tasks/load_schema.js",
