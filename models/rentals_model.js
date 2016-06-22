@@ -12,7 +12,6 @@ var Rental = function(movie_id, customer_id, created_date, due_date, returned = 
 };
 
 Rental.getCheckedOut = function(title, callback) {
-  // Not sure if this would return in an array or if we'd have to convert it to an array
   db.rentals.where("title=$1 AND returned=$2", [title, false], function(error, checked_out) {
     if(error) {
       callback(error, undefined);
@@ -33,16 +32,10 @@ Rental.getCurrentRentals = function(customer_id, callback) {
 }
 
 Rental.getCurrentlyCheckedOut = function(movie, callback) {
-  // db.run("SELECT COUNT(*) FROM rentals WHERE returned=false AND movie_id=$1", [movie.id], function(error, checked_out) {
   db.rentals.count({movie_id: movie.id, returned: false}, function (error, count) {
     if(error) {
       callback(error);
     } else {
-      // console.log(movie)
-      // console.log(count);
-      // var available_copies = movie.inventory - checked_out
-      // console.log("poooooo")
-      // console.log(movie.inventory)
       callback(null, count);
     }
   })
@@ -75,42 +68,6 @@ Rental.getOverdue = function(callback) {
       callback(error, undefined);
     }
     callback(null, overdues);
-
-
-    // for (var rental in overdues) {
-    //   db.run("SELECT name FROM customers WHERE id=$1;", [rental.customer_id], function (error, customer_name, overdues) {
-    //     if (error) {
-    //       return callback(error);
-    //     } else {
-    //       rental["name"] = customer_name;
-    //       console.log(rental)
-    //       console.log(overdues)
-    //     }
-
-    //   })
-    // }
-    // )}
-    //   // set date vars
-    //   var now = new Date();
-    //   var due = new Date(now);
-    //   due.setDate(due.getDate() + 7);
-
-    //   // save new rental (nested inside find)
-    //   db.rentals.save({
-    //     movie_id: movie_id.id,
-    //     customer_id: id,
-    //     created_date: now,
-    //     due_date: due,
-    //     returned: false
-    //     // callback with rental info
-    //   }, function (error, rental) {
-    //     if (error) {
-    //       return callback(error);
-    //     }
-    //     // pass rental back to controller
-    //     return callback(null, rental);
-    //   });
-    // });
     });
 }
 

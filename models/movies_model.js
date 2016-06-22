@@ -25,8 +25,6 @@ Movie.findMovie = function(title, callback) {
 
       callback(error || new Error("Movie not found"), undefined);
     } else {
-      // callback(null, new Movie(movie.title, movie.inventory));
-      // console.log(movie)
       callback(null, movie)
     }
   })
@@ -48,10 +46,5 @@ Movie.sort = function(column, p, n, callback) {
     }
   })
 }
-
-
-
-
-
 
 module.exports = Movie;
