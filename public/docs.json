@@ -1,0 +1,20 @@
+
+{"/movies": {
+	"verb": "get",
+	"optional parameters": "insert", 
+	"required parameters": "insert", 
+	"description of use": "insert", 
+	"if some data is found": "insert", 
+	"if no data is found": "insert", 
+	"if error occuered": "insert"
+	},
+"/customers": {
+	"verb": "get",
+	"optional parameters": "insert", 
+	"required parameters": "insert", 
+	"description of use": "insert", 
+	"if some data is found": "insert", 
+	"if no data is found": "insert", 
+	"if error occured": "insert"
+	}
+}
