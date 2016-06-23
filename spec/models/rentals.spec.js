@@ -150,6 +150,48 @@ describe('Rental', function () {
       })
     })
   })
+
+  // testing .video_current
+  describe('Rental', function () {
+    describe('video_current', function () {
+      it('returns an array', function(done) {
+        Rental.video_current('Psycho', function (error, result) {
+          expect(error).toBe(null)
+          expect(result).toEqual(jasmine.any(Array))
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('video_current', function () {
+      it('returns instances with correct keys', function(done) {
+        Rental.video_current('Psycho', function(error, result) {
+          expect(error).toBe(null)
+          for (var instance of result) {
+            expect(Object.keys(instance)).toEqual(['id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit'])
+          }
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('video_current', function () {
+      it('returns correct customer', function(done) {
+        Rental.video_current('Psycho', function(error, result) {
+          expect(error).toBe(null)
+          for (var instance of result) {
+            expect(instance['id']).toBe(8)
+            expect(instance['name']).toBe('Amanda Curtis')
+          }
+          done()
+        })
+      })
+    })
+  })
 })
 
 
