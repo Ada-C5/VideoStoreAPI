@@ -66,7 +66,7 @@ describe("RentalsController", function() {
 
   describe("#getVideoCurrent", function(done) {
     it("returns a Success response", function(done) {
-      request.get(url("/Jaws/current"), function(error, response, body) {
+      request.get(url("/customer/1/current"), function(error, response, body) {
         expect(response.statusCode).toBe(200)
         done()
       })
