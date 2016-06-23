@@ -68,9 +68,16 @@ Rental.customers_current_rentals = function(title, callback) {
 Rental.createCheckOut = function(title, customer_id, callback) {
   console.log("in rental model", title, customer_id)
   Rental.find(title, function(error, movie) {
-    console.log(movie)
-    console.log("movie_id is:", movie[0].id)
-    var in10days = new Date(today.getTime() + (10 * 24 * 60 * 60 * 1000))
-    db.rentals.saveSync({customer_id: customer_id, movie_id: movie[0].id, checkout_date: (new Date()), due_date: in10days})
+    // console.log(movie)
+    // console.log("movie_id is:", movie[0].id)
+    var today = new Date();
+    var now = new Date()
+    var dueDate = new Date(now)
+    var numberOfDaysToRent = 10;
+    dueDate.setDate(dueDate.getDate() + numberOfDaysToRent);
+    console.log("date returnDate is:", dueDate)
+    db.rentals.saveSync({customer_id: customer_id, movie_id: movie[0].id, checkout_date: today, due_date: dueDate})
+    //take out money
+    //modify inventory
   });
 };

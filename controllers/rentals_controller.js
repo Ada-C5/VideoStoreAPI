@@ -44,7 +44,7 @@ var RentalsController = {
     var customer_id = req.body.customer_id;
     console.log(movie, customer_id);
 
-    Rental.createCheckOut(movie, customer_id, function(error) { //should we add something after error, movie? rental?
+    Rental.createCheckOut(movie, customer_id, function(error, rental_checkout) {
       console.log("in createCheckOut method")
       if(error) {
         var err = new Error("Rental checkout failed");
@@ -52,7 +52,7 @@ var RentalsController = {
         next(err);
       } else {
         console.log("rental is:", rental)
-        res.json({"checkout": "it was ok"});
+        res.json(rental_checkout);
       }
     })
   }
