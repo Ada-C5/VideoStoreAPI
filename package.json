@@ -10,7 +10,8 @@
     "db:create": "createdb cassettecollection_development; createdb cassettecollection_test",
     "db:schema": "node tasks/load_schema.js",
     "db:seed": "node tasks/seed_data.js",
-    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed"
+    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed",
+    "coverage": "open coverage/lcov-report/index.html"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
