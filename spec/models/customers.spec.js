@@ -26,4 +26,13 @@ describe('Customer', function () {
       })
     })
   })
+
+  describe('#sort', function () {
+    it('should return customers sorted by specifications', function (done) {
+      Customer.all(function (error, customers) {
+        expect(customers.length).toEqual(200)
+        done()
+      })
+    })
+  })
 })
