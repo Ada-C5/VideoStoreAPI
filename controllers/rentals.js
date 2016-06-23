@@ -34,7 +34,7 @@ var RentalsController = {
   checkOut: function (req, res, next) {
     var title = req.params.movie
     var id = 55
-    console.log(req.body.customer_id) // need to test to see if customer's id comes in body
+    // need to test to see if customer's id comes in body
     // if we don't want to have them passed in the body we can alter the url to take a
     // second parameter ->/rentals/:movie/check-out/:cust_id
 
@@ -52,7 +52,7 @@ var RentalsController = {
   return: function (req, res, next) {
     var title = req.params.movie
     var id = 55
-    console.log(req.body.customer_id) // need to test to see if customer's id comes in body
+    // need to test to see if customer's id comes in body
 
     Rental.return([title, id],function (error, rental) {
       if(error) {
@@ -66,9 +66,6 @@ var RentalsController = {
   },
 
   overdue: function (req, res, next) {
-
-    console.log("ohs ")
-
     Rental.overdueList(function (error, rentals) {
       if(error) {
         var err = new Error("Error retrieving overdue list:\n" + error.message);

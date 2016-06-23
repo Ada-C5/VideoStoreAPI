@@ -20,7 +20,6 @@ var CustomersController = {
     var p = req.query.p
     var firstrow = n*(p-1)+1
     var lastrow = n*p
-    console.log("bla",type,firstrow,lastrow)
     Customer.sortBy([type,firstrow,lastrow],function(error, customers) {
       if(error) {
         var err = new Error("Error retrieving customer list:\n" + error.message);
