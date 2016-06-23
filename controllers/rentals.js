@@ -54,14 +54,14 @@ RentalsController = {
     })
   },
 
-  postCheckin:function(req, res, next) {
+  putCheckin:function(req, res, next) {
     Rental.checkin (req.params.title, req.body.customer_id, function(error, movie) {
       if (error) {
-        var err = new Error("Can't rent out");
+        var err = new Error("Can't return, try again later");
         err.status = 404;
         next(err);
       } else {
-        res.json({checkin: "Success, you checked in that movie!"})
+        res.json({checkin: "Success, you checked that movie in, yo!"})
       }
     })
   }

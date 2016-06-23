@@ -7,7 +7,7 @@ router.get('/:title', Controller.getRentalsShow)
 router.get('/:title/customers', Controller.getRentalsCustomers)
 
 router.post('/:title/checkout', Controller.postCheckout)
-router.post('/:title/checkin', Controller.postCheckin)
+router.put('/:title/checkin', Controller.putCheckin)
 
 
 module.exports = router

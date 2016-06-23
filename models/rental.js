@@ -85,11 +85,9 @@ Rental.checkout = function (title, cust_id, callback) {
       var returnDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
       db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString(), return_date: returnDate.toString()})
       db.movies.updateSync({id: movies[0].id, inventory: Rental.removeInventory(movies)})
-
       Customer.find_by_id(cust_id, function (error, customer) {
         db.customers.updateSync({id: cust_id, account_credit: Rental.charge(customer)})
       })
-
       callback(null, movies.map (function (movie) {
         return new Movie(movie)
       }))
