@@ -74,7 +74,7 @@ Rental.findCustomers = function (title, callback) {
   })
 }
 
-Rental.newRental = function (title, cust_id, callback) {
+Rental.checkout = function (title, cust_id, callback) {
   db.movies.search({columns:["title"], term: title}, function (error, movies) {
     if (movies[0].inventory <= 0) {
       return "No copies available for checkout"
@@ -91,6 +91,18 @@ Rental.newRental = function (title, cust_id, callback) {
           return new Movie(movie)
         }))
       }
+    }
+  })
+}
+
+Rental.checkin = function (title, cust_id, callback) {
+  db.movies.search({columns:["title"], term: title}, function (error, movies) {
+    if (error || !movies) {
+      callback(new Error("Could not retrieve movie"), undefined)
+    } else {
+      callback(null, movies.map (function (movie) {
+        return new Movie(movie)
+      }))
     }
   })
 }

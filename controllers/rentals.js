@@ -42,16 +42,29 @@ RentalsController = {
   },
 
   postCheckout:function(req, res, next) {
-    Rental.newRental (req.params.title, req.body.customer_id, function(error, movie) {
+    Rental.checkout (req.params.title, req.body.customer_id, function(error, movie) {
       if (error) {
         var err = new Error("Can't rent out");
         err.status = 404;
         next(err);
       } else {
-        res.json({checkout: "Success, you checked out, you fancy."})
+        res.json({checkout: "Success, you checked out, you fancy!"})
+      }
+    })
+  },
+
+  postCheckin:function(req, res, next) {
+    Rental.checkin (req.params.title, req.body.customer_id, function(error, movie) {
+      if (error) {
+        var err = new Error("Can't rent out");
+        err.status = 404;
+        next(err);
+      } else {
+        res.json({checkin: "Success, you checked in that movie!"})
       }
     })
   }
+
 }
 
 module.exports = RentalsController
