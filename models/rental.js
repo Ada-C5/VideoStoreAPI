@@ -39,7 +39,6 @@ Rental.all = function (input,callback) {
 
 Rental.overdueList = function (callback) {
   db.run("SELECT customers.name, movies.title, checkout_date, due_date FROM (SELECT customer_id, movie_id, due_date, checkout_date FROM rentals WHERE status='overdue') as overdues INNER JOIN customers ON (overdues.customer_id = customers.id) INNER JOIN movies ON (overdues.movie_id = movies.id);", function (error, rentals) {
-    console.log("halp")
     if(error || !rentals) {
       callback(error || new Error("Could not retrieve rentals"), undefined);
     } else {
