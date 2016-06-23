@@ -104,18 +104,21 @@ Rentals.find_video_history = function(title, ordered_by, callback) {
             db.customers.findOne({id: rental.customer_id}, function(error, customer) {
               cust.push(customer)
               if (cust.length === rentals.length) {
-                cust.sort(function(a, b) {
-                  var nameA = a.name.toUpperCase();
-                  var nameB = b.name.toUpperCase();
-                  if (nameA < nameB) {
-                    return -1;
-                  }
-                  if (nameA > nameB) {
-                    return 1;
-                  }
-                  return 0;
-                });
-                callback(null, cust);
+                if (ordered_by === 'name') {
+                  cust.sort(function(a, b) {
+                    var nameA = a.name.toUpperCase();
+                    var nameB = b.name.toUpperCase();
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                    return 0;
+                  });
+                } else {
+                 callback(null, cust);
+                }
               }
             })
           }
