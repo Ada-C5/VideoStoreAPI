@@ -30,4 +30,3 @@ describe("Endpoint at /customers", function () {
   })
 
   })
-})
