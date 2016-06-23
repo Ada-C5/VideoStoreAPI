@@ -81,6 +81,23 @@ describe('Customer', function () {
       })
     })
   })
+
+  describe('.currentlyCheckedOut', function () {
+    // input should be [order, firstrow, lastrow]
+    it('should return an array', function(done) {
+      Customer.currentlyCheckedOut(['Jaws'], function(error,customers){
+        expect(customers).toEqual(jasmine.any(Array))
+        done()
+      })
+    })
+
+    it('be a certain size', function(done) {
+      Customer.currentlyCheckedOut(['Psycho'], function(error,customers){
+        expect(customers.length).toEqual(1)
+        done()
+      })
+    })
+  })
 })
 
 
