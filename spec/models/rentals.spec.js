@@ -192,8 +192,8 @@ describe('Rental', function () {
       })
     })
   })
+
   // testing .find_video_history
-  // testing showed us that our sort within this function is currently incorrect. The function will need to be updated, and more tests will need to be written in order to test all end points. 
   describe('Rental', function () {
     describe('find_video_history', function () {
       it('returns an array', function(done) {
@@ -230,6 +230,30 @@ describe('Rental', function () {
             iteration++
           }
           expect(iteration).toEqual(3)
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('find_video_history', function () {
+      it('orders by name', function(done) {
+        Rental.find_video_history('Psycho', 'name', function(error, result) {
+          expect(error).toBe(null)
+          expect(result[0]['name']).toBe('Carolyn Chandler')
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('find_video_history', function () {
+      it('orders by checkout_date', function(done) {
+        Rental.find_video_history('Psycho', 'checkout_date', function(error, result) {
+          expect(error).toBe(null)
+          expect(result[0]['name']).toBe('Shelley Rocha')
           done()
         })
       })
