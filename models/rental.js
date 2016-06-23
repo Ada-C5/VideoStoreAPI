@@ -66,7 +66,7 @@ Rental.findHistoryMovies = function (title, callback) {
   })
 }
 
-Rental.findCustomers = function (title, callback) {
+Rental.find_customers = function (title, callback) {
   db.find_current_rentals([title], function (error, customers) {
     callback(null, customers.map(function (customer) {
       return new Customer(customer)
