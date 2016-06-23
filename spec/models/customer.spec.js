@@ -30,6 +30,57 @@ describe('Customer', function () {
     })
 
   })
+
+  describe('.sortBy', function () {
+    // input should be [order, firstrow, lastrow]
+    it('should return an array', function(done) {
+      Customer.sortBy(['postal_code',1,20],function(error,customers){
+        expect(customers).toEqual(jasmine.any(Array))
+        done()
+      })
+    })
+
+    it('be a certain size', function(done) {
+      Customer.sortBy(['name',1,20], function(error,customers){
+        expect(customers.length).toEqual(20)
+        done()
+      })
+    })
+  })
+
+  describe('.customersWithMovie', function () {
+    // input should be [order, firstrow, lastrow]
+    it('should return an array', function(done) {
+      Customer.customersWithMovie(['Jaws'],function(error,customers){
+        expect(customers).toEqual(jasmine.any(Array))
+        done()
+      })
+    })
+
+    it('be a certain size', function(done) {
+      Customer.customersWithMovie(['Psycho'], function(error,customers){
+        expect(customers.length).toEqual(1)
+        done()
+      })
+    })
+  })
+
+  describe('.rentedThisMovie', function () {
+    // input should be [order, firstrow, lastrow]
+    it('should return an array', function(done) {
+      Customer.rentedThisMovie(['Jaws', 'checkout_date'], function(error,customers){
+        expect(customers).toEqual(jasmine.any(Array))
+        done()
+      })
+    })
+
+    it('be a certain size', function(done) {
+      Customer.rentedThisMovie(['Psycho', 'name'], function(error,customers){
+        expect(customers.length).toEqual(3)
+        done()
+      })
+    })
+  })
 })
 
 
