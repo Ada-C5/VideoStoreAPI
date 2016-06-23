@@ -46,6 +46,13 @@ describe('Customer', function () {
         done()
       })
     })
+
+    it('produces an error when it doesnt recognize a column', function(done) {
+      Customer.sortBy(['imanerror',1,20], function(error,customers){
+        expect(error.message).toEqual('column "imanerror" does not exist')
+        done()
+      })
+    })
   })
 
   describe('.customersWithMovie', function () {
@@ -60,6 +67,14 @@ describe('Customer', function () {
     it('be a certain size', function(done) {
       Customer.customersWithMovie(['Psycho'], function(error,customers){
         expect(customers.length).toEqual(1)
+        done()
+      })
+    })
+
+    it('returns an error if no input', function(done) {
+      Customer.customersWithMovie([], function(error,customers){
+        expect(customers).toEqual(undefined)
+        expect(error).toNotEqual(null)
         done()
       })
     })
