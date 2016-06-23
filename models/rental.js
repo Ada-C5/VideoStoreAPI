@@ -79,13 +79,13 @@ Rental.checkout = function (title, cust_id, callback) {
     if (error || !movies) {
       callback(error)
     } else if (error || movies[0].inventory < 1) {
-      console.log(movies[0].inventory)
       callback(error || new Error("No more copies available"), undefined)
     } else {
       var today = new Date()
       var returnDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
       db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString(), return_date: returnDate.toString()})
       db.movies.updateSync({id: movies[0].id, inventory: Rental.removeInventory(movies)})
+
       callback(null, movies.map (function (movie) {
         return new Movie(movie)
       }))
@@ -114,5 +114,9 @@ Rental.addInventory = function (movie) {
   return movie[0].inventory + 1
 }
 
+// Rental.charge = function (customer) {
+//   // console.log(customer);
+//   return customer.account_credit - 1
+// }
 
 module.exports = Rental
