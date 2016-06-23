@@ -83,7 +83,7 @@ Rental.checkout = function (title, cust_id, callback) {
     } else {
       var today = new Date()
       var returnDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
-      db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString(), return_date: returnDate.toString()})
+      db.rentals.saveSync({customer_id: cust_id, movie_id: movies[0].id, status: true, checkout_date: (new Date()).toString(), return_date: returnDate.toString()})
       db.movies.updateSync({id: movies[0].id, inventory: Rental.removeInventory(movies)})
       Customer.find_by_id(cust_id, function (error, customer) {
         db.customers.updateSync({id: cust_id, account_credit: Rental.charge(customer)})
@@ -98,6 +98,10 @@ Rental.checkout = function (title, cust_id, callback) {
 
 Rental.checkin = function (title, cust_id, callback) {
   db.movies.search({columns:["title"], term: title}, function (error, movies) {
+    db.rentals.find({movie_id: movies[0].id, customer_id: cust_id}, function (error, rental) {
+      db.rentals.updateSync({id: rental[0].id, status: false})
+      db.movies.updateSync({id: movies[0].id, inventory: Rental.addInventory(movies)})
+    })
     if (error || !movies) {
       callback(new Error("Could not retrieve movie"), undefined)
     } else {
