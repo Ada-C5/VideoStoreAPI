@@ -46,7 +46,8 @@ RentalsController = {
       if (error) {
         var err = new Error("Can't rent out");
         err.status = 404;
-        next(err);
+        next(error);
+        res.json({})
       } else {
         res.json({checkout: "Success, you checked out, you fancy!"})
       }
