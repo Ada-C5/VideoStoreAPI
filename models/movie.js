@@ -29,6 +29,7 @@ Movie.all = function(callback) {
 Movie.sortBy = function(input, callback){
   var order = input.shift()
   db.run("Select * From (Select Row_Number() Over (Order By " + order + ") As RowNum, *From movies) movies Where RowNum BETWEEN $1 AND $2;",input, function(error, movies) {
+    // console.log("luff ", movies)
     if(error || !movies) {
       callback(error || new Error("Could not retrieve Movies"), undefined);
     } else {
