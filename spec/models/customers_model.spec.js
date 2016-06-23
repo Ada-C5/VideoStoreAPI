@@ -1,44 +1,34 @@
 var app = require("../../app");
 var db = app.get("db");
-var Account = require('../../models/customers_model')
+var Customer = require('../../models/customers_model')
 
 
-// below are tests from in class demo
 
-// describe('Account', function () {
-//   var account1, account2
-//   var initialBalance1 = 100.0
-//   var initialBalance2 = 0
+// describe('Customer', function () {
 
-//   beforeEach(function (done) {
-//     Account.create(initialBalance1, function(err, account) {
-//       account1 = account
-//       done()
-//     })
-//   })
+describe('#all', function () {
 
-//   afterEach(function () {
-//     // delete all the accounts I created
-    
-//     db.end()
-//     // Account.close_connection()
-//   })
+  it('should return an array of customers', function (done) {
+    Customer.all(function (error, data) {
+      expect(typeof data).toEqual('object')
+      done()
+    })
+  })
 
-//   describe('#getBalance', function () {
-//     it('should return positive balances', function (done) {
-//       account1.getBalance(function (error, balance) {
-//         expect(error).toBeNull
-//         expect(balance).toEqual('$100.00')
-//         done()
-//       })
-//     })
+  // it('should return an array of customers', function (done) {
+  //   Customer.all(function (error, data) {
+  //     expect(typeof data).toEqual('array')
+  //     done()
+  //   })
+  // })
+})
 
-//     it('should not break, I guess', function (done) {
-//       account1.getBalance(function (error, balance) {
-//         expect(error).toBeNull
-//         expect(balance).toEqual('$100.00')
-//         done()
-//       })
-//     })
-//   })
-// })
+describe('#sort', function () {
+
+  it('should return an array of customers', function (done) {
+    Customer.all(function (error, data) {
+      expect(typeof data).toEqual('object')
+      done()
+    })
+  })
+})

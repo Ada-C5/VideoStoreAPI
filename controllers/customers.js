@@ -12,7 +12,6 @@ var CustomersController = {
 				res.json(customers)
 			}
 		})
-
 	},
 	// customer id, sort column, offest ?????
 	subsetCustomers: function(req, res) {
@@ -21,7 +20,7 @@ var CustomersController = {
 				var err = new Error("No such data");
 				err.status = 404;
 			} else {
-					res.json(data)
+				res.json(data)
 			}
 		})
 	},
@@ -33,7 +32,7 @@ var CustomersController = {
 				var err = new Error("No such data");
 				err.status = 404;
 			} else {
-					res.json(data)
+				res.json(data)
 			}
 		})
 	},
@@ -44,7 +43,7 @@ var CustomersController = {
 				var err = new Error("No such data");
 				err.status = 404;
 			} else {
-					res.json(data)
+				res.json(data)
 			}
 		})
 	}
