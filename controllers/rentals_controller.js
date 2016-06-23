@@ -42,14 +42,17 @@ var RentalsController = {
   checkout: function(req, res, next) {
     var movie = req.params.title;
     var customer_id = req.body.customer_id;
+    console.log(movie, customer_id);
 
-    Rental.createCheckOut(movie, customer_id, function(error) {
+    Rental.createCheckOut(movie, customer_id, function(error) { //should we add something after error, movie? rental?
+      console.log("in createCheckOut method")
       if(error) {
         var err = new Error("Rental checkout failed");
         err.status = 404;
         next(err);
       } else {
-        res.json(rental);
+        console.log("rental is:", rental)
+        res.json({"checkout": "it was ok"});
       }
     })
   }
