@@ -58,7 +58,7 @@ var MovieController = {
       else {
         var customers = []
         for (var movie of movieRecords) {
-        db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
+        db.customer_select([movie.customer_id], function(err, customerRecords){
           if(err) {
             var err = new Error(err.message)
             next(err)
@@ -113,16 +113,14 @@ var MovieController = {
       } else {
         var customers = []
         for (var movie of movieRecords) {
-        db.query("select * from customers where id=$1", [movie.customer_id], function(err, customerRecords){
-          if(err) {
-            var err = new Error(err.message)
-            next(err)
-          } else {
-            customers.push(customerRecords)
-            // console.log(customers)
-          }
+          db.customer_select([movie.customer_id], function(err, customerRecords){
+            if(err) {
+              var err = new Error(err.message)
+              next(err)
+            } else {
+              customers.push(customerRecords)
+            }
           res.json(customers)
-
         }
       )}
       }
@@ -131,7 +129,7 @@ var MovieController = {
 
   rentalsTitle: function (req, res, next) {
     var movie_id = req.params.id
-    db.query("select * from rentals where movie_id = $1 and checked_out = true", [movie_id], function(err, rentalRecords) {
+    db.checked_out_movie_select([movie_id], function(err, rentalRecords) {
       if(err) {
         throw (new Error(err.message))
       } else if (movieRecords.length < 1) {
@@ -153,7 +151,7 @@ var MovieController = {
 
   rentalsCustomers: function (req, res, next) {
     var movie_id = req.params.id
-    db.query("select * from rentals where movie_id = $1 and checked_out = true", [movie_id], function(err, rentalRecords) {
+    db.checked_out_movie_select([movie_id], function(err, rentalRecords) {
       if(err) {
         throw (new Error(err.message))
       } else if (movieRecords.length < 1) {
