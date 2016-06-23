@@ -142,22 +142,45 @@ Rental.return = function (customer_id, movie_title, callback) {
   }})
 };
 
-Rental.overdue = function (input, callback) {
-  db.run("SELECT * FROM rentals WHERE checked=$1 AND due_date < $2", input, function (error, overdue) {
-    console.log(input)
+Rental.overdue = function (date, callback) {
+  // find all rentals that are checked out
+  db.run("SELECT * FROM rentals WHERE checked='true'", function (error, overdue) {
+    console.log(date)
+    console.log(overdue)
     if (error || !overdue || overdue.length ===0) {
       callback(new Error("Could not overdue rentals"), undefined)
     }else {
-      // db.run("UPDATE movies SET inventory=inventory+1 WHERE search_title=$1;", movie_title, function (error, updatesmovie) {
-      //   if (error || !updatesmovie) {
-      //     callback(new Error("Could not update movie inventory"), undefined)
-      //   } else {
-          callback(undefined, overdue.map(function(info) {
-            return info;
-            console.log(info);
-          }));)
-
+      var arrayOfRentalIds = []
+      overdue.map(function(info) {
+        if (date > (new Date(info.due_date).getTime()) ) {
+          // db.run
+          arrayOfRentalIds.push(info.id)
+          // console.log("MEOW ", info.id)
+        }
+      })
+      callback(undefined,arrayOfRentalIds)
     }
+
+
+      //   db.run("SELECT * FROM rentals WHERE checked='true'", function (error, overdue) {
+      //
+      //
+      // callback(undefined, overdue.map(function(info) {
+      //   return info;
+      //   db.customers.find("id=$1", [info.customer_id], function (error, customer) {
+      //     console.log(customer)
+      //     if (error || !customer || overdue.length ===0) {
+      //       // callback(new Error("Could not find customer"), undefined)
+      //     }else {
+      //       console.log("MEOW")
+      //       // callback(undefined, customer)
+      //     }}
+      //   // console.log(info.movie_id);
+      //   // return info;
+      // )
+      // }))
+
+    // }
   })
 };
 

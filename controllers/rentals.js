@@ -78,8 +78,7 @@ var RentalsController = {
   },
 
   overdue: function(req, res, next) {
-    // Rental.return([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
-    Rental.overdue(['true', (new Date()).toString()], function(error, overdueInfo) {
+    Rental.overdue(Date.now(), function(error, overdueInfo) {
         if(error) {
         var err = new Error("Error:\n" + error.message);
         err.status = 500;
@@ -92,18 +91,6 @@ var RentalsController = {
   // See a list of customers with overdue movies (/rentals/overdue)
   // include customer name, movie title, check-out date, and return date
 
-//   return: function(req, res, next) {
-//     // Rental.return([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
-//     Rental.return([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
-//         if(error) {
-//         var err = new Error("Error:\n" + error.message);
-//         err.status = 500;
-//         next(err);
-//       } else {
-//         res.json(customers)
-//       }
-//     });
-//   }
 };
 
 
