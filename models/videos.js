@@ -41,7 +41,7 @@ Videos.sort = function(column, p, n, callback) {
     } else {
       callback(null, videos.map(function(video) {
         return video
-      })); 
+      }));
     }
   });
 }

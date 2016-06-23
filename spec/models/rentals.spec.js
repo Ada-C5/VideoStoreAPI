@@ -2,7 +2,6 @@ var app = require('../../app')
 var db = app.get('db')
 var Rental = require('../../models/rentals')
 
-//mock customer data
 describe('Rental', function () {
   afterEach(function () {
     db.end()
@@ -261,13 +260,4 @@ describe('Rental', function () {
   })
 })
 
-
-
-
-
-//   var customer_id_test = 123
-//   var video_id_test = 101
-//   var checkout_date = "Mon, 15 Feb 2015 09:00:14 -0700"
-//   var due_date = "Tue, 16 Feb 2015 09:00:14 -0700"
-//   var checkin_date = "Wed, 17 Feb 2015 09:00:14 -0700"
-//   var charge = 1.00
+// TESTS STILL NEEDED FOR CHECKIN AND CHECKOUT, AND ERROR TESTING FOR EACH ABOVE.
