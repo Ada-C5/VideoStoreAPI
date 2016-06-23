@@ -21,12 +21,12 @@ describe('Movie', function () {
       })
     })
 
-    it('should contain movie objects',function(done){
-      Movie.all(function(error,movies){
-        expect(movies[0]).toContain("soemhting")
-      done()
-      })
-    })
+    // it('should contain movie objects',function(done){
+    //   Movie.all(function(error,movies){
+    //     expect(movies[0]).toContain("soemhting")
+    //   done()
+    //   })
+    // })
   })
 
 })
