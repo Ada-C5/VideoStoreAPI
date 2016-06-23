@@ -70,8 +70,39 @@ describe('Movie', function () {
 
     it('should be able to sort by release_date', function (done) {
       Movie.sortBy(['release_date', 1, 15], function (error, movies) {
-        console.log("halp ", movies)
         expect(movies[0].release).toEqual(firstReleaseDate)
+      done()
+      })
+    })
+  })
+
+  describe('rentalInfo', function () {
+
+    it('should return an array', function (done) {
+      Movie.rentalInfo([title], function (error, movies) {
+        expect(movies).toEqual(jasmine.any(Array))
+      done()
+      })
+    })
+
+    it('should contain movie objects', function (done) {
+      Movie.rentalInfo([title], function (error, movies) {
+        expect(movies[0]).toEqual(jasmine.any(Movie))
+      done()
+      })
+    })
+
+    it('should find the correct movie', function (done) {
+      Movie.rentalInfo(["Psycho"], function (error, movies) {
+        console.log("yo ", movies[0])
+        expect(movies[0].title).toEqual("Psycho")
+      done()
+      })
+    })
+
+    it('should only return one movie', function (done) {
+      Movie.rentalInfo([title], function (error, movies) {
+        expect(movies.length).toEqual(1)
       done()
       })
     })
