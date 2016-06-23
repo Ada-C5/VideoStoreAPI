@@ -1,6 +1,5 @@
 var app = require("../../app");
 var db = app.get("db");
-
 var Account = require('../../models/rentals_model')
 
 

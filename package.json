@@ -15,7 +15,7 @@
     "db:schema-test": "node tasks/load_schema.js video_store_test",
     "db:seed-test": "node tasks/seed.js video_store_test",
     "reset-test": "npm run db:drop-test; npm run db:create-test; npm run db:schema-test; npm run db:seed-test;",
-    "test": "clear; ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/"
+    "test": "clear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

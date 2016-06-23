@@ -1,7 +1,6 @@
 var request = require('request');
 var base_url = "http://localhost:3000/"
 var route = "customers/"
-// var app = require('../../app.js');
 
 describe("Endpoints under /customers", function() {
 
