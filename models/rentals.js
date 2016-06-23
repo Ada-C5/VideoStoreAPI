@@ -116,6 +116,7 @@ Rentals.find_video_history = function(title, ordered_by, callback) {
                     }
                     return 0;
                   });
+                  callback(null, cust);
                 } else {
                  callback(null, cust);
                 }
