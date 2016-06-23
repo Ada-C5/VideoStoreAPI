@@ -9,5 +9,6 @@ router.get('/zomg', function(req, res, next) {
   res.status(200).json({whatevs: 'whatevs!!!'});
 });
 
+router.get('/api/docs.json', IndexController.docsJSON)
 
 module.exports = router;

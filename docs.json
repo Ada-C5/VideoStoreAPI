@@ -1,0 +1,63 @@
+{
+  "base_url": "http://localhost:3000",
+
+  "endpoint": [
+    {
+      "verb": "GET",
+      "uri": "/",
+      "description": "lala",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "some_data": "lala",
+        "no_data": "lala",
+        "error": "lala"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies",
+      "description": "Returns a list of all movies that exist in the database.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "some_data": "an array of movie data in JSON format",
+        "no_data": "[]",
+        "error": "Error retrieving movies"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/sort/:sort_param",
+      "description": "Returns a list of movies in the database, sorted by a given parameter such as release_date. By using an optional query param, the amount displayed can be restrained.",
+      "required_parameters": [
+        {
+          "parameter": "release_date",
+          "description": "movies returned will be sorted in ascending order by release_date"
+        },
+        {
+          "parameter": "title",
+          "description": "movies returned will be sorted in ascending order by title, starting with numbers"
+        }
+      ],
+      "optional_parameters": [
+        {
+          "parameter": "n",
+          "description": "a query parameter that determines the number of movie records to return"
+        },
+        {
+          "parameter": "p",
+          "description": "a query parameter that determines the offset of movie records, to create pages of movies"
+        }
+      ],
+      "return_data": {
+        "some_data": "an array of movie data in JSON format",
+        "no_data": "[]",
+        "error": "Error retrieving movies"
+      }
+    }
+
+  ]
+}

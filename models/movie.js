@@ -65,7 +65,6 @@ Movie.current = function (title, callback) {
     if (error || !movie ) {
       callback(error || new Error("No movie with that title"), undefined);
     } else {
-      // console.log(movie)
       db.rentals.find({ movie_id: movie.id }, function(error, rentals) {
         if (error || !rentals) {
           // console.log(error.message)
@@ -84,14 +83,11 @@ Movie.current = function (title, callback) {
           // for (var id of ids_of_customers_renting_movie) {
           db.customers.find({ id: ids_of_customers_renting_movie }, function(error, customers) {
             if ( error || !customers ) {
-              // console.log(ids_of_customers_renting_movie)
-              // console.log(error.message)
               callback(error || new Error("No customer matching id"), undefined);
             } else {
               callback(null, customers);
             }
           });
-          // }
 
         }
       });
