@@ -94,7 +94,6 @@ describe('Movie', function () {
 
     it('should find the correct movie', function (done) {
       Movie.rentalInfo(["Psycho"], function (error, movies) {
-        console.log("yo ", movies[0])
         expect(movies[0].title).toEqual("Psycho")
       done()
       })
