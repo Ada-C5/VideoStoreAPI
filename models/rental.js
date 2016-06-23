@@ -66,7 +66,7 @@ Rental.findHistoryMovies = function (title, callback) {
   })
 }
 
-Rental.find_customers = function (title, callback) {
+Rental.findCustomers = function (title, callback) {
   db.find_current_rentals([title], function (error, customers) {
     callback(null, customers.map(function (customer) {
       return new Customer(customer)
@@ -76,20 +76,31 @@ Rental.find_customers = function (title, callback) {
 
 Rental.newRental = function (title, cust_id, callback) {
   db.movies.search({columns:["title"], term: title}, function (error, movies) {
-  var today = new Date()
-  var next_week = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
-  console.log(next_week)
-  db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString(), return_date: next_week.toString()})
-  var movieInventory = movies[0].inventory - 1
-  db.movies.updateSync({id: movies[0].id, inventory: movieInventory})
-    if (error || !movies) {
-      callback(new Error("Could not retrieve movie"), undefined)
+    if (movies[0].inventory <= 0) {
+      return "No copies available for checkout"
     } else {
-      callback(null, movies.map (function (movie) {
-        return new Movie(movie)
-      }))
+      var today = new Date()
+      var returnDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
+      db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString(), return_date: returnDate.toString()})
+      db.movies.updateSync({id: movies[0].id, inventory: Rental.removeInventory(movies)})
+      console.log(movies[0].inventory, movies[0].return_date)
+      if (error || !movies) {
+        callback(new Error("Could not retrieve movie"), undefined)
+      } else {
+        callback(null, movies.map (function (movie) {
+          return new Movie(movie)
+        }))
+      }
     }
   })
+}
+
+Rental.removeInventory = function (movie) {
+  return movie[0].inventory - 1
+}
+
+Rental.addInventory = function (movie) {
+  return movie[0].inventory + 1
 }
 
 
