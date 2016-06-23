@@ -13,7 +13,7 @@ var Rental = function(movie_id, customer_id, created_date, due_date, returned = 
 
 Rental.getCheckedOut = function(title, callback) {
   db.rentals.where("title=$1 AND returned=$2", [title, false], function(error, checked_out) {
-    if(error) {
+    if(error|| !rentals) {
       callback(error, undefined);
     } else {
       callback(null, checked_out);
@@ -23,7 +23,7 @@ Rental.getCheckedOut = function(title, callback) {
 
 Rental.getCurrentRentals = function(customer_id, callback) {
   db.rentals.where("customer_id=$1 AND returned=$2", [customer_id, false], function(error, checked_out) {
-    if(error) {
+    if(error|| !rentals) {
       callback(error, undefined);
     } else {
       callback(null, checked_out);
@@ -33,7 +33,7 @@ Rental.getCurrentRentals = function(customer_id, callback) {
 
 Rental.getCurrentlyCheckedOut = function(movie, callback) {
   db.rentals.count({movie_id: movie.id, returned: false}, function (error, count) {
-    if(error) {
+    if(error|| !rentals) {
       callback(error);
     } else {
       callback(null, count);
@@ -43,8 +43,8 @@ Rental.getCurrentlyCheckedOut = function(movie, callback) {
 
 Rental.getPastRentals = function(customer_id, callback) {
   db.run("SELECT customer_id, created_date, movie_id, returned_date FROM rentals WHERE customer_id=$1 AND returned=$2 ORDER BY returned_date ASC", [customer_id, true], function(error, past_rentals) {
-    if(error) {
-      callback(error, undefined);
+    if(error|| !rentals) {
+      callback(error || new Error("No past rentals"), undefined);
     } else {
       callback(null, past_rentals);
     }
@@ -53,7 +53,7 @@ Rental.getPastRentals = function(customer_id, callback) {
 
 Rental.getCustomers = function(movie_title, callback) {
   db.run("SELECT * FROM customers WHERE id=(SELECT customer_id FROM rentals WHERE movie_id=(SELECT id FROM movies WHERE title=$1) AND returned=false)", [movie_title], function(error, customers) {
-    if(error) {
+    if(error|| !rentals) {
       callback(error, undefined);
     } else {
       callback(null, customers);
@@ -64,7 +64,7 @@ Rental.getCustomers = function(movie_title, callback) {
 Rental.getOverdue = function(callback) {
   var now = new Date()
   db.run("SELECT customers.name, movies.title, rentals.created_date, rentals.due_date FROM rentals INNER JOIN movies ON movies.id=rentals.movie_id INNER JOIN customers ON customers.id=rentals.customer_id WHERE rentals.returned=false AND rentals.due_date<$1", [now], function (error, overdues) {
-    if (error) {
+    if (error|| !rentals) {
       callback(error, undefined);
     }
     callback(null, overdues);
@@ -77,7 +77,7 @@ Rental.getReturn = function(rental_id, callback) {
     returned: true,
     returned_date: new Date()
     }, function(error, checked_out) {
-    if(error) {
+    if(error|| !rentals) {
       callback(error, undefined);
     } else {
       callback(null, checked_out);
