@@ -23,6 +23,18 @@ describe('Rental', function () {
 
   describe('Rental', function() {
     describe('find_current', function () {
+      it('returns instances with correct keys', function(done) {
+        Rental.find_current(2, function(error, result) {
+          expect(error).toBe(null)
+          expect(Object.keys(result[0])).toEqual(['id', 'customer_id', 'video_id', 'checkout_date', 'due_date', 'checkin_date', 'charge'])
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('find_current', function () {
       it('returns instances where the checkin_date is null', function(done) {
         Rental.find_current(2, function(error, result) {
           expect(error).toBe(null)
@@ -62,6 +74,18 @@ describe('Rental', function () {
 
   describe('Rental', function() {
     describe('find_history', function () {
+      it('returns instances with correct keys', function(done) {
+        Rental.find_history(1, function(error, result) {
+          expect(error).toBe(null)
+          expect(Object.keys(result[0])).toEqual(['id', 'customer_id', 'video_id', 'checkout_date', 'due_date', 'checkin_date', 'charge'])
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('find_history', function () {
       it('returns instances where the checkin_date is not null', function(done) {
         Rental.find_history(1, function(error, result) {
           expect(error).toBe(null)
@@ -79,6 +103,47 @@ describe('Rental', function () {
           expect(error).toBe(null)
           for (var instance of result) {
             expect(instance['customer_id']).toBe(1)
+          }
+          done()
+        })
+      })
+    })
+  })
+
+  // testing .overdue
+  describe('Rental', function () {
+    describe('overdue', function () {
+      it('returns an array', function(done) {
+        Rental.overdue(function (error, result) {
+          expect(error).toBe(null)
+          expect(result).toEqual(jasmine.any(Array))
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('overdue', function () {
+      it('returns instances with correct keys', function(done) {
+        Rental.overdue(function(error, result) {
+          expect(error).toBe(null)
+          for (var instance of result) {
+            expect(Object.keys(instance)).toEqual(['customer', 'video', 'checkout_date', 'due_date'])
+          }
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('overdue', function () {
+      it('returns instances where the checkin_date is not null', function(done) {
+        Rental.overdue(function(error, result) {
+          expect(error).toBe(null)
+          for (var instance of result) {
+            expect(instance['checkin_date']).not.toBe(null)
           }
           done()
         })
