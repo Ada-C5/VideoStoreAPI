@@ -22,7 +22,7 @@ CREATE TABLE customers(
   state text,
   postal_code integer,
   phone text,
-  account_credit text
+  account_credit decimal
 );
 
 CREATE INDEX customers_name ON customers (name);
