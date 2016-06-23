@@ -26,7 +26,7 @@ describe('#all', function () {
 describe('#sort', function () {
 
   it('should return an array of customers', function (done) {
-    Customer.all(function (error, data) {
+    Customer.sort('name', 10, 2, function (error, data) {
       expect(typeof data).toEqual('object')
       done()
     })
