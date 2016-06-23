@@ -192,6 +192,49 @@ describe('Rental', function () {
       })
     })
   })
+  // testing .find_video_history
+  // testing showed us that our sort within this function is currently incorrect. The function will need to be updated, and more tests will need to be written in order to test all end points. 
+  describe('Rental', function () {
+    describe('find_video_history', function () {
+      it('returns an array', function(done) {
+        Rental.find_video_history('Psycho', 'name', function (error, result) {
+          expect(error).toBe(null)
+          expect(result).toEqual(jasmine.any(Array))
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('find_video_history', function () {
+      it('returns instances with correct keys', function(done) {
+        Rental.find_video_history('Psycho', 'name', function(error, result) {
+          expect(error).toBe(null)
+          for (var instance of result) {
+            expect(Object.keys(instance)).toEqual(['id', 'name', 'registered_at', 'address', 'city', 'state', 'postal_code', 'phone', 'account_credit'])
+          }
+          done()
+        })
+      })
+    })
+  })
+
+  describe('Rental', function() {
+    describe('find_video_history', function () {
+      it('returns correct number of records', function(done) {
+        Rental.find_video_history('Psycho', 'name', function(error, result) {
+          expect(error).toBe(null)
+          var iteration = 0
+          for (var instance of result) {
+            iteration++
+          }
+          expect(iteration).toEqual(3)
+          done()
+        })
+      })
+    })
+  })
 })
 
 
