@@ -86,6 +86,10 @@ Rental.checkout = function (title, cust_id, callback) {
       db.rentals.saveSync({customer_id: cust_id, movie_id: movies.id, status: true, checkout_date: (new Date()).toString(), return_date: returnDate.toString()})
       db.movies.updateSync({id: movies[0].id, inventory: Rental.removeInventory(movies)})
 
+      Customer.find_by_id(cust_id, function (error, customer) {
+        db.customers.updateSync({id: cust_id, account_credit: Rental.charge(customer)})
+      })
+
       callback(null, movies.map (function (movie) {
         return new Movie(movie)
       }))
@@ -114,9 +118,8 @@ Rental.addInventory = function (movie) {
   return movie[0].inventory + 1
 }
 
-// Rental.charge = function (customer) {
-//   // console.log(customer);
-//   return customer.account_credit - 1
-// }
+Rental.charge = function (customer) {
+  return customer.account_credit - 1.00
+}
 
 module.exports = Rental
