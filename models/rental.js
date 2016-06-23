@@ -75,25 +75,31 @@ Rental.createCheckOut = function(title, customer_id, callback) {
     var numberOfDaysToRent = 10;
     dueDate.setDate(dueDate.getDate() + numberOfDaysToRent);
     console.log("date returnDate is:", dueDate)
-
+    console.log(error, movie)
     db.rentals.saveSync({customer_id: customer_id, movie_id: movie[0].id, checkout_date: today, due_date: dueDate})
-    // remove money from account
+    console.log(today)
+    console.log(dueDate)
+    console.log(movie[0].id)
     console.log(customer_id)
+    // remove money from account
+    // console.log(movie_id)
+    // console.log(customer_id)
     db.run("UPDATE customers SET account_credit=account_credit-3.0 WHERE id=$1;", [customer_id], function (error, result) {
       console.log(error, result)
       if (error) {
         return callback(error);
-      }
-      // else {
-      //   //modify inventory
-      //   db.run("UPDATE movies SET inventory=inventory-1 WHERE id=$1;", [movie_id], function(error, result) {
-      //     if (error) {
-      //       console.log(error)
-      //       return callback(error);
-      //     }
-      //   })
-
-      // };
+      } else {
+        //modify inventory
+        db.run("UPDATE movies SET inventory=inventory-1 WHERE id=$1;", [movie[0].id], function(error, result) {
+          if (error) {
+            console.log("DAD")
+            console.log(error)
+            return callback(error);
+          } else {
+            return callback(null, result)
+          };
+        });
+      };
     });
  });
 };

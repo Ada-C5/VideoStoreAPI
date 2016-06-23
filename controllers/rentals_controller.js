@@ -51,7 +51,7 @@ var RentalsController = {
         err.status = 404;
         next(err);
       } else {
-        console.log("rental is:", rental)
+        console.log("rental is:", rental_checkout)
         res.json(rental_checkout);
       }
     })
