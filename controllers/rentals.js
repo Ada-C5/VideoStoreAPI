@@ -64,8 +64,19 @@ RentalsController = {
         res.json({checkin: "Success, you checked that movie in, yo!"})
       }
     })
-  }
+  },
 
+  overdue:function(req, res, next) {
+    Rental.overdueRental (function(error, rental) {
+      if (error) {
+        var err = new Error("Did not work :( ");
+        err.status = 404;
+        next(err);
+      } else {
+        res.json(rental)
+      }
+    })
+  }
 }
 
 module.exports = RentalsController

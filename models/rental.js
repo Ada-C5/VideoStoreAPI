@@ -111,6 +111,14 @@ Rental.checkin = function (title, cust_id, callback) {
     }
   })
 }
+// var myString = "12/20/2012-12/24/2012",
+//     parts = myString.split("-");
+// if (Date.parse(parts[0]) < Date.now()) {
+//     alert("start date has past the present date");
+// }
+Rental.overdueRental = function (callback) {
+  db.rentals.where("status=true && return_date")
+}
 
 Rental.removeInventory = function (movie) {
   return movie[0].inventory - 1
