@@ -23,7 +23,7 @@ Movie.findMovie = function(title, callback) {
 
     if (error || !movie) {
 
-      callback(error || new Error("Movie not found"), undefined);
+      callback(error || new Error("Could not retrieve movies"), undefined);
     } else {
       callback(null, movie)
     }
