@@ -9,7 +9,7 @@ var Videos = function(id) {
 Videos.all = function(callback) {
   db.videos.find(function(error, videos) {
     if(error || !videos) {
-      callback(error || new Error("Could not retrieve videos"), undefined);
+      callback(new Error("Could not retrieve videos"), undefined);
     } else {
       callback(null, videos.map(function(video) {
         return new Videos(video);
@@ -22,7 +22,7 @@ Videos.all = function(callback) {
 Videos.find = function(title, callback) {
   db.videos.find({title: title}, function(error, video) {
     if (error || !video) {
-      callback(error || new Error("Could not retrieve video"), undefined)
+      callback(new Error("Could not retrieve video"), undefined)
     } else {
       callback(null, video)
     }
@@ -37,7 +37,7 @@ Videos.sort = function(column, p, n, callback) {
     offset: p
   }, function(error, videos) {
     if (error || !videos) {
-      callback(error || new Error("Could not retrieve videos"), undefined)
+      callback(new Error("Could not retrieve videos"), undefined)
     } else {
       callback(null, videos.map(function(video) {
         return video
@@ -50,7 +50,7 @@ Videos.customer_current = function(title, callback) {
   db.videos.findOne({title: title}, function(error, videos) {
 
     if (error || !videos) {
-      callback(error || new Error("Rentals not found"), undefined);
+      callback(new Error("Rentals not found"), undefined);
     } else {
       var video_id = videos.id
       var cust = []

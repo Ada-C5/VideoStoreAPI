@@ -168,6 +168,18 @@ describe('Video', function () {
     })
   })
 
+  describe('Video', function() {
+    describe('sort', function () {
+      it('Errors when fed bad info', function(done) {
+        Video.sort('Fake column', 1, 10, function(error, result) {
+          expect(error.message).toBe("Could not retrieve videos")
+          expect(result).toEqual(null)
+          done()
+        })
+      })
+    })
+  })
+
 // testing .customer_current
   describe('Video', function () {
     describe('customer_current', function () {
@@ -195,10 +207,10 @@ describe('Video', function () {
 
   describe('Video', function() {
     describe('customer_current', function () {
-      it('returns the correct number of results', function(done) {
-        Video.customer_current('Psycho', function(error, result) {
-          expect(error).toBe(null)
-          expect(result.length).toEqual(1)
+      it('Errors when fed bad info', function(done) {
+        Video.customer_current('Fake Fake Fake', function(error, result) {
+          expect(error.message).toBe("Rentals not found")
+          expect(result).toEqual(null)
           done()
         })
       })
