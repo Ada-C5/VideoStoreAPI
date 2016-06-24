@@ -26,7 +26,6 @@ MoviesController = {
 			} else {
 				res.json(data)
 			}
-
 		})
 	},
 

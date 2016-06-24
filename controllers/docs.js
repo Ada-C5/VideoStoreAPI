@@ -1,7 +1,4 @@
-// var Customer = require("../models/customers_model");
-// var Rental = require("../models/rentals_model");
 var docs = require('../public/docs.json');
-
 
 var DocsController = {
 	getDocs: function(req, res) {
@@ -9,6 +6,10 @@ var DocsController = {
 			title: 'The Docs',
 			docs: docs
 		});
+	},
+
+	getJsonDocs: function(req, res) {
+		res.json(docs);
 	}
 }
 
