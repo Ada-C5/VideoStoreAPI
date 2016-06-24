@@ -10,20 +10,27 @@
     <h1>VideoStoreAPI</h1>
     <h2>API Documentation</h2>
 
-    <% for (var top_endpoint of Object.keys(documentation)) { %>
-      <%= top_endpoint %>
+    <% for (var top_endpoint in documentation) { %>
+      <strong><%= top_endpoint.toUpperCase() %>:</strong>
+      <br>
+      <%= documentation[top_endpoint] %>
+
+      <% // if documentation[top_endpoint] is an array, do the stuff you were doing below%>
+
+      <br>
     <% } %>
 
     <br><br>
 
 
     <% for (var endpoint of documentation.endpoints) { %>
-      Endpoint:<br>
+
       <% for (var info of Object.keys(endpoint)) { %>
-        <%= info %>:<br>
+        <strong><%= info.toUpperCase() %>:</strong><br>
         <%= endpoint[info] %><br>
       <% } %>
 
+      <br><br>
     <% } %>
   </header>
 </body>
