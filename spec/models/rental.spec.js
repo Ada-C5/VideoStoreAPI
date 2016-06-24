@@ -44,11 +44,11 @@ describe('Rental', function () {
 
   describe("#findHistory", function () {
     it("should return history rentals for a customer", function (done) {
-      Rental.findHistory(1, function (error, customer) {
-        expect(customer[0].customer_id).toEqual(1)
-        expect(customer[0].movie_id).toEqual(29)
-        expect(customer[0].status).toEqual(true)
-        expect(customer[0].return_date).toEqual('Sun Jun 19 2016 22:19:53 GMT-0700 (PDT)')
+      Rental.findHistory(1, function (error, movie) {
+        expect(movie[0].id).toEqual(29)
+        expect(movie[0].title).toEqual('The Shining')
+        expect(movie[0].release_date).toEqual('1980-05-22')
+        expect(movie[0].overview).toEqual('Jack Torrance accepts a caretaker job at the Overlook Hotel, where he, along with his wife Wendy and their son Danny, must live isolated from the rest of the world for the winter. But they aren\'t prepared for the madness that lurks within.')
         done()
       })
     })
@@ -70,9 +70,10 @@ describe('Rental', function () {
 
   describe("#findCurrent", function () {
     it("should return current rentals for a customer", function (done) {
-      Rental.findCurrent(29, function (error, customer) {
-        expect(customer.length).toEqual(3)
-        expect(customer[0].customer_id).toEqual(29)
+      Rental.findCurrent(29, function (error, movie) {
+        console.log(movie)
+        expect(movie.length).toEqual(3)
+        expect(movie[0].id).toEqual(19)
         done()
       })
     })
