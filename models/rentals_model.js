@@ -11,12 +11,12 @@ var Rental = function(movie_id, customer_id, created_date, due_date, returned = 
 
 };
 
-Rental.getCheckedOut = function(title, callback) {
-  db.rentals.where("title=$1 AND returned=$2", [title, false], function(error, checked_out) {
+Rental.getCheckedOut = function(movie_id, callback) {
+  db.rentals.where("movie_id=$1 AND returned=$2", [movie_id, false], function(error, checked_out) {
     if(error|| !checked_out) {
       return callback(error || new Error("No results from database"), undefined);
     } else {
-      callback(null, checked_out);
+      callback(null, new Rental(checked_out));
     }
   })
 }

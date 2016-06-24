@@ -5,7 +5,7 @@ var Rental = require('../../models/rentals_model')
 
 describe('Rental getCheckedOut', function () {
 	it('not be null', function (done) {
-		Rental.getCheckedOut("Jaws", function(error, rental) {
+		Rental.getCheckedOut(5, function(error, rental) {
 			expect(error).toBeNull;
 			expect(rental).toBeDefined;
 			done();
@@ -74,6 +74,14 @@ describe('return previously checked out movies', function () {
       done();
     })
   })
+
+	it('not be null', function (done) {
+		Rental.getPastRentals(5, function(error, movie) {
+			expect(error).toBeNull;
+			expect(movie).toBeDefined;
+			done();
+		})
+	})
 })
 
 describe('return previously checked out movies', function () {
@@ -141,9 +149,9 @@ describe('return rentals', function () {
 
 describe('checkout rentals', function () {
 	it('not be null', function (done) {
-		Rental.getCheckout("Jaws", 5, function(error, movie) {
+		Rental.getCheckout("Jaws", 2, function(error, rental) {
 			expect(error).toBeNull;
-			expect(movie).toBeDefined;
+			expect(rental).toBeDefined;
 			done();
 		})
 	})
@@ -155,4 +163,20 @@ describe('checkout rentals', function () {
       done();
     })
   })
+
+	it('should be a new instance of rental', function(done) {
+	      Rental.getCheckout('Jaws', 4, function(error,rentals){
+	        expect(this.movie_id).toNotBe(null)
+	        done()
+	      })
+	    })
+
+	it('should not create an invalid instance of rental', function (done) {
+    Rental.getCheckout('nemo', 999, function (error, data) {
+      expect(typeof data).toBeNull;
+      done()
+    })
+  })
+
+
 })

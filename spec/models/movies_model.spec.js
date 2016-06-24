@@ -41,23 +41,23 @@ describe('return all movies', function () {
 
 describe('return sorted movies', function () {
 	it('not be null', function (done) {
-		Movie.findMovie("title", function(error, movie) {
+		Movie.sort("title", 2, 10, function(error, movie) {
 			expect(error).toBeNull;
 			expect(movie).toBeDefined;
 			done();
 		})
 	})
 
-	it('should contain movie objects', function (done) {
-	Movie.all(function (error, movies) {
-		expect(movies[0]).toEqual(jasmine.any(Movie))
+	it('should contain sorted movie objects', function (done) {
+	Movie.sort("title", 2, 10, function (error, movies) {
+		expect(movies[0].title).toEqual("A Clockwork Orange")
 	done()
 	})
 	})
 
 	it('should contain all movies', function (done) {
-		Movie.all(function (error, movies) {
-			expect(movies.length).toEqual(100)
+		Movie.sort("title", 2, 100, function (error, movies) {
+			expect(movies.length).toEqual(98)
 		done()
 		})
 	})

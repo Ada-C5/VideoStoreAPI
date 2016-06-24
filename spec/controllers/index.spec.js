@@ -8,4 +8,25 @@ describe("Endpoint at /", function () {
       done()
     })
   })
+
+  // it("should be json", function(done) {
+  // request.get(base_url, function(error, response, body) {
+  //   expect(response.headers['content-type']).toBeNull
+  //   done()
+  // })
+  // });
+  //
+  // it("should be an array of objects", function(done) {
+  //     request.get(base_url, function(error, response, body) {
+  //       var data = JSON.parse(body)
+  //       expect(typeof data).toEqual('object')
+  //
+  //         expect(Object.keys(data[0])).toBeNull
+  //
+  //     done()
+  //   })
+  // });
+
+
+
 })

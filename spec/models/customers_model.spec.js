@@ -22,4 +22,11 @@ describe('#sort', function () {
       done()
     })
   })
+
+  it('should not sort by invalid column name', function (done) {
+    Customer.sort('nemo', 10, 2, function (error, data) {
+      expect(typeof data).toBeNull;
+      done()
+    })
+  })
 })
