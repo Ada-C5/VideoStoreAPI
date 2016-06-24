@@ -15,7 +15,7 @@ app.set('db', db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 
 // uncomment after placing your favicon in /public
@@ -35,10 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var customers = require('./routes/customers');
 var videos    = require('./routes/videos');
 var rentals   = require('./routes/rentals');
+var index = require('./routes/index')
 // app.use('/', routes);
 app.use('/customers', customers);
 app.use('/videos', videos);
 app.use('/rentals', rentals);
+app.use('/', index)
 
 //
 // error handlers
