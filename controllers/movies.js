@@ -131,7 +131,8 @@ var MovieController = {
     var movie_id = req.params.id
     db.checked_out_movie_select([movie_id], function(err, rentalRecords) {
       if(err) {
-        throw (new Error(err.message))
+        var err = new Error(err.message)
+        next(err)
       } else if (rentalRecords.length < 1) {
         res.json("This movie has not been checked out yet")
       }else {
@@ -153,7 +154,8 @@ var MovieController = {
     var movie_id = req.params.id
     db.checked_out_movie_select([movie_id], function(err, rentalRecords) {
       if(err) {
-        throw (new Error(err.message))
+        var err = new Error(err.message)
+        next(err)
       } else if (movieRecords.length < 1) {
         res.json("This movie has not been checked out yet")
       }else {
