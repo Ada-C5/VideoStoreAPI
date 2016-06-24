@@ -82,7 +82,7 @@
 <li>
 <p>Given a customer’s <code>id</code> and a movie’s <code>title</code> …</p>
 <ul>
-<li>“check out” one of the movie’s inventory to the customer  POST (<code>/movies/rentals/:movie_id/check-out/:customer_id</code>)
+<li>“check out” one of the movie’s inventory to the customer  POST (<code>/movies/rentals/:movie_id/checkout/:customer_id</code>)
 <ul>
 <li>Establish a return date of 14 days from current date</li>
 <li>Charge the customer’s account $1.00</li>
@@ -140,7 +140,7 @@ All urls are from root (localhost:3000/)</p>
 <ul>
 <li>(<code>/movies/rentals/:movie_id</code>) (To see movie details, and number of available copies in addition to total stock)</li>
 <li>(<code>/movies/rentals/:movie_id/customers</code>) (Customers who currently have this movie checked out)</li>
-<li>POST (<code>/movies/rentals/:movie_id/check-out/:customer_id</code>) (Creates a “check-out” of this movie to this customer, assigning the record a due date and charge)</li>
+<li>POST (<code>/movies/rentals/:movie_id/checkout/:customer_id</code>) (Creates a “check-out” of this movie to this customer, assigning the record a due date and charge)</li>
 <li>POST (<code>/movies/rentals/:movie_id/return/:customer_id</code>) (“Returns” this movie checked out to this customer, changing checked-out status to false, and changing the available inventory accordingly)</li>
 <li>(<code>/movies/rentals/overdue</code>)</li>
 </ul>
