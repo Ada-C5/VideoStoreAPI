@@ -11,27 +11,53 @@
     <h2>API Documentation</h2>
 
     <% for (var top_endpoint in documentation) { %>
-      <strong><%= top_endpoint.toUpperCase() %>:</strong>
+      <strong><em><%= top_endpoint.toUpperCase() %>:</em></strong>
       <br>
-      <%= documentation[top_endpoint] %>
+      <% if (Array.isArray(documentation[top_endpoint])) { %>
+        <% for (var endpoint of documentation.endpoints) { %>
+          <br><br>
+          <% for (var info in endpoint) { %>
+            <strong><%= info.toUpperCase() %></strong>
+            <br>
+            <% value = endpoint[info] %>
 
-      <% // if documentation[top_endpoint] is an array, do the stuff you were doing below%>
+            <% if (Array.isArray(value)) { %>
+              <% for (var sub_info of value) { %>
+                <% for (var sub_sub_info in sub_info) { %>
+                  <strong><%= sub_sub_info.toUpperCase() %></strong>
+                  <br>
+                  <%= sub_info[sub_sub_info] %>
+                  <br>
+                <% } %>
+              <% } %>
+            <% } else if (typeof value === "object") { %>
 
-      <br>
+              <% for (var sub_info in value) { %>
+                <strong><%= sub_info.toUpperCase() %></strong>
+                <br>
+                <%= value[sub_info] %>
+                <br>
+              <% } %>
+            <% } else { %>
+              <%= value %>
+              <br>
+            <% } %>
+          <% } %>
+
+          <br><br>
+        <% } %>
+
+      <% } else { %>
+        <%= documentation[top_endpoint] %>
+        <br>
+      <% } %>
     <% } %>
+
 
     <br><br>
 
 
-    <% for (var endpoint of documentation.endpoints) { %>
 
-      <% for (var info of Object.keys(endpoint)) { %>
-        <strong><%= info.toUpperCase() %>:</strong><br>
-        <%= endpoint[info] %><br>
-      <% } %>
-
-      <br><br>
-    <% } %>
   </header>
 </body>
 
