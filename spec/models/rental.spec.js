@@ -44,7 +44,7 @@ describe('Rental', function () {
 
     it('returns an error if no input', function(done) {
       Rental.all([], function(error,rentals){
-        console.log(error, rentals)
+        // console.log(error, rentals)
         expect(rentals).toEqual(undefined)
         expect(error).toNotEqual(null)
         done()
