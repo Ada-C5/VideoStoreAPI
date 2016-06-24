@@ -1,0 +1,67 @@
+[
+{
+"customer_id": "1",
+"video_id": "1",
+"checkout_date": "Tues, 5 May 2015 07:54:14 -0700",
+"due_date": "Wed, 6 May 2015 07:54:14 -0700",
+"checkin_date": "Thu, 7 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "2",
+"video_id": "3",
+"checkout_date": "Fri, 8 May 2015 07:54:14 -0700",
+"due_date": "Wed, 9 May 2015 07:54:14 -0700",
+"checkin_date": null,
+"charge": 1.50
+},
+{
+"customer_id": "3",
+"video_id": "1",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": "Fri, 1 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "4",
+"video_id": "1",
+"checkout_date": "Sat, 2 May 2015 07:54:14 -0700",
+"due_date": "Sun, 3 May 2015 07:54:14 -0700",
+"checkin_date": "Mon, 4 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "5",
+"video_id": "2",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": "Fri, 1 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "6",
+"video_id": "3",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": "Fri, 1 May 2015 07:54:14 -0700",
+"charge": 1.50
+},
+{
+"customer_id": "7",
+"video_id": "6",
+"checkout_date": "Wed, 22 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 23 Apr 2015 07:54:14 -0700",
+"checkin_date": null,
+"charge": 1.50
+},
+{
+"customer_id": "8",
+"video_id": "1",
+"checkout_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Thu, 30 Apr 2015 07:54:14 -0700",
+"checkin_date": null,
+"charge": 1.50
+}
+
+]

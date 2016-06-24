@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title></title>
+   <link rel='stylesheet' href='/stylesheets/style.css' />
+ </head>
+ <body>
+   <h1>Extreme Video Express Documentation</h1>
+  <h2>Customers:</h2>
+    <ul>
+      <li>GET customers/ - serves a list of all customers</li>
+      <li>GET customers/sort/name?n=1&p=1 - serves sorted list of customers where n = number of customers to return, p is the number of pages, and in this instance we are sorting by 'name'. You can sort by the following columns:</li>
+        <ul><li>name</li>
+          <li>registration_date</li>
+        </ul>
+      </ul>
+
+  <h2>Videos:</h2>
+    <ul>
+      <li>GET videos/ - serves a list of all videos</li>
+      <li>GET videos/sort/title?n=1&amp;p=1 - serves a sorted list of videos where n = number of customers to return, p = the number of pages, and in this instance we are sorting by 'title'. You can sort by the following columns:
+        <ul>
+          <li>title</li>
+          <li>release_date</li>
+        </ul></li>
+      <li>GET videos/Psycho - serves all information for a single video (in this instance, 'Psycho').</li>
+      <li>GET videos/Psycho/customers - serves list of customers who currently have rented a copy of the video in the url (in this instance, 'Psycho'). </li>
+    </ul>
+
+  <h2>Rentals:</h2>
+    <ul>
+      <li>GET rentals/customer/1/current'- serves all rentals currently checked out by a customer. The 1 in the url represents the customer id.</li>
+      <li>GET rentals/customer/1/history' - serves all rentals a customer has checkout out in the past. The 1 in the url represents the customer id.</li>
+      <li>GET rentals/Psycho/current - serves all customers that are currently have checked out this video (in this instance, the video 'Psycho').</li>
+      <li>GET rentals/Psycho/history/sort/name - serves list of customers that have checked out this video in the past sorted by specification. In the url here we are searching for the rentals on video 'Psycho', and sorting by customer name. You can sort by:
+        <ul>
+          <li>name</li>
+          <li>checkout_date</li>
+        </ul>
+      </li>
+      <li>GET rentals/overdue - serves currently overdue rentals, includes the following data:
+        <ul>
+          <li>customer name</li>
+          <li>video title</li>
+          <li>checkout date</li>
+          <li>due date</li>
+        </ul>
+      </li>
+      <li>POST rentals/video/Psycho/checkout/1 - checks a copy of given video out to customer. In this instance we are checking out the video Psycho to the customer with id number 1. This does the following:
+        <ul>
+          <li>Charges customer account</li>
+          <li>Adjusts available inventory of video</li>
+          <li>Creates a new rental record.</li>
+        </ul></li>
+      <li>POST rentals/video/Psycho/checkin/1 - checks copy of given video in from a customer when they return it. In this instance we are checking in the video Psycho from the customer with id number 1. This does the following:
+        <ul>
+          <li>Adjusts available inventory of video</li>
+          <li>Updates rental record checkin_date to be current date</li>
+        </ul></li>
+    </ul>
+ </body>
+</html>
