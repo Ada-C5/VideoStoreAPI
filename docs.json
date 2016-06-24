@@ -1,15 +1,50 @@
 [
-  {"CassetteCollection": "The Tunes & Takeout API allows programmatic access to randomized suggestions of specific food and music pairings, that data for which is obtained from the Yelp and Spotify APIs. The API endpoint is available at https://tunes-takeout-api.herokuapp.com/ and all paths listed in this documentation should be assumed to use that base URL."},
-  {"API_Specification": [
-    "Request": "This is version 1 of the Tunes & Takeout API. To ensure consistency if the API evolves further, all requests to version 1 are prefixed with the path /v1/.",
-    "Response": "Search results are JSON documents containing a list of suggestion hashes, and a canonical URL for the request itself. Each suggestion hash includes the ID for a specific business from the Yelp API as well as an ID and type for an item from the Spotify API.
+  {
+    "CassetteCollection": "The Tunes & Takeout API allows programmatic access to randomized suggestions of specific food and music pairings, that data for which is obtained from the Yelp and Spotify APIs. The API endpoint is available at https://tunes-takeout-api.herokuapp.com/ and all paths listed in this documentation should be assumed to use that base URL."
+  },
+  {
+    "Customers": [
+    {
+      "Request": "This is version 1 of the Tunes & Takeout API. To ensure consistency if the API evolves further, all requests to version 1 are prefixed with the path /v1/."
+    },
+    {
+      "Response": "Search results are JSON documents containing a list of suggestion hashes, and a canonical URL for the request itself. Each suggestion hash includes the ID for a specific business from the Yelp API as well as an ID and type for an item from the Spotify API."
+    },
+    {
+      "Example": [
+        {
+          "Request URL": "/customers"
+        },
+        {
+          "Response data": [
+          {
+          "id": 1,
+          "name": "Shelley Rocha",
+          "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+          "postal_code": "24309",
+          "phone": "(322) 510-8695",
+          "account_credit": "13.15"
+          },
+          {
+          "id": 2,
+          "name": "Curran Stout",
+          "registered_at": "Wed, 16 Apr 2014 21:40:20 -0700",
+          "postal_code": "94267",
+          "phone": "(908) 949-6758",
+          "account_credit": "35.66"
+          },
+          {
+          "id": 3,
+          "name": "Roanna Robinson",
+          "registered_at": "Fri, 28 Nov 2014 13:14:08 -0800",
+          "postal_code": "15867",
+          "phone": "(323) 336-1841",
+          "account_credit": "50.39"
+          }
+        ]}
+      ]
+    }
 
-    Both IDs are string values, and the type for the music item is one of artist, album, track.
 
-    Wherever possible, the Tunes & Takeout API is written to provide consistent results for the same queries. This can aid with caching, but it cannot be guaranteed. Because the Tunes & Takeout API relies upon the Yelp and Spotify APIs, when their data changes the results of particular search queries may also change.
-
-    If the request was not successful, the following HTTP status codes may be returned depending on the specific error:
-
-    400 - The request parameters were invalid. Either the query was missing, or the limit was not an integer between 1 and 100."
   ]}
 ]
