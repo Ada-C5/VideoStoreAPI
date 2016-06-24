@@ -6,8 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-
 var app = express();
+
+var massive = require("massive")
+var connectionString = "postgres://localhost/video_store"
+
+// divide responsibilities. everything in "movies" will have /movies in its url.
+var movies = require('./routes/movies');
+app.use('/movies', movies)
+
+var customers = require('./routes/customers');
+app.use('/customers', customers)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

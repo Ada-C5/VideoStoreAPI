@@ -1,0 +1,154 @@
+<html><head><meta charset="utf-8"><title>Video Store API Documentation</title><style></style></head><body id="documentation">
+<ul>
+<li>
+<p>All endpoints return JSON data unless explicitly stated otherwise. If there is no data/record to return a message such as “This movie has not yet been checked out” or “This customer has not yet checked out a movie” will be returned. If there is an error, an error page will display.</p>
+</li>
+<li>
+<p>All endpoints are assumed to be GET unless explicitly stated otherwise</p>
+</li>
+</ul>
+<h4><a id="Customers_4"></a>Customers</h4>
+<ul>
+<li>Retrive a list of all customers: (<code>/customers</code>)</li>
+<li>Retrive a subset of customers (<code>/customers/sort/:sort_params</code>)
+<ul>
+<li>Given a sort column, return <em>n</em> customer records, offset by <em>p</em> records (this will be used to create “pages” of customers)</li>
+<li>Sort params are
+<ul>
+<li><code>name</code> : (<code>/name?n=10&amp;p=2</code>)</li>
+<li><code>registered_at</code> example: (<code>/registered-at?n=10&amp;p=2</code>)</li>
+<li><code>postal_code</code> example: (<code>/postal-code?n=10&amp;p=2</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Given a customer’s <code>id</code>…
+<ul>
+<li>List the movies they <em>currently</em> have checked out (<code>/customers/:customer_id/current</code>)</li>
+<li>List the movies a customer has checked out in the past (<code>/customers/:customer_id/history</code>)
+<ul>
+<li>ordered by check out date</li>
+<li>includes return date</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a id="Movies_18"></a>Movies</h4>
+<ul>
+<li>Retrieve a list of all movies (<code>/movies</code>)</li>
+<li>Retrieve a subset of movies (<code>/movies/sort/:sort_params</code>)
+<ul>
+<li>Given a sort column, return <em>n</em> movie records, offset by <em>p</em> records (this will be used to create “pages” of movies)</li>
+<li>Sort params are
+<ul>
+<li><code>title</code> example: (<code>/title?n=5&amp;p=1</code>)</li>
+<li><code>release_date</code> example: (<code>/release-date?n=5&amp;p=1</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Given a movie’s <code>id</code>…
+<ul>
+<li>Get a list of customers that have <em>currently</em> checked out a copy of the film (<code>/movies/:movie_id/current</code>)
+<ul>
+<li>includes each customer’s name, phone number, and account credit</li>
+</ul>
+</li>
+<li>Get a list of customers that have checked out a copy <em>in the past</em>
+<ul>
+<li>includes each customer’s name, phone number, and account credit</li>
+<li>ordered by customer <code>name</code> (<code>/movies/:movie_id/history/sort/name</code>)</li>
+<li>ordered by <code>check-out</code> (<code>/movies/:movie_id/history/sort/date</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4><a id="Rental_33"></a>Rental</h4>
+<ul>
+<li>
+<p>Look a movie up by id to see (<code>/movies/rentals/2</code>)</p>
+<ul>
+<li>its synopsis</li>
+<li>release date</li>
+<li>available inventory (not currently checked-out to a customer)</li>
+<li>and inventory total</li>
+</ul>
+</li>
+<li>
+<p>See a list of customers that have <em>currently</em> checked out any of the movie’s inventory (<code>/movies/rentals/:movie_id/customers</code>)</p>
+</li>
+<li>
+<p>Given a customer’s <code>id</code> and a movie’s <code>title</code> …</p>
+<ul>
+<li>“check out” one of the movie’s inventory to the customer  POST (<code>/movies/rentals/:movie_id/checkout/:customer_id</code>)
+<ul>
+<li>Establish a return date of 14 days from current date</li>
+<li>Charge the customer’s account $1.00</li>
+</ul>
+</li>
+<li>“check in” one of customer’s rentals POST (<code>/movies/rentals/:movie_id/return/:customer_id</code>)
+<ul>
+<li>Return the movie to its inventory</li>
+<li>Change checked_out from true to false</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>See a list of customers with overdue movies (<code>/movies/rentals/overdue</code>)</p>
+<ul>
+<li>includes customer name, movie title, check-out date, and return date</li>
+</ul>
+<p>=================================</p>
+</li>
+</ul>
+<p><h3>Visual tree</h3>
+All urls are from root (localhost:3000/)</p>
+<ul>
+<li>(<code>/customers</code>) (All customers)</li>
+<li>(<code>/customers/sort/:sort_params</code>) (Some customers)
+<ul>
+<li><code>name</code> : (<code>/name?n=10&amp;p=2</code>) (sorted by name)</li>
+<li><code>registered_at</code> : (<code>/registered-at?n=10&amp;p=2</code>) (sorted by join date)</li>
+<li><code>postal_code</code> : (<code>/postal-code?n=10&amp;p=2</code>) (sorted by location)</li>
+</ul>
+</li>
+<li>(<code>/customers/:customer_id/current</code>) (Currently checked out movies by a customer)</li>
+<li>(<code>/customers/:customer_id/history</code>) (Previously checked out movies by a customer)</li>
+</ul>
+<ul>
+<li>(<code>/movies</code>) (All movies)
+<ul>
+<li>(<code>/movies/sort/:sort_params</code>) (Some movies)
+<ul>
+<li><code>title</code> : (<code>/title?n=5&amp;p=1</code>) (Sorted by title)</li>
+<li><code>release_date</code> : (<code>/release-date?n=5&amp;p=1</code>) (Sorted by release date)</li>
+</ul>
+</li>
+<li>(<code>/movies/:movie_id/current</code>) (Current rentals per movie, ordered by due date)</li>
+<li>(<code>/movies/:movie_id/history/sort/:sort_params</code>) (Some customers who have previously checked out movies)
+<ul>
+<li>(<code>/movies/:movie_id/history/sort/name</code>) (Sort by customer name)</li>
+<li>(<code>/movies/:movie_id/history/sort/date</code>) (Sort by check-out date)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>[Rentals, an extension of Movies]</h4>
+<ul>
+<li>(<code>/movies/rentals/:movie_id</code>) (To see movie details, and number of available copies in addition to total stock)</li>
+<li>(<code>/movies/rentals/:movie_id/customers</code>) (Customers who currently have this movie checked out)</li>
+<li>POST (<code>/movies/rentals/:movie_id/checkout/:customer_id</code>) (Creates a “check-out” of this movie to this customer, assigning the record a due date and charge)</li>
+<li>POST (<code>/movies/rentals/:movie_id/return/:customer_id</code>) (“Returns” this movie checked out to this customer, changing checked-out status to false, and changing the available inventory accordingly)</li>
+<li>(<code>/movies/rentals/overdue</code>)</li> (Customers with overdue movies)
+</ul>
+<h3>Informational endpoints</h3>
+<ul>
+<li>(<code>/api/docs</code>) (Serves a <em>HTML view</em> of documentation)</li>
+<li>(<code>/api/docs.json</code>) (Serves JSON documentation)</li>
+</ul>
+
+</body></html>

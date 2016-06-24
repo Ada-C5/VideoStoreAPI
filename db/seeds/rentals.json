@@ -1,0 +1,23 @@
+[
+{
+"customer_id": 1,
+"movie_id": 2,
+"check_out_date": "2016-06-14",
+"checked_out": true,
+"due_date": "2016-06-24"
+},
+{
+"customer_id": 2,
+"movie_id": 4,
+"check_out_date": "2015-02-14",
+"checked_out": true,
+"due_date": "2015-02-24"
+},
+{
+"customer_id": 2,
+"movie_id": 7,
+"check_out_date": "2013-06-15",
+"checked_out": false,
+"due_date": "2013-06-30"
+}
+]
