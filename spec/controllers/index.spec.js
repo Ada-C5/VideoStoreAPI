@@ -8,4 +8,14 @@ describe("Endpoint at /", function () {
       done()
     })
   })
+
 });
+
+describe("Endpoint at api/docs.json", function () {
+  it('returns json', function (done) {
+    request.get(base_url + 'api/docs.json', function(error, response, body) {
+      expect(JSON.parse(response.body)).toBeTruthy;
+      done()
+    })
+  })
+})
