@@ -118,18 +118,6 @@ Rental.overdueRental = function (callback) {
       return new Customer(customer)
     }))
   })
-  // db.rentals.find({ status: true }, function (error, rentals) {
-  //   callback(null, rentals.map (function (rental) {
-  //     var today = new Date()
-  //     var returnDate = rental.return_date
-  //     if (Date.parse(returnDate) < today) {
-  //       db.customers.find({id: rental.customer_id}, function (err, customer) {
-  //         console.log(customer[0]);
-  //       })
-  //     }
-  //     return new Customer(customer)
-  //   }))
-  // })
 }
 
 Rental.removeInventory = function (movie) {
