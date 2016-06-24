@@ -8,7 +8,8 @@ var CustomersController = {
 			if(error="Could not retrieve customers") {
 				res.status(404).send(error)
 			} else if (error) {
-				res.status(500).send(error)
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 				res.json(customers)
 			}
@@ -20,7 +21,8 @@ var CustomersController = {
 			if(error="Could not retrieve customers") {
 				res.status(404).send(error)
 			} else if (error) {
-				res.status(500).send(error)
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 				res.json(data)
 			}
@@ -30,9 +32,11 @@ var CustomersController = {
 	// customer id, all rentals attached to customer id within data params
 	getCustomersCurrent: function(req, res) {
 		Rental.getCurrentRentals(req.params.customer_id, function(error, data) {
-			if(error) {
-				var err = new Error("No such data");
-				err.status = 404;
+			if(error="No results from database") {
+				res.status(404).send(error)
+			} else if (error) {
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 				res.json(data)
 			}
@@ -41,9 +45,11 @@ var CustomersController = {
 
 	getCustomersHistory: function(req, res) {
 		Rental.getPastRentals(req.params.customer_id, function(error, data) {
-			if(error) {
-				var err = new Error("No such data");
-				err.status = 404;
+			if(error="No past rentals") {
+				res.status(404).send(error)
+			} else if (error) {
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 				res.json(data)
 			}
