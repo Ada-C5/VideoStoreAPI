@@ -22,7 +22,10 @@ describe("CustomersController", function(){
     it("returns customer information", function(done){
       request.get(base_url, function(error, response, body){
         var data = JSON.parse(body)
+<<<<<<< HEAD
+=======
         // console.log(data, typeof data)
+>>>>>>> 244eb6ffd22e3d96adb60c58f319dd5776f8d73e
         expect(Object.keys(data[4])).toEqual(["id", "name", "registered_at", "postal_code", "phone", "account_credit"])
         done()
       })
@@ -55,7 +58,6 @@ describe("CustomersController", function(){
     it("returns the correct number of rows", function(done){
       request.get(base_url+"/sort/name?n=22&p=2", function(error, response, body){
         var data = JSON.parse(body)
-        // console.log(data, typeof data)
         expect(data.length).toEqual(22)
         done()
       })
