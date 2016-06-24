@@ -74,6 +74,13 @@ describe('Movie', function () {
       done()
       })
     })
+
+    it('returns an empty array when the given an invalid sort type', function (done) {
+      Movie.sortBy(['year', 3, 15], function (error, movies) {
+        expect(movies).toEqual(undefined)
+      done()
+      })
+    })
   })
 
   describe('rentalInfo', function () {
@@ -102,6 +109,13 @@ describe('Movie', function () {
     it('should only return one movie', function (done) {
       Movie.rentalInfo([title], function (error, movies) {
         expect(movies.length).toEqual(1)
+      done()
+      })
+    })
+
+    it('returns an empty array when it does not find the movie title', function (done) {
+      Movie.rentalInfo(["Mr. Nobody"], function (error, movies) {
+        expect(movies).toEqual([])
       done()
       })
     })
