@@ -148,7 +148,7 @@ describe('Rental', function () {
       })
     })
 
-  // testing .video_current
+// testing .video_current
     describe('video_current', function () {
       it('returns an array', function(done) {
         Rental.video_current('Psycho', function (error, result) {
@@ -184,7 +184,7 @@ describe('Rental', function () {
       })
     })
 
-  // testing .find_video_history
+// testing .find_video_history
     describe('find_video_history', function () {
       it('returns an array', function(done) {
         Rental.find_video_history('Psycho', 'name', function (error, result) {

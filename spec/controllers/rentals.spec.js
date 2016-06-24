@@ -1,5 +1,3 @@
-// still needs error testing for JSON responses
-
 var request = require("request")
 var baseUrl = "http://localhost:3000"
 
@@ -121,29 +119,16 @@ describe("RentalsController", function() {
   })
 
   describe("#postCheckout", function(done) {
-    xit("returns a Success checkout response", function(done) {
+    it("returns a Success checkout response", function(done) {
       request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
         expect(response.statusCode).toBe(200)
         done()
       })
     })
 
-    xit("returns JSON", function(done) {
+    it("returns JSON", function(done) {
       request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
         expect(response.headers['content-type']).toContain('application/json')
-        done()
-      })
-    })
-
-// this junk does not work yet 
-    xit("should be an array of objects", function(done) {
-      request.post(url("/video/Vertigo/checkout/3/"), function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(typeof data).toEqual('object')
-
-        for (var record of data) {
-          expect(Object.keys(record)).toEqual([ 'id', 'customer_id', 'video_id', 'checkout_date', 'due_date', 'checkin_date', 'charge'])
-        }
         done()
       })
     })
@@ -163,16 +148,6 @@ describe("RentalsController", function() {
       done()
       })
     })
-
-  //   it("should be an array of objects", function(done) {
-  //     request.get(url("/overdue"), function(error, response, body) {
-  //     var data = JSON.parse(body)
-  //     expect(typeof data).toEqual('object')
-  //     for (var record of data) {
-  //       expect(Object.keys(record)).toEqual([ 'customer', 'video', 'checkout_date', 'due_date'])
-  //     }
-  //     done()
-  //   })
   })
 })
 
