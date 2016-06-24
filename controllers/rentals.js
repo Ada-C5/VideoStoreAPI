@@ -33,7 +33,7 @@ var RentalsController = {
     // Rental.checkout([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
     Rental.checkout([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
         if(error) {
-        var err = new Error("Error:\n" + error.message);
+        var err = new Error("Error, could not check out movie at this time:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
@@ -68,7 +68,7 @@ var RentalsController = {
     // Rental.return([req.body.customer], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
     Rental.return([2], [req.params.movie.toLowerCase().replace(/ /g, "").replace(/\./g, "")], function(error, customers) {
         if(error) {
-        var err = new Error("Error:\n" + error.message);
+        var err = new Error("Error, could not return movie at this time:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
@@ -80,7 +80,7 @@ var RentalsController = {
   overdue: function(req, res, next) {
     Rental.overdue(Date.now(), function(error, overdueInfo) {
         if(error) {
-        var err = new Error("Error:\n" + error.message);
+        var err = new Error("Error could not retrieve customers:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
