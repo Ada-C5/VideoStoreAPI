@@ -55,13 +55,14 @@ CustomersController = {
   },
 
   getRentalsHistory: function (req, res, next) {
-    Rental.findHistory(req.params.id, function (error, rental) {
+    Rental.findHistory(req.params.id, function (error, movie) {
       if (error) {
         var err = new Error("Error retrieving rental history:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
-        res.json(rental)
+        console.log(movie);
+        res.json(movie)
       }
     })
   }
