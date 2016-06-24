@@ -25,7 +25,8 @@ Rental.search = function (input, callback) {
 Rental.searchCust = function (input, callback) {
   console.log(input)
   db.run("SELECT customers.* FROM movies INNER JOIN rentals ON rentals.movie_id=movies.id INNER JOIN customers ON customers.id=rentals.customer_id WHERE rentals.checked=$1 AND search_title=$2", input, function (error, customer) {
-    if (error || !customer) {
+    if (error || !customer || customer.length === 0) {
+      console.log(customer)
       callback(new Error("Could not retrieve customer"), undefined)
     } else {
       callback(null, customer.map (function (customers) {

@@ -6,7 +6,7 @@
     "setup": "node ./setup.js",
     "start": "./node_modules/.bin/nodemon ./bin/www",
     "start-test": "NODE_ENV=test ./node_modules/.bin/nodemon ./bin/www",
-    "test": "tclear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
+    "test": "clear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
     "db:drop": "dropdb radio_star_development",
     "db:create": "createdb radio_star_development",
     "db:dropt": "dropdb radio_star_test",
