@@ -119,9 +119,10 @@ Rental.overdueRental = function (callback) {
       var returnDate = rental.return_date
       if (Date.parse(returnDate) < today) {
         db.customers.find({id: rental.customer_id}, function (err, customer) {
-          return new Customer(customer)
+          console.log(customer[0]);
         })
       }
+      return new Customer(customer)
     }))
   })
 }
