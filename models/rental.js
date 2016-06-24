@@ -35,9 +35,9 @@ Rental.find = function (title, callback) {
 }
 
 Rental.findCurrent = function (id, callback) {
-  db.rentals.find({customer_id: id, status: true}, function (error, rentals) {
-    callback(null, rentals.map (function (rental) {
-      return new Rental(rental)
+  db.current([id], function (error, movies) {
+    callback(null, movies.map (function (movie) {
+      return new Movie(movie)
     }))
   })
 }

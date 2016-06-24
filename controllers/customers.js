@@ -43,13 +43,13 @@ CustomersController = {
   },
 
   getRentalsCurrent: function (req, res, next) {
-    Rental.findCurrent(req.params.id, function (error, rental) {
+    Rental.findCurrent(req.params.id, function (error, movie) {
       if (error) {
         var err = new Error("Error retrieving current rentals:\n" + error.message);
         err.status = 500;
         next(err);
       } else {
-        res.json(rental)
+        res.json(movie)
       }
     })
   },
