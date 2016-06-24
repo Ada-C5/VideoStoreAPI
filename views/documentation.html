@@ -9,6 +9,7 @@ some data found
 no data found
 error occurred -->
 
+<!-- DOCTYPE -->
 <html>
 <meta charset="utf-8">
   <head>
@@ -151,10 +152,11 @@ error occurred -->
 
     <li>Given a customer’s id and a movie’s title …</li>
       <ul>
-        <!-- should this be a post since its updating data?-->
+
         <!--this routes is not given :customer_id in our routes file ??? -->
         <li>“check out” one of the movie’s inventory to the customer (<code>GET '/rentals/:movie/check-out'</code>)</li>
           <ul>
+            <li> Customer info given through JSON body </li>
             <li>Establish a return date</li>
             <li>Charge the customer’s account (cost up to you)</li>
           </ul>
@@ -165,10 +167,11 @@ error occurred -->
           </ul>
         </li>
 
-        <!-- should this be a post since its updating data?-->
+
         <!--this routes is not given :customer_id in our routes file ??? -->
         <li>“check in” one of customer’s rentals (<code>GET '/rentals/:movie/return'</code>)</li>
           <ul>
+            <li>Customer info given through JSON body</li>
             <li>return the movie to its inventory</li>
           </ul>
           <ul> Data returns:
@@ -190,6 +193,14 @@ error occurred -->
           <li>Error:</li>
       </ul>
 
+
+
+
+<h3>Informational endpoints</h3>
+  <ul>
+    <li>(<code>/api/docs</code>) (Serves a <em>HTML view</em> of documentation)</li>
+    <li>(<code>/api/docs.json</code>) (Serves JSON documentation)</li>
+  </ul>
 
 </body>
 </html>
