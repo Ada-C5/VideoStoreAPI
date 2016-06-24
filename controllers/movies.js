@@ -5,9 +5,11 @@ var Rental = require("../models/rentals_model");
 MoviesController = {
 	getMovies: function(req, res) {
 		Movie.all(function(error, movies) {
-			if(error) {
-				var err = new Error("Error retrieving movie list;\n" + error.message);
-				err.status = 500;
+			if(error="Could not retrieve movies") {
+				res.status(404).send(error)
+			} else if (error) {
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 				res.json(movies)
 			}
@@ -16,9 +18,11 @@ MoviesController = {
 
 	subsetMovies: function(req, res) {
 		Movie.sort(req.params.column, req.query.p, req.query.n, function(error, data) {
-			if(error) {
-				var err = new Error("No such data");
-				err.status = 404;
+			if(error="Could not retrieve movies") {
+				res.status(404).send(error)
+			} else if (error) {
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 				res.json(data)
 			}
@@ -28,9 +32,11 @@ MoviesController = {
 
 	getRentalsCustomers: function(req, res) {
 			Rental.getCustomers(req.params.title, function(error, checked_out) {
-			if(error) {
-				var err = new Error("No one has that movie checked out");
-				err.status = 404;
+			if(error="Could not retrieve movies") {
+				res.status(404).send(error)
+			} else if (error) {
+				var err = "Please try again"
+				res.status(500).send(err)
 			} else {
 					res.json(checked_out)
 			}
