@@ -1,0 +1,42 @@
+[
+{
+"movie_id": 2,
+"customer_id": 5,
+"created_date": "1980-06-16",
+"due_date": "1980-06-18",
+"returned": true,
+"returned_date": "1980-06-18T20:24:01.218Z"
+},
+{
+"movie_id": 2,
+"customer_id": 5,
+"created_date": "1960-06-16",
+"due_date": "2016-06-18T20:24:01.218Z",
+"returned": false
+},
+{
+"movie_id": 2,
+"customer_id": 5,
+"created_date": "1960-06-16",
+"due_date": "1960-06-18",
+"returned": true,
+"returned_date": "1960-06-18T20:24:01.218Z"
+},
+{
+"movie_id": 2,
+"customer_id": 5,
+"created_date": "1970-06-16",
+"due_date": "1970-06-18",
+"returned": true,
+"returned_date": "1967-06-18T20:24:01.218Z"
+},
+{
+"movie_id": 10,
+"customer_id": 4,
+"created_date": "1960-06-16",
+"due_date": "1960-06-17",
+"returned": false
+}
+
+
+]

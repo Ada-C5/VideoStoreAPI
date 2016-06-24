@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='docs' href='/docs.json' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <ul>
+      <% for (var key in docs) { %>
+        <% var list = docs[key] %>
+        <li><%= key %></li>
+        <ul>
+          <% for (var field in list) { %>
+            <% var entry = list[field]; %>
+            <li><%= field %>: <%= entry %></li>
+          <% } %>
+        </ul>
+      <% } %>
+    </ul>
+  </body>
+</html>

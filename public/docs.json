@@ -1,0 +1,74 @@
+{
+"/customers": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "none", 
+	"description of use": "returns list of all customers ids", 
+	"if some data is found": "json", 
+	"if no data is found": "404 & Could not retrieve customers error from model", 
+	"if error occured": "Status 500 and Error retrieving data message from controller"
+	},
+"/customers/sort/:column": {
+	"verb": "get",
+	"optional parameters": "?n=10&p=2: return n customer records, offset by p records", 
+	"required parameters": "column", 
+	"description of use": "retrieve subset of customers", 
+	"if some data is found": "json", 
+	"if no data is found": "404 & Could not retrieve customers error from model", 
+	"if error occured": "500 & Please try again"
+	},
+"/customers/:customer_id/current": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "customer id", 
+	"description of use": "get list of current rentals for customer", 
+	"if some data is found": "json data for rentals", 
+	"if no data is found": "404 & No current rentals message from model", 
+	"if error occured": "500 & Please try again"
+	},
+"/customers/:customer_id/history": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "customer id", 
+	"description of use": "get list of past rentals for customer", 
+	"if some data is found": "json data for rentals", 
+	"if no data is found": "404 & No past rentals", 
+	"if error occured": "500 & Please try again"
+	},
+"/movies": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "none", 
+	"description of use": "returns a list of all movie titles", 
+	"if some data is found": "json data for movies", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	},
+"/movies/sort/:column": {
+	"verb": "get",
+	"optional parameters": "?n=10&p=2: return n customer records, offset by p records", 
+	"required parameters": "column", 
+	"description of use": "retrieve a subset of movies", 
+	"if some data is found": "json data", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	},
+"/movies/:title/current": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "title", 
+	"description of use": "list of customers currently with a checked out copy of this movie", 
+	"if some data is found": "json data", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	},
+"/movies/:title/history": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "title", 
+	"description of use": "list of customers who have previously checked out this movie", 
+	"if some data is found": "json data", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	}
+}

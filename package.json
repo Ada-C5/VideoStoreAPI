@@ -4,7 +4,18 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; jasmine-node --verbose spec/"
+    "db:drop": "dropdb video_store_development",
+    "db:create": "createdb video_store_development",
+    "db:schema": "node tasks/load_schema.js video_store_development",
+    "db:seed": "node tasks/seed.js video_store_development",
+    "reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed;",
+    "start-test": "NODE_ENV=test ./node_modules/.bin/nodemon ./bin/www",
+    "db:drop-test": "dropdb video_store_test",
+    "db:create-test": "createdb video_store_test",
+    "db:schema-test": "node tasks/load_schema.js video_store_test",
+    "db:seed-test": "node tasks/seed.js video_store_test",
+    "reset-test": "npm run db:drop-test; npm run db:create-test; npm run db:schema-test; npm run db:seed-test;",
+    "test": "clear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -12,12 +23,14 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+    "massive": "^2.3.0",
     "morgan": "~1.6.1",
-    "sequelize": "^3.23.3",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.4",
     "jasmine-node": "^1.14.5",
+    "massive": "^2.3.0",
     "nodemon": "^1.9.2",
     "request": "^2.72.0"
   }

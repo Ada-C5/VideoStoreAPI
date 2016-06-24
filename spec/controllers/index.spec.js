@@ -9,21 +9,24 @@ describe("Endpoint at /", function () {
     })
   })
 
-  describe("the returned json data", function() {
-    it('has the right keys', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(Object.keys(data)).toEqual(['whatevs'])
-        done()
-      })
-    })
+  // it("should be json", function(done) {
+  // request.get(base_url, function(error, response, body) {
+  //   expect(response.headers['content-type']).toBeNull
+  //   done()
+  // })
+  // });
+  //
+  // it("should be an array of objects", function(done) {
+  //     request.get(base_url, function(error, response, body) {
+  //       var data = JSON.parse(body)
+  //       expect(typeof data).toEqual('object')
+  //
+  //         expect(Object.keys(data[0])).toBeNull
+  //
+  //     done()
+  //   })
+  // });
 
-    it('has the right values for the keys', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(data.whatevs).toEqual('whatevs!!!')
-        done()
-      })
-    })
-  })
+
+
 })
