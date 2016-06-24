@@ -8,4 +8,26 @@ describe("Endpoints under /movies", function() {
       done()
     })
   })
+
+  it('returns a body of content', function (done) {
+    request.get(base_url, function(error, response, body) {
+      expect(body).toNotBe(null)
+      done()
+    })
+  })
+
+  it('returns json', function (done) {
+    request.get(base_url, function(error, response, body) {
+      expect(response.headers['content-type']).toContain('application/json')
+      done()
+    })
+  })
+
+  describe('/movies/sort/')
+  it('returns json', function (done) {
+    request.get(base_url, function(error, response, body) {
+      expect(response.headers['content-type']).toContain('application/json')
+      done()
+    })
+  })
 })
