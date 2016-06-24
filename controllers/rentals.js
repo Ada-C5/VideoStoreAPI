@@ -54,7 +54,7 @@ RentalsController = {
     })
   },
 
-  putCheckin:function(req, res, next) {
+  putCheckin: function(req, res, next) {
     Rental.checkin (req.params.title, req.body.customer_id, function(error, movie) {
       if (error) {
         var err = new Error("Can't return, try again later");
@@ -66,12 +66,11 @@ RentalsController = {
     })
   },
 
-  overdue:function(req, res, next) {
-    Rental.overdueRental (function(error, rental) {
+  overdue: function (req, res) {
+    Rental.overdueRental (function (error, rental) {
       if (error) {
         var err = new Error("Did not work :( ");
         err.status = 404;
-        next(err);
       } else {
         res.json(rental)
       }
