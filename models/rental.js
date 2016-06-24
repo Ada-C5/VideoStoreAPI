@@ -119,3 +119,45 @@ Rental.returnRental = function(title, customer_id, callback) {
     });
   })
 };
+Rental.findOverdue = function(callback) {
+  var today = new Date();
+  console.log("infind OVerdue function", today)
+  db.run("SELECT customers.name, rentals.checkout_date, rentals.due_date, movies.title FROM customers INNER JOIN rentals ON customers.id=rentals.customer_id INNER JOIN movies ON rentals.movie_id = movies.id WHERE rentals.return_date IS NULL AND rentals.due_date < $1;", [today], function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+      } else {
+      callback(null, customers.map(function(customer) {
+        return new Customer(customer);
+      }));
+    }
+  })
+}
+
+
+// Rental.findOverdue = function(callback) {
+//   console.log("This is before db.search for rentals:")
+//   db.rentals.find({return_date: null}, function(error, rentals) {
+//     console.log("in db.rentals.find ", rentals)
+//     // look for all the rentals where the due_date is less than today
+//     callback(null, rentals.map (function (rental) {
+//       var today = new Date();
+//       console.log("Testing what rental is ", rental)
+//       var cust_id = rental.customer_id
+//       if(rental.due_date < today) {
+//         console.log("Type is ", typeof cust_id)
+//         console.log("RENTAL CUST ID =", rental.customer_id)
+//         db.run("SELECT customers.id, customers.name FROM customers WHERE id=$1;", [cust_id], function (error, customers) {
+//           if(error || !customers) {
+//           callback(error || new Error("Could not find customers"), undefined);
+//           } else {
+//           callback(null, customers.map(function(customer){
+//             console.log("This is customer[0] is ", customer);
+//             return new Customer(customer)
+//             }))
+//           }
+//         })
+//       }
+//       })
+//     })
+//   )}
+// }

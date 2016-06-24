@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var RentalsController = require('../controllers/rentals_controller.js');
 //
+// // GET rentals/overdue
+// // list of customers with overdue movies
+router.get('/overdue', RentalsController.overdue)
+
 // // GET rentals/:title
 // // Look a rental up by title
 router.get('/:title', RentalsController.findMovie)
@@ -18,8 +22,5 @@ router.post('/:title/check-out', RentalsController.checkout)
 // // #provide customerid and movie title
 router.post('/:title/return', RentalsController.return)
 //
-// // GET rentals/overdue
-// // list of customers with overdue movies
-// router.get('/overdue', RentalsController.overdue)
 
 module.exports = router;

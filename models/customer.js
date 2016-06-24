@@ -11,6 +11,9 @@ var Customer = function(customer) {
   this.postal_code = customer.postal_code
   this.phone = customer.phone
   this.account_credit = customer.account_credit
+  this.due_date = customer.due_date
+  this.checkout_date = customer.checkout_date
+  this.title = customer.title
 }
 module.exports = Customer;
 

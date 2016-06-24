@@ -71,6 +71,20 @@ var RentalsController = {
         res.json({returnRental: "Rental was properly returned"});
       }
     })
+  },
+
+  overdue: function(req, res, next) {
+    console.log("1st stop");
+    Rental.findOverdue(function(error, customers) {
+      if (error) {
+        var err = new Error("Error in finding overdue ");
+        err.status = 404;
+        next(err);
+      } else {
+        console.log("Final")
+        res.json(customers)
+      }
+    })
   }
 }
 module.exports = RentalsController;
