@@ -29,17 +29,17 @@ Rental.all = function (title, callback) {
   });
 };
 
-Rental.find = function (title, callback) {
-  db.movies.search({columns:["title"], term: title}, function (error, movies) {
-    if(error || !movies) {
-      callback(error || new Error("Movies not found"), undefined);
-    } else {
-      callback(null, movies.map(function(movie) {
-        return new Movie(movie)
-      }));
-    };
-  });
-};
+// Rental.find = function (title, callback) {
+//   db.rentals.find({movie_id: movie_id, customer_id: customer_id}, function (error, rentals) {
+//     if(error || !rentals) {
+//       callback(error || new Error("Rentals not found"), undefined);
+//     } else {
+//       callback(null, rentals.map(function(rental) {
+//         return new Rental(rental)
+//       }));
+//     };
+//   });
+// };
 
 Rental.sortBy = function(options, callback) {
   // first parameter is the info from movie controller which was [type, n, p]
@@ -103,21 +103,19 @@ Rental.createCheckOut = function(title, customer_id, callback) {
 
 Rental.returnRental = function(title, customer_id, callback) {
   console.log("in rental model", title, customer_id)
-  Rental.find(title, function(error, movie) {
-    db.rentals.update({customer_id: customer_id, movie_id: movie[0].id, return_date: null, checkout_date: null}, function(error, checked_out) {
+  db.movies.search({columns: ["title"], term: title}, function(error, movies) {
+    console.log("movies from movie.find is:", movies)
+    db.rentals.find({movie_id: movies[0].id, customer_id: customer_id}, function(error, rentals) {
+      console.log("rentals from rental.find is", rentals)
+      db.rentals.updateSync({id: rentals[0].id, return_date: new Date()}, function(error, checked_out) {
+        db.run("UPDATE movies SET inventory=inventory+1 WHERE id=$1;", [movies[0].id]);
+        console.log("check if return date is there:", rentals)
       if(error) {
         callback(error, undefined);
       } else {
         callback(null, checked_out);
       }
+      });
     });
-
-    db.run("UPDATE movies SET inventory=inventory+1 WHERE id=$1;", [movie[0].id], function(error, result) {
-      if (error) {
-        return callback(error);
-      } else {
-        return callback(null, result)
-      };
-    });
-  });
+  })
 };

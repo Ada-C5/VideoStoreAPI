@@ -45,7 +45,9 @@ Movie.sortBy = function(options, callback) {
 };
 
 // Movie.find = function(title, callback) {
-//   db.movies.findMovieByTitle({title: title}, function(error, movie) {
+//   console.log("in movie.find....title:", title)
+//   db.movies.findOne({title: title}, function(error, movie) {
+//     console.log("movies in movie.find is....", movie)
 //     if(error || !movie) {
 //       callback(error || new Error("No such movie by title"), undefined);
 //     } else {

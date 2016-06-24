@@ -44,15 +44,14 @@ var RentalsController = {
     var customer_id = req.body.customer_id;
     console.log(movie, customer_id);
 
-    Rental.createCheckOut(movie, customer_id, function(error, rental_checkout) {
+    Rental.createCheckOut(movie, customer_id, function(error) {
       console.log("in createCheckOut method")
       if(error) {
         var err = new Error("Rental checkout failed");
         err.status = 404;
         next(err);
       } else {
-        console.log("rental is:", rental_checkout)
-        res.json(rental_checkout);
+        res.json("rental_checkout works");
       }
     })
   },
@@ -62,15 +61,14 @@ var RentalsController = {
     var customer_id = req.body.customer_id;
 
     console.log(movie, customer_id);
-    Rental.returnRental(movie, customer_id, function(error, rental_return) {
+    Rental.returnRental(movie, customer_id, function(error) {
       console.log("in RETURN method")
       if(error) {
         var err = new Error("Rental return failed");
         err.status = 404;
         next(err);
       } else {
-        console.log("rental to return is:", rental_return)
-        res.json(rental_return);
+        res.json({returnRental: "Rental was properly returned"});
       }
     })
   }
