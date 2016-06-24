@@ -26,13 +26,13 @@ Customers.sort = function(column, p, n, callback) {
     offset: p
   }, function(error, customers) {
     if (error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined)
+      callback(new Error("Could not retrieve customers"), undefined)
     } else {
       callback(null, customers.map(function(customer) {
         return customer
-      })); 
+      }));
     }
-  }); 
+  });
 }
 
 

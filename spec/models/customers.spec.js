@@ -2,7 +2,7 @@ var app = require('../../app')
 var db = app.get('db')
 var Customer = require('../../models/customers')
 
-//mock customer data 
+//mock customer data
 describe('Customer', function () {
   var customer_test = "Gideon Defoe"
   var registered_at_test = "Mon, 15 Feb 2015 09:00:14 -0700"
@@ -17,8 +17,8 @@ describe('Customer', function () {
     db.end()
   })
 
-
-  describe('#all', function () {
+// testing .all
+  describe('all', function () {
     it('should return all customers', function (done) {
       Customer.all(function (error, customers) {
         expect(customers.length).toEqual(200)
@@ -27,10 +27,31 @@ describe('Customer', function () {
     })
   })
 
-  describe('#sort', function () {
+// testing .sort
+  describe('sort', function () {
     it('should return customers sorted by specifications', function (done) {
-      Customer.all(function (error, customers) {
-        expect(customers.length).toEqual(200)
+      Customer.sort('name', 1, 1, function (error, customers) {
+        expect(customers.length).toEqual(1)
+        done()
+      })
+    })
+  })
+
+  describe('sort', function () {
+    it('Errors when fed bad info', function(done) {
+      Customer.sort('Fake Fake Fake', 1, 1, function(error, result) {
+        expect(error.message).toBe("Could not retrieve customers")
+        expect(result).toEqual(null)
+        done()
+      })
+    })
+  })
+
+  describe('sort', function () {
+    it('Errors when fed bad info', function(done) {
+      Customer.sort('name', -1, -1, function(error, result) {
+        expect(error.message).toBe("Could not retrieve customers")
+        expect(result).toEqual(null)
         done()
       })
     })
