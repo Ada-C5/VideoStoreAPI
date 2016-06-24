@@ -77,6 +77,8 @@ var RentalsController = {
     });
   },
 
+  // See a list of customers with overdue movies (/rentals/overdue)
+  // include customer name, movie title, check-out date, and return date
   overdue: function(req, res, next) {
     Rental.overdue(Date.now(), function(error, overdueInfo) {
         if(error) {
@@ -88,8 +90,6 @@ var RentalsController = {
       }
     });
   }
-  // See a list of customers with overdue movies (/rentals/overdue)
-  // include customer name, movie title, check-out date, and return date
 
 };
 
