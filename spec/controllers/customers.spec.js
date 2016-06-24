@@ -59,4 +59,36 @@ describe("CustomersController", function(){
       })
     })
   })
+
+  describe("#current", function(done){
+    it("returns a success response", function(done){
+      request.get(base_url+"/1/current", function(error, response, body){
+        expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns json", function(done){
+      request.get(base_url+"/1/current", function(error, response, body){
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+  })
+
+  describe("#history", function(done){
+    it("returns a success response", function(done){
+      request.get(base_url+"/33/history", function(error, response, body){
+        expect(response.statusCode).toBe(200)
+        done()
+      })
+    })
+
+    it("returns json", function(done){
+      request.get(base_url+"/33/history", function(error, response, body){
+        expect(response.headers['content-type']).toContain('application/json')
+        done()
+      })
+    })
+  })
 })

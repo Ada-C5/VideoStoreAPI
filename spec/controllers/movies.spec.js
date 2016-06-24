@@ -35,8 +35,8 @@ describe("RentalsController", function(){
   })
 
   describe('/movies/sort/', function () {
-    var goodSort = 'sort/release_date?n=5&p=1'
-    var badSort = 'sort/year?n=5&p1'
+    var goodSort = '/sort/release_date?n=5&p=1'
+    var badSort = '/sort/year?n=5&p1'
 
     it('responds with 200 for a good request', function (done) {
       request.get(base_url + goodSort, function(error, response, body) {
@@ -62,8 +62,8 @@ describe("RentalsController", function(){
   })
 
   describe('/movies/:title/current', function () {
-    var goodCurrent = 'Psycho/current'
-    var badCurrent = 'Young%20Frankenstein/current'
+    var goodCurrent = '/Psycho/current'
+    var badCurrent = '/Young%20Frankenstein/current'
 
     it('responds with 200 for a good request', function (done) {
       request.get(base_url + goodCurrent, function(error, response, body) {
@@ -81,7 +81,7 @@ describe("RentalsController", function(){
 
     it('responds with empty array for bad request', function (done) {
       request.get(base_url + badCurrent, function(error, response, body) {
-        expect(response).toEqual([])
+        expect(body).toEqual('[]')
         done()
       })
     })
