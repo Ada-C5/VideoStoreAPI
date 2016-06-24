@@ -142,48 +142,49 @@ Rental.return = function (customer_id, movie_title, callback) {
   }})
 };
 
+
 Rental.overdue = function (date, callback) {
   // find all rentals that are checked out
+  var totaloutput = []
   db.run("SELECT * FROM rentals WHERE checked='true'", function (error, overdue) {
-    console.log(date)
-    console.log(overdue)
     if (error || !overdue || overdue.length ===0) {
-      callback(new Error("Could not overdue rentals"), undefined)
+      callback(new Error("Could not find overdue rentals"), undefined)
     }else {
-      var arrayOfRentalIds = []
+      var arrayOfOverdue = []
       overdue.map(function(info) {
         if (date > (new Date(info.due_date).getTime()) ) {
-          // db.run
-          arrayOfRentalIds.push(info.id)
-          // console.log("MEOW ", info.id)
-        }
-      })
-      callback(undefined,arrayOfRentalIds)
+          arrayOfOverdue.push(info)
+      }});
+      for (var rental of arrayOfOverdue) {
+        console.log(rental)
+        db.movies.findOne({id: rental.movie_id}, function(rental, error, movie) {
+          console.log("movie?: ", movie)
+          if (error || !movie) {
+            callback(new Error("Could not find movie"), undefined)
+          } else {
+            db.customers.findOne({id: rental.customer_id}, function(error, customer) {
+              console.log("customer?: ", customer)
+              if (error || !customer) {
+                callback(new Error("Could not find customer"), undefined)
+              } else {
+                var output = {
+                  customer: customer.name,
+                  movie: movie.title,
+                  checkout_date: rental.rental_date,
+                  due_date: rental.due_date
+                }
+                totaloutput.push(output)
+                if (arrayOfOverdue.length === totaloutput.length) {
+                  callback(null, totaloutput);
+                }
+              }
+            });
+          }
+        }.bind(db.movies, rental)
+      )}
     }
-
-
-      //   db.run("SELECT * FROM rentals WHERE checked='true'", function (error, overdue) {
-      //
-      //
-      // callback(undefined, overdue.map(function(info) {
-      //   return info;
-      //   db.customers.find("id=$1", [info.customer_id], function (error, customer) {
-      //     console.log(customer)
-      //     if (error || !customer || overdue.length ===0) {
-      //       // callback(new Error("Could not find customer"), undefined)
-      //     }else {
-      //       console.log("MEOW")
-      //       // callback(undefined, customer)
-      //     }}
-      //   // console.log(info.movie_id);
-      //   // return info;
-      // )
-      // }))
-
-    // }
   })
 };
-
 
 
 module.exports = Rental;
