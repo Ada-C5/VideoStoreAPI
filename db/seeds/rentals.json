@@ -1,0 +1,82 @@
+[
+{
+"movie_id": "1",
+"customer_id": "3",
+"title": "Psycho",
+"checkout_date": "2012-06-18",
+"due_date": "2012-06-16",
+"returned_date": "2012-06-16"
+},
+{
+"movie_id": "3",
+"customer_id": "12",
+"title": "The Exorcist",
+"checkout_date": "2016-06-14",
+"due_date": "2016-06-16",
+"returned_date": null
+},
+{
+"movie_id": "1",
+"customer_id": "9",
+"title": "Psycho",
+"checkout_date": "2016-04-16",
+"due_date": "2016-04-18",
+"returned_date": "2016-04-16"
+},
+{
+"movie_id": "9",
+"customer_id": "28",
+"title": "Rosemary's Baby",
+"checkout_date": "2011-04-14",
+"due_date": "2011-04-16",
+"returned_date": null
+},
+{
+"movie_id": "1",
+"customer_id": "36",
+"title": "Psycho",
+"checkout_date": "2015-12-08",
+"due_date": "2015-12-10",
+"returned_date": "2015-12-12"
+},
+{
+"movie_id": "14",
+"customer_id": "36",
+"title": "Rear Window",
+"checkout_date": "2015-11-10",
+"due_date": "2015-11-12",
+"returned_date": null
+},
+{
+"movie_id": "15",
+"customer_id": "22",
+"title": "Deliverance",
+"checkout_date": "2014-02-09",
+"due_date": "2014-02-11",
+"returned_date": null
+},
+{
+"movie_id": "18",
+"customer_id": "22",
+"title": "Vertigo",
+"checkout_date": "2015-09-28",
+"due_date": "2015-09-30",
+"returned_date": "2015-10-01"
+},
+{
+"movie_id": "20",
+"customer_id": "45",
+"title": "High Noon",
+"checkout_date": "2016-03-02",
+"due_date": "2016-03-04",
+"returned_date": "2016-03-04"
+},
+{
+"movie_id": "25",
+"customer_id": "47",
+"title": "Titanic",
+"checkout_date": "2016-2-14",
+"due_date": "2016-2-16",
+"returned_date": "2016-2-20"
+}
+]

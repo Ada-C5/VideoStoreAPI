@@ -1,0 +1,163 @@
+<html>
+<head
+<head>
+</head>
+<body>
+  <h1>Video Store API</h1>
+
+  <ul>
+    <li>
+      <h2>Movies</h2>
+      <table>
+        <tr>
+          <th>Endpoint</th>
+          <th>HTTP Verb</th>
+          <th>Required Params</th>
+          <th>Optional Params</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>None</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>/movies/sort/:column_name</td>
+          <td>GET</td>
+          <td>Must include one of the sort params</td>
+          <td>Can include n (number of results) or p (offset)</td>
+          <td>Sort params: title, release date</td>
+        </tr>
+        <tr>
+          <td>/movies/:title/current</td>
+          <td>GET</td>
+          <td>Movie title</td>
+          <td>None</td>
+          <td>Returns current renters' name, phone number, account credit</td>
+        </tr>
+        <tr>
+          <td>/movies/:title/history/sort/:column_name</td>
+          <td>GET</td>
+          <td>Movie title, one of two sort params</td>
+          <td>None</td>
+          <td>Returns past renters' name, phone number, account credit- sort by customer name or check out date</td>
+        </tr>
+      </table>
+    </li>
+    <li>
+      <h2>Customers</h2>
+      <table>
+        <tr>
+          <th>Endpoint</th>
+          <th>HTTP Verb</th>
+          <th>Required Params</th>
+          <th>Optional Params</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>/customers</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>None</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>/customers/sort/:column_name</td>
+          <td>GET</td>
+          <td>One of the three sort params</td>
+          <td>Can include n (number of results) or p (offset)</td>
+          <td>Sort params: name, registered at, postal code</td>
+        </tr>
+        <tr>
+          <td>/customers/:id/current</td>
+          <td>GET</td>
+          <td>Customer id</td>
+          <td>None</td>
+          <td>Returns movies the customer currently had checked out</td>
+        </tr>
+        <tr>
+          <td>/customers/:id/history</td>
+          <td>GET</td>
+          <td>Customer id</td>
+          <td>None</td>
+          <td>Returns movies customer has checked out in the past. Sort params: check out date, return date</td>
+        </tr>
+      </table>
+    </li>
+    <li>
+      <h2>Rentals</h2>
+      <table>
+        <tr>
+          <th>Endpoint</th>
+          <th>HTTP Verb</th>
+          <th>Required Params</th>
+          <th>Optional Params</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>/rentals/:title</td>
+          <td>GET</td>
+          <td>Title</td>
+          <td>None</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>/rentals/:title/customers</td>
+          <td>GET</td>
+          <td>Title</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>/rentals/:title/check-out/:customer_id</td>
+          <td>GET</td>
+          <td>Title and customer_id</td>
+          <td>None</td>
+          <td>Creates new rental record with appropriate customer &#38 movie data, charges customer for rental. Successful response yields 204 key- this request modifies the database, but returns no data to the controller.</td>
+        </tr>
+        <tr>
+          <td>/rentals/:title/return/:customer_id</td>
+          <td>POST</td>
+          <td></td>
+          <td></td>
+          <td>Unfinished</td>
+        </tr>
+        <tr>
+          <td>/rentals/overdue</td>
+          <td>GET</td>
+          <td></td>
+          <td></td>
+          <td>Unfinished</td>
+        </tr>
+      </table>
+    </li>
+    <li>
+      <h2>Docs</h2>
+      <table>
+        <tr>
+          <th>Endpoint</th>
+          <th>HTTP Verb</th>
+          <th>Required Params</th>
+          <th>Optional Params</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>/api/docs</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>None</td>
+
+          <td>You're looking at it!</td>
+        </tr>
+        <tr>
+          <td>/api/docs.json</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>None</td>
+          <td>Unfinished - would render this page's info in JSON.</td>
+        </tr>
+      </table>
+    </li>
+  </body>
+</html>
