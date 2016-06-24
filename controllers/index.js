@@ -1,5 +1,5 @@
 var docs = require('../docs.json');
-var docs_view = require('../views/docs.ejs')
+// var docs_view = require('../views/docs.ejs')
 
 var IndexController = {
   index: function(req, res, next) {
@@ -7,7 +7,7 @@ var IndexController = {
   },
 
   docsHTML: function(req, res, next) {
-    res.render(docs_view);
+    res.render('docs');
   },
 
   docsJSON: function(req, res, next) {
