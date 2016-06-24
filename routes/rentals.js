@@ -16,7 +16,7 @@ router.post('/:title/check-out', RentalsController.checkout)
 //
 // // POST rentals/:title/return
 // // #provide customerid and movie title
-// router.post('/:title/return', RentalsController.return)
+router.post('/:title/return', RentalsController.return)
 //
 // // GET rentals/overdue
 // // list of customers with overdue movies

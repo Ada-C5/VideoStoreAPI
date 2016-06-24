@@ -28,6 +28,7 @@ Rental.all = function (title, callback) {
     }
   });
 };
+
 Rental.find = function (title, callback) {
   db.movies.search({columns:["title"], term: title}, function (error, movies) {
     if(error || !movies) {
@@ -82,8 +83,6 @@ Rental.createCheckOut = function(title, customer_id, callback) {
     console.log(movie[0].id)
     console.log(customer_id)
     // remove money from account
-    // console.log(movie_id)
-    // console.log(customer_id)
     db.run("UPDATE customers SET account_credit=account_credit-3.0 WHERE id=$1;", [customer_id], function (error, result) {
       console.log(error, result)
       if (error) {
@@ -92,8 +91,6 @@ Rental.createCheckOut = function(title, customer_id, callback) {
         //modify inventory
         db.run("UPDATE movies SET inventory=inventory-1 WHERE id=$1;", [movie[0].id], function(error, result) {
           if (error) {
-            console.log("DAD")
-            console.log(error)
             return callback(error);
           } else {
             return callback(null, result)
@@ -102,4 +99,25 @@ Rental.createCheckOut = function(title, customer_id, callback) {
       };
     });
  });
+};
+
+Rental.returnRental = function(title, customer_id, callback) {
+  console.log("in rental model", title, customer_id)
+  Rental.find(title, function(error, movie) {
+    db.rentals.update({customer_id: customer_id, movie_id: movie[0].id, return_date: null, checkout_date: null}, function(error, checked_out) {
+      if(error) {
+        callback(error, undefined);
+      } else {
+        callback(null, checked_out);
+      }
+    });
+
+    db.run("UPDATE movies SET inventory=inventory+1 WHERE id=$1;", [movie[0].id], function(error, result) {
+      if (error) {
+        return callback(error);
+      } else {
+        return callback(null, result)
+      };
+    });
+  });
 };

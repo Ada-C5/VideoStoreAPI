@@ -55,6 +55,24 @@ var RentalsController = {
         res.json(rental_checkout);
       }
     })
+  },
+
+  return: function(req, res, next) {
+    var movie = req.params.title;
+    var customer_id = req.body.customer_id;
+
+    console.log(movie, customer_id);
+    Rental.returnRental(movie, customer_id, function(error, rental_return) {
+      console.log("in RETURN method")
+      if(error) {
+        var err = new Error("Rental return failed");
+        err.status = 404;
+        next(err);
+      } else {
+        console.log("rental to return is:", rental_return)
+        res.json(rental_return);
+      }
+    })
   }
 }
 module.exports = RentalsController;
