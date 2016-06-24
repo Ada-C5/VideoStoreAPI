@@ -1,5 +1,3 @@
-// still needs error testing for JSON responses
-
 var request = require("request")
 var baseUrl = "http://localhost:3000"
 

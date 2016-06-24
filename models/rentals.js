@@ -2,8 +2,8 @@ var app = require("../app");
 var db = app.get("db");
 
 // Constructor function
-var Rentals = function(customer_id) {
-  this.customer_id = customer_id;
+var Rentals = function() {
+  // this.id = id;
 };
 
 Rentals.find_current = function(customer_id, callback) {
@@ -205,6 +205,11 @@ Rentals.checkout = function(title, customer_id, callback) {
         }
       }
     })
+  }
+
+  if(app.get('env') === 'test') {
+    Rentals.end = function () { db.end() }
+    Rentals.clean = function(callback) { db.setup.schema(callback) }
   }
 
 module.exports = Rentals;

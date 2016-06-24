@@ -4,11 +4,20 @@ var Rental = require('../../models/rentals')
 
 describe('Rental', function () {
   afterEach(function () {
-    db.end()
+    Rental.end()
   })
 
 // testing .find_current
-  describe('Rental', function () {
+    describe('find_current', function () {
+      it('Errors when fed bad info', function(done) {
+        Rental.find_current('Fake column', function(error, result) {
+          expect(error.message).toBe('invalid input syntax for integer: "Fake column"')
+          expect(result).toEqual(null)
+          done()
+        })
+      })
+    })
+
     describe('find_current', function () {
       it('returns an array', function(done) {
         Rental.find_current(1, function (error, result) {
@@ -18,9 +27,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_current', function () {
       it('returns instances with correct keys', function(done) {
         Rental.find_current(2, function(error, result) {
@@ -30,9 +37,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_current', function () {
       it('returns instances where the checkin_date is null', function(done) {
         Rental.find_current(2, function(error, result) {
@@ -42,9 +47,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_current', function () {
       it('returns instances for one customer only', function(done) {
         Rental.find_current(2, function(error, result) {
@@ -56,10 +59,18 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
 // testing .find_history
-  describe('Rental', function () {
+    describe('find_history', function () {
+      it('Errors when fed bad info', function(done) {
+        Rental.find_history('Fake column', function(error, result) {
+          expect(error.message).toBe('invalid input syntax for integer: "Fake column"')
+          expect(result).toEqual(null)
+          done()
+        })
+      })
+    })
+
     describe('find_history', function () {
       it('returns an array', function(done) {
         Rental.find_history(1, function (error, result) {
@@ -69,9 +80,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_history', function () {
       it('returns instances with correct keys', function(done) {
         Rental.find_history(1, function(error, result) {
@@ -81,9 +90,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_history', function () {
       it('returns instances where the checkin_date is not null', function(done) {
         Rental.find_history(1, function(error, result) {
@@ -93,9 +100,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_history', function () {
       it('returns instances for one customer only', function(done) {
         Rental.find_history(1, function(error, result) {
@@ -107,10 +112,8 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  // testing .overdue
-  describe('Rental', function () {
+// testing .overdue
     describe('overdue', function () {
       it('returns an array', function(done) {
         Rental.overdue(function (error, result) {
@@ -120,9 +123,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('overdue', function () {
       it('returns instances with correct keys', function(done) {
         Rental.overdue(function(error, result) {
@@ -134,9 +135,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('overdue', function () {
       it('returns instances where the checkin_date is not null', function(done) {
         Rental.overdue(function(error, result) {
@@ -148,10 +147,8 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
   // testing .video_current
-  describe('Rental', function () {
     describe('video_current', function () {
       it('returns an array', function(done) {
         Rental.video_current('Psycho', function (error, result) {
@@ -161,9 +158,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('video_current', function () {
       it('returns instances with correct keys', function(done) {
         Rental.video_current('Psycho', function(error, result) {
@@ -175,9 +170,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('video_current', function () {
       it('returns correct customer', function(done) {
         Rental.video_current('Psycho', function(error, result) {
@@ -190,10 +183,8 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
   // testing .find_video_history
-  describe('Rental', function () {
     describe('find_video_history', function () {
       it('returns an array', function(done) {
         Rental.find_video_history('Psycho', 'name', function (error, result) {
@@ -203,9 +194,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_video_history', function () {
       it('returns instances with correct keys', function(done) {
         Rental.find_video_history('Psycho', 'name', function(error, result) {
@@ -217,9 +206,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_video_history', function () {
       it('returns correct number of records', function(done) {
         Rental.find_video_history('Psycho', 'name', function(error, result) {
@@ -233,9 +220,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_video_history', function () {
       it('orders by name', function(done) {
         Rental.find_video_history('Psycho', 'name', function(error, result) {
@@ -245,9 +230,7 @@ describe('Rental', function () {
         })
       })
     })
-  })
 
-  describe('Rental', function() {
     describe('find_video_history', function () {
       it('orders by checkout_date', function(done) {
         Rental.find_video_history('Psycho', 'checkout_date', function(error, result) {
@@ -257,7 +240,25 @@ describe('Rental', function () {
         })
       })
     })
-  })
-})
 
-// TESTS STILL NEEDED FOR CHECKIN AND CHECKOUT, AND ERROR TESTING FOR EACH ABOVE.
+    describe('checkout', function () {
+      it('returns an array', function(done) {
+        Rental.checkout('Psycho', 1, function (error, result) {
+        expect(error).toBe(null)
+        expect(typeof result).toEqual('object')
+        done()
+        })
+      })
+    })
+
+    describe('checkin', function () {
+      it('returns an array', function(done) {
+        Rental.checkin('Psycho', 1, function (error, result) {
+        expect(error).toBe(null)
+        expect(typeof result).toEqual('object')
+        done()
+        })
+      })
+    })
+  })
+
