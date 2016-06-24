@@ -2,7 +2,7 @@
   "base_url": "http://localhost:3000",
   "data_format": "JSON",
 
-  "endpoint": [
+  "endpoints": [
     {
       "verb": "GET",
       "uri": "/",

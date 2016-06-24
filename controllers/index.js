@@ -1,13 +1,17 @@
 var docs = require('../docs.json');
-// var docs_view = require('../views/docs.ejs')
 
 var IndexController = {
+  locals: {
+    documentation: docs
+  },
+
   index: function(req, res, next) {
     res.json('It works!!');
   },
 
   docsHTML: function(req, res, next) {
-    res.render('docs');
+    // console.log(string_docs);
+    res.render('docs', IndexController.locals);
   },
 
   docsJSON: function(req, res, next) {
