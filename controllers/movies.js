@@ -132,7 +132,7 @@ var MovieController = {
     db.checked_out_movie_select([movie_id], function(err, rentalRecords) {
       if(err) {
         throw (new Error(err.message))
-      } else if (movieRecords.length < 1) {
+      } else if (rentalRecords.length < 1) {
         res.json("This movie has not been checked out yet")
       }else {
         db.query("select * from movies where id=$1", [movie_id], function(err, movieRecords){
