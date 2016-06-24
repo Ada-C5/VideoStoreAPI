@@ -18,7 +18,6 @@ Videos.all = function(callback) {
   });
 };
 
-
 Videos.find = function(title, callback) {
   db.videos.find({title: title}, function(error, video) {
     if (error || !video) {
@@ -28,7 +27,6 @@ Videos.find = function(title, callback) {
     }
   });
 };
-
 
 Videos.sort = function(column, p, n, callback) {
  db.videos.find({}, {
@@ -72,6 +70,5 @@ Videos.customer_current = function(title, callback) {
     }
   })
 }
-
 
 module.exports = Videos;

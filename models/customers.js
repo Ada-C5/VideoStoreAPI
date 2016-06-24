@@ -1,7 +1,6 @@
 var app = require("../app");
 var db = app.get("db");
 
-// Constructor function
 var Customers = function(id) {
   this.id = id;
 };
@@ -18,7 +17,6 @@ Customers.all = function(callback) {
   });
 };
 
-
 Customers.sort = function(column, p, n, callback) {
  db.customers.find({}, {
     order: column,
@@ -34,6 +32,5 @@ Customers.sort = function(column, p, n, callback) {
     }
   });
 }
-
 
 module.exports = Customers;

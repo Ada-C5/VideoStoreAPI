@@ -62,7 +62,6 @@ Rentals.overdue = function(callback) {
 
 Rentals.video_current = function(title, callback) {
   db.videos.findOne({title: title}, function(error, videos) {
-
     if (error || !videos) {
       callback(error || new Error("Rentals not found"), undefined);
     } else {
@@ -72,7 +71,6 @@ Rentals.video_current = function(title, callback) {
         if(error || !rentals) {
           callback(error || new Error("Rentals not found"), undefined);
         } else {
-
           for (var rental of rentals) {
             db.customers.findOne({id: rental.customer_id}, function(error, customer) {
               cust.push(customer)
@@ -89,7 +87,6 @@ Rentals.video_current = function(title, callback) {
 
 Rentals.find_video_history = function(title, ordered_by, callback) {
   db.videos.findOne({title: title}, function(error, videos) {
-
     if (error || !videos) {
       callback(error || new Error("Rentals not found"), undefined);
     } else {
@@ -99,7 +96,6 @@ Rentals.find_video_history = function(title, ordered_by, callback) {
         if(error || !rentals) {
           callback(error || new Error("Rentals not found"), undefined);
         } else {
-
           for (var rental of rentals) {
             db.customers.findOne({id: rental.customer_id}, function(error, customer) {
               cust.push(customer)
@@ -207,9 +203,9 @@ Rentals.checkout = function(title, customer_id, callback) {
     })
   }
 
-  if(app.get('env') === 'test') {
-    Rentals.end = function () { db.end() }
-    Rentals.clean = function(callback) { db.setup.schema(callback) }
-  }
+if(app.get('env') === 'test') {
+  Rentals.end = function () { db.end() }
+  Rentals.clean = function(callback) { db.setup.schema(callback) }
+}
 
 module.exports = Rentals;
