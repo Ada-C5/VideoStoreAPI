@@ -70,7 +70,7 @@
 <li>
 <p>Look a movie up by id to see (<code>/movies/rentals/2</code>)</p>
 <ul>
-<li>it’s synopsis</li>
+<li>its synopsis</li>
 <li>release date</li>
 <li>available inventory (not currently checked-out to a customer)</li>
 <li>and inventory total</li>
@@ -90,7 +90,8 @@
 </li>
 <li>“check in” one of customer’s rentals POST (<code>/movies/rentals/:movie_id/return/:customer_id</code>)
 <ul>
-<li>return the movie to its inventory</li>
+<li>Return the movie to its inventory</li>
+<li>Change checked_out from true to false</li>
 </ul>
 </li>
 </ul>
@@ -98,7 +99,7 @@
 <li>
 <p>See a list of customers with overdue movies (<code>/movies/rentals/overdue</code>)</p>
 <ul>
-<li>include customer name, movie title, check-out date, and return date</li>
+<li>includes customer name, movie title, check-out date, and return date</li>
 </ul>
 <p>=================================</p>
 </li>
@@ -110,7 +111,7 @@ All urls are from root (localhost:3000/)</p>
 <li>(<code>/customers/sort/:sort_params</code>) (Some customers)
 <ul>
 <li><code>name</code> : (<code>/name?n=10&amp;p=2</code>) (sorted by name)</li>
-<li><code>registered_at</code> : (<code>/registered-at?n=10&amp;p=2</code>) (sortedby join date)</li>
+<li><code>registered_at</code> : (<code>/registered-at?n=10&amp;p=2</code>) (sorted by join date)</li>
 <li><code>postal_code</code> : (<code>/postal-code?n=10&amp;p=2</code>) (sorted by location)</li>
 </ul>
 </li>
@@ -142,7 +143,7 @@ All urls are from root (localhost:3000/)</p>
 <li>(<code>/movies/rentals/:movie_id/customers</code>) (Customers who currently have this movie checked out)</li>
 <li>POST (<code>/movies/rentals/:movie_id/checkout/:customer_id</code>) (Creates a “check-out” of this movie to this customer, assigning the record a due date and charge)</li>
 <li>POST (<code>/movies/rentals/:movie_id/return/:customer_id</code>) (“Returns” this movie checked out to this customer, changing checked-out status to false, and changing the available inventory accordingly)</li>
-<li>(<code>/movies/rentals/overdue</code>)</li>
+<li>(<code>/movies/rentals/overdue</code>)</li> (Customers with overdue movies)
 </ul>
 <h3>Informational endpoints</h3>
 <ul>
