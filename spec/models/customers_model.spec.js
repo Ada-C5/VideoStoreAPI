@@ -4,8 +4,6 @@ var Customer = require('../../models/customers_model')
 
 
 
-// describe('Customer', function () {
-
 describe('#all', function () {
 
   it('should return an array of customers', function (done) {
@@ -14,13 +12,6 @@ describe('#all', function () {
       done()
     })
   })
-
-  // it('should return an array of customers', function (done) {
-  //   Customer.all(function (error, data) {
-  //     expect(typeof data).toEqual('array')
-  //     done()
-  //   })
-  // })
 })
 
 describe('#sort', function () {
