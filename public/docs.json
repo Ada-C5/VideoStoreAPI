@@ -10,8 +10,8 @@
 	},
 "/customers/sort/:column": {
 	"verb": "get",
-	"optional parameters": "none", 
-	"required parameters": "column, ?n=10&p=2: return n customer records, offset by p records", 
+	"optional parameters": "?n=10&p=2: return n customer records, offset by p records", 
+	"required parameters": "column", 
 	"description of use": "retrieve subset of customers", 
 	"if some data is found": "json", 
 	"if no data is found": "404 & Could not retrieve customers error from model", 
@@ -37,11 +37,38 @@
 	},
 "/movies": {
 	"verb": "get",
-	"optional parameters": "insert", 
-	"required parameters": "insert", 
-	"description of use": "insert", 
-	"if some data is found": "insert", 
-	"if no data is found": "insert", 
-	"if error occuered": "insert"
+	"optional parameters": "none", 
+	"required parameters": "none", 
+	"description of use": "returns a list of all movie titles", 
+	"if some data is found": "json data for movies", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	},
+"/movies/sort/:column": {
+	"verb": "get",
+	"optional parameters": "?n=10&p=2: return n customer records, offset by p records", 
+	"required parameters": "column", 
+	"description of use": "retrieve a subset of movies", 
+	"if some data is found": "json data", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	},
+"/movies/:title/current": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "title", 
+	"description of use": "list of customers currently with a checked out copy of this movie", 
+	"if some data is found": "json data", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
+	},
+"/movies/:title/history": {
+	"verb": "get",
+	"optional parameters": "none", 
+	"required parameters": "title", 
+	"description of use": "list of customers who have previously checked out this movie", 
+	"if some data is found": "json data", 
+	"if no data is found": "404 & Could not retrieve movies", 
+	"if error occuered": "500 & Please try again"
 	}
 }
