@@ -20,9 +20,7 @@ Movie.all = function(callback) {
 
 Movie.findMovie = function(title, callback) {
   db.movies.findOne({title: title}, function(error, movie) {
-
     if (error || !movie) {
-
       callback(error || new Error("Could not retrieve movies"), undefined);
     } else {
       callback(null, movie)
