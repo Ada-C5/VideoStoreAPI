@@ -5,9 +5,10 @@ var Rental = require("../models/rentals_model");
 var CustomersController = {
 	getCustomers: function(req, res) {
 		Customer.all(function(error, customers) {
-			if(error) {
-				var err = new Error("Error retrieving data;\n" + error.message);
-				err.status = 500;
+			if(error="Could not retrieve customers") {
+				res.status(404).send(error)
+			} else if (error) {
+				res.status(500).send(error)
 			} else {
 				res.json(customers)
 			}
@@ -16,9 +17,10 @@ var CustomersController = {
 	// customer id, sort column, offest ?????
 	subsetCustomers: function(req, res) {
 		Customer.sort(req.params.column, req.query.p, req.query.n, function(error, data) {
-			if(error) {
-				var err = new Error("No such data");
-				err.status = 404;
+			if(error="Could not retrieve customers") {
+				res.status(404).send(error)
+			} else if (error) {
+				res.status(500).send(error)
 			} else {
 				res.json(data)
 			}
