@@ -113,18 +113,18 @@ Rental.checkin = function (title, cust_id, callback) {
 }
 
 Rental.overdueRental = function (callback) {
- db.rentals.find({ status: true }, function (error, rentals) {
+  db.rentals.find({ status: true }, function (error, rentals) {
     callback(null, rentals.map (function (rental) {
       var today = new Date()
       var returnDate = rental.return_date
       if (Date.parse(returnDate) < today) {
-        db.customers.find({id: rental.customer_id, function (err, customer) {
-        return new Customer(customer)
+        db.customers.find({id: rental.customer_id}, function (err, customer) {
+          return new Customer(customer)
+        })
       }
-    })
     }))
-  // })
-})
+  })
+}
 
 Rental.removeInventory = function (movie) {
   return movie[0].inventory - 1
