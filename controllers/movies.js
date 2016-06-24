@@ -16,7 +16,7 @@ var MovieController = {
   find: function(req, res, next) {
     Movie.sort(req.params.query, req.query.n , req.query.p, function(error, movies) {
         if(error) {
-        var err = new Error("Error retrieving customer list:\n" + error.message);
+        var err = new Error("Error retrieving movies list:\n" + error.message);
         err.status = 500;
         next(err);
       } else {

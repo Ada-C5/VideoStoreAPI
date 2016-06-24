@@ -1,0 +1,238 @@
+{
+  "base_url": "http://localhost:3000",
+  "data_format": "JSON",
+
+  "endpoints": [
+    {
+      "verb": "GET",
+      "uri": "/customers",
+      "description": "Returns a list of all customers that exist in the database.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of customer result hashes",
+        "no_data": "Error retrieving customer list, status code 500",
+        "error": "Error retrieving customer list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/customers/sort/:query",
+      "description": "Returns a list of customers in the database, sorted by a given parameter. By using an optional query param, the amount displayed can be limited.",
+      "required_parameters (select one)": [
+        {
+          "parameter": "name",
+          "description": "customers returned will be sorted in alphabetical order by name"
+        },
+        {
+          "parameter": "registered_at",
+          "description": "customers returned will be sorted in ascending order by when they registered"
+        },
+        {
+          "parameter": "postal_code",
+          "description": "customers returned will be sorted in ascending order by postal code"
+        }
+      ],
+      "optional_parameters": [
+        {
+          "parameter": "n",
+          "description": "a query parameter that determines the number of customer records to return"
+        },
+        {
+          "parameter": "p",
+          "description": "a query parameter that determines the offset of customer records, to create pages of customers"
+        }
+      ],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of customer result hashes",
+        "no_data": "Error retrieving customer list, status code 500",
+        "error": "Error retrieving customer list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/customers/:id/current",
+      "description": "Returns a list of movies that a customer currently has checked out.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of movie result hashes",
+        "no_data": "Error retrieving customer's current movie list, status code 500",
+        "error": "Error retrieving customer's current movie list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/customers/:id/history",
+      "description": "Returns a list of movies that a customer has checked out in the past, ordered by checkout date.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of movie result hashes",
+        "no_data": "Error retrieving rental history list, status code 500",
+        "error": "Error retrieving rental history list, status code 500"
+      }
+    },
+
+
+    {
+      "verb": "GET",
+      "uri": "/movies",
+      "description": "Returns a list of all movies that exist in the database.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of movie result hashes",
+        "no_data": "Error retrieving movies list, status code 500",
+        "error": "Error retrieving movies list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/sort/:query",
+      "description": "Returns a list of movies in the database, sorted by a given parameter. By using an optional query param, the amount displayed can be limited.",
+      "required_parameters (select one)": [
+        {
+          "parameter": "title",
+          "description": "movies returned will be sorted in alphabetical order by movie title"
+        },
+        {
+          "parameter": "release_date",
+          "description": "movies returned will be sorted in ascending order by release_date"
+        }
+      ],
+      "optional_parameters": [
+        {
+          "parameter": "n",
+          "description": "a query parameter that determines the number of movie records to return"
+        },
+        {
+          "parameter": "p",
+          "description": "a query parameter that determines the offset of movie records, to create pages of movies"
+        }
+      ],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of movie result hashes",
+        "no_data": "Error retrieving movies list, status code 500",
+        "error": "Error retrieving movies list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/:movie/current",
+      "description": "Returns a list of customers that have currently checked out a copy of the movie.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of customer result hashes",
+        "no_data": "Error retrieving customer list, status code 500",
+        "error": "Error retrieving customer list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/:movie/history/sort/:query",
+      "description": "Returns a list of customers that have checked out a film in the past",
+      "required_parameters (select one)": [
+        {
+          "parameter": "name",
+          "description": "customers returned will be sorted in alphabetical order by customer name"
+        },
+        {
+          "parameter": "checkout date",
+          "description": "customers returned will be sorted in ascending order by the checkout date of their rental"
+        }
+      ],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of customer result hashes",
+        "no_data": "Error retrieving customer list, status code 500",
+        "error": "Error retrieving customer list, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/rentals/:title",
+      "description": "Returns movie info including synopsis, release date, available inventory (not currently checked-out to a customer), and inventory total",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of movie info result hash",
+        "no_data": "Error retrieving movie info, status code 500",
+        "error": "Error retrieving movie info, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/rentals/:movie/customers",
+      "description": "See a list of customers that have currently checked out any of the movie’s inventory",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of customer result hash",
+        "no_data": "Error retrieving customers, status code 500",
+        "error": "Error retrieving customers, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/rentals/:movie/check-out",
+      "description": "Check out one of the movie’s inventory to the customer, establishes a return date, and charges customer account $1.50",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "JSON document that has rental due date",
+        "no_data": "Error, could not check out movie at this time, status code 500",
+        "error": "Error, could not check out movie at this time, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/rentals/:movie/return",
+      "description": "Check in one of customer’s rentals",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "JSON document confirms movie returned successfully",
+        "no_data": "Error, could not return movie at this time, status code 500",
+        "error": "Error, could not return movie at this time, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/rentals/overdue",
+      "description": "See a list of customers that have currently checked out any of the movie’s inventory",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "found": "Search results are JSON documents containing an array of customer result hashes",
+        "no_data": "Error could not retrieve customers, status code 500",
+        "error": "Error could not retrieve customers, status code 500"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/api/docs",
+      "description": "Serves a HTML view of documentation"
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/api/docs.json",
+      "description": "Serves JSON documentation"
+    }
+
+  ]
+}

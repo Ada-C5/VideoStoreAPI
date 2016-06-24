@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var Controller = require('../controllers/index')
 
+var Controller = require('../controllers/index');
 var MovieController = require('../controllers/movies');
 var CustController = require('../controllers/customers');
 var RentalController = require('../controllers/rentals');
@@ -11,9 +11,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/', Controller.nothing)
+// router.get('/', Controller.nothing)
 
-router.get('/zomg', Controller.zomg)
+// router.get('/zomg', Controller.zomg)
 
 
 // Retrive a list of all customers
@@ -84,7 +84,12 @@ router.get('/rentals/:movie/check-out/:id', RentalController.checkOut);
 // return the movie to its inventory
 router.get('/rentals/:movie/return/:id', RentalController.return);
 
+//HTML API Documentation
+router.get('/api/docs', Controller.docsHTML);
 
+
+//JSON API Documentation
+router.get('/api/docs.json', Controller.docsJSON);
 
 
 module.exports = router;
