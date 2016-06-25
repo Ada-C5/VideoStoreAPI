@@ -97,6 +97,10 @@ Movie.current = function (title, callback) {
 
 };
 
+if (app.get('env') === 'test') {
+  Movie.end = function () { db.end() }
+}
+
 
 
 module.exports = Movie;
