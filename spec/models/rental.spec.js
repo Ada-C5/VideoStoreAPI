@@ -156,50 +156,15 @@ describe('Rental', function () {
       })
       done()
     }) 
-
-    // Tests below here are some I tried but they are just not working. 
-    // Leaving them in so Jeremy is aware we tried to finish them.
-
-    // it("should not rent out movie when it's out of stock", function (done) {
-    //   Rental.checkout("Deliverance", 9, function(error, movies){})
-    //   Rental.checkout("Deliverance", 9, function(error, movies){})
-    //   Rental.checkout("Deliverance", 9, function(error, movies){
-    //     expect(error).toBe(null)
-    //     done()
-    //   })
-    // })
   })
 
   describe("#overdueRental", function () {
     it("should return list of customers with overdue rentals", function (done) {
       Rental.overdueRental(function (error, customers) {
-
-      expect(customers.length).toEqual(2)
+        expect(customers.length).toEqual(2)
       })
       done()
     })
   })
-
-
-  // describe("#checkin", function () {
-    // it("should return correct movie and increase movie inventory when checkedin", function (done) {
-    //   Rental.checkout("Rosemary's Baby", 29, function(error, movie){
-    //   })
-    //   Rental.checkin("Rosemary's Baby", 29, function(error, movie){})
-    //   Rental.find("Rosemary's Baby", function(error, movie) {
-    //     var postStock = movie[0].inventory
-    //     expect(postStock).toEqual(preStock + 1)
-    //   })
-    //   done()
-    // }) 
-
-    // it("should not rent out movie when it's out of stock", function (done) {
-    //   Rental.checkout("The Birds", 200, function(error, movie){})
-    //   Rental.checkout("The Birds", 200, function(error, movie){
-    //     expect(error.message).toEqual("No more copies available")
-    //   })
-    //   done()
-    // })
-  // })
 
 })
