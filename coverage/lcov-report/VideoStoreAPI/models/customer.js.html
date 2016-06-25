@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for VideoStoreAPI/models/customer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">VideoStoreAPI/models/</a> customer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">21.05% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">21.05% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/38</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var app = require("../app");
+var db = app.get("db");
+&nbsp;
+// Constructor function
+var Customer = <span class="fstat-no" title="function not covered" >function(customerInfo) {</span>
+<span class="cstat-no" title="statement not covered" >  this.id = customerInfo.id;</span>
+<span class="cstat-no" title="statement not covered" >  this.name = customerInfo.name;</span>
+<span class="cstat-no" title="statement not covered" >  this.address = customerInfo.address;</span>
+<span class="cstat-no" title="statement not covered" >  this.city = customerInfo.city;</span>
+<span class="cstat-no" title="statement not covered" >  this.state = customerInfo.state;</span>
+<span class="cstat-no" title="statement not covered" >  this.postal_code = customerInfo.postal_code;</span>
+<span class="cstat-no" title="statement not covered" >  this.account_credit = customerInfo.account_credit;</span>
+<span class="cstat-no" title="statement not covered" >  this.phone = customerInfo.phone;</span>
+<span class="cstat-no" title="statement not covered" >  this.registered_at = customerInfo.registered_at;</span>
+<span class="cstat-no" title="statement not covered" >  this.created_at = customerInfo.created_at;</span>
+<span class="cstat-no" title="statement not covered" >  this.updated_at = customerInfo.updated_at;</span>
+};
+&nbsp;
+// Instance functions
+&nbsp;
+Customer.prototype.getCurrent = <span class="fstat-no" title="function not covered" >function(user_id, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  db.customers.find({id: user_id}, {}, <span class="fstat-no" title="function not covered" >function(error, customers) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if(error) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error, undefined);</span>
+    } else {
+      // var rentals = rentals where cutomer id = user_id and status = "checkout"
+<span class="cstat-no" title="statement not covered" >      callback(null, result.balance);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this;</span>
+};
+&nbsp;
+Customer.all = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >  db.customers.find(<span class="fstat-no" title="function not covered" >function(error, customers) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if(error || !customers) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error || new Error("Could not retrieve customers"), undefined);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      callback(null, customers.map(<span class="fstat-no" title="function not covered" >function(customer) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return new Customer(customer);</span>
+      }));
+    }
+  });
+};
+&nbsp;
+Customer.find = <span class="fstat-no" title="function not covered" >function(id, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  db.customers.findOne({id: id}, <span class="fstat-no" title="function not covered" >function(error, customer) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if(error || !customer) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error || new Error("Customer not found"), undefined);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      callback(null, new Customer(customer));</span>
+    }
+  });
+};
+&nbsp;
+Customer.sort = <span class="fstat-no" title="function not covered" >function(options,callback) {</span>
+<span class="cstat-no" title="statement not covered" >  db.customers.find({}, options, <span class="fstat-no" title="function not covered" >function(error, customers) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if(error || !customers) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error || new Error("Could not retrieve customers"), undefined);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      callback(null, customers.map(<span class="fstat-no" title="function not covered" >function(customer) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return new Customer(customer);</span>
+      }));
+    }
+  });
+};
+&nbsp;
+module.exports = Customer;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 24 2016 23:12:52 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

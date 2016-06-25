@@ -9,21 +9,13 @@ describe("Endpoint at /", function () {
     })
   })
 
-  describe("the returned json data", function() {
-    it('has the right keys', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(Object.keys(data)).toEqual(['whatevs'])
-        done()
-      })
-    })
+});
 
-    it('has the right values for the keys', function(done) {
-      request.get(base_url, function(error, response, body) {
-        var data = JSON.parse(body)
-        expect(data.whatevs).toEqual('whatevs!!!')
-        done()
-      })
+describe("Endpoint at api/docs.json", function () {
+  it('returns json', function (done) {
+    request.get(base_url + 'api/docs.json', function(error, response, body) {
+      expect(JSON.parse(response.body)).toBeTruthy;
+      done()
     })
   })
 })

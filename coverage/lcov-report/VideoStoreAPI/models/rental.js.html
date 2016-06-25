@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for VideoStoreAPI/models/rental.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">VideoStoreAPI/models/</a> rental.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25.64% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>10/39</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25.64% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>10/39</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var app = require("../app");
+var Movie = require("./movie.js");
+var Customer = require("./customer.js");
+var db = app.get("db");
+&nbsp;
+var rental_days = 5; // due date is in 5 days
+var rentalFee = 2
+&nbsp;
+&nbsp;
+&nbsp;
+// Constructor function
+var Rental = <span class="fstat-no" title="function not covered" >function(rentalInfo) {</span>
+<span class="cstat-no" title="statement not covered" >  this.id = rentalInfo.id;</span>
+<span class="cstat-no" title="statement not covered" >  this.movie_id = rentalInfo.movie_id;</span>
+<span class="cstat-no" title="statement not covered" >  this.customer_id = rentalInfo.customer_id;</span>
+<span class="cstat-no" title="statement not covered" >  this.status = rentalInfo.status; </span>//"returned" and "checkedOut"
+};
+&nbsp;
+// show title --&gt; from movies --&gt; overview, release_date, available inventory
+Rental.findTitle = <span class="fstat-no" title="function not covered" >function(movie_title, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  db.movies.findOne({title: movie_title}, <span class="fstat-no" title="function not covered" >function(error, movie) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if(error || !movie) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error || new Error("Movie with this title not found"), undefined);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      callback(null, new Movie(movie));</span>
+    }
+  });
+};
+&nbsp;
+Rental.createCheckOut = <span class="fstat-no" title="function not covered" >function(customer_id, title, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  Rental.findTitle(title, <span class="fstat-no" title="function not covered" >function(error, movie) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if(error || !movie) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error);</span>
+    } else <span class="cstat-no" title="statement not covered" >if (error || movie.available_inventory &lt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >      callback(error || new Error("Availability issue: All movies of this title are currently checked out"), undefined)</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      Customer.find(customer_id, <span class="fstat-no" title="function not covered" >function(error, customer) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (error || !customer || customer.account_credit &lt; 2) {</span>
+<span class="cstat-no" title="statement not covered" >          callback(error || new Error("Insufficient Funds: Account Credit balance is less than $2.00"));</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          var rentalInfo = {</span>
+            movie_id: movie.id,
+            customer_id: customer_id,
+            created_at: new Date(),
+            updated_at: new Date(),
+            status: "checked-out",
+            return_date: new Date(new Date().getTime()+(5*24*60*60*1000))
+          };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          db.rentals.save(rentalInfo, <span class="fstat-no" title="function not covered" >function(error, rental) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (error) {</span>
+<span class="cstat-no" title="statement not covered" >              callback(error || new Error("Rental was not saved to database"))</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              var new_balance = customer.account_credit - rentalFee</span>
+<span class="cstat-no" title="statement not covered" >              db.customers.save({id: customer.id, account_credit: new_balance}, <span class="fstat-no" title="function not covered" >function(error,updated){</span></span>
+<span class="cstat-no" title="statement not covered" >                if (error){</span>
+<span class="cstat-no" title="statement not covered" >                  callback(error || new Error("Update Not Successful: Unable to update customer account credit"))</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                  var new_inventory = movie.available_inventory - 1;</span>
+<span class="cstat-no" title="statement not covered" >                  db.movies.save({id: movie.id, available_inventory: new_inventory}, <span class="fstat-no" title="function not covered" >function(error, movie) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (error) {</span>
+<span class="cstat-no" title="statement not covered" >                      callback(error || new Error("Unable to reduce inventory count"));</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                      callback(null, {rentalInfo: new Rental(rentalInfo), customerInfo: new Customer(customer)});</span>
+                    }
+                  })
+                }
+              })
+&nbsp;
+            }
+          });
+&nbsp;
+        }
+      })
+&nbsp;
+    }
+  })
+&nbsp;
+};
+&nbsp;
+module.exports = Rental;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jun 24 2016 23:12:52 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

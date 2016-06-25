@@ -1,0 +1,99 @@
+{
+  "base_url": "http://localhost:3000",
+  "data_format": "JSON",
+
+  "endpoints": [
+    {
+      "verb": "GET",
+      "uri": "/",
+      "description": "The root page, simply confirms that you've successfully connected with the API",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "some_data": "It works!!",
+        "no_data": "",
+        "error": ""
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies",
+      "description": "Returns a list of all movies that exist in the database.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "some_data": "an array of movie data",
+        "no_data": "[]",
+        "error": "Error retrieving movies"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/sort/:sort_param",
+      "description": "Returns a list of movies in the database, sorted by a given parameter such as release_date. By using an optional query param, the amount displayed can be limited.",
+      "required_parameters": [
+        {
+          "parameter": "release_date",
+          "description": "movies returned will be sorted in ascending order by release_date"
+        },
+        {
+          "parameter": "title",
+          "description": "movies returned will be sorted in ascending order by title, starting with numbers"
+        }
+      ],
+      "optional_parameters": [
+        {
+          "parameter": "n",
+          "description": "a query parameter that determines the number of movie records to return"
+        },
+        {
+          "parameter": "p",
+          "description": "a query parameter that determines the offset of movie records, to create pages of movies"
+        }
+      ],
+      "return_data": {
+        "some_data": "an array of movie data",
+        "no_data": "[]",
+        "error": "Error retrieving movies"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/:title/current",
+      "description": "Returns a list of customers that have currently checked out a copy of the film.",
+      "required_parameters": [],
+      "optional_parameters": [],
+      "return_data": {
+        "some_data": "an array of customer data",
+        "no_data": "[]",
+        "error": "Error retrieving movies"
+      }
+    },
+
+    {
+      "verb": "GET",
+      "uri": "/movies/:title/history/sort/:sort_param",
+      "description": "Returns a list of customers that have checked out a film in the past",
+      "required_parameters": [
+        {
+          "parameter": "name",
+          "description": "customers returned will be sorted in ascending order by customer name"
+        },
+        {
+          "parameter": "created_at",
+          "description": "customers returned will be sorted in ascending order by the date of their rental (e.g., the date that rental record was created)"
+        }
+      ],
+      "optional_parameters": [],
+      "return_data": {
+        "some_data": "an array of customer data",
+        "no_data": "[]",
+        "error": "Error retrieving movies"
+      }
+    }
+
+  ]
+}

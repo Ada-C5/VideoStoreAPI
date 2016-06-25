@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VideoStoreAPI Documentation</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <header>
+    <h1>VideoStoreAPI</h1>
+    <h2>API Documentation</h2>
+
+    <% for (var top_endpoint in documentation) { %>
+      <strong><em><%= top_endpoint.toUpperCase() %>:</em></strong>
+      <br>
+      <% if (Array.isArray(documentation[top_endpoint])) { %>
+        <% for (var endpoint of documentation.endpoints) { %>
+          <br><br>
+          <% for (var info in endpoint) { %>
+            <strong><%= info.toUpperCase() %></strong>
+            <br>
+            <% value = endpoint[info] %>
+
+            <% if (Array.isArray(value)) { %>
+              <% for (var sub_info of value) { %>
+                <% for (var sub_sub_info in sub_info) { %>
+                  <strong><%= sub_sub_info.toUpperCase() %></strong>
+                  <br>
+                  <%= sub_info[sub_sub_info] %>
+                  <br>
+                <% } %>
+              <% } %>
+            <% } else if (typeof value === "object") { %>
+
+              <% for (var sub_info in value) { %>
+                <strong><%= sub_info.toUpperCase() %></strong>
+                <br>
+                <%= value[sub_info] %>
+                <br>
+              <% } %>
+            <% } else { %>
+              <%= value %>
+              <br>
+            <% } %>
+          <% } %>
+
+          <br><br>
+        <% } %>
+
+      <% } else { %>
+        <%= documentation[top_endpoint] %>
+        <br>
+      <% } %>
+    <% } %>
+
+
+    <br><br>
+
+
+
+  </header>
+</body>
+
+</html>
