@@ -4,14 +4,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var massive = require('massive');
 
-var routes = require('./routes/index');
+var app = module.exports = express();
 
-var app = express();
+// database setup
+var connectionString = "postgres://localhost/videoStore";
+// the node module that is used to access the database
+var db = massive.connectSync({connectionString: connectionString});
+// this gives me a way to grab the database from the code, like in the model
+app.set('db', db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -21,7 +27,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/index');
 app.use('/', routes);
+
+var moviesRoutes = require('./routes/movies');
+app.use('/movies', moviesRoutes);
+
+var customersRoutes = require('./routes/customers');
+app.use('/customers', customersRoutes);
+
+var rentalsRoutes = require('./routes/rentals');
+app.use('/rentals', rentalsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
