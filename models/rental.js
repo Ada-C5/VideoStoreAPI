@@ -104,8 +104,7 @@ Rental.checkin = function (title, cust_id, callback) {
 }
 
 Rental.overdueRental = function (callback) {
-  db.overdue_rentals(function (error, customers, movies, rentals) {
-    console.log(customers)
+  db.overdue_rentals(function (error, customers) {
     callback(null, customers.map (function (customer) {
       return customer
     }))

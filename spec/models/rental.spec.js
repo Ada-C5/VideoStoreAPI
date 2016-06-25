@@ -170,6 +170,17 @@ describe('Rental', function () {
     // })
   })
 
+  describe("#overdueRental", function () {
+    it("should return list of customers with overdue rentals", function (done) {
+      Rental.overdueRental(function (error, customers) {
+
+      expect(customers.length).toEqual(2)
+      })
+      done()
+    })
+  })
+
+
   // describe("#checkin", function () {
     // it("should return correct movie and increase movie inventory when checkedin", function (done) {
     //   Rental.checkout("Rosemary's Baby", 29, function(error, movie){
