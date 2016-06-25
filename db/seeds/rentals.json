@@ -1,0 +1,23 @@
+[
+{
+"movie_id": "1",
+"customer_id": "1",
+"checked": "false",
+"rental_date": "Wed, 29 Apr 2015 07:54:14 -0700",
+"due_date": "Wed, 06 May 2015 07:54:14 -0700"
+},
+{
+"movie_id": "2",
+"customer_id": "1",
+"checked": "true",
+"rental_date": "Fri, Jun 17 2016 13:33:34 -0700",
+"due_date": "Fri, Jun 24 2016 13:33:34 -0700"
+},
+{
+"movie_id": "3",
+"customer_id": "1",
+"checked": "true",
+"rental_date": "Fri, Jun 17 2016 13:33:34 -0700",
+"due_date": "Fri, Jun 24 2016 13:33:34 -0700"
+}
+]
