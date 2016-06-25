@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Open+Sans:300')
+  body
+    .docs-container
+      .docs-header
+        h1 Cassette Collection
+        img(src='http://londoninspiration.com/wp-content/uploads/2014/01/vhs.jpg')
+      .docs-info
+        p The Tunes & Takeout API allows programmatic access to randomized suggestions of specific food and music pairings, that data for which is obtained from the Yelp and Spotify APIs.
+
+        p The API endpoint is available at https://cassettecollection.herokuapp.com/ and all paths listed in this documentation should be assumed to use that base URL.
+
+        h2 API Specification
+
+        p This is version 1 of the Cassette Collection. To ensure consistency if the API evolves further, all requests to version 1 are prefixed with the path /v1/.
+
+        h2 Search for suggestions
+
+        p Search for food and music suggestions given a particular search term, and an optional limit for number of results.
+
+        h3 Request
+
+        p Search requests are GET requests to the /v1/suggestions/search endpoint with the following parameters:
+
+        p blah
+
+        h3 Response
+
+        p Search results are JSON documents containing a list of suggestion hashes, and a canonical URL for the request itself. Each suggestion hash includes the ID for a specific business from the Yelp API as well as an ID and type for an item from the Spotify API.
+
+        p Both IDs are string values, and the type for the music item is one of artist, album, track.
+
+        p Wherever possible, the Tunes & Takeout API is written to provide consistent results for the same queries. This can aid with caching, but it cannot be guaranteed. Because the Tunes & Takeout API relies upon the Yelp and Spotify APIs, when their data changes the results of particular search queries may also change.
+
+        p If the request was not successful, the following HTTP status codes may be returned depending on the specific error:
+
+        p 400 - The request parameters were invalid. Either the query was missing, or the limit was not an integer between 1 and 100.
+
+        h2 Examples
+
+        h3 Simple query without a limit
+
+        p Request URL:
+
+        p GET:
+
+        code /v1/suggestions/search?query=banana

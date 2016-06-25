@@ -5,10 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var massive = require('massive')
 
 var app = express();
-
+module.exports = app;
+var connectionString = "postgres://localhost/cassettecollection_" + app.get('env')
+var db = massive.connectSync({connectionString : connectionString})
+app.set("db", db)
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,7 +24,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+var routes = require('./routes/index');
 app.use('/', routes);
+
+var moviesRoutes = require('./routes/movies');
+app.use('/movies', moviesRoutes);
+
+var customersRoutes = require('./routes/customers');
+app.use('/customers', customersRoutes);
+
+var rentalsRoutes = require('./routes/rentals');
+app.use('/rentals', rentalsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,6 +67,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
