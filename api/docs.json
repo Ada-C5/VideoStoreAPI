@@ -1,0 +1,24 @@
+{
+  "links": {
+    "customers": "http://localhost:3000/customers",
+    "customer_show": "http://localhost/customers/:name",
+    "customer_sort": "http://localhost/customers/sort/:field?n=[limit]p=[offset]",
+    "customer_current": "http://localhost/customers/:id/current",
+    "customer_history": "http://localhost/customers/:id/history"
+  },
+  "data": [{
+    "type": "customers",
+    "id": "1",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+  
+  }]
+}
