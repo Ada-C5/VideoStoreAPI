@@ -1,5 +1,3 @@
-var express = require('express')
-var router = express.Router()
 var docs = {
   customers: {
     list_all_customers: {
@@ -241,18 +239,3 @@ var docs = {
     }
   }
 }
-
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.status(200).json(docs)
-})
-
-router.get('/zomg', function (req, res, next) {
-  res.status(200).json({itWorks: 'it works!'})
-})
-
-router.get('/api/docs.json', function (req, res, next){
-  res.status(200).json(docs)
-})
-
-module.exports = router
