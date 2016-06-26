@@ -71,8 +71,6 @@ describe('Rental', function () {
   describe("#findCurrent", function () {
     it("should return current rentals for a customer", function (done) {
       Rental.findCurrent(29, function (error, movie) {
-        console.log(movie)
-        expect(movie.length).toEqual(3)
         expect(movie[0].id).toEqual(19)
         done()
       })
@@ -110,5 +108,63 @@ describe('Rental', function () {
     })
   })
 
+  describe("#findHistoryMovies", function () {
+    it("should return rental history for a movie", function (done) {
+      Rental.findHistoryMovies('Die Hard', function (error, rentals) {
+        expect(rentals.length).toEqual(2)
+        expect(rentals[0].id).toEqual(29)
+        done()
+      })
+    })
+
+    it('should throw an error if no rentals found', function (done) {
+      Rental.findHistoryMovies("bad title", function(error, movie) {
+        expect(error).toEqual(null)
+        done()
+      })
+    })
+  })
+
+  describe("#find_customers", function () {
+    it("should return customers who rented a given movie", function (done) {
+      Rental.find_customers('Die Hard', function (error, customers) {
+        expect(customers.length).toEqual(2)
+        expect(customers[0].id).toEqual(19)
+        done()
+      })
+    })
+
+    it('should throw an error if no customers found', function (done) {
+      Rental.findHistoryMovies("bad title", function(error, movie) {
+        expect(error).toEqual(null)
+        done()
+      })
+    })
+  })
+
+  describe("#checkout", function () {
+    it("should checkout correct movie and decrease movie inventory when checked out", function (done) {
+      var preStock;
+      Rental.find('Speed', function(error, movie) {
+        preStock = movie[0].inventory
+      })
+      Rental.checkout("Speed", 29, function(error, movie){})
+      Rental.find('Speed', function(error, movie) {
+        var postStock = movie[0].inventory
+        expect(movie[0].title).toEqual('Speed')
+        expect(postStock).toEqual(preStock - 1)
+      })
+      done()
+    }) 
+  })
+
+  describe("#overdueRental", function () {
+    it("should return list of customers with overdue rentals", function (done) {
+      Rental.overdueRental(function (error, customers) {
+        expect(customers.length).toEqual(2)
+      })
+      done()
+    })
+  })
 
 })

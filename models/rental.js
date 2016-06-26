@@ -2,17 +2,8 @@ var app = require('../app')
 var db = app.get('db')
 var Movie = require('./movie')
 var Customer = require('./customer')
-var Rental = require('./rental')
 
-// var movieHistory = require('../db/rental_movie_history')
-
-var Rental = function (rental) {
-  this.id = rental.id
-  this.customer_id = rental.customer_id
-  this.movie_id = rental.movie_id
-  this.status = rental.status
-  this.return_date = rental.return_date
-}
+var Rental = function () {}
 
 Rental.all = function (callback) {
   db.movies.find (function (error, movies) {
@@ -113,8 +104,7 @@ Rental.checkin = function (title, cust_id, callback) {
 }
 
 Rental.overdueRental = function (callback) {
-  db.overdue_rentals(function (error, customers, movies, rentals) {
-    console.log(customers)
+  db.overdue_rentals(function (error, customers) {
     callback(null, customers.map (function (customer) {
       return customer
     }))
