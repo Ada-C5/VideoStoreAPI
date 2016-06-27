@@ -1,0 +1,135 @@
+{
+  "links": {
+    "customers": "http://localhost:3000/customers",
+    "customer_show": "http://localhost/customers/:name",
+    "customer_sort": "http://localhost/customers/sort/:field?n=[limit]p=[offset]",
+    "customer_current": "http://localhost/customers/:id/current",
+    "customer_history": "http://localhost/customers/:id/history"
+  },
+  "data": [{
+    "type": "customers",
+    "id": "1",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+    "type": "customers_show",
+    "id": "1",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+    "type": "customers_sort",
+    "field": "name",
+    "n": "number",
+    "p": "offset",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+    "type": "customers_current",
+    "id": "1",
+    "attributes": {
+      "id": 29,
+      "title": "The Shining",
+      "overview": "Jack Torrance accepts a caretaker job at the Overlook Hotel, where he, along with his wife Wendy and their son Danny, must live isolated from the rest of the world for the winter. But they aren't prepared for the madness that lurks within.",
+      "release_date": "1980-05-22",
+      "inventory": 3
+    },
+    "type": "customers_history",
+    "id": "1",
+    "attributes": {
+      "id": 29,
+      "title": "The Shining",
+      "overview": "Jack Torrance accepts a caretaker job at the Overlook Hotel, where he, along with his wife Wendy and their son Danny, must live isolated from the rest of the world for the winter. But they aren't prepared for the madness that lurks within.",
+      "release_date": "1980-05-22",
+      "inventory": 3
+    }
+  }]
+}
+
+{
+  "links": {
+    "customers": "http://localhost:3000/movies",
+    "customer_show": "http://localhost/movies/sort/:field?n=[limit]p=offset",
+    "customer_sort": "http://localhost/movies/:title/current",
+    "customer_current": "http://localhost/movies/:title/history",
+    "customer_history": "http://localhost/movies/:id/history"
+  },
+  "data": [{
+    "type": "customers",
+    "id": "1",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+    "type": "customers_show",
+    "id": "1",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+    "type": "customers_sort",
+    "field": "name",
+    "n": "number",
+    "p": "offset",
+    "attributes": {
+      "name": "Shelley Rocha",
+      "registered_at": "Wed, 29 Apr 2015 07:54:14 -0700",
+      "address": "Ap #292-5216 Ipsum Rd.",
+      "city": "Hillsboro",
+      "state": "OR",
+      "postal_code": "24309",
+      "phone": "(322) 510-8695",
+      "account_credit": "13.15"
+    },
+    "type": "customers_current",
+    "id": "1",
+    "attributes": {
+      "id": 29,
+      "title": "The Shining",
+      "overview": "Jack Torrance accepts a caretaker job at the Overlook Hotel, where he, along with his wife Wendy and their son Danny, must live isolated from the rest of the world for the winter. But they aren't prepared for the madness that lurks within.",
+      "release_date": "1980-05-22",
+      "inventory": 3
+    },
+    "type": "customers_history",
+    "id": "1",
+    "attributes": {
+      "id": 29,
+      "title": "The Shining",
+      "overview": "Jack Torrance accepts a caretaker job at the Overlook Hotel, where he, along with his wife Wendy and their son Danny, must live isolated from the rest of the world for the winter. But they aren't prepared for the madness that lurks within.",
+      "release_date": "1980-05-22",
+      "inventory": 3
+    }
+  }]
+}

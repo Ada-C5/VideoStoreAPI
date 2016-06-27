@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
+var Controller = require('../controllers/index')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.status(200).json({whatevs: 'whatevs!!!'})
-});
+router.get('/', Controller.getIndex)
+router.get('/zomg', Controller.getZomg)
 
-module.exports = router;
+module.exports = router

@@ -1,0 +1,65 @@
+[
+{
+"customer_id": 1,
+"movie_id": 29,
+"status": true,
+"checkout_date": "Fri Jun 10 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jun 19 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 19,
+"movie_id": 69,
+"status": true,
+"checkout_date": "Fri Jun 17 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jun 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 19,
+"movie_id": 39,
+"status": true,
+"checkout_date": "Fri Jun 24 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 39,
+"status": true,
+"checkout_date": "Fri Jun 10 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 19,
+"status": true,
+"checkout_date": "Fri Jun 24 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 99,
+"status": true,
+"checkout_date": "Fri Jun 17 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 28,
+"movie_id": 89,
+"status": false,
+"checkout_date": "Fri Jun 17 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 27,
+"movie_id": 89,
+"status": true,
+"checkout_date": "Fri Jun 17 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+},
+{
+"customer_id": 29,
+"movie_id": 89,
+"status": false,
+"checkout_date": "Fri Jun 17 2016 20:19:53 GMT-0700 (PDT)",
+"return_date": "Sun Jul 10 2016 22:19:53 GMT-0700 (PDT)"
+}
+]
